@@ -1,0 +1,431 @@
+@mixin animation ($delay, $duration, $animation, $infinite) {
+    -webkit-animation-delay: $delay;
+    -webkit-animation-duration: $duration;
+    -webkit-animation-name: $animation;
+    -webkit-animation-iteration-count:$infinite;
+
+    -moz-animation-delay: $delay;
+    -moz-animation-duration: $duration;
+    -moz-animation-name: $animation;
+    -moz-animation-iteration-count:$infinite;
+
+    -o-animation-delay: $delay;
+    -o-animation-duration: $duration;
+    -o-animation-name: $animation;
+    -o-animation-iteration-count:$infinite;
+
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $animation;
+    animation-iteration-count:$infinite;
+}
+
+@mixin forward($forward) {
+  -webkit-animation-fill-mode:$forward; /*Chrome 16+, Safari 4+*/
+   -moz-animation-fill-mode:$forward; /*FF 5+*/
+   -o-animation-fill-mode:$forward; /*Not implemented yet*/
+   -ms-animation-fill-mode:$forward; /*IE 10+*/
+   animation-fill-mode:$forward; /*when the spec is finished*/
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@include keyframes(body) {
+  0% {
+  }
+  80% {
+    top: -5px;
+  }
+  100% {
+    top: 0px;
+    background: #d5e1bb;
+  }
+}
+@include keyframes(cicle) {
+  0% {
+    transform: translate( -50%, -50%) scale(0);
+  }
+  80% {
+    transform: translate( -50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate( -50%, -50%) scale(1);
+  }
+}
+@include keyframes(ciclesss) {
+  0% {
+    transform: rotate(34deg) scale(0);
+  }
+  80% {
+    transform: rotate(34deg) scale(1.1);
+  }
+  100% {
+    transform: rotate(34deg) scale(1);
+  }
+}
+@include keyframes(select) {
+  0% {
+    transform: translate( -50%, -50%) scale(0) rotate(55deg);
+    // top: 140px;
+    // left: 190px;
+  }
+  80% {
+    transform: translate( -50%, -50%) scale(1.1) rotate(55deg);
+    // top: 140px;
+    // left: 190px;
+  }
+  100% {
+    transform: translate( -50%, -50%) scale(1) rotate(55deg);
+    // top: 140px;
+    // left: 190px;
+  }
+}
+@include keyframes(ciclerotate) {
+  0% {
+    transform: rotate(0deg);
+    margin-top: -56px;
+  }
+  97% {
+    transform: rotate(1080deg);
+    box-shadow:  0 0px 0px 0px #27376a;
+    margin-top: -56px;
+  }
+  100%{
+    transform: rotate(1080deg);
+    box-shadow: 0 4px 0px 0px #27376a;
+    margin-top: -60px;
+  }
+}
+@include keyframes(ciclerotate2) {
+  0% {
+    transform: rotate(0deg);
+    margin-top: -21px;
+  }
+  97% {
+    transform: rotate(1080deg);
+    box-shadow:  0 0px 0px 0px #27376a;
+    margin-top: -21px;
+  }
+  100%{
+    transform: rotate(1080deg);
+    box-shadow: 0 4px 0px 0px #27376a;
+    margin-top: -25px;
+  }
+}
+@include keyframes(op) {
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+body{
+  background: #E1A14C;
+}
+.controler{
+  height: 300px;
+  width: 700px;
+  margin: 0 auto;
+  position: relative;
+  .left{
+    height: 280px;
+    width: 280px;
+    border-radius: 50%;
+    background: #b1a1a3;
+    display: inline-block;
+    margin-top: 40px;
+  }
+  .right{
+    height: 280px;
+    width: 280px;
+    border-radius: 50%;
+    background: #b1a1a3;
+    display: inline-block;
+    float: right;
+    margin-top: 40px;
+  }
+  .middle{
+    width: 430px;
+    height: 250px;
+    position: absolute;
+    display: inline-block;
+    left: 140px;
+    background: #b1a1a3;
+    margin-top: 40px;
+  }
+  .left2{
+    height: 280px;
+    width: 280px;
+    border-radius: 50%;
+    background: #b1a1a3;
+    display: inline-block;
+    position: absolute;
+    top: 20px;
+    left: 0px;
+    @include animation( 0s, 0.4s, body, 1);
+    @include forward( forwards );
+    .circle{
+      height: 160px;
+      width: 160px;
+      border-radius: 50%;
+      background: #b1a1a3;
+      border: 1px solid #f8fcfa;
+      position:relative;
+      top: 50%;
+      left: 50%;
+      overflow: hidden;
+      z-index:1;
+      box-shadow:inset 0 2px 0 1px #82859d;
+      transform: translate( -50%, -50%) scale(0,0);
+      @include animation( 1.8s, 1s, cicle, 1);
+      @include forward( forwards );
+      .horizontal{
+        width: 120px;
+        height: 50px;
+        border-radius: 4px;
+        background: #3e4a78;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -25px;
+        margin-left: -60px;
+        box-shadow: inset 0 -4px 0px 0px #27376a;
+        @include animation( 1.8s, 5s, ciclerotate2, 1);
+        @include forward( forwards );
+      }
+      .vertical{
+        width: 50px;
+        height: 120px;
+        border-radius: 4px;
+        background: #3e4a78;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-top: -60px;
+        margin-left: -25px;
+        box-shadow: inset 0 -4px 0px 0px #27376a;
+        @include animation( 1.8s, 5s, ciclerotate, 1);
+        @include forward( forwards );
+      }
+    }
+  }
+  .right2{
+    height: 280px;
+    width: 280px;
+    border-radius: 50%;
+    background: #b1a1a3;
+    display: inline-block;
+    right: 0;
+    position: absolute;
+    top: 20px;
+    // z-index:1;
+    @include animation( 0s, 0.4s, body, 1);
+    @include forward( forwards );
+    .circle{
+      height: 250px;
+      width: 250px;
+      border-radius: 50%;
+      background: #91899d;
+      border: 1px solid #f8fcfa;
+      position:relative;
+      top: 50%;
+      left: 50%;
+      overflow: hidden;
+      transform: translate( -50%, -50%) scale(0,0);
+      @include animation( 1s, 1s, cicle, 1);
+      @include forward( forwards );
+      .top{
+        height: 59px;
+        width: 140px;
+        border-radius: 34px;
+        border: 1px solid #f8fcfa;
+        transform: rotate(-34deg);
+        position: absolute;
+        top: 70px;
+        left: 24px;
+        background: #d5e1bb;
+        opacity: 0;
+        @include animation( 2s, 1s, op, 1);
+        @include forward( forwards );
+        .green{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: none;
+          background: #539f89;
+          position:relative;
+          top: 0px;
+          left: 5px;
+          cursor: pointer;
+          transform: rotate(34deg) scale(0);
+          box-shadow: 0 4px 0px 0px #2c8475;
+          @include animation( 3.6s, 1s, ciclesss, 1);
+          @include forward( forwards );
+          &:active{
+            top: 5px;
+            left: 2px;
+            box-shadow: 0 0px 0px 0px #2c8475;
+            outline:none;
+          }
+          &:visited, &:focus{
+            outline:none;
+          }
+        }
+        .blue{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: none;
+          background: #4e83c7;
+          position:relative;
+          top: 0px;
+          left: 35px;
+          cursor: pointer;
+          transform: rotate(34deg) scale(0);
+          box-shadow: 0 4px 0px 0px #2868a7;
+          @include animation( 3.2s, 1s, ciclesss, 1);
+          @include forward( forwards );
+          &:active{
+            top: 5px;
+            left: 32px;
+            box-shadow: 0 0px 0px 0px #2868a7;
+            outline:none;
+          }
+          &:visited, &:focus{
+            outline:none;
+          }
+        }
+      }
+      .bottom{
+        height: 59px;
+        width: 140px;
+        border-radius: 34px;
+        border: 1px solid #f8fcfa;
+        transform: rotate(-34deg);
+        position: absolute;
+        top: 120px;
+        left: 84px;
+        background: #d5e1bb;
+        opacity: 0;
+        @include animation( 2.5s, 1s, op, 1);
+        @include forward( forwards );
+        .orange{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: none;
+          background: #e1a14c;
+          position:relative;
+          top: 0px;
+          left: 5px;
+          cursor: pointer;
+          transform: rotate(34deg) scale(0);
+          box-shadow: 0 4px 0px 0px #da7e46;
+          @include animation( 2.8s, 1s, ciclesss, 1);
+          @include forward( forwards );
+          &:active{
+            top: 5px;
+            left: 2px;
+            box-shadow: 0 0px 0px 0px #da7e46;
+            outline:none;
+          }
+          &:visited, &:focus{
+            outline:none;
+          }
+        }
+        .red{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          border: none;
+          background: #b3586e;
+          position:relative;
+          top: 0px;
+          left: 35px;
+          cursor: pointer;
+          transform: rotate(34deg) scale(0);
+          box-shadow: 0 4px 0px 0px #882644;
+          @include animation( 2.4s, 1s, ciclesss, 1);
+          @include forward( forwards );
+          &:active{
+            top: 5px;
+            left: 32px;
+            box-shadow: 0 0px 0px 0px #882644;
+            outline:none;
+          }
+          &:visited, &:focus{
+            outline:none;
+          }
+        }
+      }
+    }
+  }
+  .middle2{
+    width: 430px;
+    height: 250px;
+    position: absolute;
+    display: inline-block;
+    left: 140px;
+    background: #b1a1a3;
+    top: 20px;
+    // z-index:1;
+    @include animation( 0s, 0.4s, body, 1);
+    @include forward( forwards );
+    .select{
+      height: 50px;
+      width: 17px;
+      display: inline-block;
+      border-radius: 8px;
+      background: #3e4a78;
+      border: 1px solid #f8fcfa;
+      position: relative;
+      top: 140px;
+      left: 140px;
+      box-shadow: inset -1px -1px 0px 1px #0a1a51;
+      transform: rotate(55deg) scale(0, 0);
+      @include animation( 2.8s, 1s, select, 1);
+      @include forward( forwards );
+      cursor: pointer;
+      &:active{
+        box-shadow: inset 0px 0px 0px 0px #0a1a51;
+        top: 141px;
+      }
+    }
+    .start{
+      height: 50px;
+      width: 17px;
+      display: inline-block;
+      border-radius: 8px;
+      background: #3e4a78;
+      border: 1px solid #f8fcfa;
+      position: relative;
+      top: 140px;
+      left: 190px;
+      -webkit-box-shadow: inset -1px -1px 0px 1px #0a1a51;
+      box-shadow: inset -1px -1px 0px 1px #0a1a51;
+      transform: rotate(55deg) scale(0, 0);
+      @include animation( 1.8s, 1s, select, 1);
+      @include forward( forwards );
+      cursor: pointer;
+      &:active{
+        box-shadow: inset 0px 0px 0px 0px #0a1a51;
+        top: 141px;
+      }
+    }
+  }
+}

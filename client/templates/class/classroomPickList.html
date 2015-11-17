@@ -1,0 +1,31 @@
+<template name="classroomPickList">
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Classroom List</h1>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+
+        {{#each classrooms}}
+
+          {{#ionItem path="studentTalkWithParam" buttonRight=true avatar=true}}
+            <div class="class_logo">
+              <img src={{logo}}>  
+            </div>
+            <h2>{{name}}</h2>
+            <p>
+              Status: {{status}}
+            </p>
+            <p>
+              Create Date: {{formatDate createDate}}
+            </p>
+            {{> ionIcon icon="ios-arrow-right"}}
+          {{/ionItem}}
+
+        {{/each}}
+
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+</template>

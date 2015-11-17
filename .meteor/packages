@@ -1,0 +1,57 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base
+
+accounts-password
+accounts-facebook
+sunkay:easy-side-menu
+iron:router
+useraccounts:bootstrap
+useraccounts:iron-routing
+mdg:camera
+dburles:google-maps
+
+fourseven:scss@2.0.0
+meteoric:ionic-sass
+meteoric:ionicons-sass
+meteoric:ionic
+
+okland:camera-ui
+lukemadera:autoform-googleplace
+aldeed:collection2
+aldeed:autoform
+matb33:collection-hooks
+mrt:qr-scanner
+reywood:publish-composite
+lepozepo:s3
+kadira:debug
+standard-minifiers
+mobile-experience
+mongo
+blaze-html-templates
+session
+jquery
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+khrone:img-qrcode
+mrt:later
+raix:push
+erasaur:notification-badge
+underscore
+juliancwirko:s-image-box
+okgrow:analytics
+mdg:geolocation
+
+ccorcos:transitioner
+reactive-var
+crosswalk
+momentjs:moment

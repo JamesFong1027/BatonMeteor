@@ -1,0 +1,16 @@
+<template name="teacherTalk">  
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Talk Mode</h1>
+	{{/contentFor}}
+
+	{{#ionContent class="padding"}}
+		<div class="wrapper">
+			{{#each tickets}}
+			  <div id="img1" class="avatar">
+			    <div class="bottom_badge">{{user.participation.attendTimes}}</div>
+			    <div class="top_badge">{{ticketContent}}</div>
+			  </div>
+			{{/each}}
+		</div>
+    {{/ionContent}} 
+</template>  
