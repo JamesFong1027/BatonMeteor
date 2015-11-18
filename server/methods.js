@@ -44,5 +44,9 @@ Meteor.methods({
     {
       Meteor.users.update({_id:userId},{$set:{userType:Schemas.userType.teacher}})
     }
+  },
+  resetClassroom:function(classroomId){
+    if(isClassroomBlongTo(Meteor.userId(),classroomId))
+      TicketsInfo.update({cid:classroomId},{$set:{status:Schemas.ticketStatus.dismissed}});
   }
 });

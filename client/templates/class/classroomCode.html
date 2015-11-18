@@ -1,0 +1,12 @@
+<template name="classroomCode">  
+{{#ionContent class="padding"}}
+	{{#with classroomsInfo}}
+	    <div class="classroomName">
+	      {{name}}
+	    </div>
+	    <div class="confirmQR">
+	      {{> QrCode text=name }}
+	    </div>
+	{{/with}}
+{{/ionContent}}
+</template>

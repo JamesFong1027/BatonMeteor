@@ -19,7 +19,7 @@ ClassroomKicker={
 		return false;
 
 	},
-	// for student get their current waiting ticket
+	// for teacher to get their current teaching classroom
 	getCurrentClassroom:function(){
 		return ClassroomsInfo.findOne({
 			tid:Meteor.userId(),
@@ -27,10 +27,14 @@ ClassroomKicker={
 			status:Schemas.classroomStatus.open
 		});
 	},
-	// for student get their classroom buddy
+	getClassroomInfo:function (classroomId) {
+		return ClassroomsInfo.findOne({_id:classroomId});
+	},
+	// for teacher get their classroom history list
 	getClassroomHistoryList:function(){
 		return ClassroomsInfo.find({tid:Meteor.userId(),status:Schemas.classroomStatus.close});
 	},
+	// for teacher to get all the classroom they have created
 	getClassroomList:function(){
 		return ClassroomsInfo.find({tid:Meteor.userId()});
 	},
@@ -38,5 +42,20 @@ ClassroomKicker={
 	getOpenClassroom:function(){
 		return ClassroomsInfo.find({sid:"1",status:Schemas.classroomStatus.open});
 	},
+	// for teacher to reset the classrooom
+	// put all waiting tickets into dismissed
+	resetClassroom:function(classroomId){
+		Meteor.call("resetClassroom",classroomId);
+	},
+	// for teacher to close the classroom
+	// will set classroom status as close
+	// and reset the classroom at the same time
+	clossClassroom:function(classroomId){
+		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
+		ClassroomKicker.resetClassroom(classroomId);
+	},
+	restartClassroom:function(classroomId){
+		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.open}});
+	}
 
 }

@@ -1,0 +1,20 @@
+<template name="teacherMenu">
+  {{#ionPopover}}
+    <div class="content">
+      <div class="list">
+        <li class="item item-icon-left" id="close_class">
+          {{> ionIcon icon="ios-arrow-right"}}
+          Close Classroom
+        </li>
+        <li class="item item-icon-left" id="class_info">
+          {{> ionIcon icon="ios-arrow-right"}}
+          Classroom Info
+        </li>
+        <li class="item item-icon-left" id="help" data-ion-modal="classroomCode">
+          {{> ionIcon icon="ios-arrow-right"}}
+          Help
+        </li>
+      </div>
+    </div>
+  {{/ionPopover}}
+</template>

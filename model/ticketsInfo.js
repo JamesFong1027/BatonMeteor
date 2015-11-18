@@ -103,7 +103,7 @@ TicketsInfo.allow({
 	// only the ticket owner or teacher can update the ticket
 	update: function(userId, document,fields, modifier)
 	{
-		return userId===document.uid||userId===document.pid;
+		return userId===document.uid||isClassroomBlongTo(userId,document.cid);
 	},
 	// can only remove your own documents
 	remove: function (userId, doc) {
