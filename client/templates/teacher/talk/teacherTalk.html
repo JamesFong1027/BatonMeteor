@@ -12,14 +12,30 @@
     </button>
   {{/contentFor}}
 
-	{{#ionContent class="padding"}}
-		<div class="wrapper">
-			{{#each tickets}}
-			  <div id="img1" class="avatar">
-			    <div class="bottom_badge">{{user.participation.attendTimes}}</div>
-			    <div class="top_badge">{{ticketContent}}</div>
-			  </div>
-			{{/each}}
-		</div>
+  {{#ionView}}
+    {{#ionSubheaderBar}}
+		{{#if hasCurClassroom}}
+    		<h2 class="title">{{classroomName}}</h2>
+    	{{else}}
+    		<h2 class="title">There are no classroom open yet, Create one!</h2>
+  	{{/if}}
+    {{/ionSubheaderBar}}
+    {{#ionContent class="padding"}}
+    	{{#if hasCurClassroom}}
+			<div class="wrapper">
+				{{#each tickets}}
+				  <div id="img1" class="avatar">
+				    <div class="bottom_badge">{{user.participation.attendTimes}}</div>
+				    <div class="top_badge">{{ticketContent}}</div>
+				  </div>
+				{{/each}}
+			</div>
+		{{else}}
+			<div class="row">
+			  <button id="createClassroom" data-ion-modal="createClassroom" class="button button-positive col-33 col-offset-33">Create a classroom</button>
+			</div>
+		{{/if}}
     {{/ionContent}} 
+  {{/ionView}}
+
 </template>  

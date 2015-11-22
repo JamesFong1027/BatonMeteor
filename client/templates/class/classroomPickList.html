@@ -1,29 +1,37 @@
 <template name="classroomPickList">
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton}}
+  {{/contentFor}}
+
   {{#contentFor "headerTitle"}}
-    <h1 class="title">Classroom List</h1>
+    <h1 class="title">Pickup a classroom to join!</h1>
   {{/contentFor}}
 
   {{#ionView}}
     {{#ionContent}}
       {{#ionList}}
 
-        {{#each classrooms}}
+        {{#if classrooms}}
+          {{#each classrooms}}
 
-          {{#ionItem path="studentTalkWithParam" buttonRight=true avatar=true}}
-            <div class="class_logo">
-              <img src={{logo}}>  
-            </div>
-            <h2>{{name}}</h2>
-            <p>
-              Status: {{status}}
-            </p>
-            <p>
-              Create Date: {{formatDate createDate}}
-            </p>
-            {{> ionIcon icon="ios-arrow-right"}}
-          {{/ionItem}}
+            {{#ionItem data-dismiss=modal path="studentTalkWithParam" buttonRight=true avatar=true}}
+              <div class="class_logo">
+                <img src={{logo}}>  
+              </div>
+              <h2>{{name}}</h2>
+              <p>
+                Status: {{status}}
+              </p>
+              <p>
+                Create Date: {{formatDate createDate}}
+              </p>
+              {{> ionIcon icon="ios-arrow-right"}}
+            {{/ionItem}}
 
-        {{/each}}
+          {{/each}}  
+        {{else}}
+          <h2>There are no classroom exist, wait for teacher to create</h2>
+        {{/if}}
 
       {{/ionList}}
     {{/ionContent}}

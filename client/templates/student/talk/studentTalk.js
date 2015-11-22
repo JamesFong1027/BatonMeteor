@@ -6,7 +6,12 @@ Template.studentTalk.rendered = function () {
 };
 
 Template.studentTalk.helpers({
-  
+  "hasCurClassroom":function(){
+  	return Session.get("curClassroomId")!==undefined;
+  },
+  classroomName:function(){
+  	return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId")).name;
+  }
 });
 
 Template.studentTalk.events({
@@ -21,5 +26,8 @@ Template.studentTalk.events({
 	},
 	"click #challenge":function(){
 		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.challenge);
+	},
+	"click #pickClassroom":function(){
+		Router.go("classroomPickList");
 	},
 });

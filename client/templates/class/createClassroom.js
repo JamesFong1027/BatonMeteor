@@ -1,5 +1,6 @@
 Template.createClassroom.events({
-  "submit .new-classroom": function (event) {
+  "submit .new_classroom": function (event) {
+    console.log("createClassroom");
     // Prevent default browser form submit
     event.preventDefault();
 
@@ -12,7 +13,7 @@ Template.createClassroom.events({
     if(classroomId){
       Session.set("curMode",Schemas.ticketType.talkTicket);
       Session.set("curClassroomId",classroomId)
-      Router.go("teacherTalk");
+      Router.go("home");
     }
 
   },

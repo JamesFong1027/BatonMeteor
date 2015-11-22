@@ -1,12 +1,14 @@
 <template name="classroomCode">  
-{{#ionContent class="padding"}}
-	{{#with classroomsInfo}}
-	    <div class="classroomName">
-	      {{name}}
-	    </div>
-	    <div class="confirmQR">
-	      {{> QrCode text=name }}
-	    </div>
+{{#ionModal title="Classroom Information"}}
+    {{#with classroomsInfo}}
+    	<div class="padding">
+		    <div class="classroomName">
+		      	<h1 class="title">{{name}}</h1>
+		    </div>
+		    <div class="confirmQR">
+		      {{> QrCode text=name }}
+		    </div>
+		</div>
 	{{/with}}
-{{/ionContent}}
+ {{/ionModal}}
 </template>

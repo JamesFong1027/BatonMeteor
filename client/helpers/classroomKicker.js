@@ -50,12 +50,12 @@ ClassroomKicker={
 	// for teacher to close the classroom
 	// will set classroom status as close
 	// and reset the classroom at the same time
-	clossClassroom:function(classroomId){
+	closeClassroom:function(classroomId){
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
 		ClassroomKicker.resetClassroom(classroomId);
 	},
 	restartClassroom:function(classroomId){
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.open}});
-	}
+	},
 
 }

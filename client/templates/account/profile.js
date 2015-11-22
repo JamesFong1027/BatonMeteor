@@ -9,4 +9,14 @@ Template.profile.helpers({
   userProfile:function(){
     return Session.get("userProfile");
   },
+  historyClassroomCount:function(){
+  	return ClassroomKicker.getClassroomHistoryList().length;
+  },
+});
+
+Template.profile.events({
+	"click #logout":function(event){
+		console.log("logout");
+		AccountsTemplates.logout();
+	},
 });

@@ -6,14 +6,41 @@
 
   {{#ionView}}
     {{#ionContent}}
-      {{> atNavButton }}
+      <!-- {{> atNavButton }} -->
       {{#with userProfile}}
-		<div class="location-title">
-			{{firstName}} {{lastName}}		
-		</div>
-		<div class="location-address">
-			User Type: {{userType}}
-		</div>
+      <div class="padding">
+
+        {{#ionList}}
+
+          {{#ionItem class="item item-icon-left"}}
+            <i class="icon ion-person"></i>
+            User profile
+            <span class="item-note">
+              {{firstName}},{{lastName}}    
+            </span>
+          {{/ionItem}}
+
+          {{#ionItem class="item item-icon-left item-icon-right" path="classroomHistoryList"}}
+            <i class="icon ion-ios-people"></i>
+            Classroom history list
+            <span class="badge badge-assertive">{{historyClassroomCount}}</span>
+          {{/ionItem}}
+
+          {{#ionItem class="item item-icon-left"}}
+            <i class="icon ion-settings"></i>
+            Preference
+            <i class="icon ion-ios-arrow-right"></i>
+          {{/ionItem}}
+
+          {{#ionItem class="item item-icon-left assertive" id="logout"}}
+            <i class="icon ion-log-out assertive"></i>
+            Logout
+          {{/ionItem}}
+
+        {{/ionList}}
+
+      </div>
+
 	  {{/with}}
     {{/ionContent}}
   {{/ionView}}

@@ -48,6 +48,13 @@ Meteor.startup(function () {
 
 	//start schedule pickup reminder
 	// initialReminder();
+
+	
+	Template.registerHelper('formatDate', function(date) {
+	  if(undefined===date)
+	    return "Not Ready";
+	  return moment(date).format('hh:mm MMM-DD');
+	});
 });
 
 
