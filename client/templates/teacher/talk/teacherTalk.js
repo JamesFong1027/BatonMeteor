@@ -12,6 +12,16 @@ Template.teacherTalk.helpers({
   "hasCurClassroom":function(){
   	return ClassroomKicker.getCurrentClassroom();
   },
+  longHoldGesture:{
+    'press .avatar': function (event, templateInstance) {
+      /* `event` is the Hammer.js event object */
+      /* `templateInstance` is the `Blaze.TemplateInstance` */
+      /* `this` is the data context of the element in your template */
+      console.log(event);
+      var ticketId = event.target.id;
+      TicketShutter.selectTicket(ticketId);
+    },
+  }
 });
 
 Template.teacherTalk.events({

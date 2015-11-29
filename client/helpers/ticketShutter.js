@@ -62,6 +62,12 @@ TicketShutter={
 
 		return ticketArray;
 	},
+	getTicketInfoByID:function(ticketId){
+		return TicketsInfo.findOne({_id:ticketId});
+	},
+	selectTicket:function(ticketId){
+		TicketsInfo.update({_id:ticketId},{$set:{status:Schemas.ticketStatus.selected}});
+	},
 
 
 }

@@ -1,4 +1,4 @@
-<template name="studentTalk">  
+<template name="studentTalk_backup">  
 	{{#contentFor "headerTitle"}}
 		<h1 class="title">Talk Mode</h1>
 	{{/contentFor}}
@@ -15,35 +15,33 @@
 
 	{{#ionContent class="padding"}}
 		{{#if hasCurClassroom}}
-			<div id="carousel">
-			    <div class="container">
-			    	
-			    </div>
-			  </div>
-
-			  <div id="circles-counter">
-			    <span>0 circles</span>
-			  </div>
-
-			  <div id="add-circle"></div>
-			<nav class='circle-menu'>
-			  <input checked='checked' class='menu-toggler' id='menu-toggler' type='checkbox'>
-			  <label for='menu-toggler'></label>
-			  <ul>
-			    <li class='menu-item'>
-			      <a class='icon ion-social-facebook' id="build" target='_blank'></a>
-			    </li>
-			    <li class='menu-item'>
-			      <a class='icon ion-ios-lightbulb' id="new_idea" target='_blank'></a>
-			    </li>
-			    <li class='menu-item'>
-			      <a class='icon ion-help' id="question" target='_blank'></a>
-			    </li>
-			    <li class='menu-item'>
-			      <a class='icon ion-alert' id="challenge" target='_blank'></a>
-			    </li>
-			  </ul>
-			</nav>
+			<div class="controler">
+		      <div class="left"></div>
+		      <div class="middle"></div>
+		      <div class="right"></div>
+		      <div class="left2">
+		        <div class="circle">
+		          <div class="horizontal"></div>
+		          <div class="vertical"></div>
+		        </div>
+		      </div>
+		      <div class="middle2">
+		        <div class="select"></div>
+		        <div class="start"></div>
+		      </div>
+		      <div class="right2">
+		        <div class="circle">
+		          <div class="top">
+		            <button class="green" id="build">Build</button>
+		            <button class="blue" id="new_idea">Idea</button>
+		          </div>
+		          <div class="bottom">
+		            <button class="orange" id="question">Question</button>
+		            <button class="red" id="challenge">Challenge</button>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
 		{{else}}
 			<div class="row padding">
 				<div class="col-33 col-offset-33">

@@ -55,6 +55,11 @@ Meteor.startup(function () {
 	    return "Not Ready";
 	  return moment(date).format('hh:mm MMM-DD');
 	});
+
+	// Converts from degrees to radians.
+	Math.radians = function(degrees) {
+	  return degrees * Math.PI / 180;
+	}
 });
 
 

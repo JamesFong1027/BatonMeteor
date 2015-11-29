@@ -44,8 +44,13 @@ ClassroomKicker={
 	},
 	// for teacher to reset the classrooom
 	// put all waiting tickets into dismissed
-	resetClassroom:function(classroomId){
-		Meteor.call("resetClassroom",classroomId);
+	resetClassroom:function(type,classroomId){
+		// Meteor.call("resetClassroom",classroomId);
+		_.each(TicketShutter.getClassroomTicketList(type,classroomId),
+			function(element, index, list){
+				TicketsInfo.update({_id:element._id},{$set:{status:Schemas.ticketStatus.dismissed}});
+			}
+		)
 	},
 	// for teacher to close the classroom
 	// will set classroom status as close
