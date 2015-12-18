@@ -84,6 +84,7 @@ body,
   width: 70px;
   border-radius: 6px;
   margin: 20px;
+  background-image: url("https://s3.amazonaws.com/uifaces/faces/twitter/enda/128.jpg");
 }
 #img1 {
   background-image: url("https://s3.amazonaws.com/uifaces/faces/twitter/enda/128.jpg");

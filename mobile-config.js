@@ -5,10 +5,10 @@ App.info({
 });
 
 App.icons({
-  'android_ldpi': 'logo.png',
-  'android_mdpi': 'logo.png',
-  'android_hdpi': 'logo.png',
-  'android_xhdpi': 'logo.png'
+  'android_ldpi': 'public/logo.png',
+  'android_mdpi': 'public/logo.png',
+  'android_hdpi': 'public/logo.png',
+  'android_xhdpi': 'public/logo.png'
 });
 
 App.accessRule('*.google.com/*');
