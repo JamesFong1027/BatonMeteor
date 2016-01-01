@@ -54,7 +54,8 @@ TicketShutter={
 			ticketArray[i].user = Meteor.users.findOne({_id:ticketArray[i].uid});
 			//put student participation info into user
 			var attendTimes = TicketsInfo.find({cid:classroomId,ticketType:type,uid:ticketArray[i].uid}).count();
-			var selectedTimes = TicketsInfo.find({cid:classroomId,ticketType:type,uid:ticketArray[i].uid,ticketStatus:Schemas.ticketStatus.selected}).count();
+			var selectedTimes = TicketsInfo.find({cid:classroomId,ticketType:type,uid:ticketArray[i].uid,status:Schemas.ticketStatus.selected}).count();
+			console.log()
 			ticketArray[i].user.participation = new Object();
 			ticketArray[i].user.participation.attendTimes = attendTimes;
 			ticketArray[i].user.participation.selectedTimes = selectedTimes;

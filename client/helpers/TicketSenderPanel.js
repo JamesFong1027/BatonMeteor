@@ -73,10 +73,35 @@ TicketSenderPanel = function (template){
 
     this.setPosition();
   };
-  this.addCircle=function(id,ticketInfo) {
+  this.addCircle=function(id,ticketInfo,isSelf) {
+    var circleClass = "circle";
+    if(isSelf)
+      circleClass+= " self";
+
     this.container = template.$(".container")[0];
     this.circlesCounter = template.$("#circles-counter")[0];
-    this.container.innerHTML += "<div class='circle' id="+id+" style='background :" + this.randomFlatColor() + "'></div>";
+    this.container.innerHTML += "<div class='"+circleClass+"' id="+id+"></div>";
+
+    if(isSelf)
+    {
+      switch(ticketInfo.ticketContent){
+        case Schemas.talkTicketValue.buildOn:
+          template.$("#"+id).append("<a class='icon "+GlobalVar.intentIcon.buildOn+"'></a>");
+          break;
+        case Schemas.talkTicketValue.newIdea:
+          template.$("#"+id).append("<a class='icon "+GlobalVar.intentIcon.newIdea+"'></a>");
+          break;
+        case Schemas.talkTicketValue.challenge:
+          template.$("#"+id).append("<a class='icon "+GlobalVar.intentIcon.challenge+"'></a>");
+          break;
+        case Schemas.talkTicketValue.question:
+          template.$("#"+id).append("<a class='icon "+GlobalVar.intentIcon.question+"'></a>");
+          break;
+      }
+      template.$("#"+id).css("background-color","#33CD5F");
+    }
+
+    
     this.circlesCounter.innerHTML = "<span style='color :" + this.randomFlatColor() + "'>" + (this.circles.length + 1) + " circles</span>"
     this.setPosition();
   };

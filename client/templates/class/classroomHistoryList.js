@@ -26,6 +26,7 @@ Template.classroomHistoryList.events({
 			Session.set("curClassroomId",event.currentTarget.id);
 			Session.set("curMode",Schemas.ticketType.talkTicket);
 			Router.go("teacherTalk");
+			// Router.go("teacherTalkWithParam", {_id: event.currentTarget.id}, {});
 	      },
 	      onCancel: function() {
 	        console.log('Cancelled');

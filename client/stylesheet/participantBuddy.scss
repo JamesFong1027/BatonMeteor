@@ -28,9 +28,31 @@ html,body {
       transition: all 1s cubic-bezier(0.680, -0.550, 0.265, 1.550);
       opacity: 0;
       border-radius: 100%;
+      background : rgba(#0A9DC7,0.6);
     }
   }
 }
+
+.self{
+  border: 2px solid #FAFAFA;
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 15px #EF473A;
+}
+
+.self a {
+  display: block;
+  width: inherit;
+  height: inherit;
+  line-height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 40px;
+  pointer-events: none;
+  transition: .2s;
+}
+
 .instructions {
   font-size: 1rem;
   line-height: 1.4rem;

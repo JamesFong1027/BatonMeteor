@@ -12,7 +12,7 @@ Template.studentTalk.rendered = function () {
 Template.studentTalk.onRendered(function(){
 	console.log("in onRendered");
 	// add a observer on getbuddylist cursor
-	var buddyListWatcher = TicketShutter.getClassroomBuddyList(Session.get("curMode"),Session.get("curClassroomId"));
+	var buddyList = TicketShutter.getClassroomBuddyList(Session.get("curMode"),Session.get("curClassroomId"));
 	var template = Template.instance();
 	template.sender.get().init();
 	// first initial the existing tickets
@@ -20,10 +20,11 @@ Template.studentTalk.onRendered(function(){
 		// template.sender.get().addCircle();
 	// });
 	// second, have added callback function, to addcircle when it trigger
-	var handle = buddyListWatcher.observeChanges({
+	var buddyListWatcher = buddyList.observeChanges({
 	  added: function (id, ticketInfo) {
 	  	console.log(ticketInfo);
-	    template.sender.get().addCircle(id,ticketInfo);
+
+	    template.sender.get().addCircle(id,ticketInfo,ticketInfo.uid===Meteor.userId());
 	  },
 	  removed: function (id) {
 	    console.log(id);
@@ -31,6 +32,9 @@ Template.studentTalk.onRendered(function(){
 	  },
 	  changed:function(id,fields){
 	  	console.log(fields);
+	  	template.sender.get().removeCircle(id);
+	  	var ticketInfo = TicketShutter.getTicketInfoByID(id);
+	  	template.sender.get().addCircle(id,ticketInfo,ticketInfo.uid===Meteor.userId());
 	  }
 	});
 });

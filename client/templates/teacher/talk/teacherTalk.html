@@ -25,10 +25,15 @@
         {{#HammerTouchArea gestureMap=longHoldGesture}}
     			<div class="wrapper">
     				{{#each tickets}}
-    				  <div class="avatar" id={{_id}}>
+            <div class="ticketSquare">
+    				  <div id={{_id}}  class="avatar" style={{changeColor createDate}}>
+                <a class={{getIntentIconClass ticketContent}} ></a>
     				    <div class="bottom_badge">{{user.participation.attendTimes}}</div>
-    				    <div class="top_badge">{{ticketContent}}</div>
+    				    <div class="top_badge">{{user.participation.selectedTimes}}</div>
     				  </div>
+              <p>{{user.profile.firstName}}, {{user.profile.lastName}}</p>
+            </div>
+            {{ afterRenderTrigger}}
     				{{/each}}
     			</div>
         {{/HammerTouchArea}}
