@@ -1,5 +1,5 @@
 Template.studentWork.onCreated(function(){
-	console.log("in onCreated");
+	Session.set("curMode",Schemas.ticketType.workTicket);
 	var template = this;
 	template.sender = new ReactiveVar(new TicketSenderPanel(template));
 	// template.sender.get().init();
@@ -13,6 +13,7 @@ Template.studentWork.onRendered(function(){
 	console.log("in onRendered");
 	// add a observer on getbuddylist cursor
 	var buddyList = TicketShutter.getClassroomBuddyList(Session.get("curMode"),Session.get("curClassroomId"));
+	console.log(buddyList.count());
 	var template = Template.instance();
 	template.sender.get().init();
 	// first initial the existing tickets
@@ -61,17 +62,35 @@ Template.studentWork.helpers({
 });
 
 Template.studentWork.events({
-	"click #build":function(){
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.buildOn);
+	"click #numOne":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.one);
 	},
-	"click #new_idea":function(){
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.newIdea);	
+	"click #numTwo":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.two);	
 	},
-	"click #question":function(){
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.question);
+	"click #numThree":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.three);
 	},
-	"click #challenge":function(){
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.challenge);
+	"click #numFour":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.four);
+	},
+	"click #numFive":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.five);
+	},
+	"click #numSix":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.six);
+	},
+	"click #numSeven":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.seven);
+	},
+	"click #numEight":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.eight);
+	},
+	"click #numNine":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.nine);
+	},
+	"click #numTen":function(){
+		TicketShutter.sendTicketAuto(Schemas.workTicketValue.ten);
 	},
 	"click #pickClassroom":function(){
 		Router.go("classroomPickList");

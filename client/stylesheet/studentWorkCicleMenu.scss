@@ -1,7 +1,7 @@
-// circle menu helpers
+// circleMenu for student work tab
 
-$tab-menu-class: other-menu-item;
-$toggler-size: 30px;
+$tab-menu-class: worktab-menu-item;
+$toggler-size: 35px;
 $toggler-color: black;
 $toggler-transition: transform .5s, top .5s;
 
@@ -9,7 +9,8 @@ $item-count: 10;
 $item-size: $toggler-size * 2;
 $item-color: black;
 $item-transition: .5s;
-$radius: 30px;
+$radius: 60px;
+
 
 @mixin size ($width, $height: $width) {
   width: $width;

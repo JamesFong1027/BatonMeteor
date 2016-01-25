@@ -16,15 +16,12 @@ TicketSenderPanel = function (template){
   this.init=function(){    
     this.circles = template.$('.circle');
     
-    if(0===this.circles.length)
-      return;
-    this.setPosition();
+    if(0!==this.circles.length) {
+      console.log(this.circles.length);
+    }
+    // this.setPosition();
     // this.update();
 
-    // Set random colors
-    for (var i = 0; i < this.circles.length; i++) {
-      this.circles[i].style.background = this.randomFlatColor();
-    };
   };
 
   this.setPosition=function() {
@@ -79,7 +76,7 @@ TicketSenderPanel = function (template){
       circleClass+= " self";
 
     this.container = template.$(".container")[0];
-    this.circlesCounter = template.$("#circles-counter")[0];
+    // this.circlesCounter = template.$("#circles-counter")[0];
     this.container.innerHTML += "<div class='"+circleClass+"' id="+id+"></div>";
 
     if(isSelf)
@@ -97,12 +94,24 @@ TicketSenderPanel = function (template){
         case Schemas.talkTicketValue.question:
           template.$("#"+id).append("<a class='icon "+GlobalVar.intentIcon.question+"'></a>");
           break;
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+        case "10":
+        // <a class='icon button-icon' id="numberTen" target='_blank' style="background: rgba(255,0,0, 0.9)">10</a>
+          template.$("#"+id).append("<a class='icon button-icon'>"+ticketInfo.ticketContent+"</a>");
       }
       template.$("#"+id).css("background-color","#33CD5F");
     }
 
     
-    this.circlesCounter.innerHTML = "<span style='color :" + this.randomFlatColor() + "'>" + (this.circles.length + 1) + " circles</span>"
+    // this.circlesCounter.innerHTML = "<span style='color :" + this.randomFlatColor() + "'>" + (this.circles.length) + " circles</span>"
     this.setPosition();
   };
   this.removeCircle=function(id){
@@ -127,14 +136,4 @@ TicketSenderPanel = function (template){
     return flatColors[Math.floor(Math.random() * flatColors.length)];
   }
 }
-
-
-
-
-
-
-
-
-
-
 

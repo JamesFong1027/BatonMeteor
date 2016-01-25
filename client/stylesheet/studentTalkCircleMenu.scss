@@ -1,15 +1,16 @@
-// circle menu helpers
+// circle menu for student talk tab
 
-$tab-menu-class: other-menu-item;
-$toggler-size: 30px;
+$tab-menu-class: talktab-menu-item;
+$toggler-size: 40px;
 $toggler-color: black;
 $toggler-transition: transform .5s, top .5s;
 
-$item-count: 10;
+$item-count: 4;
 $item-size: $toggler-size * 2;
 $item-color: black;
 $item-transition: .5s;
 $radius: 30px;
+
 
 @mixin size ($width, $height: $width) {
   width: $width;
