@@ -14,13 +14,13 @@ Meteor.publish('classroomsInfo',function(){
 // });
 
 // with extra users profile info
-Meteor.publishComposite('ticketsInfoDetail',function(classroomId,ticketType) { 
+Meteor.publishComposite('ticketsInfoDetail',function(classroomId) { 
 	return {
 
 		find:function(){
 			//TODO need restrict the publish permission
-			console.log(classroomId,ticketType);
-			return TicketsInfo.find({cid:classroomId,ticketType:ticketType});
+			console.log(classroomId);
+			return TicketsInfo.find({cid:classroomId});
 		},
 		children:[
 			{

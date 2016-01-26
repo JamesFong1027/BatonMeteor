@@ -1,0 +1,48 @@
+<template name="teacherWork">  
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Work Mode</h1>
+	{{/contentFor}}
+	{{#contentFor "headerButtonRight"}}
+    <button class="button button-clear" data-ion-popover="teacherMenu">
+      {{#if isAndroid}}
+        {{> ionIcon icon='android-more-vertical'}}
+      {{else}}
+        {{> ionIcon icon='more'}}
+      {{/if}}
+    </button>
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionSubheaderBar}}
+		{{#if hasCurClassroom}}
+    		<h2 class="title">{{classroomName}}</h2>
+    	{{else}}
+    		<h2 class="title">There are no classroom open yet, Create one!</h2>
+  	{{/if}}
+    {{/ionSubheaderBar}}
+    {{#ionContent class="padding"}}
+    	{{#if hasCurClassroom}}
+        {{#HammerTouchArea gestureMap=longHoldGesture}}
+    			<div class="wrapper">
+    				{{#each tickets}}
+            <div class="ticketSquare">
+    				  <div id={{_id}}  class="avatar" style={{changeColor ticketContent}}>
+                <a class="icon">{{ticketContent}}</a>
+    				    <div class="bottom_badge">{{user.participation.attendTimes}}</div>
+    				    <div class="top_badge">{{user.participation.selectedTimes}}</div>
+    				  </div>
+              <p>{{user.profile.firstName}}, {{user.profile.lastName}}</p>
+            </div>
+            {{ afterRenderTrigger}}
+    				{{/each}}
+    			</div>
+        {{/HammerTouchArea}}
+		{{else}}
+			<div class="row">
+			  <button id="createClassroom" data-ion-modal="createClassroom" class="button button-positive col-33 col-offset-33">Create a classroom</button>
+			</div>
+		{{/if}}
+    {{/ionContent}} 
+  {{/ionView}}
+
+</template>  

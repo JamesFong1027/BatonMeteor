@@ -16,7 +16,7 @@ Meteor.startup(function () {
 	Tracker.autorun(function () {
 		if(Session.get("curClassroomId")&&Session.get("curMode")){
 			console.log("start subscribe ticketsInfoDetail");
-			Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroomId"),Session.get("curMode"));		
+			Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroomId"));		
 			Meteor.subscribe('userProfile');
 		}
 	});
