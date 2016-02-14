@@ -24,8 +24,10 @@ Template.studentTalk.onRendered(function(){
 	var buddyListWatcher = buddyList.observeChanges({
 	  added: function (id, ticketInfo) {
 	  	console.log(ticketInfo);
-
 	    template.sender.get().addCircle(id,ticketInfo,ticketInfo.uid===Meteor.userId());
+	    if(template.$(".menu-toggler:checked").size()===0){
+	    	template.sender.get().setPosition();
+	    }
 	  },
 	  removed: function (id) {
 	    console.log(id);
@@ -33,9 +35,11 @@ Template.studentTalk.onRendered(function(){
 	  },
 	  changed:function(id,fields){
 	  	console.log(fields);
-	  	template.sender.get().removeCircle(id);
-	  	var ticketInfo = TicketShutter.getTicketInfoByID(id);
-	  	template.sender.get().addCircle(id,ticketInfo,ticketInfo.uid===Meteor.userId());
+	  	if(isTicketBelongTo(Meteor.userId(),id)){
+	  		template.sender.get().removeCircle(id);
+		  	var ticketInfo = TicketShutter.getTicketInfoByID(id);
+		  	template.sender.get().addCircle(id,ticketInfo,ticketInfo.uid===Meteor.userId());	
+	  	}
 	  }
 	});
 });
@@ -79,6 +83,12 @@ Template.studentTalk.events({
 	},
 	"click #add-circle":function(){
 		// Template.instance().sender.addCircle();
+	},
+	"click .talktab-menu-item":function(){
+		Template.instance().$('.menu-toggler').trigger("click");
+	},
+	"click #menu-toggler":function(event){
+		Template.instance().sender.get().togglePanel(!event.target.checked);
 	}
 });
 

@@ -24,6 +24,20 @@ TicketSenderPanel = function (template){
 
   };
 
+  this.hidePanel = function(){
+    template.$('.circle').css({"transform": "translate3d(-40px, -40px, 0px)"});
+    // template.$('.circle').animate({opacity:0},800,null);  
+    template.$('.circle').css({"opacity": 0});
+  }
+
+  this.togglePanel = function(toggler){
+    if(toggler){
+      this.setPosition();
+    } else {
+      this.hidePanel();
+    }
+  };
+
   this.setPosition=function() {
     this.carousel = template.$("#carousel")[0];
     this.circles = this.template.$(".circle");
@@ -109,10 +123,6 @@ TicketSenderPanel = function (template){
       }
       template.$("#"+id).css("background-color","#33CD5F");
     }
-
-    
-    // this.circlesCounter.innerHTML = "<span style='color :" + this.randomFlatColor() + "'>" + (this.circles.length) + " circles</span>"
-    this.setPosition();
   };
   this.removeCircle=function(id){
     template.$("#"+id).remove();

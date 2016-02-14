@@ -2,6 +2,7 @@
 
 $tab-menu-class: worktab-menu-item;
 $toggler-size: 35px;
+$radius: 80px;
 $toggler-color: black;
 $toggler-transition: transform .5s, top .5s;
 
@@ -9,8 +10,6 @@ $item-count: 10;
 $item-size: $toggler-size * 2;
 $item-color: black;
 $item-transition: .5s;
-$radius: 60px;
-
 
 @mixin size ($width, $height: $width) {
   width: $width;

@@ -1,5 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500);
 
+$bubble-size: 70px;
+$carousel-size: 280px;
+
 html,body {
   position: relative;
   width: 100%;
@@ -11,8 +14,8 @@ html,body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 560px;
-  height: 560px;
+  width: $carousel-size;
+  height: $carousel-size;
   transform: translate3D(-50%, -50%, 0);
   .container {
     position: relative;
@@ -23,8 +26,8 @@ html,body {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 80px;
-      height: 80px;
+      width: $bubble-size;
+      height: $bubble-size;
       transition: all 1s cubic-bezier(0.680, -0.550, 0.265, 1.550);
       opacity: 0;
       border-radius: 100%;
@@ -44,11 +47,11 @@ html,body {
   display: block;
   width: inherit;
   height: inherit;
-  line-height: 80px;
+  line-height: $bubble-size;
   border-radius: 50%;
   text-align: center;
   text-decoration: none;
-  font-size: 40px;
+  font-size: $bubble-size/2;
   pointer-events: none;
   transition: .2s;
 }
