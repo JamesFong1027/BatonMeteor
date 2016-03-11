@@ -43,6 +43,11 @@ body {
   height: 100%;
 }
 
+.login-icon{
+  text-align: center;
+  padding-top: 80px;
+}
+
 @media only screen and (min-width : 601px) {
   .container {
     width: 99%; }

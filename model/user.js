@@ -23,6 +23,11 @@ Schemas.User = new SimpleSchema({
     participation:{
       type:Schemas.Participation,
       optional:true
+    },
+    services:{
+      type: Object,
+      optional:true,
+      blackbox:true
     }
 });
 

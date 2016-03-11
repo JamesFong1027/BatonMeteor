@@ -20,6 +20,7 @@ Meteor.startup(function () {
 			Meteor.subscribe('userProfile');
 		}
 	});
+
 	// Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroom"),Session.get("CurMode"));		
 	// Meteor.subscribe('userProfile');
 	//push notification setup

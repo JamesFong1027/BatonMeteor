@@ -7,7 +7,6 @@
 meteor-base
 
 accounts-password
-accounts-facebook
 sunkay:easy-side-menu
 iron:router
 useraccounts:bootstrap
@@ -56,3 +55,7 @@ reactive-var
 crosswalk
 momentjs:moment
 chriswessels:hammer
+google
+accounts-google
+service-configuration
+accounts-ui
