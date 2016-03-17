@@ -14,3 +14,16 @@
     {{/ionContent}}
   {{/ionView}}
 </template>
+
+<template name="loginLayout">
+{{#ionBody}}
+  {{#ionView}}
+    {{#ionContent}}
+      <div class="login-icon">
+        <h1>Welcome to Baton!</h1>
+      </div>
+      {{> yield}}
+    {{/ionContent}}
+  {{/ionView}}
+{{/ionBody}}
+</template>

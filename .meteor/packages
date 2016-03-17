@@ -9,7 +9,7 @@ meteor-base
 accounts-password
 sunkay:easy-side-menu
 iron:router
-useraccounts:bootstrap
+useraccounts:ionic
 useraccounts:iron-routing
 mdg:camera
 dburles:google-maps
@@ -58,4 +58,3 @@ chriswessels:hammer
 google
 accounts-google
 service-configuration
-accounts-ui

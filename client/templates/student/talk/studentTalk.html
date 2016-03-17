@@ -3,65 +3,67 @@
 		<h1 class="title">Talk Mode</h1>
 	{{/contentFor}}
 	
-    {{#ionSubheaderBar}}
-		{{#if hasCurClassroom}}
-			{{#with classroom}}
-    		<h2 class="title">{{name}} [{{status}}]</h2>
-			{{/with}}
-    	{{else}}
-    		<h2 class="title">There are no classroom open yet, Pick one!</h2>
-  	{{/if}}
-    {{/ionSubheaderBar}}
+	{{#ionView}}
+	    {{#ionSubheaderBar}}
+			{{#if hasCurClassroom}}
+				{{#with classroom}}
+	    		<h2 class="title">{{name}} [{{status}}]</h2>
+				{{/with}}
+	    	{{else}}
+	    		<h2 class="title">There are no classroom open yet, Pick one!</h2>
+	  	{{/if}}
+	    {{/ionSubheaderBar}}
 
-	{{#ionContent class="padding"}}
-		{{#if hasCurClassroom}}
-			<div id="carousel">
-			    <div class="container">
-			    	
-			    </div>
-			  </div>
+		{{#ionContent class="padding"}}
+			{{#if hasCurClassroom}}
+				<div id="carousel">
+				    <div class="container">
+				    	
+				    </div>
+				  </div>
 
-			  <!-- <div id="circles-counter">
-			    <span>0 circles</span>
-			  </div> -->
-			  
-			<nav class='circle-menu'>
-			  <input checked='checked' class='menu-toggler' id='menu-toggler' type='checkbox'>
-			  <label for='menu-toggler'></label>
-			  <ul>
-			    <li class='talktab-menu-item'>
-			      <a class='icon ion-android-contacts' id="build" target='_blank'></a>
-			    </li>
-			    <li class='talktab-menu-item'>
-			      <a class='icon ion-ios-lightbulb' id="new_idea" target='_blank'></a>
-			    </li>
-			    <li class='talktab-menu-item'>
-			      <a class='icon ion-help' id="question" target='_blank'></a>
-			    </li>
-			    <li class='talktab-menu-item'>
-			      <a class='icon ion-alert' id="challenge" target='_blank'></a>
-			    </li>
-			  </ul>
-			</nav>
-		{{else}}
-			<div class="row padding">
-				<div class="col-33 col-offset-33">
-			  		<button id="pickClassroom" class="button button-block button-positive ">Pick a classroom from list</button>
+				  <!-- <div id="circles-counter">
+				    <span>0 circles</span>
+				  </div> -->
+				  
+				<nav class='circle-menu'>
+				  <input checked='checked' class='menu-toggler' id='menu-toggler' type='checkbox'>
+				  <label for='menu-toggler'></label>
+				  <ul>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-android-contacts' id="build" target='_blank'></a>
+				    </li>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-ios-lightbulb' id="new_idea" target='_blank'></a>
+				    </li>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-help' id="question" target='_blank'></a>
+				    </li>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-alert' id="challenge" target='_blank'></a>
+				    </li>
+				  </ul>
+				</nav>
+			{{else}}
+				<div class="row padding">
+					<div class="col-33 col-offset-33">
+				  		<button id="pickClassroom" class="button button-block button-positive ">Pick a classroom from list</button>
+					</div>
 				</div>
-			</div>
 
-			<div class="row padding">
-				<div class="col-33 col-offset-33">
-			  		<button id="EnterName" data-ion-modal="classroomPickList" class="button button-block button-positive">Enter Classroom Name</button>
+				<div class="row padding">
+					<div class="col-33 col-offset-33">
+				  		<button id="EnterName" data-ion-modal="classroomPickList" class="button button-block button-positive">Enter Classroom Name</button>
+					</div>
 				</div>
-			</div>
 
-			<div class="row padding">
-				<div class="col-33 col-offset-33">
-			  		<button id="scanQRCode" data-ion-modal="classroomPickList" class="button button-block button-positive">Scan QR code</button>
+				<div class="row padding">
+					<div class="col-33 col-offset-33">
+				  		<button id="scanQRCode" data-ion-modal="classroomPickList" class="button button-block button-positive">Scan QR code</button>
+					</div>
 				</div>
-			</div>
 
-		{{/if}}
-    {{/ionContent}} 
+			{{/if}}
+	    {{/ionContent}} 
+	{{/ionView}}
 </template>  
