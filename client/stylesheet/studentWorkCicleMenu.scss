@@ -149,14 +149,6 @@ body {
   }
 
   &:active{
-
-    @for $i from 0 through $item-count - 1 {
-        .#{$tab-menu-class}:nth-child(#{$i + 1}) {
-          transform: rotate(360deg / $item-count * $i) translateX(0);
-      }
-    }
-
-    opacity: 0;
-    
+    opacity: 0.3;
   }
 }

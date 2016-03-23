@@ -20,11 +20,26 @@ Meteor.startup(function() {
   });
 
   Accounts.onCreateUser(function(options, user) {
-    console.log("options", options);
-    console.log("user", user);
+    // console.log("options", options);
+    // console.log("user", user);
     if (options.profile)
       user.profile = options.profile;
     if (user.services.google != undefined) {
+      var isRegister= Meteor.users.find({"emails.address":user.services.google.email}).count() > 0;
+      
+      //TODO do we really allow user to login when them have the gmail account
+      if(isRegister){
+        // add goole service credential to the account profile
+        // var userProfile = Meteor.users.find({"emails.address":user.services.google.email}).fetch()[0];
+        // userProfile.services.google = user.services.google;
+        // userProfile.services.resume = user.services.resume;
+        // update the user profile
+        // Meteor.users.update({"_id":userProfile._id},{$set:userProfile});
+        //log user in with email and password
+
+      }
+
+      // setup user profile by using google 
       user.profile.firstName = user.services.google.given_name;
       user.profile.lastName = user.services.google.family_name;
       user.emails = [{
