@@ -2,7 +2,6 @@
 
 $tab-menu-class: worktab-menu-item;
 $toggler-size: 35px;
-$radius: 80px;
 $toggler-color: black;
 $toggler-transition: transform .5s, top .5s;
 
@@ -10,6 +9,41 @@ $item-count: 10;
 $item-size: $toggler-size * 2;
 $item-color: black;
 $item-transition: .5s;
+
+@mixin transform ($index, $radius: 100px ) {
+    transform: rotate(360deg / $item-count * $index) translateX(-$item-size - $radius);
+}
+
+@media only screen and (max-width : 320px){
+  .menu-toggler:checked ~ ul {
+    @for $i from 0 through $item-count - 1 {
+      .#{$tab-menu-class}:nth-child(#{$i + 1}) {
+        @include transform($i,45px);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 420px) and (min-width : 320px){
+  .menu-toggler:checked ~ ul {
+    @for $i from 0 through $item-count - 1 {
+      .#{$tab-menu-class}:nth-child(#{$i + 1}) {
+        @include transform($i,55px);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width : 3000px) and (min-width : 420px){
+  .menu-toggler:checked ~ ul {
+    @for $i from 0 through $item-count - 1 {
+      .#{$tab-menu-class}:nth-child(#{$i + 1}) {
+        @include transform($i);
+      }
+    }
+  }
+}
+
 
 @mixin size ($width, $height: $width) {
   width: $width;
@@ -81,12 +115,6 @@ body {
     opacity: 1;
   }
 
-  @for $i from 0 through $item-count - 1 {
-    .#{$tab-menu-class}:nth-child(#{$i + 1}) {
-      transform: rotate(360deg / $item-count * $i) translateX(-$item-size - $radius);
-    }
-  }
-  
   .#{$tab-menu-class} a {
     pointer-events: auto;
   }
