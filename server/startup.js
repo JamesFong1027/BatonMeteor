@@ -6,6 +6,16 @@ Meteor.startup(function() {
     return next();
   });
 
+  smtp = {
+    username: 'info@batonmobile.com',
+    password: 'ummchzwemyquhgxs',
+    server:   'smtp.gmail.com',  // eg: mail.gandi.net
+    port: 465
+  }
+
+  process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
+
+
   // Add Facebook configuration entry
   ServiceConfiguration.configurations.update({
     "service": "google"
@@ -13,7 +23,7 @@ Meteor.startup(function() {
     $set: {
       "clientId": "553157495789-7v8oh686td1u7du0hdd2jdp9t6fflqgm.apps.googleusercontent.com",
       "secret": "Ikpp_WkPQDDirxjU-_TZj6wV",
-      "redirectUrl": "http://localhost:3000/_oauth/google"
+      "redirectUrl": "http://app.batonmobile.com/_oauth/google"
     }
   }, {
     upsert: true
