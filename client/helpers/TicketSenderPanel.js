@@ -98,19 +98,19 @@ TicketSenderPanel = function(template) {
     this.container.innerHTML += "<div class='" + circleClass + "' id=" + id + "></div>";
 
     if (isSelf) {
-      var backgroundColor = "#33CD5F";
+      var backgroundColor = "#03A9F4";
       switch (ticketInfo.ticketContent) {
         case Schemas.talkTicketValue.buildOn:
-          template.$("#" + id).append("<a class='icon " + GlobalVar.intentIcon.buildOn + "'></a>");
+          template.$("#" + id).append("<a class='icon stable " + GlobalVar.intentIcon.buildOn + "'></a>");
           break;
         case Schemas.talkTicketValue.newIdea:
-          template.$("#" + id).append("<a class='icon " + GlobalVar.intentIcon.newIdea + "'></a>");
+          template.$("#" + id).append("<a class='icon stable " + GlobalVar.intentIcon.newIdea + "'></a>");
           break;
         case Schemas.talkTicketValue.challenge:
-          template.$("#" + id).append("<a class='icon " + GlobalVar.intentIcon.challenge + "'></a>");
+          template.$("#" + id).append("<a class='icon stable " + GlobalVar.intentIcon.challenge + "'></a>");
           break;
         case Schemas.talkTicketValue.question:
-          template.$("#" + id).append("<a class='icon " + GlobalVar.intentIcon.question + "'></a>");
+          template.$("#" + id).append("<a class='icon stable " + GlobalVar.intentIcon.question + "'></a>");
           break;
         case "1":
           backgroundColor = "rgba(0,255,0, 0.2)";

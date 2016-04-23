@@ -78,9 +78,6 @@ Template.studentTalk.events({
 	"click #challenge":function(){
 		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.challenge);
 	},
-	"click #pickClassroom":function(){
-		Router.go("classroomPickList");
-	},
 	"click #add-circle":function(){
 		// Template.instance().sender.addCircle();
 	},

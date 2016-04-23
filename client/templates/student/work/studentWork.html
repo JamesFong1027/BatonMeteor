@@ -4,7 +4,7 @@
 	{{/contentFor}}
 	
 	{{#ionView}}
-	    {{#ionSubheaderBar}}
+	    {{#ionSubheaderBar class="bar-stable subtitle"}}
 			{{#if hasCurClassroom}}
 				{{#with classroom}}
 	    		<h2 class="title">{{name}} [{{status}}]</h2>
@@ -60,28 +60,10 @@
 				    <li class='worktab-menu-item'>
 				      <a class='icon button-icon' id="numSeven" target='_blank' style="background: rgba(255,180,0, 0.6)">7</a>
 				    </li>
-				    
 				  </ul>
 				</nav>
 			{{else}}
-				<div class="row padding">
-					<div class="col-33 col-offset-33">
-				  		<button id="pickClassroom" class="button button-block button-positive ">Pick a classroom from list</button>
-					</div>
-				</div>
-
-				<div class="row padding">
-					<div class="col-33 col-offset-33">
-				  		<button id="EnterName" data-ion-modal="classroomPickList" class="button button-block button-positive">Enter Classroom Name</button>
-					</div>
-				</div>
-
-				<div class="row padding">
-					<div class="col-33 col-offset-33">
-				  		<button id="scanQRCode" data-ion-modal="classroomPickList" class="button button-block button-positive">Scan QR code</button>
-					</div>
-				</div>
-
+				{{> classEntry}}
 			{{/if}}
 	    {{/ionContent}} 
 	{{/ionView}}

@@ -14,18 +14,13 @@
         {{#if classrooms}}
           {{#each classrooms}}
 
-            {{#ionItem data-dismiss=modal path="studentTalkWithParam" buttonRight=true avatar=true}}
-              <div class="class_logo">
-                <img src={{logo}}>  
-              </div>
+            {{#ionItem data-dismiss=modal path="studentTalkWithParam" class="item-thumbnail-left item-icon-right"}}
+              <img src={{getImage logo}}>  
               <h2>{{name}}</h2>
-              <p>
-                Status: {{status}}
-              </p>
-              <p>
-                Create Date: {{formatDate createDate}}
-              </p>
-              {{> ionIcon icon="ios-arrow-right"}}
+              <p>Status: {{status}}</p>
+              <p>Teacher: {{getTeacherName tid}}</p>
+              <p>Create Date: {{formatDate createDate}}</p>
+              <i class="icon ion-chevron-right"></i>
             {{/ionItem}}
 
           {{/each}}  

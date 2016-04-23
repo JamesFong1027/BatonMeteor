@@ -1,5 +1,16 @@
-Meteor.publish('classroomsInfo',function(){
-	return ClassroomsInfo.find({sid:"1"});
+Meteor.publishComposite('classroomsInfo',function(){
+	return {
+		find:function(){
+			return ClassroomsInfo.find({sid:"1"});	
+		},
+		children:[
+			{
+				find:function(classroomsInfo){
+					return Meteor.users.find({_id:classroomsInfo.tid},{fields:{'profile': 1}});
+				}
+			}
+		]	
+	}
 });
 
 // Meteor.publish('schoolsInfo',function(){

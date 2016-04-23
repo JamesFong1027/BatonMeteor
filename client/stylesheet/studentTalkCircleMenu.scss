@@ -1,13 +1,16 @@
+@import 'colorVariables.scss';
+
 // circle menu for student talk tab
 $toggler-size: 35px;
 
 $tab-menu-class: talktab-menu-item;
 $toggler-color: black;
+$item-bgcolor: $stable;
 $toggler-transition: transform .5s, top .5s;
 
 $item-count: 4;
 $item-size: $toggler-size * 2;
-$item-color: black;
+$item-color: $calm;
 $item-transition: .5s;
 
 
@@ -15,7 +18,7 @@ $item-transition: .5s;
     transform: rotate(360deg / $item-count * $index) translateX(-$item-size - $radius);
 }
 
-@media only screen and (max-width : 320px){
+@media only screen and (max-width : 321px){
   .menu-toggler:checked ~ ul {
     @for $i from 0 through $item-count - 1 {
       .#{$tab-menu-class}:nth-child(#{$i + 1}) {
@@ -25,7 +28,7 @@ $item-transition: .5s;
   }
 }
 
-@media only screen and (max-width : 420px) and (min-width : 320px){
+@media only screen and (max-width : 420px) and (min-width : 321px){
   .menu-toggler:checked ~ ul {
     @for $i from 0 through $item-count - 1 {
       .#{$tab-menu-class}:nth-child(#{$i + 1}) {
@@ -161,13 +164,16 @@ body {
   height: inherit;
   line-height: $item-size;
   color: rgba($item-color, 0.7);
-  background: rgba(black, 0.2);
+  background: rgba($item-bgcolor, 0.2);
   border-radius: 50%;
   text-align: center;
   text-decoration: none;
   font-size: $item-size/2;
   pointer-events: none;
   transition: .2s;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
   
   &:hover {
     box-shadow: 0 0 0 $item-size/40 rgba(white, 0.3);

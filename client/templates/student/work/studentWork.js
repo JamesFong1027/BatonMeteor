@@ -96,9 +96,6 @@ Template.studentWork.events({
 	"click #numTen":function(){
 		TicketShutter.sendTicketAuto(Schemas.workTicketValue.ten);
 	},
-	"click #pickClassroom":function(){
-		Router.go("classroomPickList");
-	},
 	"click .worktab-menu-item":function(){
 		Template.instance().$('.menu-toggler').trigger("click");
 	},

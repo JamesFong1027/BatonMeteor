@@ -20,4 +20,7 @@ Meteor.methods({
       TicketsInfo.update({cid:classroomId},{$set:{status:Schemas.ticketStatus.dismissed}});
     }
   },
+  isEmailExist:function(email){
+    return !!Meteor.users.findOne({"emails.address":email});
+  }
 });

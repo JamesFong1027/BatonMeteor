@@ -1,6 +1,6 @@
-$positive: #DE4F4F;
 $loading-font-size: 22px;
 
+@import 'colorVariables.scss';
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionic-sass/_ionic';
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/_ionicons';
 
@@ -37,3 +37,4 @@ $loading-font-size: 22px;
     top: 16px !important;
   }
 }
+
