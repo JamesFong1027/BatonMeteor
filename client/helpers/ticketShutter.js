@@ -46,6 +46,8 @@ TicketShutter={
 	},
 	// for teacher get their classroom ticketlist
 	getClassroomTicketList:function(type,classroomId){
+		console.log(type);
+		console.log(classroomId);
 		var ticketArray = TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting}).fetch();
 		
     	console.log(ticketArray);

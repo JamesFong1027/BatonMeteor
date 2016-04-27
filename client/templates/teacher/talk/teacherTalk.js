@@ -1,5 +1,10 @@
 Template.teacherTalk.onCreated(function(){
   Session.set("curMode",Schemas.ticketType.talkTicket);
+  var curClassroomId = Session.get("curClassroomId");
+  if(curClassroomId){
+    Router.go("/t/talkPanel/"+curClassroomId);
+  }
+
 });
 
 Template.teacherTalk.onRendered(function(){

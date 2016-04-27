@@ -1,20 +1,31 @@
 <template name="_tabs">
-  {{#if isAndroid}}
-    {{#ionTabs style="android" class="tabs-background-positive tabs-color-light"}}
-      {{> ionTab title="Talk" path="studentTalk" icon="chatboxes"}}
+  <div class="tabs tabs-icon-top buttom-tabs">
+    {{> ionTab title="Talk" path="studentTalk" iconOff="ios-chatboxes-outline" iconOn="ios-chatboxes"}}
+    {{> ionTab title="Work" path="studentWork" icon="edit"}}
+    {{> ionTab title="Profile" path="userProfile" iconOff="ios-person-outline" iconOn="ios-person"}}
+  </div>
+<!-- it's kind of hard to adapter both of IOS and Android style by using Ionic, so just keep IOS style for both plaform for now -->
+  <!-- {{#if isIOS}}
+    <div class="tabs tabs-icon-top buttom-tabs">
+      {{> ionTab title="Talk" path="studentTalk" iconOff="ios-chatboxes-outline" iconOn="ios-chatboxes"}}
       {{> ionTab title="Work" path="studentWork" icon="edit"}}
-      {{> ionTab title="Profile" path="userProfile" icon="person"}}
-    {{/ionTabs}}
-  {{else}}
+      {{> ionTab title="Profile" path="userProfile" iconOff="ios-person-outline" iconOn="ios-person"}}
+    </div>
+  {{else}} -->
     <!-- {{#ionTabs style="ios" class="tabs-stable buttom-tabs"}}
       {{> ionTab title="Talk" path="studentTalk" iconOff="ios-chatboxes-outline" iconOn="ios-chatboxes"}}
       {{> ionTab title="Work" path="studentWork" iconOff="ios-paper-outline" iconOn="ios-paper"}}
       {{> ionTab title="Profile" path="userProfile" iconOff="ios-person-outline" iconOn="ios-person"}}
     {{/ionTabs}} -->
-    <div class="tabs tabs-icon-top buttom-tabs">
-      {{> ionTab title="Talk" path="studentTalk" iconOff="ios-chatboxes-outline" iconOn="ios-chatboxes"}}
-      {{> ionTab title="Work" path="studentWork" iconOff="ios-paper-outline" iconOn="ios-paper"}}
-      {{> ionTab title="Profile" path="userProfile" iconOff="ios-person-outline" iconOn="ios-person"}}
-    </div>
-  {{/if}}
+    <!-- {{#ionTabs style="android" class="tabs-background-positive tabs-color-light"}}
+      {{> ionTab title="Talk" path="studentTalk" icon="chatboxes"}}
+      {{> ionTab title="Work" path="studentWork" icon="edit"}}
+      {{> ionTab title="Profile" path="userProfile" icon="person"}}
+    {{/ionTabs}} -->
+    <!-- <div class="tabs tabs-background-stable tabs-top tabs-striped tabs-icon-left">
+      {{> ionTab title="Talk" path="studentTalk" icon="chatboxes"}}
+      {{> ionTab title="Work" path="studentWork" icon="edit"}}
+      {{> ionTab title="Profile" path="userProfile" icon="person"}}
+    </div> -->
+  <!-- {{/if}} -->
 </template>
