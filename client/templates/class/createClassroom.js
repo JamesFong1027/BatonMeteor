@@ -14,7 +14,7 @@ Template.createClassroom.events({
     if(classroomId){
       Session.set("curMode",Schemas.ticketType.talkTicket);
       Session.set("curClassroomId",classroomId)
-      Router.go("home");
+      Router.go("teacherTalk");
     }
 
   },

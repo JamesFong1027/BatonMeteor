@@ -44,14 +44,29 @@ TicketShutter={
 	getClassroomBuddyList:function(type,classroomId){
 		return TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting});
 	},
-	// for teacher get their classroom ticketlist
+	getCurClassroomStudentList:function() {
+		// in the publication we restrict only publish the student's profile who within current classroom
+		return Meteor.users.find({"profile.userType":Schemas.userType.student}); 
+	},
+	// for teacher get their classroom current ticketlist
 	getClassroomTicketList:function(type,classroomId){
 		console.log(type);
 		console.log(classroomId);
 		var ticketArray = TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting}).fetch();
-		
-    	console.log(ticketArray);
-    	for (var i = ticketArray.length - 1; i >= 0; i--) {
+		return this.getTicketRelativeInfo(ticketArray,classroomId);
+	},
+	// for teacher get their classroom ticket records
+	getClassroomTicketRecordList:function(classroomId){
+		var studentArray = this.getCurClassroomStudentList().fetch();
+		var ticketRecordArray = new Array();
+		for (var i = studentArray.length - 1; i >= 0; i--) {
+			// only put the latest ticket
+			ticketRecordArray = ticketRecordArray.concat(TicketsInfo.find({cid:classroomId,uid:studentArray[i]._id},{sort:{updateDate:-1},limit:1}).fetch());
+		}
+		return this.getTicketRelativeInfo(ticketRecordArray,classroomId);
+	},
+	getTicketRelativeInfo:function(ticketArray,classroomId){
+		for (var i = ticketArray.length - 1; i >= 0; i--) {
     		//put user profile into ticket info
 			ticketArray[i].user = Meteor.users.findOne({_id:ticketArray[i].uid});
 			//put student participation info into user
@@ -61,7 +76,6 @@ TicketShutter={
 			ticketArray[i].user.participation.attendTimes = attendTimes;
 			ticketArray[i].user.participation.selectedTimes = selectedTimes;
 		}
-
 		return ticketArray;
 	},
 	getTicketInfoByID:function(ticketId){

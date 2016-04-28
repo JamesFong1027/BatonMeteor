@@ -1,5 +1,10 @@
 <template name="teacherTab">
-  {{#if isAndroid}}
+  <div class="tabs tabs-icon-top buttom-tabs">
+    {{> ionTab title="Talk" path="teacherTalk" iconOff="ios-chatboxes-outline" iconOn="ios-chatboxes"}}
+    {{> ionTab title="Work" path="teacherWork" iconOff="ios-paper-outline" iconOn="ios-paper"}}
+    {{> ionTab title="Profile" path="userProfile" iconOff="ios-person-outline" iconOn="ios-person"}}
+  </div>
+  <!-- {{#if isAndroid}}
     {{#ionTabs style="android" class="tabs-background-positive tabs-color-light"}}
       {{> ionTab title="Talk" path="teacherTalk" icon="chatboxes"}}
       {{> ionTab title="Work" path="teacherWork" icon="edit"}}
@@ -11,5 +16,5 @@
       {{> ionTab title="Work" path="teacherWork" iconOff="ios-paper-outline" iconOn="ios-paper"}}
       {{> ionTab title="Profile" path="userProfile" iconOff="ios-person-outline" iconOn="ios-person"}}
     {{/ionTabs}}
-  {{/if}}
+  {{/if}} -->
 </template>

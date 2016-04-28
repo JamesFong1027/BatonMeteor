@@ -54,6 +54,25 @@ function pollFunc(fn, timeout, interval) {
     })();
 }
 
+Template.registerHelper('getIntentIconClass', function(intent) {
+  var iconClass="icon ";
+  switch(intent){
+      case Schemas.talkTicketValue.buildOn:
+        iconClass+= GlobalVar.intentIcon.buildOn;
+        break;
+      case Schemas.talkTicketValue.newIdea:
+        iconClass+= GlobalVar.intentIcon.newIdea;
+        break;
+      case Schemas.talkTicketValue.challenge:
+        iconClass+= GlobalVar.intentIcon.challenge;
+        break;
+      case Schemas.talkTicketValue.question:
+        iconClass+= GlobalVar.intentIcon.question;
+        break;
+    }
+    return iconClass;
+});
+
 Template.teacherTalk.helpers({
   "afterRenderTrigger":function(){
     (function(ticketInfo){
@@ -76,24 +95,6 @@ Template.teacherTalk.helpers({
     // console.log(this.convertRate);
     // return "transition: background-color "+convertSecond+"s ease;";
     return getRGB(this.convertRate.get());
-  },
-  "getIntentIconClass":function(intent){
-    var iconClass="icon ";
-    switch(intent){
-        case Schemas.talkTicketValue.buildOn:
-          iconClass+= GlobalVar.intentIcon.buildOn;
-          break;
-        case Schemas.talkTicketValue.newIdea:
-          iconClass+= GlobalVar.intentIcon.newIdea;
-          break;
-        case Schemas.talkTicketValue.challenge:
-          iconClass+= GlobalVar.intentIcon.challenge;
-          break;
-        case Schemas.talkTicketValue.question:
-          iconClass+= GlobalVar.intentIcon.question;
-          break;
-      }
-      return iconClass;
   },
   "classroomName":function(){
   	 return ClassroomKicker.getCurrentClassroom().name;

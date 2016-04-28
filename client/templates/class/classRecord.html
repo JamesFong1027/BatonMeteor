@@ -1,0 +1,17 @@
+<template name="classRecord">  
+{{#ionModal title="Participation Record"}}
+	<div class="wrapper">
+		{{#each ticketRecords}}
+			<div class="ticketSquare">
+				<div id={{_id}}  class="avatar stable">
+					<a class={{getIntentIconClass ticketContent}} ></a>
+					<div class="bottom_badge">{{user.participation.attendTimes}}</div>
+					<div class="top_badge">{{user.participation.selectedTimes}}</div>
+				</div>
+				<p>{{user.profile.firstName}}, {{user.profile.lastName}}</p>
+			</div>
+			{{ afterRenderTrigger}}
+		{{/each}}
+	</div>
+ {{/ionModal}}
+</template>

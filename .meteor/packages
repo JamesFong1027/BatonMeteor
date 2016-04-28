@@ -14,7 +14,7 @@ useraccounts:iron-routing
 mdg:camera
 dburles:google-maps
 
-fourseven:scss@2.0.0
+fourseven:scss
 meteoric:ionic-sass
 meteoric:ionicons-sass
 meteoric:ionic
@@ -28,7 +28,6 @@ mrt:qr-scanner
 reywood:publish-composite
 lepozepo:s3
 kadira:debug
-standard-minifiers
 mobile-experience
 mongo
 blaze-html-templates
@@ -58,3 +57,5 @@ chriswessels:hammer
 google
 accounts-google
 service-configuration
+standard-minifier-css
+standard-minifier-js

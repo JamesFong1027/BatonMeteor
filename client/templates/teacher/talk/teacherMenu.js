@@ -1,3 +1,8 @@
+Template.teacherMenu.onCreated(function(){
+	console.log("in onCreated");
+});
+
+
 Template.teacherMenu.helpers({
   
 });
@@ -7,11 +12,19 @@ Template.teacherMenu.events({
 		ClassroomKicker.closeClassroom(Session.get("curClassroomId"));
 		Session.set("curClassroomId",undefined);
 		// back to home page, create another classroom
-		Router.go("home");
-		event.target.parentNode.remove();
+		Router.go("teacherTalk");
 	},
 	"click #reset_class":function(event){
 		ClassroomKicker.resetClassroom(Session.get("curMode"),Session.get("curClassroomId"));
-		event.target.parentNode.remove();
+	},
+	"click #class_info":function(){
+		IonModal.open("classroomCode");
+	},
+	"click #class_record":function(){
+		IonModal.open("classRecord");
+	},
+	"click .popover-item":function(event){
+		// remove the popover when click on each item
+		IonPopover.hide();
 	}
 });
