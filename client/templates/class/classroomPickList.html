@@ -4,11 +4,19 @@
   {{/contentFor}}
 
   {{#contentFor "headerTitle"}}
-    <h1 class="title">Pickup a classroom to join!</h1>
+    <h1 class="title">Pick a classroom!</h1>
   {{/contentFor}}
 
   {{#ionView}}
     {{#ionContent}}
+
+    <!--Auto complete search box-->
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input id="classSearch" type="text" placeholder="Type to search...">
+      </label>
+    </div>
       {{#ionList}}
 
         {{#if classrooms}}

@@ -1,70 +1,63 @@
 <template name="studentWork">  
 	{{#contentFor "headerTitle"}}
-		<h1 class="title">Work Mode</h1>
+		<!-- <h1 class="text-center">Work Mode</h1> -->
+		<h1 class="title">Work Mode</h1> 	
 	{{/contentFor}}
 	
 	{{#ionView}}
 	    {{#ionSubheaderBar class="bar-stable subtitle"}}
-			{{#if hasCurClassroom}}
-				{{#with classroom}}
-	    		<h2 class="title">{{name}} [{{status}}]</h2>
-				{{/with}}
-	    	{{else}}
-	    		<h2 class="title">There are no classroom open yet, Pick one!</h2>
-	  		{{/if}}
+			{{#with classroom}}
+				<h2 class="title">{{name}} [{{status}}]</h2>
+			{{/with}}
 	    {{/ionSubheaderBar}}
 
 		{{#ionContent class="padding"}}
-			{{#if hasCurClassroom}}
-				<div id="carousel">
-				    <div class="container">
-				    	
-				    </div>
-				</div>
+			<div id="carousel">
+			    <div class="container">
+			    	
+			    </div>
+			</div>
 
-				<!-- <div id="circles-counter">
-				    <span>0 circles</span>
-				  </div> -->
+			<!-- <div id="circles-counter">
+			    <span>0 circles</span>
+			  </div> -->
 
-				<nav class='circle-menu'>
-				  <input checked='checked' class='menu-toggler' id='menu-toggler' type='checkbox'>
-				  <label for='menu-toggler'></label>
-				  <ul>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numEight" target='_blank' style="background: rgba(255,120,0, 0.7)">8</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numNine" target='_blank' style="background: rgba(255,60,0, 0.8)">9</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numTen" target='_blank' style="background: rgba(255,0,0, 0.9)">10</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numOne" target='_blank' style="background: rgba(0,255,0, 0.2)">1</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numTwo" target='_blank' style="background: rgba(60,255,0, 0.3)">2</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numThree" target='_blank' style="background: rgba(120,255,0, 0.4)">3</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numFour" target='_blank' style="background: rgba(180,255,0, 0.5)">4</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numFive" target='_blank' style="background: rgba(240,255,0, 0.6)">5</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numSix" target='_blank' style="background: rgba(255,240,0, 0.6)">6</a>
-				    </li>
-				    <li class='worktab-menu-item'>
-				      <a class='icon button-icon' id="numSeven" target='_blank' style="background: rgba(255,180,0, 0.6)">7</a>
-				    </li>
-				  </ul>
-				</nav>
-			{{else}}
-				{{> classEntry}}
-			{{/if}}
+			<nav class='circle-menu'>
+			  <input checked='checked' class='menu-toggler' id='menu-toggler' type='checkbox'>
+			  <label for='menu-toggler'></label>
+			  <ul>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numEight" target='_blank' style="background: rgba(255,120,0, 0.7)">8</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numNine" target='_blank' style="background: rgba(255,60,0, 0.8)">9</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numTen" target='_blank' style="background: rgba(255,0,0, 0.9)">10</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numOne" target='_blank' style="background: rgba(0,255,0, 0.2)">1</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numTwo" target='_blank' style="background: rgba(60,255,0, 0.3)">2</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numThree" target='_blank' style="background: rgba(120,255,0, 0.4)">3</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numFour" target='_blank' style="background: rgba(180,255,0, 0.5)">4</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numFive" target='_blank' style="background: rgba(240,255,0, 0.6)">5</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numSix" target='_blank' style="background: rgba(255,240,0, 0.6)">6</a>
+			    </li>
+			    <li class='worktab-menu-item'>
+			      <a class='icon button-icon' id="numSeven" target='_blank' style="background: rgba(255,180,0, 0.6)">7</a>
+			    </li>
+			  </ul>
+			</nav>
 	    {{/ionContent}} 
 	{{/ionView}}
 </template>  

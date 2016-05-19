@@ -50,13 +50,6 @@ Meteor.startup(function () {
 	//start schedule pickup reminder
 	// initialReminder();
 
-	if (Meteor.isCordova) {
-	  document.addEventListener("deviceready", function() {
-	    StatusBar.overlaysWebView(true);
-	    StatusBar.styleLightContent();
-	  }, false);
-	}
-
 	
 	Template.registerHelper('formatDate', function(date) {
 	  if(undefined===date)

@@ -97,7 +97,8 @@ Template.studentWork.events({
 		TicketShutter.sendTicketAuto(Schemas.workTicketValue.ten);
 	},
 	"click .worktab-menu-item":function(){
-		Template.instance().$('.menu-toggler').trigger("click");
+		document.getElementById('menu-toggler').checked = !document.getElementById('menu-toggler').checked;
+		Template.instance().sender.get().togglePanel(!document.getElementById('menu-toggler').checked);
 	},
 	"click #menu-toggler":function(event){
 		Template.instance().sender.get().togglePanel(!event.target.checked);

@@ -48,6 +48,10 @@ TicketSenderPanel = function(template) {
     this.circles = this.template.$(".circle");
     this.carouselBoundingRect = this.carousel.getBoundingClientRect();
 
+    // if(this.circles.length==0){
+    //   return;
+    // }
+
     this.carouselSize = {
       w: this.carouselBoundingRect.width,
       h: this.carouselBoundingRect.height,

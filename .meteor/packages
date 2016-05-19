@@ -24,7 +24,7 @@ lukemadera:autoform-googleplace
 aldeed:collection2
 aldeed:autoform
 matb33:collection-hooks
-mrt:qr-scanner
+hitchcott:qr-scanner
 reywood:publish-composite
 lepozepo:s3
 kadira:debug
@@ -59,3 +59,4 @@ accounts-google
 service-configuration
 standard-minifier-css
 standard-minifier-js
+mobile-status-bar

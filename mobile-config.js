@@ -17,3 +17,5 @@ App.accessRule('*.gstatic.com/*');
 App.accessRule('*');
 App.accessRule("https://s3.amazonaws.com/*");
 
+// App.setPreference('StatusBarOverlaysWebView', 'true');
+// App.setPreference('StatusBarStyle', 'lightcontent');

@@ -40,7 +40,7 @@ ClassroomKicker={
 		return ClassroomsInfo.find({tid:Meteor.userId()});
 	},
 	//for student to get all the opening classroom list
-	getOpenClassroom:function(){
+	getOpenClassroom:function(searchStr){
 		// var classroomInfoList = ClassroomsInfo.find({sid:"1",status:Schemas.classroomStatus.open}).fetch();
 		// for (var i = classroomInfoList.length - 1; i >= 0; i--) {
   //   		//find teacher profile by tid
@@ -50,7 +50,13 @@ ClassroomKicker={
 		// 	ticketArray[i].user.participation.attendTimes = attendTimes;
 		// 	ticketArray[i].user.participation.selectedTimes = selectedTimes;
 		// }
-		return ClassroomsInfo.find({sid:"1",status:Schemas.classroomStatus.open});
+		searchStr = searchStr ? searchStr:"";
+		// escape the search string
+		searchStr = searchStr.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
+		// default to match all the string
+		searchStr = searchStr+".*";
+		// case insensitive
+		return ClassroomsInfo.find({sid:"1",status:Schemas.classroomStatus.open,"name":{$regex:searchStr, $options: "i"}});
 	},
 	// for teacher to reset the classrooom
 	// put all waiting tickets into dismissed

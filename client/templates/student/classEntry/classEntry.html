@@ -1,31 +1,33 @@
 <template name="classEntry">
-	<div class="row padding">
-		<div class="col-80 col-offset-10">
-			<div class="list card">
-			  <a id="pickClassroom" href="#" class="item item-icon-left item-calm text-center classentry-button">
-			    <i class="icon"><img class="classentry-icon" src="/list.png"/></i> Pick from list
-			  </a>
-			</div>
-		</div>
-	</div>
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Welcome to Baton</h1>
+	{{/contentFor}}
+	
+	{{#ionView}}
+	    {{#ionSubheaderBar class="bar-stable subtitle"}}
+	    	<h2 class="title">Pick a classroom!</h2>
+	    {{/ionSubheaderBar}}
 
-	<div class="row padding">
-		<div class="col-80 col-offset-10">
-			<div class="list card">
-			  <a id="EnterName" href="#" class="item item-icon-left item-calm text-center classentry-button">
-			    <i class="icon"><img class="classentry-icon" src="/input.png"/></i> Enter Name
-			  </a>
+		{{#ionContent class="padding"}}
+			<div class="row">
+				<div class="col-80 col-offset-10">
+					<div class="list card">
+					  <a id="pickClassroom" href="#" class="item item-icon-left item-calm text-center classentry-button">
+					    <i class="icon"><img class="classentry-icon" src="/list.png"/></i> Pick from list
+					  </a>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
 
-	<div class="row padding">
-		<div class="col-80 col-offset-10">
-			<div class="list card">
-			  <a id="scanQRCode" href="#" class="item item-icon-left item-calm text-center classentry-button">
-			    <i class="icon"><img class="classentry-icon" src="/qrscan.png"/></i> Scan QR code
-			  </a>
+			<div class="row">
+				<div class="col-80 col-offset-10">
+					<div class="list card">
+					  <a id="scanQRCode" href="#" class="item item-icon-left item-calm text-center classentry-button">
+					    <i class="icon"><img class="classentry-icon" src="/qrscan.png"/></i> Scan QR code
+					  </a>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
+		{{/ionContent}}
+	{{/ionView}}
 </template>

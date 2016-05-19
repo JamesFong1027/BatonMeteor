@@ -26,7 +26,7 @@ Schemas.ClassroomsInfo = new SimpleSchema({
     		// console.log(this.field("lastUpdate").value);
     		if(this.isInsert&&null==this.value)
     		{
-    			return "logo.png";
+    			return "/classDefaultLogo.png";
     		}
     		else if(null!=this.value)
     			return this.value;
