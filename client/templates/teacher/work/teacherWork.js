@@ -1,5 +1,6 @@
 Template.teacherWork.onCreated(function(){
   Session.set("curMode",Schemas.ticketType.workTicket);
+  Session.set('ionTab.current', "teacherWork");
 });
 
 Template.teacherWork.onRendered(function(){

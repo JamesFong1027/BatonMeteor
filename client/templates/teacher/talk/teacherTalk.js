@@ -1,5 +1,6 @@
 Template.teacherTalk.onCreated(function(){
   Session.set("curMode",Schemas.ticketType.talkTicket);
+  Session.set('ionTab.current', "teacherTalk");
   var curClassroomId = Session.get("curClassroomId");
   if(curClassroomId){
     Router.go("/t/talkPanel/"+curClassroomId);

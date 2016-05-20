@@ -1,5 +1,6 @@
 Template.studentTalk.onCreated(function(){
 	console.log("in onCreated");
+	Session.set('ionTab.current', "studentTalk");
 	Session.set("curMode",Schemas.ticketType.talkTicket);
 	var template = this;
 	template.sender = new ReactiveVar(new TicketSenderPanel(template));

@@ -1,4 +1,5 @@
 Template.studentWork.onCreated(function(){
+	Session.set('ionTab.current', "studentWork");
 	Session.set("curMode",Schemas.ticketType.workTicket);
 	var template = this;
 	template.sender = new ReactiveVar(new TicketSenderPanel(template));

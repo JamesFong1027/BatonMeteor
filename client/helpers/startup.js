@@ -50,7 +50,9 @@ Meteor.startup(function () {
 	//start schedule pickup reminder
 	// initialReminder();
 
-	
+	// IonKeyboard.enableScroll();
+	// IonKeyboard.hideKeyboardAccessoryBar();
+
 	Template.registerHelper('formatDate', function(date) {
 	  if(undefined===date)
 	    return "Not Ready";
