@@ -43,29 +43,6 @@ body {
   height: 100%;
 }
 
-.login-icon{
-  text-align: center;
-  padding-top: 0px;
-}
-
-.app-icon{
-  width: 200px;
-}
-
-.login-screen{
-  background-color: #03A9F4;
-}
-.login-screen div{
-  background-color: #03A9F4;
-}
-.login-screen .input-label{
-  color:#FFFFFF;
-  font-family: "Roboto", sans-serif;
-}
-.login-screen .item{
-  border-width:0px;
-}
-
 .classentry-button{
   font-size: large;
 }
@@ -86,6 +63,10 @@ body {
   box-shadow:0px 1px 5px 1px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.5);
   -moz-box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.5);
+}
+
+.subtitle .title{
+  font-weight: normal;
 }
 
 .buttom-tabs{

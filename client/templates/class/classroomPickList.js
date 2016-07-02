@@ -28,4 +28,3 @@ Template.classroomPickList.events({
     template.searchStr.set(searchStr);
   }
 });
-

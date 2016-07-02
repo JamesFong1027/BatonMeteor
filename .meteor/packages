@@ -7,26 +7,20 @@
 meteor-base
 
 accounts-password
-sunkay:easy-side-menu
 iron:router
 useraccounts:ionic
 useraccounts:iron-routing
-mdg:camera
-dburles:google-maps
 
 fourseven:scss
 meteoric:ionic-sass
 meteoric:ionicons-sass
 meteoric:ionic
 
-okland:camera-ui
-lukemadera:autoform-googleplace
 aldeed:collection2
 aldeed:autoform
 matb33:collection-hooks
 hitchcott:qr-scanner
 reywood:publish-composite
-lepozepo:s3
 kadira:debug
 mobile-experience
 mongo
@@ -45,13 +39,12 @@ mrt:later
 raix:push
 erasaur:notification-badge
 underscore
-juliancwirko:s-image-box
 okgrow:analytics
 mdg:geolocation
 
 ccorcos:transitioner
 reactive-var
-crosswalk
+
 momentjs:moment
 chriswessels:hammer
 google

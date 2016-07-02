@@ -6,10 +6,10 @@ Template.createClassroom.events({
 
     // Get value from form element
     var classroomName = event.target.classroomName.value;
-    var description = event.target.description.value;
+    // var description = event.target.description.value;
 
     // Insert a classroom into the collection
-    var classroomId = ClassroomKicker.createClassroom(classroomName,description);
+    var classroomId = ClassroomKicker.createClassroom(classroomName,"");
 
     if(classroomId){
       Session.set("curMode",Schemas.ticketType.talkTicket);

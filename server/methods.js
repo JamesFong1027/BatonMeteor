@@ -1,10 +1,4 @@
 // Meteor Method at server sides
-S3.config = {
-	    key: 'AKIAIAOQ5OMKYX3GI2RA',
-	    secret: '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',
-	    bucket: 'swiftpad.padimg',
-	    region : 'us-west-2'
-	};
 Meteor.methods({
   setUserAsTeacher:function(userId){
     if(isAdminAccount(Meteor.userId()))

@@ -38,3 +38,16 @@ $loading-font-size: 22px;
   }
 }
 
+input{
+  padding-left:5px !important;
+}
+
+/*
+input:focus { 
+  outline: none;
+  box-shadow: 0px 0px 5px 4px $positive !important;
+  -webkit-box-shadow: 0px 0px 5px 4px $positive !important;
+  -moz-box-shadow: 0px 0px 5px 4px $positive !important;
+}
+*/
+

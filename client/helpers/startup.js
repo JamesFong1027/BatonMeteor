@@ -1,5 +1,4 @@
-
-Meteor.startup(function () {
+Meteor.startup(function() {
 	// BrowserPolicy.content.allowOriginForAll("http://meteor.local");
 	// WebApp.connectHandlers.use(function(req, res, next) {
 	// 	console.log("in connectHandlers");
@@ -7,19 +6,46 @@ Meteor.startup(function () {
 	//   return next();
 	// });
 	// on client sides startup code
-	GoogleMaps.load({ v: '3', key: 'AIzaSyAuyEhHtZbrxCuAOEkIw-R25914sOPbpqs', libraries: 'geometry,places' });
-	// GoogleMaps.load();
+
 	AutoForm.setDefaultTemplate('ionic');
-	
+
 	Meteor.subscribe('classroomsInfo');
 	Meteor.subscribe('schoolsInfo');
-	Tracker.autorun(function () {
-		if(Session.get("curClassroomId")&&Session.get("curMode")){
+	Tracker.autorun(function() {
+		if (Session.get("curClassroomId") && Session.get("curMode")) {
 			console.log("start subscribe ticketsInfoDetail");
-			Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroomId"));		
+			Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroomId"));
 			Meteor.subscribe('userProfile');
 		}
 	});
+	
+	if (Meteor.isCordova) {
+		document.addEventListener("backbutton", function() {
+			console.log("on backbutton press");
+			if (IonPopover.view && !IonPopover.view.isDestroyed) {
+				IonPopover.hide();
+			} else if (IonModal.views && IonModal.views.length > 0) {
+				IonModal.close();
+			} else if (~document.location.pathname.indexOf("classEntry") || ~document.location.pathname.indexOf("talkPanel") || ~document.location.pathname.indexOf("sign-in")) {
+				console.log("backbutton");
+				navigator.app.exitApp();
+				// window.plugins.Suspend.suspendApp();
+			} else {
+				history.go(-1);
+			}
+
+		});
+	}
+
+	// window.onpopstate = function () {
+	//        if (history.state && history.state.initial === true){
+	//            navigator.app.exitApp();
+
+	//            //or to suspend meteor add cordova:org.android.tools.suspend@0.1.2
+	//            //window.plugins.Suspend.suspendApp();
+	//        }
+	//    };
+
 
 	// Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroom"),Session.get("CurMode"));		
 	// Meteor.subscribe('userProfile');
@@ -29,23 +55,33 @@ Meteor.startup(function () {
 		// console.log(JSON.stringify(notification))
 
 		LocalNotifHelper.fireAlert();
-		
+
 	});
+
+
+	// Transitioner.transition({
+	//     fromRoute: 'login',
+	//     toRoute: 'studentTalk',
+	//     velocityAnimation: {
+	//         in: transition.slideLeftIn,
+	//         out: transition.slideLeftOut
+	//     }
+	// });
 	// Push.addListener('token', function(token) {
 	// 	console.log("save token to device");
- //      if (token.apn) {
- //        var tokenObj = Object.create(null);
- //        tokenObj.token = token.apn;
- //        tokenObj.tokenType = "apn";
- //        Meteor.call("someMethod", tokenObj);
- //      }
- //      else if (token.gcm) {
- //        var tokenObj = Object.create(null);
- //        tokenObj.token = token.gcm;
- //        tokenObj.tokenType = "gcm";
- //        Meteor.call("someMethod", tokenObj);
- //      }
- //    });
+	//      if (token.apn) {
+	//        var tokenObj = Object.create(null);
+	//        tokenObj.token = token.apn;
+	//        tokenObj.tokenType = "apn";
+	//        Meteor.call("someMethod", tokenObj);
+	//      }
+	//      else if (token.gcm) {
+	//        var tokenObj = Object.create(null);
+	//        tokenObj.token = token.gcm;
+	//        tokenObj.tokenType = "gcm";
+	//        Meteor.call("someMethod", tokenObj);
+	//      }
+	//    });
 
 	//start schedule pickup reminder
 	// initialReminder();
@@ -54,19 +90,17 @@ Meteor.startup(function () {
 	// IonKeyboard.hideKeyboardAccessoryBar();
 
 	Template.registerHelper('formatDate', function(date) {
-	  if(undefined===date)
-	    return "Not Ready";
-	  return moment(date).format('hh:mm MMM-DD');
+		if (undefined === date)
+			return "Not Ready";
+		return moment(date).format('hh:mm MMM-DD');
 	});
 
 	Template.registerHelper('pathTo', function(path) {
-	  Router.go(path);
+		Router.go(path);
 	});
 
 	// Converts from degrees to radians.
 	Math.radians = function(degrees) {
-	  return degrees * Math.PI / 180;
+		return degrees * Math.PI / 180;
 	}
 });
-
-
