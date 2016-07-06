@@ -1,14 +1,14 @@
 <template name="tabsLayout">
   {{#ionBody}}
   	{{> ionNavBar class="bar-stable"}}
-    {{#ionView}}
-    	{{> yield}}
+    {{#ionNavView}}
+    	 {{> yield}}
 		{{#if isTeacher}}
 			{{> teacherTab}}
 		{{else}}
 			{{> _tabs}}
 		{{/if}}
       
-    {{/ionView}}
+    {{/ionNavView}}
   {{/ionBody}}
 </template>

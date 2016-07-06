@@ -18,7 +18,7 @@ Meteor.startup(function() {
 			Meteor.subscribe('userProfile');
 		}
 	});
-	
+
 	if (Meteor.isCordova) {
 		document.addEventListener("backbutton", function() {
 			console.log("on backbutton press");
@@ -58,15 +58,6 @@ Meteor.startup(function() {
 
 	});
 
-
-	// Transitioner.transition({
-	//     fromRoute: 'login',
-	//     toRoute: 'studentTalk',
-	//     velocityAnimation: {
-	//         in: transition.slideLeftIn,
-	//         out: transition.slideLeftOut
-	//     }
-	// });
 	// Push.addListener('token', function(token) {
 	// 	console.log("save token to device");
 	//      if (token.apn) {

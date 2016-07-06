@@ -16,22 +16,20 @@ Meteor.startup(function() {
   process.env.MAIL_URL = 'smtp://' + encodeURIComponent(smtp.username) + ':' + encodeURIComponent(smtp.password) + '@' + encodeURIComponent(smtp.server) + ':' + smtp.port;
 
 
-  // Add Facebook configuration entry
-  ServiceConfiguration.configurations.update({
+  // Add Google configuration entry
+  ServiceConfiguration.configurations.upsert({
     "service": "google"
   }, {
     $set: {
       "clientId": "553157495789-7v8oh686td1u7du0hdd2jdp9t6fflqgm.apps.googleusercontent.com",
       "secret": "Ikpp_WkPQDDirxjU-_TZj6wV",
-      "redirectUrl": "http://app.batonmobile.com/_oauth/google"
+      "redirectUrl": "http://app.batonmobile.com/_oauth/google",
     }
-  }, {
-    upsert: true
   });
 
   Accounts.onCreateUser(function(options, user) {
     // console.log("options", options);
-    // console.log("user", user);
+    console.log("user", user);
     if (options.profile)
       user.profile = options.profile;
 

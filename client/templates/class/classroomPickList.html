@@ -1,28 +1,18 @@
 <template name="classroomPickList">
-  {{#contentFor "headerButtonLeft"}}
-    {{>ionNavBackButton}}
-  {{/contentFor}}
-
-  {{#contentFor "headerTitle"}}
-    <h1 class="title">Pick a classroom from list</h1>
-  {{/contentFor}}
-
-  {{#ionView}}
-    {{#ionContent}}
-
+  {{#ionModal title="Pick a classroom from list"}}
     <!--Auto complete search box-->
-    <div class="list list-inset">
-      <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input id="classSearch" type="text" placeholder="Type to search...">
-      </label>
-    </div>
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input id="classSearch" type="text" placeholder="Type to search...">
+        </label>
+      </div>
       {{#ionList}}
 
         {{#if classrooms}}
           {{#each classrooms}}
 
-            {{#ionItem data-dismiss=modal path="studentTalkWithParam" class="item-thumbnail-left item-icon-right"}}
+            {{#ionItem path="studentTalkWithParam" class="item-thumbnail-left item-icon-right classroomItem"}}
               <img src={{getImage logo}}>  
               <h2>{{name}}</h2>
               <p>Status: {{status}}</p>
@@ -37,6 +27,5 @@
         {{/if}}
 
       {{/ionList}}
-    {{/ionContent}}
-  {{/ionView}}
+  {{/ionModal}}
 </template>

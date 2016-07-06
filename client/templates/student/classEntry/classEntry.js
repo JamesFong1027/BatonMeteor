@@ -1,7 +1,7 @@
 Template.classEntry.events({
 	"click #pickClassroom":function(event){
 		event.preventDefault();
-		Router.go("classroomPickList");
+		IonModal.open("classroomPickList");
 	},
 	"click #scanQRCode":function(event){
 		event.preventDefault();

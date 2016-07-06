@@ -21,6 +21,7 @@ Template.classroomPickList.helpers({
 Template.classroomPickList.events({
 	"click .classroomItem":function(event){
 		// console.log(event);
+    IonModal.close();
 	},
   "input #classSearch":function(event,template){
     console.log(event.target.value);

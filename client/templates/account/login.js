@@ -10,5 +10,11 @@ Template.loginLayout.onRendered(function () {
 	// Router.go('tabs.three');
 	// console.log(this.$('#at-signUp'));
 	// AccountsTemplates.removeField('insuranceNumber');
-
 });
+
+// work around to all ways allow login with google button enable
+Template.loginLayout.events({
+	"click #at-google": function(event, template){
+		AccountsTemplates.setDisabled(false);
+	}
+})
