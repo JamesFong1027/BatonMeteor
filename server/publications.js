@@ -30,7 +30,7 @@ Meteor.publishComposite('ticketsInfoDetail',function(classroomId) {
 
 		find:function(){
 			//TODO need restrict the publish permission
-			console.log(classroomId);
+			// console.log("ticketsInfoDetail:",classroomId);
 			return TicketsInfo.find({cid:classroomId});
 		},
 		children:[
