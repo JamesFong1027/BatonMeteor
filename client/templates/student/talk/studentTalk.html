@@ -1,6 +1,12 @@
 <template name="studentTalk">  
 	{{#contentFor "headerTitle"}}
-		<h1 class="title title-center">Talk Mode</h1>
+		{{#if hasCurClassroom}}
+			{{#with classroom}}
+				<h1 class="title title-center">Talk Mode</h1>
+			{{/with}}
+		{{else}}
+			<h1 class="title">Pick a classroom to start</h1>
+		{{/if}}
 	{{/contentFor}}
 	
 	{{#ionView}}
