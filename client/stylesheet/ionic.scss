@@ -4,18 +4,36 @@ $loading-font-size: 22px;
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionic-sass/_ionic';
 @import '.meteor/local/build/programs/server/assets/packages/meteoric_ionicons-sass/_ionicons';
 
-.ionic-body.platform-android {
-  font-family: "Roboto", sans-serif;
-
-  h1, h2, h3, h4, h5, h6,
-  .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: "Roboto", sans-serif;
-  }
-
-  .tab-item {
-    font-family: "Roboto", sans-serif;
-  }
+@font-face {
+  font-family: 'Montserrat';
+  src: url('Montserrat.otf');
 }
+
+@mixin set-font-family ($title-font-family, $content-font-family) {
+    font-family: $content-font-family, "Open Sans" helvetica, sans-serif !important;
+
+    h1, h2, h3, h4, h5, h6,
+    .h1, .h2, .h3, .h4, .h5, .h6 {
+      font-family: $title-font-family, "Open Sans", helvetica, sans-serif !important;
+    }
+
+    .tab-item, button, a, div {
+      font-family: $content-font-family, "Open Sans", helvetica, sans-serif !important;
+    }
+}
+
+.platform-ios.ionic-body {
+  @include set-font-family("Montserrat","Montserrat");
+}
+
+.platform-android.ionic-body {
+  @include set-font-family("Roboto","Roboto");
+}
+
+.platform-web.ionic-body {
+  @include set-font-family("Montserrat","Montserrat");
+}
+
 
 .ion-slide {
   text-align: center;
