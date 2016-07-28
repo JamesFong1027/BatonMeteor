@@ -23,7 +23,7 @@ Meteor.startup(function() {
     $set: {
       "clientId": "553157495789-7v8oh686td1u7du0hdd2jdp9t6fflqgm.apps.googleusercontent.com",
       "secret": "Ikpp_WkPQDDirxjU-_TZj6wV",
-      "redirectUrl": "http://app.batonmobile.com/_oauth/google",
+      "redirectUrl": "http://app.batonmobile.com/_oauth/google?close",
     }
   });
 
