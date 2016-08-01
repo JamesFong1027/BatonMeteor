@@ -1,0 +1,24 @@
+<template name="studentMenu">
+  {{#ionPopover}}
+    <div class="content">
+      <div class="list">
+        <li class="item item-icon-left popover-item" id="class_record" >
+          {{> ionIcon icon="ios-people"}}
+          Class Participation
+        </li>
+        <li class="item item-icon-left popover-item" id="class_info">
+          {{> ionIcon icon="information-circled"}}
+          Classroom Info
+        </li>
+        <li class="item item-icon-left popover-item" id="cancel_request">
+          {{> ionIcon icon="ios-close"}}
+          Cancel Request
+        </li>
+        <li class="item item-icon-left popover-item" id="leave_class">
+          {{> ionIcon icon="paper-airplane"}}
+          Leave Classroom
+        </li>
+      </div>
+    </div>
+  {{/ionPopover}}
+</template>

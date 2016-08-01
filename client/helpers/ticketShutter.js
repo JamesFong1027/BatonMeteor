@@ -31,6 +31,10 @@ TicketShutter={
 	sendTicketAuto:function(purpose){
 		return TicketShutter.sendTicket(Session.get("curMode"),purpose,Session.get("curClassroomId"));
 	},
+	// for student to cancel the ticket
+	cancelTicket:function(ticketId){
+		Meteor.call("cancelTicket", ticketId);
+	},
 	// for student get their current waiting ticket
 	getCurrentTicket:function(type,classroomId){
 		return TicketsInfo.findOne({
@@ -81,6 +85,7 @@ TicketShutter={
 	getTicketInfoByID:function(ticketId){
 		return TicketsInfo.findOne({_id:ticketId});
 	},
+	// for teacher confirm which ticket be selected
 	selectTicket:function(ticketId){
 		TicketsInfo.update({_id:ticketId},{$set:{status:Schemas.ticketStatus.selected}});
 	},

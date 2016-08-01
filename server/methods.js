@@ -16,5 +16,11 @@ Meteor.methods({
   },
   isEmailExist:function(email){
     return !!Meteor.users.findOne({"emails.address":email});
+  },
+  cancelTicket:function(ticketId){
+    if(isTicketBelongTo(Meteor.userId(),ticketId)){
+      return TicketsInfo.remove({_id:ticketId});  
+    }
+    return 0;
   }
 });
