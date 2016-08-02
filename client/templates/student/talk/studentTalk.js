@@ -20,7 +20,7 @@ Template.studentTalk.onRendered(function() {
 		console.log(curClassroomId);
 		console.log(curClassroom);
 		if (!curClassroom)
-			c.stop();
+			return;
 
 		if (curClassroom.status !== Schemas.classroomStatus.close) {
 			//if status is open, set the cur classroom
@@ -59,7 +59,6 @@ Template.studentTalk.onRendered(function() {
 			Session.set("curClassroomId", undefined);
 			Session.set("curMode", undefined);
 			Router.go("studentTalk");
-			template.buddyListWatcher.stop();
 		}
 	});
 });
