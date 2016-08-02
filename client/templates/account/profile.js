@@ -10,8 +10,11 @@ Template.profile.helpers({
     return Session.get("userProfile");
   },
   historyClassroomCount:function(){
-  	return ClassroomKicker.getClassroomHistoryList().length;
+  	return ClassroomKicker.getClassroomHistoryList().fetch().length;
   },
+  isTeacher: function () {
+    return isTeacherAccount(Meteor.userId());
+  }
 });
 
 Template.profile.events({

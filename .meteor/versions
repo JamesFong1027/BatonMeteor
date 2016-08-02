@@ -25,7 +25,6 @@ ccorcos:transitioner@2.0.2
 check@1.2.3
 chriswessels:hammer@4.0.2
 coffeescript@1.1.2_1
-cosmos:browserify@0.10.0
 crosswalk@1.6.2
 ddp@1.2.5
 ddp-client@1.2.8_1
@@ -58,7 +57,8 @@ iron:middleware-stack@1.1.0
 iron:router@1.0.13
 iron:url@1.0.11
 jquery@1.11.9
-kadira:debug@2.2.4
+kadira:debug@3.2.2
+kadira:runtime-dev@0.0.1
 khrone:img-qrcode@0.1.1
 launch-screen@1.0.12
 livedata@1.0.18
