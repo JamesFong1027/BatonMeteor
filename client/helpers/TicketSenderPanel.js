@@ -38,8 +38,10 @@ TicketSenderPanel = function(template) {
     this.circleVisible = toggler;
     if (toggler) {
       this.setPosition();
+      template.$("#viewTitle").text("Classroom participation");
     } else {
       this.hidePanel();
+      template.$("#viewTitle").text("Send your request");
     }
   };
 
