@@ -25,6 +25,11 @@ TicketShutter={
 			TicketsInfo.update({_id:currentTicket._id},{$set:{ticketContent:purpose}});
 			console.log("update a ticket");
 		}
+		analytics.track("Send Ticket Request", {
+		  name: currentTicket.ticketType,
+		  value: 1
+		});
+
 		return currentTicket;
 	},
 	//Simple version by using session var
@@ -33,6 +38,9 @@ TicketShutter={
 	},
 	// for student to cancel the ticket
 	cancelTicket:function(ticketId){
+		analytics.track("Cancel Ticket Request", {
+		  value: 1
+		});
 		Meteor.call("cancelTicket", ticketId);
 	},
 	// for student get their current waiting ticket

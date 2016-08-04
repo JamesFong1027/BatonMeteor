@@ -4,7 +4,7 @@
 $toggler-size: 35px;
 
 $tab-menu-class: talktab-menu-item;
-$toggler-color: black;
+$toggler-color: $stable;
 $item-bgcolor: $stable;
 $toggler-transition: transform .5s, top .5s;
 
@@ -121,6 +121,14 @@ body {
   .#{$tab-menu-class} a {
     pointer-events: auto;
   }
+}
+
+.menu-toggler-icon {
+  @include absolute-center;
+  width: $toggler-size*1.5;
+  height: $toggler-size*1.5;
+  border-radius: 50%;
+  background: gray;
 }
 
 .menu-toggler + label {

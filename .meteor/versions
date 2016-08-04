@@ -38,6 +38,7 @@ ecmascript-runtime@0.2.11_1
 ejson@1.0.12
 email@1.0.14_1
 erasaur:notification-badge@0.0.6
+es5-shim@4.5.12_1
 fastclick@1.0.12
 fourseven:scss@2.1.1
 geojson-utils@1.0.9
@@ -92,7 +93,7 @@ npm-mongo@1.4.44_1
 oauth@1.1.11
 oauth2@1.1.10
 observe-sequence@1.0.12
-okgrow:analytics@1.0.9
+okgrow:analytics@2.0.0
 ordered-dict@1.0.8
 promise@0.7.2_1
 raix:eventemitter@0.1.3

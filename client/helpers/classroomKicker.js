@@ -16,6 +16,10 @@ ClassroomKicker={
 			});	
 			return curId;
 		}
+
+		analytics.track("Create Classroom", {
+		  value: 1
+		});
 		
 		return false;
 
@@ -62,6 +66,11 @@ ClassroomKicker={
 	// put all waiting tickets into dismissed
 	resetClassroom:function(type,classroomId){
 		// Meteor.call("resetClassroom",classroomId);
+		analytics.track("Reset Classroom", {
+		  name: type,
+		  value: 1
+		});
+
 		_.each(TicketShutter.getClassroomTicketList(type,classroomId),
 			function(element, index, list){
 				TicketsInfo.update({_id:element._id},{$set:{status:Schemas.ticketStatus.dismissed}});
@@ -76,6 +85,9 @@ ClassroomKicker={
 		ClassroomKicker.resetClassroom(classroomId);
 	},
 	restartClassroom:function(classroomId){
+		analytics.track("Restart Classroom", {
+		  value: 1
+		});
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.open}});
 	},
 

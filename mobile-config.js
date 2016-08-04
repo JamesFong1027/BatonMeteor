@@ -55,6 +55,8 @@ App.launchScreens({
 App.accessRule('*.google.com/*');
 App.accessRule('*.googleapis.com/*');
 App.accessRule('*.gstatic.com/*');
+App.accessRule('www.google-analytics.com');
+App.accessRule('cdn.mxpnl.com');
 App.accessRule('*');
 App.accessRule("https://s3.amazonaws.com/*");
 
