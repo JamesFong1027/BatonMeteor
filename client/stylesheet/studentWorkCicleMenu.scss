@@ -3,7 +3,7 @@
 // circleMenu for student work tab
 $tab-menu-class: worktab-menu-item;
 $toggler-size: 35px;
-$toggler-color: black;
+$toggler-color: $stable;
 $item-bgcolor: $stable;
 $toggler-transition: transform .5s, top .5s;
 
@@ -67,7 +67,7 @@ $item-transition: .5s;
   display: block;
   z-index: 1;
   border-radius: $toggler-size/16;
-  background: rgba($toggler-color, 0.7);
+  background: $toggler-color;
   transition: $toggler-transition;
 }
 

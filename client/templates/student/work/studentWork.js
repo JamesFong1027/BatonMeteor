@@ -119,7 +119,13 @@ Template.studentWork.events({
 		document.getElementById('menu-toggler').checked = !document.getElementById('menu-toggler').checked;
 		Template.instance().sender.get().togglePanel(!document.getElementById('menu-toggler').checked);
 	},
-	"click #menu-toggler":function(event){
+	"click #menu-toggler": function(event) {
+		console.log("click on menu toggler");
+		Template.instance().sender.get().togglePanel(!event.target.checked);
+	},
+	"click .menu-toggler-circle": function(event) {
+		console.log("click on menu toggler circle");
+		document.getElementById('menu-toggler').checked = !document.getElementById('menu-toggler').checked;
 		Template.instance().sender.get().togglePanel(!event.target.checked);
 	}
 });

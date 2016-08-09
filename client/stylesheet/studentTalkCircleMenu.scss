@@ -68,7 +68,7 @@ $item-transition: .5s;
   display: block;
   z-index: 1;
   border-radius: $toggler-size/16;
-  background: rgba($toggler-color, 0.7);
+  background: $toggler-color;
   transition: $toggler-transition;
 }
 
@@ -123,12 +123,18 @@ body {
   }
 }
 
-.menu-toggler-icon {
+.menu-toggler-circle {
   @include absolute-center;
-  width: $toggler-size*1.5;
-  height: $toggler-size*1.5;
   border-radius: 50%;
-  background: gray;
+  background: $calm;
+
+  @include size($toggler-size*1.7);
+  z-index: 0;
+  cursor: pointer;
+
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
 }
 
 .menu-toggler + label {
