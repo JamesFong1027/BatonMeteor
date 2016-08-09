@@ -26,8 +26,9 @@ TicketShutter={
 			console.log("update a ticket");
 		}
 		analytics.track("Send Ticket Request", {
-		  name: currentTicket.ticketType,
-		  value: 1
+			category:"Student",
+			label: currentTicket.ticketType,
+			value: 1
 		});
 
 		return currentTicket;
@@ -39,7 +40,9 @@ TicketShutter={
 	// for student to cancel the ticket
 	cancelTicket:function(ticketId){
 		analytics.track("Cancel Ticket Request", {
-		  value: 1
+			category:"Student",
+			label:"",
+			value: 1
 		});
 		Meteor.call("cancelTicket", ticketId);
 	},
