@@ -126,7 +126,7 @@ body {
 .menu-toggler-circle {
   @include absolute-center;
   border-radius: 50%;
-  background: $calm;
+  background: #424242;
 
   @include size($toggler-size*1.7);
   z-index: 0;

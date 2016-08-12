@@ -23,6 +23,9 @@ Template.teacherMenu.events({
 	"click #class_record":function(){
 		IonModal.open("classRecord");
 	},
+	"click #teacher_guides":function(event){
+		IonModal.open("teacherGuides");
+	},
 	"click .popover-item":function(event){
 		// remove the popover when click on each item
 		IonPopover.hide();

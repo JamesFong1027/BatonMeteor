@@ -36,6 +36,9 @@ Template.studentMenu.events({
 	"click #class_record":function(){
 
 	},
+	"click #guides":function(){
+		IonModal.open("studentGuides");
+	},
 	"click .popover-item":function(event){
 		// remove the popover when click on each item
 		IonPopover.hide();
