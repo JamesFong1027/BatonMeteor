@@ -55,10 +55,6 @@
   font-weight: 600;
 }
 .wrapper {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
@@ -73,6 +69,7 @@
   height: 90px;
   position: relative;
   margin: 20px;
+  float: left;
 }
 
 .ticketSquare p{
@@ -92,8 +89,6 @@
   /*transition: background-color 20s ease;*/
   /*background-color: green;*/
 }
-
-
 .avatar a {
   display: block;
   width: inherit;
@@ -105,4 +100,9 @@
   font-size: 40px;
   pointer-events: none;
   transition: .2s;
+}
+
+.hammer-touch-area{
+  height: 100%;
+  width: 100%;
 }

@@ -1,5 +1,5 @@
 Template.classroomCode.helpers({
   classroomsInfo:function(){
-    return ClassroomKicker.getCurrentClassroom();
+    return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId"));
   },
 });
