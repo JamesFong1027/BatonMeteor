@@ -19,6 +19,20 @@ Meteor.startup(function() {
 		}
 	});
 
+	Tracker.autorun(function(){
+		if(Reload.isWaitingForResume()){
+			IonLoading.show({
+		      customTemplate: '<h3>New Version Available</h3><br/><p>We are making Baton better</p><p>Restart the app to update</p>',
+		      duration: 3000,
+		      backdrop: true
+		    });
+		    // Meteor.setTimeout(function(){
+		    //    window.location.replace(window.location.href);
+		    // }, 3000);
+		    // window.location.replace(window.location.href);
+		}
+	});
+
 	if (Meteor.isCordova) {
 		document.addEventListener("backbutton", function() {
 			console.log("on backbutton press");

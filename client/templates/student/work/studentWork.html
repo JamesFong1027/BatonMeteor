@@ -1,7 +1,22 @@
 <template name="studentWork">  
 	{{#contentFor "headerTitle"}}
-		<!-- <h1 class="text-center">Work Mode</h1> -->
-		<h1 class="title">Work Mode</h1> 	
+		{{#if hasCurClassroom}}
+			{{#with classroom}}
+				<h1 class="title title-center">Work Mode</h1>
+			{{/with}}
+		{{else}}
+			<h1 class="title">Pick a classroom to start</h1>
+		{{/if}} 	
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+		<button class="button button-clear" data-ion-popover="studentMenu">
+		  {{#if isAndroid}}
+		    {{> ionIcon icon='android-more-vertical'}}
+		  {{else}}
+		    {{> ionIcon icon='more'}}
+		  {{/if}}
+		</button>
 	{{/contentFor}}
 	
 	{{#ionView}}

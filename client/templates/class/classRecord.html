@@ -4,7 +4,11 @@
 		{{#each ticketRecords}}
 			<div class="ticketSquare">
 				<div id={{_id}}  class="avatar stable">
-					<a class={{getIntentIconClass ticketContent}} ></a>
+					{{#if isTalkTicket ticketType}}
+						<a class={{getIntentIconClass ticketContent}} ></a>
+					{{else}}
+						<a class="icon">{{ticketContent}}</a>
+					{{/if}}
 					<div class="bottom_badge">{{user.participation.attendTimes}}</div>
 					<div class="top_badge">{{user.participation.selectedTimes}}</div>
 				</div>

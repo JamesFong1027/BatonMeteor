@@ -54,3 +54,4 @@ standard-minifier-css
 standard-minifier-js
 mobile-status-bar
 crosswalk
+mdg:reload-on-resume
