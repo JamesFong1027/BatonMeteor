@@ -63,6 +63,11 @@ Schemas.UserProfile = new SimpleSchema({
       type:String,
       label:"the current classroom ID",
       optional:true
+    },
+    firstTimeLogin:{
+      type:Boolean,
+      label:"is the first time login to the app",
+      optional:true
     }
 });
 

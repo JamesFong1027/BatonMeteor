@@ -95,5 +95,14 @@ ClassroomKicker={
 		});
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.open}});
 	},
-
+	showFirstTimeGuide:function(){
+		// show first time user guide
+		if(Meteor.user().profile.firstTimeLogin){
+			Meteor.call("removeFistTimeFlag", function(err,result){
+				if(!err && result){
+					IonModal.open("studentGuides");
+				}
+			});
+		}
+	},
 }

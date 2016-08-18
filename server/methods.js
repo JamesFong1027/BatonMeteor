@@ -6,6 +6,11 @@ Meteor.methods({
       Meteor.users.update({_id:userId},{$set:{userType:Schemas.userType.teacher}})
     }
   },
+  removeFistTimeFlag:function(){
+    var updateFlagSync = Meteor.wrapAsync(Meteor.users.update, Meteor.users);
+    var res = updateFlagSync({_id:Meteor.userId(),"profile.firstTimeLogin":true},{$set:{"profile.firstTimeLogin":false}});
+    return res;
+  },
   resetClassroom:function(classroomId){
     console.log(classroomId);
     if(isClassroomBlongTo(Meteor.userId(),classroomId))

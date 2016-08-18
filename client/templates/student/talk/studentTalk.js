@@ -65,7 +65,13 @@ Template.studentTalk.onRendered(function() {
 
 Template.studentTalk.helpers({
 	"hasCurClassroom": function() {
-		return Session.get("curClassroomId") !== undefined;
+		var hasCurClassflag = Session.get("curClassroomId") !== undefined;
+
+		// show first time user guide
+		if(hasCurClassflag){
+			ClassroomKicker.showFirstTimeGuide();
+		}
+		return hasCurClassflag;
 	},
 	classroom: function() {
 		return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId"));

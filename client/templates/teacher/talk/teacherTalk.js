@@ -101,6 +101,11 @@ Template.teacherTalk.helpers({
   	 return ClassroomKicker.getCurrentClassroom().name;
   },
   "hasCurClassroom":function(){
+    // show first time user guide
+    if(ClassroomKicker.getCurrentClassroom()){
+      ClassroomKicker.showFirstTimeGuide();
+    }
+
   	return ClassroomKicker.getCurrentClassroom();
   },
   longHoldGesture:{

@@ -61,6 +61,7 @@ Meteor.startup(function() {
         user.profile.userType = isnum ? Schemas.userType.student : Schemas.userType.teacher;  
       } 
     }
+    user.profile.firstTimeLogin = true;
     return user;
   });
 });
