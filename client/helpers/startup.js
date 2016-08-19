@@ -67,13 +67,13 @@ Meteor.startup(function() {
 	// Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroom"),Session.get("CurMode"));		
 	// Meteor.subscribe('userProfile');
 	//push notification setup
-	Push.addListener('message', function(notification) {
-		// Called on every message
-		// console.log(JSON.stringify(notification))
+	// Push.addListener('message', function(notification) {
+	// 	// Called on every message
+	// 	// console.log(JSON.stringify(notification))
 
-		LocalNotifHelper.fireAlert();
+	// 	LocalNotifHelper.fireAlert();
 
-	});
+	// });
 
 	// Push.addListener('token', function(token) {
 	// 	console.log("save token to device");
