@@ -1,18 +1,21 @@
 // a classroom helper on the client side
 ClassroomKicker={
 	//for teacher create classroom
-	createClassroom: function(classroomName,description){
+	createClassroom: function(classroomName,description,passcode){
 		// the classroom name is unique within the school
 		// and teacher can only have one open classroom at a time
 		if(ClassroomsInfo.find({name:classroomName}).count()===0
 			&&ClassroomKicker.getCurrentClassroom()===undefined)
 		{
 			//add a tickt to db
+			var passcodeObj = {"passcode":passcode,"isProtected":!!passcode&&passcode!==""};
+			console.log(passcodeObj);
 			var curId = ClassroomsInfo.insert({
 				tid:Meteor.userId(),
 				sid:"1",
 				name:classroomName,
 				description:description,
+				passcode:passcodeObj
 			});	
 			return curId;
 		}
@@ -105,4 +108,44 @@ ClassroomKicker={
 			});
 		}
 	},
+	requestClassroomPasscode:function(classId){
+		IonPopup.show({
+	        title: 'Passcode Required',
+	        subTitle: "Please enter the passcode",
+	        template: '<input type="text" placeholder="Passcode" name="passcode" >',
+	        buttons: [
+	        {
+	          text: 'Cancel',
+	          type: 'button-default',
+	          onTap: function (event, template) {
+	            return true;
+	          }
+	        },
+	        {
+	          text: 'Enter',
+	          type: 'button-positive',
+	          onTap: function (event, template) {
+	            var input = $(template.firstNode).find('[name=passcode]');
+	            var passcode = input.val();
+
+	            Meteor.call("checkClassroomPasscode",classId,passcode, function(err,result){
+	              if(result){
+	                // if passcode match, close both Modal and Popup
+	                IonModal.close();
+	                IonPopup.close();
+	                Router.go("studentTalkWithParam",{_id:classId});
+	              } else {
+	                console.log("don't match");
+	                if(!input.hasClass()){
+	                  input.addClass("circle self");
+	                }
+	                input.val("");
+	                input.attr("placeholder","Passcode incorrect, try again");  
+	              }
+	            });
+	              
+	          }
+	        }]
+	    });
+	}
 }

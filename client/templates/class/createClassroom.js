@@ -6,14 +6,14 @@ Template.createClassroom.events({
 
     // Get value from form element
     var classroomName = event.target.classroomName.value;
-    // var description = event.target.description.value;
-
+    var passcode = event.target.passcode.value;
+    console.log(passcode);
     // Insert a classroom into the collection
-    var classroomId = ClassroomKicker.createClassroom(classroomName,"");
+    var classroomId = ClassroomKicker.createClassroom(classroomName,"",passcode);
 
     if(classroomId){
       Session.set("curMode",Schemas.ticketType.talkTicket);
-      Session.set("curClassroomId",classroomId)
+      Session.set("curClassroomId",classroomId);
       Router.go("teacherTalk");
     }
 

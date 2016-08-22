@@ -12,7 +12,7 @@
         {{#if classrooms}}
           {{#each classrooms}}
 
-            {{#ionItem path="studentTalkWithParam" class="item-thumbnail-left item-icon-right classroomItem"}}
+            {{#ionItem isProtected=this.passcode.isProtected id=this._id class="item-thumbnail-left item-icon-right classroomItem"}}
               <img src={{getImage logo}}>  
               <h2>{{name}}</h2>
               <p>Status: {{status}}</p>

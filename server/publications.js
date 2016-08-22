@@ -1,7 +1,12 @@
 Meteor.publishComposite('classroomsInfo',function(){
 	return {
 		find:function(){
-			return ClassroomsInfo.find({sid:"1"});	
+			// if(isTeacherAccount(this.userId)){
+			// 	return ClassroomsInfo.find({sid:"1"});
+			// } else {
+			// 	return ClassroomsInfo.find({sid:"1"},{fields: {'passcode.passcode':0}});	
+			// }
+			return ClassroomsInfo.find({sid:"1"},{fields: {'passcode.passcode':0}});
 		},
 		children:[
 			{

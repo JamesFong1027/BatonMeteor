@@ -6,6 +6,7 @@ Template.classroomPickList.onCreated(function(){
 
 Template.classroomPickList.helpers({
   classrooms: function () {
+    console.log(ClassroomKicker.getOpenClassroom().fetch().length);
     return ClassroomKicker.getOpenClassroom(Template.instance().searchStr.get());
   },
   getTeacherName:function(tid){
@@ -20,8 +21,12 @@ Template.classroomPickList.helpers({
 
 Template.classroomPickList.events({
 	"click .classroomItem":function(event){
-		// console.log(event);
-    IonModal.close();
+    if(this.isProtected){
+      var classId = this.id;
+      ClassroomKicker.requestClassroomPasscode(classId);
+    }
+    
+    // IonModal.close();
 	},
   "input #classSearch":function(event,template){
     console.log(event.target.value);

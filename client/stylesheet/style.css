@@ -76,6 +76,10 @@ body {
   background-size: 0px;
 }
 
+.class_info_container{
+  text-align: center;
+}
+
 /*work around for center title on android device*/
 .bar h1.title.title-left{
   text-align: center;

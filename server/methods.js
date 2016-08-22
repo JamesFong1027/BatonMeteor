@@ -27,5 +27,17 @@ Meteor.methods({
       return TicketsInfo.remove({_id:ticketId});  
     }
     return 0;
+  },
+  checkClassroomPasscode:function(classroomId, passCode){
+    console.log(classroomId);
+    console.log(passCode);
+    return !!ClassroomsInfo.findOne({_id:classroomId, "passcode.passcode":passCode});
+  },
+  getClassroomPasscode:function(classroomId){
+    if(isClassroomBlongTo(Meteor.userId(),classroomId)){
+      return ClassroomsInfo.findOne({_id:classroomId}).passcode.passcode;
+    } else {
+      return "";
+    }
   }
 });

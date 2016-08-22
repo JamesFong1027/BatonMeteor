@@ -13,6 +13,20 @@ Schemas.ClassroomsInfo = new SimpleSchema({
 		label: "the unique name of classroom",
 		optional: true
 	},
+	passcode:{
+		type: Object,
+		label: "the passcode object",
+		optional: true,
+		blackbox: true
+	},
+	'passcode.passcode': {
+		type: String,
+		optional: true
+	},
+	'passcode.isProtected': {
+		type: Boolean,
+		optional: true
+	},
 	description:{
 		type: String,
 		label: "the description of this classroom",
@@ -74,6 +88,7 @@ Schemas.ClassroomsInfo = new SimpleSchema({
 		label:"school's id which running this class"
 	},
 });
+
 ClassroomsInfo.attachSchema(Schemas.ClassroomsInfo);
 
 ClassroomsInfo.allow({
