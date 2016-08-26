@@ -17,8 +17,6 @@ Template.studentTalk.onRendered(function() {
 			return;
 
 		var curClassroom = ClassroomKicker.getClassroomInfo(curClassroomId);
-		console.log(curClassroomId);
-		console.log(curClassroom);
 		if (!curClassroom)
 			return;
 
@@ -27,32 +25,33 @@ Template.studentTalk.onRendered(function() {
 			Session.set("curClassroomId", curClassroomId);
 			Session.set("curMode", Schemas.ticketType.talkTicket);
 
-			console.log("create buddyListWatcher");
-			template.buddyList = TicketShutter.getClassroomBuddyList(Session.get("curMode"), Session.get("curClassroomId"));
-			
-			template.sender.get().init();
-			var buddyListWatcher = template.buddyList.observeChanges({
-				added: function(id, ticketInfo) {
-					console.log(ticketInfo);
-					template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());
-					if (template.$(".menu-toggler:checked").size() === 0) {
-						template.sender.get().setPosition();
-					}
-				},
-				removed: function(id) {
-					console.log(id);
-					template.sender.get().removeCircle(id);
-				},
-				changed: function(id, fields) {
-					console.log(fields);
-					if (isTicketBelongTo(Meteor.userId(), id)) {
-						template.sender.get().removeCircle(id);
-						var ticketInfo = TicketShutter.getTicketInfoByID(id);
+			if(!template.buddyListWatcher){
+				console.log("create buddyListWatcher");
+				var buddyList = TicketShutter.getClassroomBuddyList(Session.get("curMode"), Session.get("curClassroomId"));
+				
+				template.sender.get().init();
+				template.buddyListWatcher = buddyList.observeChanges({
+					added: function(id, ticketInfo) {
+						console.log(ticketInfo);
 						template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());
+						if (template.$(".menu-toggler:checked").size() === 0) {
+							template.sender.get().setPosition();
+						}
+					},
+					removed: function(id) {
+						console.log(id);
+						template.sender.get().removeCircle(id);
+					},
+					changed: function(id, fields) {
+						console.log(fields);
+						if (isTicketBelongTo(Meteor.userId(), id)) {
+							template.sender.get().removeCircle(id);
+							var ticketInfo = TicketShutter.getTicketInfoByID(id);
+							template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());
+						}
 					}
-				}
-			});
-
+				});
+			}
 		} else {
 			//if status is close, reset cur classroom
 			// and stop autorun

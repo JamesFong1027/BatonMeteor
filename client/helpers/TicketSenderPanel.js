@@ -160,6 +160,9 @@ TicketSenderPanel = function(template) {
           break;
       }
       template.$("#" + id).css("background", backgroundColor);
+    } else{
+      // add participation buddy icon
+      template.$("#" + id).append("<a class='icon dark ion-ios-body-outline'></a>");
     }
   };
 

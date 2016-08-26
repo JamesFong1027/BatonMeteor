@@ -103,7 +103,11 @@ ClassroomKicker={
 		if(Meteor.user().profile.firstTimeLogin){
 			Meteor.call("removeFistTimeFlag", function(err,result){
 				if(!err && result){
-					IonModal.open("studentGuides");
+					var guideTemplateName = "studentGuides";
+					if(isTeacherAccount(Meteor.userId())){	
+						guideTemplateName = "teacherGuides";
+					}
+					IonModal.open(guideTemplateName);
 				}
 			});
 		}
