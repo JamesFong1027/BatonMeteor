@@ -4,13 +4,14 @@ Template.studentMenu.onCreated(function(){
 
 
 Template.studentMenu.helpers({
-  
+
 });
 
 Template.studentMenu.events({
 	"click #leave_class": function(event){
 		Session.set("curClassroomId",undefined);
 		Session.set("curMode",undefined);
+		TicketShutter.leaveClass();
 		//back to home page, create another classroom
 		Router.go("studentTalk");
 	},

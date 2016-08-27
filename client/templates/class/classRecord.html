@@ -1,18 +1,18 @@
 <template name="classRecord">  
 {{#ionModal title="Participation Record"}}
 	<div class="wrapper">
-		{{#each ticketRecords}}
+		{{#each userRecords}}
 			<div class="ticketSquare">
 				<div id={{_id}}  class="avatar stable">
-					{{#if isTalkTicket ticketType}}
-						<a class={{getIntentIconClass ticketContent}} ></a>
+					{{#if isTalkTicket ticketInfo}}
+						<a class={{getIntentIconClass ticketInfo.ticketContent}} ></a>
 					{{else}}
-						<a class="icon">{{ticketContent}}</a>
+						<a class="icon">{{ticketInfo.ticketContent}}</a>
 					{{/if}}
-					<div class="bottom_badge">{{user.participation.attendTimes}}</div>
-					<div class="top_badge">{{user.participation.selectedTimes}}</div>
+					<div class="bottom_badge">{{participation.attendTimes}}</div>
+					<div class="top_badge">{{participation.selectedTimes}}</div>
 				</div>
-				<p>{{user.profile.firstName}}, {{user.profile.lastName}}</p>
+				<p>{{profile.firstName}}, {{profile.lastName}}</p>
 			</div>
 			{{ afterRenderTrigger}}
 		{{/each}}

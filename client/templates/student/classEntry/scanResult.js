@@ -18,7 +18,9 @@ Template.scanResult.events({
   "click #selectClassroom":function(){
     event.preventDefault();
     IonModal.close("scanResult");
-    Session.set("curClassroomId",Template.instance().data);
+    var classroomId = Template.instance().data;
+    TicketShutter.attendClass(classroomId);
+    Session.set("curClassroomId",classroomId);
     Router.go('studentTalk');
 
     // for now we keep it simple, if user have qr code, then no shortcode required

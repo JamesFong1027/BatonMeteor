@@ -7,7 +7,6 @@ Template.studentTalk.onCreated(function() {
 Template.studentTalk.onRendered(function() {
 	console.log("in studentTalk onRendered");
 	Session.set('ionTab.current', "studentTalk");
-
 });
 
 Template.studentTalk.helpers({

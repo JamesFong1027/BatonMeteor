@@ -22,7 +22,8 @@ Schemas.User = new SimpleSchema({
     },
     participation:{
       type:Schemas.Participation,
-      optional:true
+      optional: true,
+      blackbox: true
     },
     services:{
       type: Object,
@@ -67,6 +68,10 @@ Schemas.UserProfile = new SimpleSchema({
     firstTimeLogin:{
       type:Boolean,
       label:"is the first time login to the app",
+      optional:true
+    },
+    curClassId:{
+      type: String,
       optional:true
     }
 });

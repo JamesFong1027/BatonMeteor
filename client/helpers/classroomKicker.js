@@ -44,6 +44,13 @@ ClassroomKicker={
 			status:Schemas.classroomStatus.open
 		});
 	},
+	getCurrentAttendingClassroom:function(){
+		if(!!Meteor.user().profile && !!Meteor.user().profile.curClassId){
+			return this.getClassroomInfo(Meteor.user().profile.curClassId);
+		}
+		
+		return null;
+	},
 	getClassroomInfo:function (classroomId) {
 		return ClassroomsInfo.findOne({_id:classroomId});
 	},
@@ -157,6 +164,7 @@ ClassroomKicker={
 						} else {
 							// go to classroom
 							IonPopup.close();
+							TicketShutter.attendClass(classroom._id);
 							Router.go("studentTalkWithParam", {_id: classroom._id});
 							return;	
 						}

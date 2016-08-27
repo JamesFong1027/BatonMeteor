@@ -3,10 +3,11 @@ Template.classRecord.onCreated(function(){
 });
 
 Template.classRecord.helpers({
-	"ticketRecords": function () {
-	    return TicketShutter.getClassroomTicketRecordList(Session.get("curClassroomId"));
+	"userRecords": function () {
+	    return TicketShutter.getCurClassroomStudentList(Session.get("curClassroomId"));
 	},
-	"isTalkTicket":function(ticketType){
-		return ticketType === Schemas.ticketType.talkTicket;
+	"isTalkTicket":function(ticketInfo){
+		console.log(ticketInfo);
+		return !!ticketInfo && ticketInfo.ticketType === Schemas.ticketType.talkTicket;
 	}
 });

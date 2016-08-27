@@ -208,9 +208,9 @@ TicketSenderPanel = function(template) {
           // if class is closed, reset the session and redirect to inital page
           Session.set("curClassroomId", undefined);
           Session.set("curMode", undefined);
-          Router.go("studentTalk");
           c.stop();
           template.buddyListWatcher = null;
+          TicketShutter.leaveClass();
         }
       });
     });

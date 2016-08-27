@@ -59,9 +59,21 @@ TicketShutter={
 	getClassroomBuddyList:function(type,classroomId){
 		return TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting});
 	},
-	getCurClassroomStudentList:function() {
-		// in the publication we restrict only publish the student's profile who within current classroom
-		return Meteor.users.find({"profile.userType":Schemas.userType.student}); 
+	// for teacher get their classroom current attending student list, with latest ticket info
+	getCurClassroomStudentList:function(classroomId) {
+		// in the publication we restrict only publish the student's profile who within current classroom or sent tickets
+		var studentArray = Meteor.users.find({"profile.curClassId":classroomId}).fetch();
+		var ticketRecordArray = new Array();
+		for (var i = studentArray.length - 1; i >= 0; i--) {
+			// only put the latest ticket
+			var latestTicket = TicketsInfo.findOne({cid:classroomId,uid:studentArray[i]._id},{sort:{updateDate:-1},limit:1});
+			if(!!latestTicket){
+				studentArray[i].ticketInfo = latestTicket;
+			}
+			// add participation info
+			studentArray[i].participation = this.getParticipationInfo(studentArray[i]._id,classroomId);
+		}
+		return studentArray;
 	},
 	// for teacher get their classroom current ticketlist
 	getClassroomTicketList:function(type,classroomId){
@@ -70,28 +82,22 @@ TicketShutter={
 		var ticketArray = TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting}).fetch();
 		return this.getTicketRelativeInfo(ticketArray,classroomId);
 	},
-	// for teacher get their classroom ticket records
-	getClassroomTicketRecordList:function(classroomId){
-		var studentArray = this.getCurClassroomStudentList().fetch();
-		var ticketRecordArray = new Array();
-		for (var i = studentArray.length - 1; i >= 0; i--) {
-			// only put the latest ticket
-			ticketRecordArray = ticketRecordArray.concat(TicketsInfo.find({cid:classroomId,uid:studentArray[i]._id},{sort:{updateDate:-1},limit:1}).fetch());
-		}
-		return this.getTicketRelativeInfo(ticketRecordArray,classroomId);
-	},
 	getTicketRelativeInfo:function(ticketArray,classroomId){
 		for (var i = ticketArray.length - 1; i >= 0; i--) {
     		//put user profile into ticket info
 			ticketArray[i].user = Meteor.users.findOne({_id:ticketArray[i].uid});
-			//put student participation info into user
-			var attendTimes = TicketsInfo.find({cid:classroomId,uid:ticketArray[i].uid}).count();
-			var selectedTimes = TicketsInfo.find({cid:classroomId,uid:ticketArray[i].uid,status:Schemas.ticketStatus.selected}).count();
-			ticketArray[i].user.participation = new Object();
-			ticketArray[i].user.participation.attendTimes = attendTimes;
-			ticketArray[i].user.participation.selectedTimes = selectedTimes;
+			ticketArray[i].user.participation = this.getParticipationInfo(ticketArray[i].uid,classroomId);
 		}
 		return ticketArray;
+	},
+	getParticipationInfo:function(uid,classroomId){
+		//put student participation info into user
+		var attendTimes = TicketsInfo.find({cid:classroomId,uid:uid}).count();
+		var selectedTimes = TicketsInfo.find({cid:classroomId,uid:uid,status:Schemas.ticketStatus.selected}).count();
+		var participation = new Object();	
+		participation.attendTimes = attendTimes;
+		participation.selectedTimes = selectedTimes;
+		return participation;
 	},
 	getTicketInfoByID:function(ticketId){
 		return TicketsInfo.findOne({_id:ticketId});
@@ -111,5 +117,12 @@ TicketShutter={
 	            setTimeout(p, interval);
 	        }
 	    })();
+	},
+	// for student setup current attendant class id
+	attendClass:function(classroomId){
+		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":classroomId}});
+	},
+	leaveClass:function(){
+		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":""}});
 	}
 }

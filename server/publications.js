@@ -11,7 +11,14 @@ Meteor.publishComposite('classroomsInfo',function(){
 		children:[
 			{
 				find:function(classroomsInfo){
+					// return teacher profile
 					return Meteor.users.find({_id:classroomsInfo.tid},{fields:{'profile': 1}});
+				}
+			},
+			{
+				find:function(classroomsInfo){
+					// return all the students attending this classs
+					return Meteor.users.find({"profile.curClassId":classroomsInfo._id},{fields:{'profile': 1}});
 				}
 			}
 		]	

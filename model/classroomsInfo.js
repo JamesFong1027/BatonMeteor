@@ -1,4 +1,3 @@
-Schemas = {};
 ClassroomsInfo = new Mongo.Collection('classroomsInfo'); 
 Schemas.classroomStatus={
 	open: "Open",

@@ -1,13 +1,11 @@
-Template.profile.rendered = function() {
-    var profile = this.data;
-    
-    Session.set("userProfile",profile);
-};
-
+Template.profile.onRendered(function() {
+  console.log("in profile onRendered");
+  Session.set('ionTab.current', "profile");
+});
 
 Template.profile.helpers({
   userProfile:function(){
-    return Session.get("userProfile");
+    return !!Meteor.user() ? Meteor.user().profile : null;
   },
   historyClassroomCount:function(){
   	return ClassroomKicker.getClassroomHistoryList().fetch().length;
