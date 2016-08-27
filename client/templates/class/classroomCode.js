@@ -3,7 +3,7 @@ Template.classroomCode.onRendered(function(){
 		var template = this;
 		if(!err && res){
 			console.log(res);
-			template.$('#shortcode').text("Shortcode:" + res.toUpperCase());
+			template.$('#shortcode').text("Shortcode: " + res.toUpperCase());
 		}
 	});
 	
