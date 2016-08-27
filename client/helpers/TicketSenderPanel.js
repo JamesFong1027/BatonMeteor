@@ -13,16 +13,6 @@ TicketSenderPanel = function(template) {
     interval: null,
     turn: 'circle'
   };
-  this.init = function() {
-    this.circles = template.$('.circle');
-
-    if (0 !== this.circles.length) {
-      console.log(this.circles.length);
-    }
-    // this.setPosition();
-    // this.update();
-
-  };
 
   this.hidePanel = function() {
     template.$('.circle').css({
@@ -50,9 +40,9 @@ TicketSenderPanel = function(template) {
     this.circles = this.template.$(".circle");
     this.carouselBoundingRect = this.carousel.getBoundingClientRect();
 
-    // if(this.circles.length==0){
-    //   return;
-    // }
+    if(this.circles.length==0){
+      return;
+    }
 
     this.carouselSize = {
       w: this.carouselBoundingRect.width,
@@ -62,7 +52,7 @@ TicketSenderPanel = function(template) {
     };
 
     for (var i = 0; i < this.circles.length; i++) {
-      console.log(this.offsetAngle);
+      // console.log(this.offsetAngle);
       var angle = (360 / this.circles.length) * i + this.offsetAngle;
 
       var transformY = Math.sin(Math.radians(angle)) * this.carouselSize.radius - this.carouselSize.circle / 2 + "px";
@@ -86,8 +76,8 @@ TicketSenderPanel = function(template) {
   };
   this.rotate = function() {
     this.circles = this.template.$(".circle");
-    console.log(this.circles.length);
-    console.log(this.offsetAngle);
+    // console.log(this.circles.length);
+    // console.log(this.offsetAngle);
     this.offsetAngle += (360 / 60);
 
     if (this.offsetAngle > 360)
@@ -99,6 +89,7 @@ TicketSenderPanel = function(template) {
     if (isSelf)
       circleClass += " self";
 
+    // console.log(template);
     this.container = template.$(".container")[0];
     // this.circlesCounter = template.$("#circles-counter")[0];
     this.container.innerHTML += "<div class='" + circleClass + "' id=" + id + "></div>";
@@ -168,13 +159,86 @@ TicketSenderPanel = function(template) {
 
   this.removeCircle = function(id) {
       template.$("#" + id).remove();
-    }
-    /*
-     * Utils
-     */
+  };
 
+  this.addClassroomWatcher = function(ticketType, curClassroomId){
+    this.runWhenViewReady(function(){
+      console.log("addClassroomWatcher");
+      // if user enter the classroom, set the classroom id and mode
+      Session.set("curClassroomId", curClassroomId);
+      Session.set("curMode", ticketType);
+
+      // add a auto run to watch classroom status
+      Tracker.autorun(function(c) {
+
+
+        var curClassroom = ClassroomKicker.getClassroomInfo(curClassroomId);
+        if (!!!curClassroom)
+          return;
+
+        if (curClassroom.status !== Schemas.classroomStatus.close && !!Session.get("curClassroomId")) {
+
+            console.log("create buddyListWatcher");
+            if(!!template.buddyListWatcher) return;
+
+            console.log("create new watcher");
+            var buddyList = TicketShutter.getClassroomBuddyList(ticketType, curClassroomId);
+            template.buddyListWatcher = buddyList.observeChanges({
+              added: function(id, ticketInfo) {
+                console.log(ticketInfo);
+                template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());
+                if (template.$(".menu-toggler:checked").size() === 0) {
+                  template.sender.get().setPosition();
+                }
+              },
+              removed: function(id) {
+                console.log(id);
+                template.sender.get().removeCircle(id);
+              },
+              changed: function(id, fields) {
+                console.log(fields);
+                if (isTicketBelongTo(Meteor.userId(), id)) {
+                  template.sender.get().removeCircle(id);
+                  var ticketInfo = TicketShutter.getTicketInfoByID(id);
+                  template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());
+                }
+              }
+            });
+        } else {
+          // if class is closed, reset the session and redirect to inital page
+          Session.set("curClassroomId", undefined);
+          Session.set("curMode", undefined);
+          Router.go("studentTalk");
+          c.stop();
+          template.buddyListWatcher = null;
+        }
+      });
+    });
+  }
+
+  this.removeClassroomWatcher = function(){
+    if(!!template.buddyListWatcher){
+      template.buddyListWatcher.stop();
+      template.buddyListWatcher = null;  
+    }
+  }
+
+  /*
+   * Utils
+   */
   this.randomFlatColor = function() {
     var flatColors = ["#1abd9d", "#2ecc71", "#3498db", "#9b59b6", "#19b496", "#27ae60", "#2980b9", "#8e44ad", "#f1c40f", "#e67e22", "#e74c3c", "#f39c12", "#d35400", "#c0392b"];
     return flatColors[Math.floor(Math.random() * flatColors.length)];
+  }
+
+  this.runWhenViewReady =function(fn){
+    if(template.view.isRendered){
+      fn();
+    } else{
+      template.view.onViewReady(function(){
+        fn();
+      });  
+    }
+    
   }
 }

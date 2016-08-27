@@ -2,75 +2,17 @@ Template.studentTalk.onCreated(function() {
 	console.log("in onCreated");
 	var template = this;
 	template.sender = new ReactiveVar(new TicketSenderPanel(template));
-	// template.sender.get().init();
 });
 
 Template.studentTalk.onRendered(function() {
 	console.log("in studentTalk onRendered");
 	Session.set('ionTab.current', "studentTalk");
 
-	var template = Template.instance();
-	// auto close the classroom
-	Tracker.autorun(function(c) {
-		var curClassroomId = Router.current().state.get('studentTalkClassId');
-		if(!curClassroomId)
-			return;
-
-		var curClassroom = ClassroomKicker.getClassroomInfo(curClassroomId);
-		if (!curClassroom)
-			return;
-
-		if (curClassroom.status !== Schemas.classroomStatus.close) {
-			//if status is open, set the cur classroom
-			Session.set("curClassroomId", curClassroomId);
-			Session.set("curMode", Schemas.ticketType.talkTicket);
-
-			if(!template.buddyListWatcher){
-				console.log("create buddyListWatcher");
-				var buddyList = TicketShutter.getClassroomBuddyList(Session.get("curMode"), Session.get("curClassroomId"));
-				
-				template.sender.get().init();
-				template.buddyListWatcher = buddyList.observeChanges({
-					added: function(id, ticketInfo) {
-						console.log(ticketInfo);
-						template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());
-						if (template.$(".menu-toggler:checked").size() === 0) {
-							template.sender.get().setPosition();
-						}
-					},
-					removed: function(id) {
-						console.log(id);
-						template.sender.get().removeCircle(id);
-					},
-					changed: function(id, fields) {
-						console.log(fields);
-						if (isTicketBelongTo(Meteor.userId(), id)) {
-							template.sender.get().removeCircle(id);
-							var ticketInfo = TicketShutter.getTicketInfoByID(id);
-							template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());
-						}
-					}
-				});
-			}
-		} else {
-			//if status is close, reset cur classroom
-			// and stop autorun
-			Session.set("curClassroomId", undefined);
-			Session.set("curMode", undefined);
-			Router.go("studentTalk");
-		}
-	});
 });
 
 Template.studentTalk.helpers({
 	"hasCurClassroom": function() {
-		var hasCurClassflag = Session.get("curClassroomId") !== undefined;
-
-		// show first time user guide
-		if(hasCurClassflag){
-			ClassroomKicker.showFirstTimeGuide();
-		}
-		return hasCurClassflag;
+		return !!Template.instance().data;
 	},
 	classroom: function() {
 		return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId"));
@@ -79,6 +21,18 @@ Template.studentTalk.helpers({
 		console.log("in ticketList helper");
 		return TicketShutter.getClassroomBuddyList(Session.get("curMode"), Session.get("curClassroomId"));
 	},
+	"afterHasClassroomTrigger": function() {
+		var template = Template.instance();
+		var curClassroomId = template.data;
+		if (!!!curClassroomId)
+			return;
+
+		template.sender.get().addClassroomWatcher(Schemas.ticketType.talkTicket, curClassroomId);
+	}
+});
+
+Template.studentTalk.onDestroyed(function() {
+	this.sender.get().removeClassroomWatcher();
 });
 
 Template.studentTalk.events({

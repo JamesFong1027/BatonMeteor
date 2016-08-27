@@ -11,7 +11,6 @@ Template.studentMenu.events({
 	"click #leave_class": function(event){
 		Session.set("curClassroomId",undefined);
 		Session.set("curMode",undefined);
-		Router.current().state.set('studentTalkClassId',undefined);
 		//back to home page, create another classroom
 		Router.go("studentTalk");
 	},
