@@ -4,9 +4,9 @@ Meteor.publishComposite('classroomsInfo',function(){
 			// if(isTeacherAccount(this.userId)){
 			// 	return ClassroomsInfo.find({sid:"1"});
 			// } else {
-			// 	return ClassroomsInfo.find({sid:"1"},{fields: {'passcode.passcode':0}});	
+			// 	return ClassroomsInfo.find({sid:"1"},{fields: {'shortcode.shortcode':0}});	
 			// }
-			return ClassroomsInfo.find({sid:"1"},{fields: {'passcode.passcode':0}});
+			return ClassroomsInfo.find({sid:"1"},{fields: {'shortcode.shortcode':0}});
 		},
 		children:[
 			{

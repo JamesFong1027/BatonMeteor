@@ -28,14 +28,13 @@ Meteor.methods({
     }
     return 0;
   },
-  checkClassroomPasscode:function(classroomId, passCode){
-    console.log(classroomId);
-    console.log(passCode);
-    return !!ClassroomsInfo.findOne({_id:classroomId, "passcode.passcode":passCode});
+  checkClassroomShortcode:function(shortCode){
+    console.log(shortCode);
+    return ClassroomsInfo.findOne({"shortcode.shortcode":shortCode});
   },
-  getClassroomPasscode:function(classroomId){
+  getClassroomShortcode:function(classroomId){
     if(isClassroomBlongTo(Meteor.userId(),classroomId)){
-      return ClassroomsInfo.findOne({_id:classroomId}).passcode.passcode;
+      return ClassroomsInfo.findOne({_id:classroomId}).shortcode.shortcode;
     } else {
       return "";
     }

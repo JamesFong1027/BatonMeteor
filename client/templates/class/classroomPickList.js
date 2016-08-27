@@ -23,7 +23,7 @@ Template.classroomPickList.events({
 	"click .classroomItem":function(event){
     if(this.isProtected){
       var classId = this.id;
-      ClassroomKicker.requestClassroomPasscode(classId);
+      ClassroomKicker.requestClassroomShortcode(classId);
     }
     
     // IonModal.close();

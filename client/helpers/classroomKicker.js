@@ -1,21 +1,28 @@
 // a classroom helper on the client side
 ClassroomKicker={
 	//for teacher create classroom
-	createClassroom: function(classroomName,description,passcode){
+	createClassroom: function(classroomName,description){
 		// the classroom name is unique within the school
 		// and teacher can only have one open classroom at a time
 		if(ClassroomsInfo.find({name:classroomName}).count()===0
 			&&ClassroomKicker.getCurrentClassroom()===undefined)
 		{
+			// generate shortcode
+			var shortcode = "";
+			while(shortcode.length!=5){
+				shortcode = (Math.random()+1).toString(36).substr(2, 5);	
+			}
+			// TODO check the shortcode redudancy
+
 			//add a tickt to db
-			var passcodeObj = {"passcode":passcode,"isProtected":!!passcode&&passcode!==""};
-			console.log(passcodeObj);
+			var shortcodeObj = {"shortcode":shortcode,"isProtected":!!shortcode&&shortcode!==""};
+			console.log(shortcodeObj);
 			var curId = ClassroomsInfo.insert({
 				tid:Meteor.userId(),
 				sid:"1",
 				name:classroomName,
 				description:description,
-				passcode:passcodeObj
+				shortcode:shortcodeObj
 			});	
 			return curId;
 		}
@@ -121,11 +128,11 @@ ClassroomKicker={
 			});
 		}
 	},
-	requestClassroomPasscode:function(classId){
+	requestClassroomShortcode:function(){
 		IonPopup.show({
-	        title: 'Passcode Required',
-	        subTitle: "Please enter the passcode",
-	        template: '<input type="text" placeholder="Passcode" name="passcode" >',
+	        title: 'Enter ShortCode',
+	        subTitle: "Ignore upper or lower case",
+	        template: '<input type="text" placeholder="ShortCode" name="shortcode" maxlength="5" >',
 	        buttons: [
 	        {
 	          text: 'Cancel',
@@ -138,25 +145,34 @@ ClassroomKicker={
 	          text: 'Enter',
 	          type: 'button-positive',
 	          onTap: function (event, template) {
-	            var input = $(template.firstNode).find('[name=passcode]');
-	            var passcode = input.val();
+	            var input = $(template.firstNode).find('[name=shortcode]');
+	            var shortcode = input.val();
 
-	            Meteor.call("checkClassroomPasscode",classId,passcode, function(err,result){
-	              if(result){
-	                // if passcode match, close both Modal and Popup
-	                IonModal.close();
-	                IonPopup.close();
-	                Router.go("studentTalkWithParam",{_id:classId});
-	              } else {
-	                console.log("don't match");
-	                if(!input.hasClass()){
-	                  input.addClass("circle self");
-	                }
-	                input.val("");
-	                input.attr("placeholder","Passcode incorrect, try again");  
-	              }
-	            });
-	              
+				Meteor.call("checkClassroomShortcode", shortcode.toLowerCase(), function(err, classroom) {
+					var errMsg = "";
+					if (classroom) {
+						// if shortcode match, close both Modal and Popup
+						if (classroom.status !== Schemas.classroomStatus.open) {
+							errMsg = "Classroom is closed";
+						} else {
+							// go to classroom
+							IonPopup.close();
+							Router.go("studentTalkWithParam", {_id: classroom._id});
+							return;	
+						}
+						
+					} else {
+						console.log("don't match");
+						errMsg = "Shortcode not exist, try again";
+					}
+
+					// show error message
+					if (!input.hasClass()) {
+						input.addClass("circle self");
+					}
+					input.val("");
+					input.attr("placeholder", errMsg);
+				});
 	          }
 	        }]
 	    });

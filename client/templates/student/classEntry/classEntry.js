@@ -1,4 +1,8 @@
 Template.classEntry.events({
+	"click #shortCode":function(event){
+		event.preventDefault();
+		ClassroomKicker.requestClassroomShortcode();
+	},
 	"click #pickClassroom":function(event){
 		event.preventDefault();
 		IonModal.open("classroomPickList");

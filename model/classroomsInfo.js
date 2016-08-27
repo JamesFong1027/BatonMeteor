@@ -13,17 +13,17 @@ Schemas.ClassroomsInfo = new SimpleSchema({
 		label: "the unique name of classroom",
 		optional: true
 	},
-	passcode:{
+	shortcode:{
 		type: Object,
-		label: "the passcode object",
+		label: "the shortcode object",
 		optional: true,
 		blackbox: true
 	},
-	'passcode.passcode': {
+	'shortcode.shortcode': {
 		type: String,
 		optional: true
 	},
-	'passcode.isProtected': {
+	'shortcode.isProtected': {
 		type: Boolean,
 		optional: true
 	},

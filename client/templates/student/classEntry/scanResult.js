@@ -21,8 +21,8 @@ Template.scanResult.events({
     Session.set("curClassroomId",Template.instance().data);
     Router.go('studentTalk');
 
-    // for now we keep it simple, if user have qr code, then no passcode required
-    // ClassroomKicker.requestClassroomPasscode(Template.instance().data);
+    // for now we keep it simple, if user have qr code, then no shortcode required
+    // ClassroomKicker.requestClassroomShortcode(Template.instance().data);
   },
 })
 
