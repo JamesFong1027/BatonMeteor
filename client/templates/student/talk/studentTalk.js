@@ -28,6 +28,8 @@ Template.studentTalk.helpers({
 			return;
 
 		template.sender.get().addClassroomWatcher(Schemas.ticketType.talkTicket, curClassroomId);
+		// template.sender.get().runWhenViewReady(ClassroomKicker.showFirstTimeGuide);
+		ClassroomKicker.showFirstTimeGuide();
 	}
 });
 

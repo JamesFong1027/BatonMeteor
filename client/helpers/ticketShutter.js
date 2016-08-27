@@ -100,6 +100,16 @@ TicketShutter={
 	selectTicket:function(ticketId){
 		TicketsInfo.update({_id:ticketId},{$set:{status:Schemas.ticketStatus.selected}});
 	},
+ 	pollFunc:function(fn, timeout, interval) {
+	    var startTime = (new Date()).getTime();
+	    interval = interval || 1000,
+	    canPoll = true;
 
-
+	    (function p() {
+	        canPoll = ((new Date).getTime() - startTime ) <= timeout;
+	        if (!fn() && canPoll)  { // ensures the function exucutes
+	            setTimeout(p, interval);
+	        }
+	    })();
+	}
 }

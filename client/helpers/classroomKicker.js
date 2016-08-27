@@ -107,7 +107,16 @@ ClassroomKicker={
 					if(isTeacherAccount(Meteor.userId())){	
 						guideTemplateName = "teacherGuides";
 					}
-					IonModal.open(guideTemplateName);
+					// using pollfunc to prevent previous modal not closed
+					(function(modalName) {
+							TicketShutter.pollFunc(function() {
+									console.log(IonModal.views.length);
+									if (IonModal.views.length == 0) {
+										IonModal.open(modalName);
+										return true;
+									}
+							}, 5 * 1000, 1000);
+					})(guideTemplateName);
 				}
 			});
 		}

@@ -42,19 +42,6 @@ function getRGB(convertRate){
   return "background-color: rgba("+red+","+green+","+blue+",0.8);"
 }
 
-function pollFunc(fn, timeout, interval) {
-    var startTime = (new Date()).getTime();
-    interval = interval || 1000,
-    canPoll = true;
-
-    (function p() {
-        canPoll = ((new Date).getTime() - startTime ) <= timeout;
-        if (!fn() && canPoll)  { // ensures the function exucutes
-            setTimeout(p, interval);
-        }
-    })();
-}
-
 Template.registerHelper('getIntentIconClass', function(intent) {
   var iconClass="icon ";
   switch(intent){
@@ -77,7 +64,7 @@ Template.registerHelper('getIntentIconClass', function(intent) {
 Template.teacherTalk.helpers({
   "afterRenderTrigger":function(){
     (function(ticketInfo){
-      pollFunc(function(){
+      TicketShutter.pollFunc(function(){
         // console.log(ticketInfo.convertRate);
         if(1!=ticketInfo.convertRate.get())
           ticketInfo.convertRate.set(getConvertRate(ticketInfo.createDate));
