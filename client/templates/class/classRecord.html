@@ -1,5 +1,14 @@
 <template name="classRecord">  
 {{#ionModal title="Participation Record"}}
+	<li class="item item-toggle">
+       Toggle to see the whole class record
+       <label class="toggle toggle-calm">
+         <input type="checkbox" class="viewToggle">
+         <div class="track">
+           <div class="handle"></div>
+         </div>
+       </label>
+    </li>
 	<div class="wrapper">
 		{{#each userRecords}}
 			<div class="ticketSquare">

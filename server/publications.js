@@ -25,6 +25,10 @@ Meteor.publishComposite('classroomsInfo',function(){
 	}
 });
 
+Meteor.publish("classSession",function(){
+	return ClassSession.find({uid:this.userId});
+});
+
 // Meteor.publish('schoolsInfo',function(){
 // 	return SchoolsInfo.find();
 // });

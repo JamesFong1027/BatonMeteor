@@ -1,6 +1,5 @@
 Template.teacherTalk.onCreated(function(){
   Session.set("curMode",Schemas.ticketType.talkTicket);
-  Session.set('ionTab.current', "teacherTalk");
   var curClassroomId = Session.get("curClassroomId");
   if(curClassroomId){
     Router.go("/t/talkPanel/"+curClassroomId);
@@ -9,6 +8,7 @@ Template.teacherTalk.onCreated(function(){
 });
 
 Template.teacherTalk.onRendered(function(){
+  Session.set('ionTab.current', "teacherTalk");
   // Tracker.afterFlush(function(){
   //   this.$(".avatar").css("background-color","red");
   //   console.log(this.$(".avatar"));  
@@ -85,15 +85,15 @@ Template.teacherTalk.helpers({
     return getRGB(this.convertRate.get());
   },
   "classroomName":function(){
-  	 return ClassroomKicker.getCurrentClassroom().name;
+  	 return ClassroomKicker.getCurrentTeachingClassroom().name;
   },
   "hasCurClassroom":function(){
     // show first time user guide
-    if(ClassroomKicker.getCurrentClassroom()){
+    if(ClassroomKicker.getCurrentTeachingClassroom()){
       ClassroomKicker.showFirstTimeGuide();
     }
 
-  	return ClassroomKicker.getCurrentClassroom();
+  	return ClassroomKicker.getCurrentTeachingClassroom();
   },
   longHoldGesture:{
     'press .avatar': function (event, templateInstance) {

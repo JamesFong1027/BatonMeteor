@@ -1,9 +1,10 @@
 Template.teacherWork.onCreated(function(){
   Session.set("curMode",Schemas.ticketType.workTicket);
-  Session.set('ionTab.current', "teacherWork");
+  
 });
 
 Template.teacherWork.onRendered(function(){
+  Session.set('ionTab.current', "teacherWork");
   // Tracker.afterFlush(function(){
   //   this.$(".avatar").css("background-color","red");
   //   console.log(this.$(".avatar"));  
@@ -56,10 +57,10 @@ Template.teacherWork.helpers({
       return iconClass;
   },
   "classroomName":function(){
-  	 return ClassroomKicker.getCurrentClassroom().name;
+  	 return ClassroomKicker.getCurrentTeachingClassroom().name;
   },
   "hasCurClassroom":function(){
-  	return ClassroomKicker.getCurrentClassroom();
+  	return ClassroomKicker.getCurrentTeachingClassroom();
   },
   longHoldGesture:{
     'press .avatar': function (event, templateInstance) {

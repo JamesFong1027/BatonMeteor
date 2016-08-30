@@ -91,13 +91,15 @@ Schemas.TicketsInfo = new SimpleSchema({
 		autoValue: function(){
     		// console.log(this.field("lastUpdate").value);
     		if(this.isInsert&&null==this.value)
-    		{
-    			return new Date();
-    		}
-    		else if(null!=this.value)
-    			return this.value;
-    		else
-    			this.unset();
+            {
+                return new Date();
+            }
+            else if(this.isUpdate)
+                return new Date();
+            else if(null!=this.value)
+                return this.value;
+            else
+                this.unset();
     	}
 	},
 	user:{

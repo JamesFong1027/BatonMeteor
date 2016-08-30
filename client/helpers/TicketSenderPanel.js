@@ -197,7 +197,7 @@ TicketSenderPanel = function(template) {
               },
               changed: function(id, fields) {
                 console.log(fields);
-                if (isTicketBelongTo(Meteor.userId(), id)) {
+                if (isTicketBelongTo(Meteor.userId(), id) && ("ticketContent" in fields)) {
                   template.sender.get().removeCircle(id);
                   var ticketInfo = TicketShutter.getTicketInfoByID(id);
                   template.sender.get().addCircle(id, ticketInfo, ticketInfo.uid === Meteor.userId());

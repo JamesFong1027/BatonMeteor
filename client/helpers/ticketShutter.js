@@ -5,7 +5,7 @@ TicketShutter={
 		//every student only have one waiting ticket at a time
 		//TODO need make the currentTicket as a reactvar and keep within the class
 		var currentTicket = TicketShutter.getCurrentTicket(type,classroomId);
-		console.log(classroomId);
+		// console.log(classroomId);
 		if( currentTicket === undefined)
 		{
 			//add a tickt to db
@@ -16,14 +16,14 @@ TicketShutter={
 				ticketContent:purpose,
 			});	
 			currentTicket = TicketsInfo.findOne({_id:curId});
-			console.log("insert a ticket");
+			// console.log("insert a ticket");
 		}
 		else
 		{
 			// update the current ticket
-			console.log(purpose);
+			// console.log(purpose);
 			TicketsInfo.update({_id:currentTicket._id},{$set:{ticketContent:purpose}});
-			console.log("update a ticket");
+			// console.log("update a ticket");
 		}
 		analytics.track("Send Ticket Request", {
 			category:"Student",
@@ -60,25 +60,32 @@ TicketShutter={
 		return TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting});
 	},
 	// for teacher get their classroom current attending student list, with latest ticket info
-	getCurClassroomStudentList:function(classroomId) {
+	getCurClassroomStudentList:function(classroomId, sessionObj) {
+		var startDateFilter;
+		if(!!sessionObj){
+			startDateFilter = sessionObj.sessionStart;
+		} else {
+			startDateFilter = ClassroomKicker.getClassroomInfo(classroomId).createDate;
+		}
+		// console.log(startDateFilter);
 		// in the publication we restrict only publish the student's profile who within current classroom or sent tickets
 		var studentArray = Meteor.users.find({"profile.curClassId":classroomId}).fetch();
 		var ticketRecordArray = new Array();
 		for (var i = studentArray.length - 1; i >= 0; i--) {
 			// only put the latest ticket
-			var latestTicket = TicketsInfo.findOne({cid:classroomId,uid:studentArray[i]._id},{sort:{updateDate:-1},limit:1});
+			var latestTicket = TicketsInfo.findOne({cid:classroomId,uid:studentArray[i]._id, "createDate" : { $gte : startDateFilter}},{sort:{updateDate:-1},limit:1});
 			if(!!latestTicket){
 				studentArray[i].ticketInfo = latestTicket;
 			}
 			// add participation info
-			studentArray[i].participation = this.getParticipationInfo(studentArray[i]._id,classroomId);
+			studentArray[i].participation = this.getParticipationInfo(studentArray[i]._id,classroomId,startDateFilter);
 		}
 		return studentArray;
 	},
 	// for teacher get their classroom current ticketlist
 	getClassroomTicketList:function(type,classroomId){
-		console.log(type);
-		console.log(classroomId);
+		// console.log(type);
+		// console.log(classroomId);
 		var ticketArray = TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting}).fetch();
 		return this.getTicketRelativeInfo(ticketArray,classroomId);
 	},
@@ -90,10 +97,11 @@ TicketShutter={
 		}
 		return ticketArray;
 	},
-	getParticipationInfo:function(uid,classroomId){
+	getParticipationInfo:function(uid,classroomId,startDateFilter){
+		if(!!!startDateFilter) startDateFilter = ClassroomKicker.getClassroomInfo(classroomId).createDate;
 		//put student participation info into user
-		var attendTimes = TicketsInfo.find({cid:classroomId,uid:uid}).count();
-		var selectedTimes = TicketsInfo.find({cid:classroomId,uid:uid,status:Schemas.ticketStatus.selected}).count();
+		var attendTimes = TicketsInfo.find({cid:classroomId,uid:uid,"createDate" : { $gte : startDateFilter}}).count();
+		var selectedTimes = TicketsInfo.find({cid:classroomId,uid:uid,status:Schemas.ticketStatus.selected,"createDate" : { $gte : startDateFilter}}).count();
 		var participation = new Object();	
 		participation.attendTimes = attendTimes;
 		participation.selectedTimes = selectedTimes;

@@ -5,7 +5,7 @@ ClassroomKicker={
 		// the classroom name is unique within the school
 		// and teacher can only have one open classroom at a time
 		if(ClassroomsInfo.find({name:classroomName}).count()===0
-			&&ClassroomKicker.getCurrentClassroom()===undefined)
+			&&ClassroomKicker.getCurrentTeachingClassroom()===undefined)
 		{
 			// generate shortcode
 			var shortcode = "";
@@ -14,7 +14,7 @@ ClassroomKicker={
 			}
 			// TODO check the shortcode redudancy
 
-			//add a tickt to db
+			//add a classroom record to db
 			var shortcodeObj = {"shortcode":shortcode,"isProtected":!!shortcode&&shortcode!==""};
 			console.log(shortcodeObj);
 			var curId = ClassroomsInfo.insert({
@@ -25,6 +25,9 @@ ClassroomKicker={
 				shortcode:shortcodeObj
 			});	
 			return curId;
+
+			// start the first session
+			this.startClassSession(curId);
 		}
 
 		analytics.track("Create Classroom", {
@@ -37,7 +40,7 @@ ClassroomKicker={
 
 	},
 	// for teacher to get their current teaching classroom
-	getCurrentClassroom:function(){
+	getCurrentTeachingClassroom:function(){
 		return ClassroomsInfo.findOne({
 			tid:Meteor.userId(),
 			sid:"1",
@@ -103,6 +106,9 @@ ClassroomKicker={
 	closeClassroom:function(classroomId){
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
 		ClassroomKicker.resetClassroom(classroomId);
+
+		// start the first session
+		this.endClassSession(classroomId);
 	},
 	restartClassroom:function(classroomId){
 		analytics.track("Restart Classroom", {
@@ -110,7 +116,11 @@ ClassroomKicker={
 			label:"",
 			value: 1
 		});
+
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.open}});
+
+		// start a new session
+		this.startClassSession(classroomId);
 	},
 	showFirstTimeGuide:function(){
 		// show first time user guide
@@ -184,5 +194,30 @@ ClassroomKicker={
 	          }
 	        }]
 	    });
+	},
+	startClassSession: function(classroomId) {
+		ClassSession.insert({
+			uid: Meteor.userId(),
+			cid: classroomId
+		});
+
+		analytics.track("Start Session", {
+			category: 'Teacher',
+			label: '',
+			value: 1
+		});
+	},
+	getCurrentClassSession:function(classroomId){
+		return ClassSession.findOne({
+			uid: Meteor.userId(),
+			cid: classroomId,
+			status: Schemas.classSessionStatus.within
+		});	
+	},
+	endClassSession:function(classroomId){
+		var curSession = this.getCurrentClassSession(classroomId);
+		if(!!curSession){
+			ClassSession.update({_id:curSession._id},{$set:{status:Schemas.classSessionStatus.end}});
+		}
 	}
 }

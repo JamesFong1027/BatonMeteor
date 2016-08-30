@@ -1,17 +1,15 @@
-// might be used in the future, for save student attendance records
-Schemas = {};
-Attendance = new Mongo.Collection('attendance');
+ClassSession = new Mongo.Collection('classSession');
 
-Schemas.attendanceStatus={
-	pending:   "Pending",
-	attending: "Attending",
-	dismissed: "Dismissed"
+Schemas.classSessionStatus={
+	pending:   	"Pending",
+	within: 	"Within",
+	end: 		"End"
 }
 
-Schemas.Attendance = new SimpleSchema({
+Schemas.ClassSession = new SimpleSchema({
 	uid:{
 		type: String,
-		label: "student id"
+		label: "teacher id"
 	},
 	cid:{
 		type: String,
@@ -19,12 +17,12 @@ Schemas.Attendance = new SimpleSchema({
 	},
 	status:{
 		type: String,
-		label: "the ticket status",
+		label: "the session status",
 		autoValue: function(){
     		// console.log(this.field("lastUpdate").value);
     		if(this.isInsert&&null==this.value)
     		{
-    			return Schemas.attendanceStatus.attending;
+    			return Schemas.classSessionStatus.within;
     		}
     		else if(null!=this.value)
     			return this.value;
@@ -49,23 +47,25 @@ Schemas.Attendance = new SimpleSchema({
 	},
 	updateDate:{
 		type: Date,
-		label: "the time this ticket updated",
+		label: "the time this session updated",
 		autoValue: function(){
     		// console.log(this.field("lastUpdate").value);
     		if(this.isInsert&&null==this.value)
     		{
     			return new Date();
     		}
+    		else if(this.isUpdate)
+    			return new Date();
     		else if(null!=this.value)
     			return this.value;
     		else
     			this.unset();
     	}
-	}
+	},
 });
-Attendance.attachSchema(Schemas.Attendance);
+ClassSession.attachSchema(Schemas.ClassSession);
 
-Attendance.allow({
+ClassSession.allow({
 	// can only insert ticket on your behavour
 	insert: function(userId, document){return userId===document.uid;},
 	// only the ticket owner or teacher can update the ticket
@@ -79,7 +79,7 @@ Attendance.allow({
 	}
 });
 
-Attendance.deny({  
+ClassSession.deny({  
   update: function (userId, docs, fields, modifier) {
     // can't change owners
     return _.contains(fields, 'uid');
