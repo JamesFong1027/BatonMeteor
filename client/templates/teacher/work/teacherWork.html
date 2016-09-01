@@ -2,15 +2,18 @@
 	{{#contentFor "headerTitle"}}
 		<h1 class="title">Work Mode</h1>
 	{{/contentFor}}
-	{{#contentFor "headerButtonRight"}}
-    <button class="button button-clear" data-ion-popover="teacherMenu">
-      {{#if isAndroid}}
-        {{> ionIcon icon='android-more-vertical'}}
-      {{else}}
-        {{> ionIcon icon='more'}}
-      {{/if}}
-    </button>
-  {{/contentFor}}
+
+  {{#if hasCurClassroom}}
+  	{{#contentFor "headerButtonRight"}}
+      <button class="button button-clear" data-ion-popover="teacherMenu">
+        {{#if isAndroid}}
+          {{> ionIcon icon='android-more-vertical'}}
+        {{else}}
+          {{> ionIcon icon='more'}}
+        {{/if}}
+      </button>
+    {{/contentFor}}
+  {{/if}}
 
   {{#ionView}}
     {{#ionSubheaderBar class="bar-stable subtitle"}}

@@ -7,6 +7,7 @@ Template.studentTalk.onCreated(function() {
 Template.studentTalk.onRendered(function() {
 	console.log("in studentTalk onRendered");
 	Session.set('ionTab.current', "studentTalk");
+	Session.set("curMode", Schemas.ticketType.talkTicket);
 });
 
 Template.studentTalk.helpers({
@@ -23,9 +24,10 @@ Template.studentTalk.helpers({
 	"afterHasClassroomTrigger": function() {
 		var template = Template.instance();
 		var curClassroomId = template.data;
-		if (!!!curClassroomId)
+		if (!!!curClassroomId || !!!ClassroomKicker.getCurrentAttendingClassroom())
 			return;
 
+		// template.sender.get().removeClassroomWatcher();
 		template.sender.get().addClassroomWatcher(Schemas.ticketType.talkTicket, curClassroomId);
 		// template.sender.get().runWhenViewReady(ClassroomKicker.showFirstTimeGuide);
 		ClassroomKicker.showFirstTimeGuide();

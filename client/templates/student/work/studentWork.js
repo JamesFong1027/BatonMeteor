@@ -7,11 +7,12 @@ Template.studentWork.onCreated(function() {
 Template.studentWork.onRendered(function() {
 	console.log("in studentWork onRendered");
 	Session.set('ionTab.current', "studentWork");
+	Session.set("curMode", Schemas.ticketType.workTicket);
 });
 
 Template.studentWork.helpers({
 	"hasCurClassroom": function() {
-		return Session.get("curClassroomId") !== undefined;
+		return !!Template.instance().data;
 	},
 	classroom: function() {
 		return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId"));
@@ -23,7 +24,7 @@ Template.studentWork.helpers({
 	"afterHasClassroomTrigger": function() {
 		var template = Template.instance();
 		var curClassroomId = template.data;
-		if (!!!curClassroomId)
+		if (!!!curClassroomId || !!!ClassroomKicker.getCurrentAttendingClassroom())
 			return;
 
 		template.sender.get().addClassroomWatcher(Schemas.ticketType.workTicket, curClassroomId);

@@ -128,9 +128,11 @@ TicketShutter={
 	},
 	// for student setup current attendant class id
 	attendClass:function(classroomId){
+		Session.set("curClassroomId", classroomId);
 		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":classroomId}});
 	},
 	leaveClass:function(){
+		Session.set("curClassroomId", undefined);
 		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":""}});
 	}
 }

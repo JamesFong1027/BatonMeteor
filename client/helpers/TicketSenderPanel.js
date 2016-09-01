@@ -158,27 +158,36 @@ TicketSenderPanel = function(template) {
   };
 
   this.removeCircle = function(id) {
-      template.$("#" + id).remove();
+    template.$("#" + id).remove();
   };
 
-  this.addClassroomWatcher = function(ticketType, curClassroomId){
-    this.runWhenViewReady(function(){
-      console.log("addClassroomWatcher");
-      // if user enter the classroom, set the classroom id and mode
-      Session.set("curClassroomId", curClassroomId);
-      Session.set("curMode", ticketType);
+  this.removeAllCircle = function(){
+    template.$(".circle").remove();
+  }
 
+  this.addClassroomWatcher = function(ticketType, curClassroomId){
+    console.log("addClassroomWatcher");
+    var self = this;
+    console.log("check classWatcher");
+    if(!!template.classWatcher){
+      if(!template.classWatcher.stopped)
+        return;
+      else {
+        this.removeClassroomWatcher();
+        this.removeAllCircle();
+      }
+    }
+ 
+    this.runWhenViewReady(function(){
       // add a auto run to watch classroom status
       Tracker.autorun(function(c) {
-
-
+        template.classWatcher = c;
         var curClassroom = ClassroomKicker.getClassroomInfo(curClassroomId);
         if (!!!curClassroom)
           return;
 
         if (curClassroom.status !== Schemas.classroomStatus.close && !!Session.get("curClassroomId")) {
-
-            console.log("create buddyListWatcher");
+            console.log("check buddyListWatcher");
             if(!!template.buddyListWatcher) return;
 
             console.log("create new watcher");
@@ -205,21 +214,30 @@ TicketSenderPanel = function(template) {
               }
             });
         } else {
-          // if class is closed, reset the session and redirect to inital page
-          Session.set("curClassroomId", undefined);
-          Session.set("curMode", undefined);
+          // if class is closed, stop the watcher and flag as leave the class
+          console.log("classwatcher computer stopped");
+          self.removeClassroomWatcher();
           c.stop();
-          template.buddyListWatcher = null;
-          TicketShutter.leaveClass();
+          if(curClassroom.status === Schemas.classroomStatus.close){
+            // when the class is closed, all the student will flag as leave the class
+            TicketShutter.leaveClass();
+            Router.go("home");
+          }
         }
       });
     });
   }
 
   this.removeClassroomWatcher = function(){
+    console.log("removeClassWatcher");
+    if(!!template.classWatcher){
+      template.classWatcher.stop();
+      template.classWatcher = null;
+    }
+
     if(!!template.buddyListWatcher){
       template.buddyListWatcher.stop();
-      template.buddyListWatcher = null;  
+      template.buddyListWatcher = null; 
     }
   }
 

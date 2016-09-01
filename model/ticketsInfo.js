@@ -94,7 +94,7 @@ Schemas.TicketsInfo = new SimpleSchema({
             {
                 return new Date();
             }
-            else if(this.isUpdate)
+            else if(this.isUpdate&&null==this.value)
                 return new Date();
             else if(null!=this.value)
                 return this.value;

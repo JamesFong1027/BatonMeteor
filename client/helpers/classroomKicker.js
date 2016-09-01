@@ -175,7 +175,7 @@ ClassroomKicker={
 							// go to classroom
 							IonPopup.close();
 							TicketShutter.attendClass(classroom._id);
-							Router.go("studentTalkWithParam", {_id: classroom._id});
+							Router.go("home");
 							return;	
 						}
 						

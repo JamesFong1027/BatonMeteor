@@ -12,7 +12,7 @@ Template.teacherMenu.events({
 		ClassroomKicker.closeClassroom(Session.get("curClassroomId"));
 		Session.set("curClassroomId",undefined);
 		// back to home page, create another classroom
-		Router.go("teacherTalk");
+		Router.go("home");
 	},
 	"click #reset_class":function(event){
 		ClassroomKicker.resetClassroom(Session.get("curMode"),Session.get("curClassroomId"));
