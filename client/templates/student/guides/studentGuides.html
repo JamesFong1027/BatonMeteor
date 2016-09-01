@@ -1,0 +1,25 @@
+<template name="studentGuides">
+{{#ionModal customTemplate=true}}
+<div class="row calm-bg">
+  <div class="col col-10 col-offset-90">
+    <button data-dismiss="modal" class="button button-clear" id="dismiss_button" style="color:#db5a3c; float: right;">Skip</button>
+  </div>
+</div>
+
+  <div class="content overflow-scroll has-header">
+    {{#ionSlideBox}}
+      {{#ionSlide class="calm-bg"}}
+        <div class="guides" style="background-image: url('/student_guides_1.png');"></div>
+      {{/ionSlide}}
+      {{#ionSlide class="calm-bg"}}
+        <div class="guides" style="background-image: url('/student_guides_2.png');"></div>
+      {{/ionSlide}}
+      {{#ionSlide class="calm-bg"}}
+        <div class="guides" style="background-image: url('/student_guides_3.png');"></div>
+      {{/ionSlide}}
+    {{/ionSlideBox}}
+  </div>
+
+    
+{{/ionModal}}
+</template>

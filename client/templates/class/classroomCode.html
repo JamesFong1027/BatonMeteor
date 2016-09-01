@@ -1,0 +1,26 @@
+<template name="classroomCode">  
+{{#ionModal title="Classroom QR Code"}}
+    {{#with classroomsInfo}}
+
+	  <!-- <div class="wrapper">
+	    <h1 class="title">{{name}}</h1>
+	  </div>
+
+	  <div class="confirmQR wrapper">
+	  	{{> QrCode text=_id }}
+	  </div> -->
+
+    	<div class="padding class_info_container">
+		    <div class="classroomName">
+		      	<h1 class="title">{{name}}</h1>
+		      	{{#if isShowShortcode shortcode.isProtected}}
+		      		<h3 class="title" id="shortcode"></h3>
+		      	{{/if}}
+		    </div>
+		    <div class="confirmQR">
+		      {{> QrCode text=_id }}
+		    </div>
+		</div>
+	{{/with}}
+ {{/ionModal}}
+</template>

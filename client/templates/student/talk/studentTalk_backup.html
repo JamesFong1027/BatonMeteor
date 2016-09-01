@@ -1,0 +1,66 @@
+<template name="studentTalk_backup">  
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Talk Mode</h1>
+	{{/contentFor}}
+	
+    {{#ionSubheaderBar}}
+		{{#if hasCurClassroom}}
+			{{#with classroom}}
+    		<h2 class="title">{{name}} [{{status}}]</h2>
+			{{/with}}
+    	{{else}}
+    		<h2 class="title">There are no classroom open yet, Pick one!</h2>
+  	{{/if}}
+    {{/ionSubheaderBar}}
+
+	{{#ionContent class="padding"}}
+		{{#if hasCurClassroom}}
+			<div class="controler">
+		      <div class="left"></div>
+		      <div class="middle"></div>
+		      <div class="right"></div>
+		      <div class="left2">
+		        <div class="circle">
+		          <div class="horizontal"></div>
+		          <div class="vertical"></div>
+		        </div>
+		      </div>
+		      <div class="middle2">
+		        <div class="select"></div>
+		        <div class="start"></div>
+		      </div>
+		      <div class="right2">
+		        <div class="circle">
+		          <div class="top">
+		            <button class="green" id="build">Build</button>
+		            <button class="blue" id="new_idea">Idea</button>
+		          </div>
+		          <div class="bottom">
+		            <button class="orange" id="question">Question</button>
+		            <button class="red" id="challenge">Challenge</button>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
+		{{else}}
+			<div class="row padding">
+				<div class="col-33 col-offset-33">
+			  		<button id="pickClassroom" class="button button-block button-positive ">Pick a classroom from list</button>
+				</div>
+			</div>
+
+			<div class="row padding">
+				<div class="col-33 col-offset-33">
+			  		<button id="EnterName" data-ion-modal="classroomPickList" class="button button-block button-positive">Enter Classroom Name</button>
+				</div>
+			</div>
+
+			<div class="row padding">
+				<div class="col-33 col-offset-33">
+			  		<button id="scanQRCode" data-ion-modal="classroomPickList" class="button button-block button-positive">Scan QR code</button>
+				</div>
+			</div>
+
+		{{/if}}
+    {{/ionContent}} 
+</template>  

@@ -1,0 +1,30 @@
+<template name="createClassroom">  
+{{#ionModal title="New Classroom"}}
+<form class="new_classroom">
+	<div class="list">
+	  <label class="item item-input item-stacked-label">
+	    <span class="input-label">Classroom Name</span>
+	    <input type="text" name="classroomName" placeholder="Science course Nov.10" />
+	  </label>
+	  <!-- <label class="item item-input item-stacked-label">
+	    <span class="input-label">Shortcode</span>
+	    <input type="text" name="shortcode" placeholder="Optional">
+	  </label> -->
+	  <!-- <label class="item item-input item-stacked-label">
+	    <span class="input-label">Description</span>
+	    <input type="text" name="description" placeholder="About gravity and black hole">
+	  </label> -->
+	  <!-- <label class="item item-input item-stacked-label">
+	    <span class="input-label">Subject</span>
+	    <input type="text" placeholder="Science">
+	  </label> -->
+		
+		<div class="button-bar">
+			<button type="submit" data-dismiss=modal class="button button-positive">
+				Create Classroom
+			</button>
+		</div>
+	</div>
+</form>
+ {{/ionModal}}
+</template>

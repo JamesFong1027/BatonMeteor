@@ -1,0 +1,22 @@
+<template name="scanResult">  
+	{{#ionModal title="Classroom Information" closeText="Cancel"}}
+		<!-- <button>Scan</button> -->
+		<div class="padding">
+		{{#with classroomInfo}}
+			<div class="list">
+  				<div class="item item-thumbnail-left">
+					<img src={{getImage logo}}>  
+					<h2>{{name}}</h2>
+					<p>Status: {{status}}</p>
+					<p>Teacher: {{getTeacherName tid}}</p>
+					<p>Create Date: {{formatDate createDate}}</p>
+				</div>
+			</div>
+			<!-- <button class="button button-full button-calm">Select</button> -->
+			<div id="selectClassroom" class="bar bar-footer bar-balanced">
+			  <div class="title">Enter</div>
+			</div>
+	    {{/with}}
+	    </div>
+	{{/ionModal}}
+</template>  

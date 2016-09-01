@@ -1,0 +1,31 @@
+<template name="classroomPickList">
+  {{#ionModal title="Pick a classroom from list"}}
+    <!--Auto complete search box-->
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input id="classSearch" type="text" placeholder="Type to search...">
+        </label>
+      </div>
+      {{#ionList}}
+
+        {{#if classrooms}}
+          {{#each classrooms}}
+
+            {{#ionItem isProtected=this.shortcode.isProtected id=this._id class="item-thumbnail-left item-icon-right classroomItem"}}
+              <img src={{getImage logo}}>  
+              <h2>{{name}}</h2>
+              <p>Status: {{status}}</p>
+              <p>Teacher: {{getTeacherName tid}}</p>
+              <p>Create Date: {{formatDate createDate}}</p>
+              <i class="icon ion-chevron-right"></i>
+            {{/ionItem}}
+
+          {{/each}}  
+        {{else}}
+          <h2>There are no classroom exist, wait for teacher to create</h2>
+        {{/if}}
+
+      {{/ionList}}
+  {{/ionModal}}
+</template>

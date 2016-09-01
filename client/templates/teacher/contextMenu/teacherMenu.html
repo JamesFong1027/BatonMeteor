@@ -1,0 +1,28 @@
+<template name="teacherMenu">
+  {{#ionPopover}}
+    <div class="content">
+      <div class="list">
+        <li class="item item-icon-left popover-item" id="class_record" >
+          {{> ionIcon icon="ios-people"}}
+          Class Participation
+        </li>
+        <li class="item item-icon-left popover-item" id="class_info">
+          {{> ionIcon icon="information-circled"}}
+          Classroom Info
+        </li>
+        <li class="item item-icon-left popover-item" id="teacher_guides">
+          {{> ionIcon icon="help-buoy"}}
+          Guides
+        </li>
+        <li class="item item-icon-left popover-item" id="reset_class">
+          {{> ionIcon icon="ios-skipforward"}}
+          Reset all/Next topic
+        </li>
+        <li class="item item-icon-left popover-item" id="close_class">
+          {{> ionIcon icon="ios-close"}}
+          Close Classroom
+        </li>
+      </div>
+    </div>
+  {{/ionPopover}}
+</template>

@@ -1,0 +1,75 @@
+<template name="studentTalk">  
+	{{#contentFor "headerTitle"}}
+		{{#if hasCurClassroom}}
+			{{#with classroom}}
+				<h1 class="title title-center">Talk Mode</h1>
+			{{/with}}
+		{{else}}
+			<h1 class="title">Pick a classroom to start</h1>
+		{{/if}}
+	{{/contentFor}}
+
+	{{#if hasCurClassroom}}
+		{{#contentFor "headerButtonRight"}}
+			<button class="button button-clear" data-ion-popover="studentMenu">
+			  {{#if isAndroid}}
+			    {{> ionIcon icon='android-more-vertical'}}
+			  {{else}}
+			    {{> ionIcon icon='more'}}
+			  {{/if}}
+			</button>
+		{{/contentFor}}
+	{{/if}}
+	
+	{{#ionView}}
+	    {{#ionSubheaderBar class="bar-stable subtitle"}}
+			{{#if hasCurClassroom}}
+				{{#with classroom}}
+					<h2 class="title">{{name}} [{{status}}]</h2>
+				{{/with}}
+			{{else}}
+				<h2 class="title">Use one of the option</h2>
+			{{/if}}
+	    {{/ionSubheaderBar}}
+
+		{{#ionContent class="padding"}}
+			{{#if hasCurClassroom}}
+				<h4 class="viewTitle" id="viewTitle">Send your request</h4>
+				<div id="carousel">
+				    <div class="container">
+				    	
+				    </div>
+				  </div>
+
+				  <!-- <div id="circles-counter">
+				    <span>0 circles</span>
+				  </div> -->
+				  
+				<nav>
+					
+					<input checked='checked' class='menu-toggler' id='menu-toggler' type='checkbox'>
+				  	<label for='menu-toggler'></label>	
+				  	<div class='menu-toggler-circle'></div>
+					
+				  <ul>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-android-contacts' id="build" target='_blank'></a>
+				    </li>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-ios-lightbulb' id="new_idea" target='_blank'></a>
+				    </li>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-help' id="question" target='_blank'></a>
+				    </li>
+				    <li class='talktab-menu-item'>
+				      <a class='icon ion-alert' id="challenge" target='_blank'></a>
+				    </li>
+				  </ul>
+				</nav>
+				{{ afterHasClassroomTrigger}}
+			{{else}}
+				{{> classEntry}}
+			{{/if}}
+	    {{/ionContent}} 
+	{{/ionView}}
+</template>  

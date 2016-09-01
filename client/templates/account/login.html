@@ -1,0 +1,29 @@
+<template name="myLogin">
+	{{#ionView}}
+    {{#ionContent}}
+    <div class="login-icon">
+      <h1>Welcome to Baton!</h1>
+    </div>
+      {{#if currentUser}}
+        <div class="padding">
+          <button class="button button-positive button-block" data-action="logout">Log Out</button>
+        </div>
+      {{else}}
+        {{> atForm}}
+      {{/if}}
+    {{/ionContent}}
+  {{/ionView}}
+</template>
+
+<template name="loginLayout">
+{{#ionBody}}
+  {{#ionView}}
+    {{#ionContent class="login-screen padding"}}
+      <div class="login-icon">
+        <img class="app-icon" src="littleman.png">  
+      </div>
+      {{> yield}}
+    {{/ionContent}}
+  {{/ionView}}
+{{/ionBody}}
+</template>

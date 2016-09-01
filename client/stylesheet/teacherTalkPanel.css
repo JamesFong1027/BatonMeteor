@@ -1,0 +1,108 @@
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600");
+.top_badge {
+  height: 22px;
+  min-width: 22px;
+  top: -8px;
+  right: -10px;
+  padding: 3px;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: green;
+  background-size: 80% 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+.bottom_badge {
+  height: 22px;
+  min-width: 22px;
+  bottom: 12px;
+  right: -10px;
+  padding: 3px;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: #f44336;
+  position: absolute;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+.wrapper {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.ticketSquare{
+  width: 70px;
+  height: 90px;
+  position: relative;
+  margin: 20px;
+  float: left;
+}
+
+.ticketSquare p{
+  text-align: center;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.avatar {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 70px;
+  width: 70px;
+  border-radius: 30%;
+  background : #03A9F4;
+  /*transition: background-color 20s ease;*/
+  /*background-color: green;*/
+}
+.avatar a {
+  display: block;
+  width: inherit;
+  height: inherit;
+  line-height: 80px;
+  border-radius: 50%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 40px;
+  pointer-events: none;
+  transition: .2s;
+}
+
+.hammer-touch-area{
+  height: 100%;
+  width: 100%;
+}

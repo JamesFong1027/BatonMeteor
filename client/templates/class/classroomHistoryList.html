@@ -1,0 +1,24 @@
+<template name="classroomHistoryList">
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">Classroom History List</h1>
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton}}
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionList}}
+        {{#each classrooms}}
+          {{#ionItem id=this._id class="classroomItem item item-thumbnail-left item-icon-right"}}
+            <img src={{logo}}>
+            <h2>{{name}}</h2>
+            <p>Create Date: {{formatDate createDate}}</p>
+            <i class="icon ion-ios-arrow-right"></i>
+          {{/ionItem}}
+        {{/each}}
+      {{/ionList}}
+    {{/ionContent}}
+  {{/ionView}}
+</template>
