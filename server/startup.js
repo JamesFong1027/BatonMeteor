@@ -8,7 +8,7 @@ Meteor.startup(function() {
 
   smtp = {
     username: 'info@batonmobile.com',
-    password: 'ummchzwemyquhgxs',
+    password: Meteor.settings.private.smtp.password,
     server:   'smtp.gmail.com',  // eg: mail.gandi.net
     port: 465
   }
@@ -21,8 +21,8 @@ Meteor.startup(function() {
     "service": "google"
   }, {
     $set: {
-      "clientId": "553157495789-7v8oh686td1u7du0hdd2jdp9t6fflqgm.apps.googleusercontent.com",
-      "secret": "Ikpp_WkPQDDirxjU-_TZj6wV",
+      "clientId": Meteor.settings.private.google.clientId,
+      "secret": Meteor.settings.private.google.secret,
       "redirectUrl": "http://app.batonmobile.com/_oauth/google?close",
     }
   });
