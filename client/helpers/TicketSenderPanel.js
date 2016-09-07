@@ -220,7 +220,7 @@ TicketSenderPanel = function(template) {
           c.stop();
           if(curClassroom.status === Schemas.classroomStatus.close){
             // when the class is closed, all the student will flag as leave the class
-            TicketShutter.leaveClass();
+            ClassroomKicker.leaveClass();
             Router.go("home");
           }
         }

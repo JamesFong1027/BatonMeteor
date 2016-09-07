@@ -38,5 +38,8 @@ Meteor.methods({
     } else {
       return "";
     }
+  },
+  switchRole:function(userType){
+    Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.userType":userType}});
   }
 });

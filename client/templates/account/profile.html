@@ -28,10 +28,12 @@
             {{/ionItem}}
           {{/if}}
 
-          {{#ionItem class="item item-icon-left"}}
-            <i class="icon ion-settings"></i>
-            Preference
-            <i class="icon ion-ios-arrow-right"></i>
+          {{#ionItem class="item item-icon-left" id="switchRole"}}
+            <i class="icon ion-arrow-swap"></i>
+            Switch Role
+            <span class="item-note">
+              {{userType}}
+            </span>
           {{/ionItem}}
 
           {{#ionItem class="item item-icon-left assertive" id="logout"}}

@@ -19,7 +19,7 @@ Template.scanResult.events({
     event.preventDefault();
     IonModal.close("scanResult");
     var classroomId = Template.instance().data;
-    TicketShutter.attendClass(classroomId);
+    ClassroomKicker.attendClass(classroomId);
     Router.go("home");
 
     // for now we keep it simple, if user have qr code, then no shortcode required

@@ -21,21 +21,22 @@ Meteor.startup(function() {
 	});
 
 
-	Tracker.autorun(function(){
-		console.log(Reload.isWaitingForResume());
-		if(Reload.isWaitingForResume()){
-			reloadFlag = false;
-			IonLoading.show({
-		      customTemplate: '<h3>New Version Available</h3><br/><p>Updating...</p><p>We are making Baton better</p>',
-		      duration: 3000,
-		      backdrop: true
-		    });
+	// for waiting for resume, when update available
+	// Tracker.autorun(function(){
+	// 	console.log(Reload.isWaitingForResume());
+	// 	if(Reload.isWaitingForResume()){
+	// 		reloadFlag = false;
+	// 		IonLoading.show({
+	// 	      customTemplate: '<h3>New Version Available</h3><br/><p>Updating...</p><p>We are making Baton better</p>',
+	// 	      duration: 3000,
+	// 	      backdrop: true
+	// 	    });
 
-		    Meteor.setTimeout(function(){
-		       window.location.replace(window.location.href);
-		    }, 3000);
-		}
-	});
+	// 	    Meteor.setTimeout(function(){
+	// 	       window.location.replace(window.location.href);
+	// 	    }, 3000);
+	// 	}
+	// });
 
 	if (Meteor.isCordova) {
 		document.addEventListener("backbutton", function() {

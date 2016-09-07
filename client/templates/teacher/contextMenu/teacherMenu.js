@@ -10,7 +10,6 @@ Template.teacherMenu.helpers({
 Template.teacherMenu.events({
 	"click #close_class": function(event){
 		ClassroomKicker.closeClassroom(Session.get("curClassroomId"));
-		Session.set("curClassroomId",undefined);
 		// back to home page, create another classroom
 		Router.go("home");
 	},

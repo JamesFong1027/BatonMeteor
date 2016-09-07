@@ -87,7 +87,7 @@ ClassroomKicker={
 	// for teacher to reset the classrooom
 	// put all waiting tickets into dismissed
 	resetClassroom:function(type,classroomId){
-		// Meteor.call("resetClassroom",classroomId);
+		console.log("reset classroom:" + type + classroomId);
 		analytics.track("Reset Classroom", {
 			category: "Teacher",
 			label: type,
@@ -104,10 +104,12 @@ ClassroomKicker={
 	// will set classroom status as close
 	// and reset the classroom at the same time
 	closeClassroom:function(classroomId){
-		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
-		ClassroomKicker.resetClassroom(classroomId);
+		this.resetClassroom(Schemas.ticketType.talkTicket, classroomId);
+		this.resetClassroom(Schemas.ticketType.workTicket, classroomId);
 
-		// start the first session
+		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
+		Session.set("curClassroomId",undefined);
+		// close the current session
 		this.endClassSession(classroomId);
 	},
 	restartClassroom:function(classroomId){
@@ -174,7 +176,7 @@ ClassroomKicker={
 						} else {
 							// go to classroom
 							IonPopup.close();
-							TicketShutter.attendClass(classroom._id);
+							ClassroomKicker.attendClass(classroom._id);
 							Router.go("home");
 							return;	
 						}
@@ -219,5 +221,22 @@ ClassroomKicker={
 		if(!!curSession){
 			ClassSession.update({_id:curSession._id},{$set:{status:Schemas.classSessionStatus.end}});
 		}
+	},
+	// for student setup current attendant class id
+	attendClass:function(classroomId){
+		Session.set("curClassroomId", classroomId);
+		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":classroomId}});
+	},
+	leaveClass:function(){
+		Session.set("curClassroomId", undefined);
+		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":""}});
+	},
+	switchRole:function(switch2Type){
+		if (switch2Type === Schemas.userType.student) {
+			ClassroomKicker.closeClassroom(this.getCurrentTeachingClassroom()._id);
+		} else if (!!this.getCurrentTeachingClassroom()) {
+			ClassroomKicker.leaveClass();
+		}
+		Meteor.call("switchRole", switch2Type);
 	}
 }

@@ -60,11 +60,6 @@ Schemas.UserProfile = new SimpleSchema({
       type: String,
       optional: true
     },
-    ccid:{
-      type:String,
-      label:"the current classroom ID",
-      optional:true
-    },
     firstTimeLogin:{
       type:Boolean,
       label:"is the first time login to the app",
@@ -76,5 +71,13 @@ Schemas.UserProfile = new SimpleSchema({
     }
 });
 
+Meteor.users.deny({  
+  update: function (userId, docs, fields, modifier) {
+    // can't change id
+    if(userId !== docs._id) return true;
+    // can't change userType
+    if(_.contains(Object.keys(modifier.$set), "profile.userType")) return true;
+  }
+});
 
 // Meteor.users.attachSchema(Schemas.User);

@@ -9,7 +9,7 @@ Template.studentMenu.helpers({
 
 Template.studentMenu.events({
 	"click #leave_class": function(event){
-		TicketShutter.leaveClass();
+		ClassroomKicker.leaveClass();
  
 		//back to home page
 		Router.go("home");
