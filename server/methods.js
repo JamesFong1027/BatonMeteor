@@ -40,6 +40,7 @@ Meteor.methods({
     }
   },
   switchRole:function(userType){
+    if(!_.contains([Schemas.userType.teacher, Schemas.userType.student],userType)) return false;
     Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.userType":userType}});
   }
 });
