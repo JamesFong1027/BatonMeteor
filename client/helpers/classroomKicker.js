@@ -222,6 +222,9 @@ ClassroomKicker={
 			ClassSession.update({_id:curSession._id},{$set:{status:Schemas.classSessionStatus.end}});
 		}
 	},
+	getClassroomSessionList:function(classroomId){
+		return ClassSession.find({cid:classroomId});
+	},
 	// for student setup current attendant class id
 	attendClass:function(classroomId){
 		Session.set("curClassroomId", classroomId);

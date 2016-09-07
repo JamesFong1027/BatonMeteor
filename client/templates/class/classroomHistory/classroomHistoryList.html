@@ -11,7 +11,7 @@
     {{#ionContent}}
       {{#ionList}}
         {{#each classrooms}}
-          {{#ionItem id=this._id class="classroomItem item item-thumbnail-left item-icon-right"}}
+          {{#ionItem path="classroomDetail" id=this._id class="classroomItem item item-thumbnail-left item-icon-right"}}
             <img src={{logo}}>
             <h2>{{name}}</h2>
             <p>Create Date: {{formatDate createDate}}</p>

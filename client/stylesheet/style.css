@@ -89,9 +89,9 @@ body {
   bottom: 0px !important;
 }*/
 
-.content.overflow-scroll.has-header {
+/*.content.overflow-scroll.has-header {
     bottom: 0px !important;
-}
+}*/
 
 @media only screen and (min-width : 601px) {
   .container {

@@ -1,0 +1,39 @@
+<template name="classroomDetail">  
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Classroom Detail</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton}}
+	{{/contentFor}}
+	
+	{{#ionView}}
+    	{{#ionContent}}
+  			{{#with classroomInfo}}
+	  				<div class="item item-thumbnail-left">
+						<img src={{getImage logo}}>  
+						<h2>{{name}}</h2>
+						<p>Status: {{status}}</p>
+						<p>Teacher: {{getTeacherName tid}}</p>
+						<p>Create Date: {{formatDate createDate}}</p>
+					</div>
+				<!-- <button class="button button-full button-calm">Select</button> -->
+		    {{/with}}
+		    <div class="item item-divider">
+	          Classroom Session History [{{totalNumber}}]
+	        </div>
+			{{#ionList}}
+				{{#each classroomSession}}
+					{{#ionItem id=this._id class="classroomItem item item-icon-right"}}
+						<h2>Session: {{sessionNumber @index}}</h2>
+						<p>Start Date: {{formatDate sessionStart}}</p>
+						<p>End Date: {{formatDate updateDate}}</p>
+					{{/ionItem}}
+				{{/each}}
+			{{/ionList}}
+		{{/ionContent}}
+		<div id="selectClassroom" class="bar bar-footer bar-calm">
+		  <div class="title">Start new Session</div>
+		</div>
+  	{{/ionView}}
+</template>
