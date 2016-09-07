@@ -39,6 +39,19 @@ ClassroomKicker={
 		return false;
 
 	},
+	updateClassroom: function(classroomInfo){
+		if(ClassroomsInfo.find({name:classroomInfo.name}).count()===0){
+			// only update name for now
+			ClassroomsInfo.update({_id: classroomInfo._id}, {
+				$set: {
+					name: classroomInfo.name
+				}
+			});
+			return true;
+		}
+
+		return false;
+	},
 	// for teacher to get their current teaching classroom
 	getCurrentTeachingClassroom:function(){
 		return ClassroomsInfo.findOne({

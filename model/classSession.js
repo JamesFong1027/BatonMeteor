@@ -15,20 +15,18 @@ Schemas.ClassSession = new SimpleSchema({
 		type: String,
 		label: "class id"
 	},
-	status:{
+	status: {
 		type: String,
 		label: "the session status",
-		autoValue: function(){
-    		// console.log(this.field("lastUpdate").value);
-    		if(this.isInsert&&null==this.value)
-    		{
-    			return Schemas.classSessionStatus.within;
-    		}
-    		else if(null!=this.value)
-    			return this.value;
-    		else
-    			this.unset();
-    	}
+		autoValue: function() {
+			// console.log(this.field("lastUpdate").value);
+			if (this.isInsert && null == this.value) {
+				return Schemas.classSessionStatus.within;
+			} else if (null != this.value)
+				return this.value;
+			else
+				this.unset();
+		}
 	},
 	sessionStart:{
 		type: Date,
