@@ -27,7 +27,7 @@ ClassroomKicker={
 			return curId;
 
 			// start the first session
-			this.startClassSession(curId);
+			ClassroomKicker.startClassSession(curId, Schemas.sessionType.hosting);
 		}
 
 		analytics.track("Create Classroom", {
@@ -61,10 +61,10 @@ ClassroomKicker={
 		});
 	},
 	getCurrentAttendingClassroom:function(){
-		if(!!Meteor.user().profile && !!Meteor.user().profile.curClassId){
-			return this.getClassroomInfo(Meteor.user().profile.curClassId);
+		var curSession = ClassroomKicker.getCurrentClassSessionByType(Schemas.sessionType.attending);
+		if(!!curSession){
+			return ClassroomKicker.getClassroomInfo(curSession.cid);
 		}
-		
 		return null;
 	},
 	getClassroomInfo:function (classroomId) {
@@ -117,13 +117,13 @@ ClassroomKicker={
 	// will set classroom status as close
 	// and reset the classroom at the same time
 	closeClassroom:function(classroomId){
-		this.resetClassroom(Schemas.ticketType.talkTicket, classroomId);
-		this.resetClassroom(Schemas.ticketType.workTicket, classroomId);
+		ClassroomKicker.resetClassroom(Schemas.ticketType.talkTicket, classroomId);
+		ClassroomKicker.resetClassroom(Schemas.ticketType.workTicket, classroomId);
 
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
 		Session.set("curClassroomId",undefined);
 		// close the current session
-		this.endClassSession(classroomId);
+		ClassroomKicker.endClassSession(classroomId);
 	},
 	restartClassroom:function(classroomId){
 		analytics.track("Restart Classroom", {
@@ -135,7 +135,7 @@ ClassroomKicker={
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.open}});
 
 		// start a new session
-		this.startClassSession(classroomId);
+		ClassroomKicker.startClassSession(classroomId, Schemas.sessionType.hosting);
 	},
 	showFirstTimeGuide:function(){
 		// show first time user guide
@@ -210,16 +210,33 @@ ClassroomKicker={
 	        }]
 	    });
 	},
-	startClassSession: function(classroomId) {
+	startClassSession: function(classroomId,sessionType) {
 		ClassSession.insert({
 			uid: Meteor.userId(),
-			cid: classroomId
+			cid: classroomId,
+			sessionType: sessionType
 		});
 
-		analytics.track("Start Session", {
-			category: 'Teacher',
-			label: '',
-			value: 1
+		if(sessionType === Schemas.sessionType.attending){
+			analytics.track("Attending class", {
+				category: 'Student',
+				label: 'start session',
+				value: 1
+			});
+		} else {
+			analytics.track("Hosting class", {
+				category: 'Teacher',
+				label: 'start session',
+				value: 1
+			});
+		}
+		
+	},
+	getCurrentClassSessionByType:function(sessionType){
+		return ClassSession.findOne({
+			uid: Meteor.userId(),
+			sessionType: sessionType,
+			status: Schemas.classSessionStatus.within
 		});
 	},
 	getCurrentClassSession:function(classroomId){
@@ -230,27 +247,35 @@ ClassroomKicker={
 		});	
 	},
 	endClassSession:function(classroomId){
-		var curSession = this.getCurrentClassSession(classroomId);
+		var curSession = ClassroomKicker.getCurrentClassSession(classroomId);
 		if(!!curSession){
 			ClassSession.update({_id:curSession._id},{$set:{status:Schemas.classSessionStatus.end}});
 		}
 	},
-	getClassroomSessionList:function(classroomId){
-		return ClassSession.find({cid:classroomId});
+	getClassroomSessionList:function(classroomId, sessionType){
+		return ClassSession.find({cid:classroomId,sessionType:sessionType});
+	},
+	getHostingSessionList:function(classroomId){
+		return ClassroomKicker.getClassroomSessionList(classroomId,Schemas.sessionType.hosting);
+	},
+	getAttendingSessionList:function(classroomId){
+		return ClassroomKicker.getClassroomSessionList(classroomId,Schemas.sessionType.attending);
 	},
 	// for student setup current attendant class id
 	attendClass:function(classroomId){
 		Session.set("curClassroomId", classroomId);
-		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":classroomId}});
+		ClassroomKicker.startClassSession(classroomId, Schemas.sessionType.attending);
 	},
 	leaveClass:function(){
+		var classroomId = Session.get("curClassroomId");
+		ClassroomKicker.endClassSession(classroomId);
 		Session.set("curClassroomId", undefined);
-		Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.curClassId":""}});
+		
 	},
 	switchRole:function(switch2Type){
 		if (switch2Type === Schemas.userType.student) {
-			ClassroomKicker.closeClassroom(this.getCurrentTeachingClassroom()._id);
-		} else if (!!this.getCurrentTeachingClassroom()) {
+			ClassroomKicker.closeClassroom(ClassroomKicker.getCurrentTeachingClassroom()._id);
+		} else if (!!ClassroomKicker.getCurrentTeachingClassroom()) {
 			ClassroomKicker.leaveClass();
 		}
 		Meteor.call("switchRole", switch2Type);

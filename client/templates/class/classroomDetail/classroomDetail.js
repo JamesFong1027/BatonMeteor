@@ -13,13 +13,13 @@ Template.classroomDetail.helpers({
     return logoUrl===""?"/logo.png":logoUrl;
   },
   classroomSession:function(){
-    return ClassroomKicker.getClassroomSessionList(Template.instance().data);
+    return ClassroomKicker.getHostingSessionList(Template.instance().data);
   },
   sessionNumber:function(index){
     return index+1;
   },
   totalNumber:function(){
-    return ClassroomKicker.getClassroomSessionList(Template.instance().data).fetch().length;
+    return ClassroomKicker.getHostingSessionList(Template.instance().data).fetch().length;
   }
 });
 

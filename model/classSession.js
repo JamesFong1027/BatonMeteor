@@ -6,14 +6,23 @@ Schemas.classSessionStatus={
 	end: 		"End"
 }
 
+Schemas.sessionType={
+	hosting:   		"Hosting",
+	attending : 	"Attending"
+}
+
 Schemas.ClassSession = new SimpleSchema({
 	uid:{
 		type: String,
-		label: "teacher id"
+		label: "user id"
 	},
 	cid:{
 		type: String,
 		label: "class id"
+	},
+	sessionType:{
+		type: String,
+		label: "Hosting or attending"
 	},
 	status: {
 		type: String,

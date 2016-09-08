@@ -16,10 +16,21 @@ Meteor.publishComposite('classroomsInfo',function(){
 				}
 			},
 			{
+				// publicate all the related class session
 				find:function(classroomsInfo){
-					// return all the students attending this classs
-					return Meteor.users.find({"profile.curClassId":classroomsInfo._id},{fields:{'profile': 1}});
-				}
+					// if this classroom belongs to the user(teacher), will return all the related classSession
+					if(isClassroomBlongTo(this.userId,classroomsInfo._id)){
+						return ClassSession.find({cid:classroomsInfo._id});
+					}
+				},
+				children:[
+					{
+						// given this class belongs to user(teacher), will return all the attending student profile
+						find:function(classSession){
+							return Meteor.users.find({_id:classSession.uid},{fields:{'profile': 1}});
+						}
+					}
+				]
 			}
 		]	
 	}
