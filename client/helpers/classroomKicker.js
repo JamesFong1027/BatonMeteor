@@ -211,6 +211,8 @@ ClassroomKicker={
 	    });
 	},
 	startClassSession: function(classroomId,sessionType) {
+		if(!!ClassroomKicker.getCurrentClassSession(classroomId)) return;
+
 		ClassSession.insert({
 			uid: Meteor.userId(),
 			cid: classroomId,

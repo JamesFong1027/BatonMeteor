@@ -29,12 +29,12 @@ Schemas.ClassSession = new SimpleSchema({
 		label: "the session status",
 		autoValue: function() {
 			// console.log(this.field("lastUpdate").value);
-			if (this.isInsert && null == this.value) {
-				return Schemas.classSessionStatus.within;
-			} else if (null != this.value)
-				return this.value;
-			else
-				this.unset();
+			if (this.isInsert) {
+				if(null == this.value)
+					return Schemas.classSessionStatus.within;
+				else
+					return this.value;	
+			}
 		}
 	},
 	sessionStart:{
