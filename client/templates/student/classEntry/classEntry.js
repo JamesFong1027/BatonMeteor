@@ -3,7 +3,7 @@ Template.classEntry.events({
 		event.preventDefault();
 		ClassroomKicker.requestClassroomShortcode();
 	},
-	"click #pickClassroom":function(event){
+	"click #recentAttended":function(event){
 		event.preventDefault();
 		IonModal.open("classroomPickList");
 	},

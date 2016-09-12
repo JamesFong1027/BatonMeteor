@@ -263,6 +263,10 @@ ClassroomKicker={
 	getAttendingSessionList:function(classroomId){
 		return ClassroomKicker.getClassroomSessionList(classroomId,Schemas.sessionType.attending);
 	},
+	getAttendedClassroomInfoList:function(){
+		var attendedClassIdList = DBUtil.distinct(ClassSession,"cid",{uid:Meteor.userId(),sessionType:Schemas.sessionType.attending},{sessionStart:-1});
+		return ClassroomsInfo.find({_id:{$in:attendedClassIdList},status:Schemas.classroomStatus.open});
+	},
 	// for student setup current attendant class id
 	attendClass:function(classroomId){
 		Session.set("curClassroomId", classroomId);

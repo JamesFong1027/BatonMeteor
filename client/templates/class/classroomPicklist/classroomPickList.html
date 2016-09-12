@@ -1,18 +1,18 @@
 <template name="classroomPickList">
-  {{#ionModal title="Pick a classroom from list"}}
+  {{#ionModal title="Recently attended classes"}}
     <!--Auto complete search box-->
-      <div class="list list-inset">
+      <!-- <div class="list list-inset">
         <label class="item item-input">
           <i class="icon ion-search placeholder-icon"></i>
           <input id="classSearch" type="text" placeholder="Type to search...">
         </label>
-      </div>
+      </div> -->
       {{#ionList}}
 
         {{#if classrooms}}
           {{#each classrooms}}
 
-            {{#ionItem isProtected=this.shortcode.isProtected id=this._id class="item-thumbnail-left item-icon-right classroomItem"}}
+            {{#ionItem classStatus=this.status id=this._id class="item-thumbnail-left item-icon-right classroomItem"}}
               <img src={{getImage logo}}>  
               <h2>{{name}}</h2>
               <p>Status: {{status}}</p>
