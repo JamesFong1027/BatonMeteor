@@ -24,10 +24,11 @@ ClassroomKicker={
 				description:description,
 				shortcode:shortcodeObj
 			});	
-			return curId;
 
 			// start the first session
 			ClassroomKicker.startClassSession(curId, Schemas.sessionType.hosting);
+			
+			return curId;
 		}
 
 		analytics.track("Create Classroom", {
