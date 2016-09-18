@@ -85,6 +85,28 @@ body {
   text-align: center;
 }
 
+.history-class{
+  position: absolute;
+  left: 0px;
+  right: 0px;
+}
+.entry-options{
+ /*height: 40%;*/
+}
+
+.no-scroll{
+  overflow: hidden;
+}
+
+.scroll-list{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: scroll;
+    border-radius: 8px !important;
+    background-color: #fff;
+}
+
 /*body.keyboard-open .content.overflow-scroll {
   bottom: 0px !important;
 }*/

@@ -5,12 +5,12 @@
 				<h1 class="title title-center">Talk Mode</h1>
 			{{/with}}
 		{{else}}
-			<h1 class="title">Pick a classroom to start</h1>
+			<h1 class="title">Pick a classroom</h1>
 		{{/if}}
 	{{/contentFor}}
 
-	{{#if hasCurClassroom}}
-		{{#contentFor "headerButtonRight"}}
+	{{#contentFor "headerButtonRight"}}
+		{{#if hasCurClassroom}}
 			<button class="button button-clear" data-ion-popover="studentMenu">
 			  {{#if isAndroid}}
 			    {{> ionIcon icon='android-more-vertical'}}
@@ -18,21 +18,23 @@
 			    {{> ionIcon icon='more'}}
 			  {{/if}}
 			</button>
-		{{/contentFor}}
-	{{/if}}
+		{{else}}
+			<div id="scanQRCode" class="button button-clear">
+				<i class="icon ion-ios-barcode-outline"></i>
+			</div>
+		{{/if}}
+	{{/contentFor}}
 	
 	{{#ionView}}
-	    {{#ionSubheaderBar class="bar-stable subtitle"}}
-			{{#if hasCurClassroom}}
-				{{#with classroom}}
+		{{#if hasCurClassroom}}
+			{{#with classroom}}
+				{{#ionSubheaderBar class="bar-stable subtitle"}}
 					<h2 class="title">{{name}} [{{status}}]</h2>
-				{{/with}}
-			{{else}}
-				<h2 class="title">Use one of the option</h2>
-			{{/if}}
-	    {{/ionSubheaderBar}}
-
-		{{#ionContent class="padding"}}
+		    	{{/ionSubheaderBar}}
+			{{/with}}
+		{{/if}}
+	    
+		{{#ionContent class="has-footer"}}
 			{{#if hasCurClassroom}}
 				<h4 class="viewTitle" id="viewTitle">Send your request</h4>
 				<div id="carousel">

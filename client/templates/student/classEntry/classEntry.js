@@ -1,42 +1,66 @@
+Template.classEntry.onCreated(function(){
+	var template = this;
+	template.ListMode = new ReactiveVar(true);
+});
+
 Template.classEntry.events({
-	"click #shortCode":function(event){
+	"submit .shortCodeForm":function(event){
 		event.preventDefault();
-		ClassroomKicker.requestClassroomShortcode();
+		console.log(event);
+		var input = $(event.target.shortCode);
+		var shortcode = input.val();
+
+		Meteor.call("checkClassroomShortcode", shortcode.toLowerCase(), function(err, classroom) {
+			var errMsg = "";
+			if (classroom) {
+				// if shortcode match, close both Modal and Popup
+				if (classroom.status !== Schemas.classroomStatus.open) {
+					errMsg = "Classroom is closed";
+				} else {
+					// go to classroom
+					ClassroomKicker.attendClass(classroom._id);
+					Router.go("home");
+					return;	
+				}
+			} else {
+				console.log("don't match");
+				errMsg = "Shortcode not exist, try again";
+			}
+
+			// show error message
+			$("#shortCodeInputWrapper").addClass("circle self");
+			input.val("");
+			input.attr("placeholder", errMsg);
+		});
 	},
-	"click #recentAttended":function(event){
-		event.preventDefault();
-		IonModal.open("classroomPickList");
+	"click .classroomItem":function(event){
+	    if(this.classStatus === Schemas.classroomStatus.open){
+	      IonModal.close();
+	      ClassroomKicker.attendClass(this.id);
+	      Router.go("home");
+	    } else {
+	      IonPopup.alert({
+	        title: 'Classroom is closed',
+	        template: 'Please wait until the classroom is re-opened.',
+	        okText: 'Got It'
+	      });
+	    }
+    
 	},
-	"click #scanQRCode":function(event){
-		event.preventDefault();
-		if (Meteor.isCordova) {
-			console.log("isCordova use cordova barcodeScanner");
-			cordova.plugins.barcodeScanner.scan(
-		      function (result) {
-		          // alert("We got a barcode\n" +
-		          //       "Result: " + result.text + "\n" +
-		          //       "Format: " + result.format + "\n" +
-		          //       "Cancelled: " + result.cancelled);
-		          // Session.set("curClassroomId",result.text);
-		          // Router.go('studentTalk');
-		          if(result.cancelled==0) {
-		          	IonModal.open("scanResult", result.text);
-		          }
-		      }, 
-		      function (error) {
-		          alert("Scanning failed: " + error);
-		      },
-		      {
-		          "preferFrontCamera" : false, // iOS and Android 
-		          "showFlipCameraButton" : true, // iOS and Android 
-		          "prompt" : "Place a barcode inside the scan area", // supported on Android only 
-		          "formats" : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED 
-		          "orientation" : "portrait" // Android only (portrait|landscape), default unset so it rotates with the device 
-		      }
-		   );
-		} else{
-			console.log("not Cordova, use qrScanner");
-			IonModal.open("scanResult","JZ5nPxptnDEhoEvPH");
-		}
-	},
+	"click .listToggle":function(event){
+		Template.instance().ListMode.set(!event.target.checked);
+	}
+});
+
+Template.classEntry.helpers({
+  attendedClasses: function () {
+		return ClassroomKicker.getAttendedClassroomInfoList(Template.instance().ListMode.get() ? Schemas.classroomStatus.open : null);
+  },
+  getTeacherName:function(tid){
+    var teacherProfile = Meteor.users.findOne({_id:tid});
+    return teacherProfile.profile.lastName +", "+ teacherProfile.profile.firstName;
+  },
+  getImage:function(logoUrl){
+    return logoUrl===""?"/logo.png":logoUrl;
+  },
 });

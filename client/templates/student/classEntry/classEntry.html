@@ -46,16 +46,21 @@
 					</div>
 				</div>
 			</div> -->
-
-			<div class="row">
-				<div class="col-80 col-offset-10">
-					<div class="list card">
-					  <a id="shortCode" href="#" class="item item-icon-left item-calm text-center classentry-button">
-					    <i class="icon"><i class="classentry-icon icon ion-wand"></i></i> Enter ShortCode
-					  </a>
+			<!-- <div class="entry-options">
+				<div class="row">
+					<div class="col-80 col-offset-10">
+						<div class="list card">
+						  <a id="shortCode" href="#" class="item item-icon-left item-calm text-center classentry-button">
+						    <i class="icon"><i class="classentry-icon icon ion-wand"></i></i> Enter ShortCode
+						  </a>
+						</div>
+						<div class="list card">
+						  <a id="scanQRCode" href="#" class="item item-icon-left item-calm text-center classentry-button">
+						    <i class="icon"><img class="classentry-icon" src="/qrscan.png"/></i> Scan QR code
+						  </a>
+						</div>
 					</div>
 				</div>
-			</div>
 
 			<div class="row">
 				<div class="col-80 col-offset-10">
@@ -75,6 +80,38 @@
 					  </a>
 					</div>
 				</div>
+			</div> -->
+			<div class="history-class">
+				<form class="shortCodeForm">
+					<div class="bar bar-header item-input-inset">
+						<label class="item-input-wrapper" id="shortCodeInputWrapper">
+							<input type="text" name="shortCode" placeholder="Input short code to start...">
+						</label>
+						<button class="button button-calm" type="submit">
+							&nbsp;Join&nbsp;
+						</button>
+					</div>
+				</form>
+				<div class="item item-stable item-toggle">
+		          	Recently Attended Class
+					<label class="toggle toggle-calm">
+						<input type="checkbox" class="listToggle">
+						<div class="track">
+							<div class="handle"></div>
+						</div>
+					</label>
+		        </div>
+	        	{{#ionList}}
+					{{#each attendedClasses}}
+						{{#ionItem id=this._id classStatus=this.status class="classroomItem item item-thumbnail-left item-icon-right"}}
+							<img src={{getImage logo}}>  
+							<h2>{{name}}</h2>
+							<p>Status: {{status}}</p>
+							<p>Teacher: {{getTeacherName tid}}</p>
+							<p>Create Date: {{formatDate createDate}}</p>
+						{{/ionItem}}
+					{{/each}}
+				{{/ionList}}
 			</div>
 <!-- 		{{/ionContent}}
 	{{/ionView}} -->

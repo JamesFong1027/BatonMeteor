@@ -2,9 +2,9 @@
 	{{#contentFor "headerTitle"}}
 		<h1 class="title">Talk Mode</h1>
 	{{/contentFor}}
-
-  {{#if hasCurClassroom}}
-  	{{#contentFor "headerButtonRight"}}
+  
+	{{#contentFor "headerButtonRight"}}
+    {{#if hasCurClassroom}}
       <button class="button button-clear" data-ion-popover="teacherMenu">
         {{#if isAndroid}}
           {{> ionIcon icon='android-more-vertical'}}
@@ -12,22 +12,22 @@
           {{> ionIcon icon='more'}}
         {{/if}}
       </button>
-    {{/contentFor}}
-  {{/if}}
-
-  {{#contentFor "headerButtonLeft"}}
-  
+    {{else}}
+      <button class="button button-clear " data-ion-modal="createClassroom">
+        <i class="icon ion-ios-plus-empty"></i>
+      </button>
+    {{/if}}
   {{/contentFor}}
 
+
   {{#ionView}}
-    {{#ionSubheaderBar class="bar-stable subtitle"}}
-		{{#if hasCurClassroom}}
-    		<h2 class="title">{{classroomName}}</h2>
-    	{{else}}
-    		<h2 class="title">There are no classroom open yet, Create one!</h2>
-  	{{/if}}
-    {{/ionSubheaderBar}}
-    {{#ionContent class="padding"}}
+    {{#if hasCurClassroom}}
+      {{#ionSubheaderBar class="bar-stable subtitle"}}
+      		<h2 class="title">{{classroomName}}</h2>
+      {{/ionSubheaderBar}}
+    {{/if}}
+
+    {{#ionContent class="has-footer"}}
     	{{#if hasCurClassroom}}
         {{#HammerTouchArea gestureMap=longHoldGesture}}
     			<div class="wrapper">

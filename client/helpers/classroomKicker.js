@@ -72,8 +72,16 @@ ClassroomKicker={
 		return ClassroomsInfo.findOne({_id:classroomId});
 	},
 	// for teacher get their classroom history list
-	getClassroomHistoryList:function(){
-		return ClassroomsInfo.find({tid:Meteor.userId(),status:Schemas.classroomStatus.close});
+	getClassroomHistoryList:function(searchStr){
+		if(!!!searchStr) return ClassroomsInfo.find({tid:Meteor.userId(),status:Schemas.classroomStatus.close});
+
+		searchStr = searchStr ? searchStr:"";
+		// escape the search string
+		searchStr = searchStr.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
+		// default to match all the string
+		searchStr = searchStr+".*";
+		// case insensitive
+		return ClassroomsInfo.find({tid:Meteor.userId(),status:Schemas.classroomStatus.close,"name":{$regex:searchStr, $options: "i"}});
 	},
 	// for teacher to get all the classroom they have created
 	getClassroomList:function(){
@@ -119,7 +127,6 @@ ClassroomKicker={
 	// and reset the classroom at the same time
 	closeClassroom:function(classroomId){
 		ClassroomKicker.resetClassroom(Schemas.ticketType.talkTicket, classroomId);
-		ClassroomKicker.resetClassroom(Schemas.ticketType.workTicket, classroomId);
 
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
 		Session.set("curClassroomId",undefined);
@@ -264,9 +271,13 @@ ClassroomKicker={
 	getAttendingSessionList:function(classroomId){
 		return ClassroomKicker.getClassroomSessionList(classroomId,Schemas.sessionType.attending);
 	},
-	getAttendedClassroomInfoList:function(){
+	getAttendedClassroomInfoList:function(classroomStatus){
 		var attendedClassIdList = DBUtil.distinct(ClassSession,"cid",{uid:Meteor.userId(),sessionType:Schemas.sessionType.attending},{sessionStart:-1});
-		return ClassroomsInfo.find({_id:{$in:attendedClassIdList},status:Schemas.classroomStatus.open});
+		if(!!classroomStatus){
+			return ClassroomsInfo.find({_id:{$in:attendedClassIdList},status:classroomStatus});	
+		} else {
+			return ClassroomsInfo.find({_id:{$in:attendedClassIdList}},{sort:{status:-1}});
+		}
 	},
 	// for student setup current attendant class id
 	attendClass:function(classroomId){

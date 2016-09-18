@@ -1,5 +1,5 @@
 <template name="classCreate">
-	<div class="row padding">
+	<!-- <div class="row padding">
 		<div class="col-80 col-offset-10">
 			<div class="list card">
 			  <a id="createClassroom" data-ion-modal="createClassroom" href="#" class="item item-icon-left item-calm text-center classcreate-button">
@@ -17,5 +17,40 @@
 			  </a>
 			</div>
 		</div>
+	</div> -->
+	<div class="history-class">
+		<!-- <form class="shortCodeForm">
+			<div class="bar bar-header item-input-inset">
+				<label class="item-input-wrapper" id="shortCodeInputWrapper">
+					<input type="text" name="shortCode" placeholder="Input short code to start...">
+				</label>
+				<button class="button button-calm" type="submit">
+					&nbsp;Join&nbsp;
+				</button>
+			</div>
+		</form> -->
+		<!--Auto complete search box-->
+		<div class="row">
+			<div class="col">
+	        <label class="item item-input">
+	          <i class="icon ion-search placeholder-icon"></i>
+	          <input id="classSearch" type="text" placeholder="Type to search...">
+	        </label>
+	        </div>
+      	</div>
+
+		<div class="item item-stable">
+	      	Classroom History List
+	    </div>
+		{{#ionList}}
+			{{#each classrooms}}
+				{{#ionItem path="classroomDetail" id=this._id class="classroomItem item item-thumbnail-left item-icon-right"}}
+					<img src={{logo}}>
+					<h2>{{name}}</h2>
+					<p>Create Date: {{formatDate createDate}}</p>
+					<i class="icon ion-ios-arrow-right"></i>
+				{{/ionItem}}
+			{{/each}}
+		{{/ionList}}
 	</div>
 </template>
