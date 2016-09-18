@@ -15,7 +15,7 @@ Template.studentTalk.helpers({
 		return !!Template.instance().data;
 	},
 	classroom: function() {
-		return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId"));
+		return ClassroomKicker.getClassroomInfo(Template.instance().data);
 	},
 	"ticketList": function() {
 		console.log("in ticketList helper");
