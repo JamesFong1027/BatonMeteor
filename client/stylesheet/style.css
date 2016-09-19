@@ -107,6 +107,10 @@ body {
     background-color: #fff;
 }
 
+.text-center{
+  text-align: center;
+}
+
 /*body.keyboard-open .content.overflow-scroll {
   bottom: 0px !important;
 }*/

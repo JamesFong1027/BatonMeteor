@@ -62,5 +62,5 @@ Template.classEntry.helpers({
   },
   getImage:function(logoUrl){
     return logoUrl===""?"/logo.png":logoUrl;
-  },
+  }
 });

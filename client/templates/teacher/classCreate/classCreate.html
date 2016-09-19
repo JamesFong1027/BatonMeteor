@@ -42,15 +42,24 @@
 		<div class="item item-stable">
 	      	Classroom History List
 	    </div>
-		{{#ionList}}
-			{{#each classrooms}}
-				{{#ionItem path="classroomDetail" id=this._id class="classroomItem item item-thumbnail-left item-icon-right"}}
-					<img src={{logo}}>
-					<h2>{{name}}</h2>
-					<p>Create Date: {{formatDate createDate}}</p>
-					<i class="icon ion-ios-arrow-right"></i>
-				{{/ionItem}}
-			{{/each}}
-		{{/ionList}}
+		{{#with classrooms}}
+			{{#if this.count}}
+				{{#ionList}}
+					{{#each this}}
+						{{#ionItem path="classroomDetail" id=this._id class="classroomItem item item-thumbnail-left item-icon-right"}}
+							<img src={{logo}}>
+							<h2>{{name}}</h2>
+							<p>Create Date: {{formatDate createDate}}</p>
+							<i class="icon ion-ios-arrow-right"></i>
+						{{/ionItem}}
+					{{/each}}
+				{{/ionList}}
+			{{else}}
+				<div class="padding text-center">
+					<h4>You have no history classroom, please create a classroom to start</h4>
+	    		</div>
+	        {{/if}}
+	    {{/with}}
+		
 	</div>
 </template>

@@ -101,17 +101,26 @@
 						</div>
 					</label>
 		        </div>
-	        	{{#ionList}}
-					{{#each attendedClasses}}
-						{{#ionItem id=this._id classStatus=this.status class="classroomItem item item-thumbnail-left item-icon-right"}}
-							<img src={{getImage logo}}>  
-							<h2>{{name}}</h2>
-							<p>Status: {{status}}</p>
-							<p>Teacher: {{getTeacherName tid}}</p>
-							<p>Create Date: {{formatDate createDate}}</p>
-						{{/ionItem}}
-					{{/each}}
-				{{/ionList}}
+        		{{#with attendedClasses}}
+	        		{{#if this.count}}
+	        			{{#ionList}}
+							{{#each this}}
+								{{#ionItem id=this._id classStatus=this.status class="classroomItem item item-thumbnail-left item-icon-right"}}
+									<img src={{getImage logo}}>  
+									<h2>{{name}}</h2>
+									<p>Status: {{status}}</p>
+									<p>Teacher: {{getTeacherName tid}}</p>
+									<p>Create Date: {{formatDate createDate}}</p>
+								{{/ionItem}}
+							{{/each}}
+						{{/ionList}}
+			        {{else}}
+						<div class="padding text-center">
+							<h4>There are no classroom, using short code or scan QR code to join a classroom</h4>
+			    		</div>
+			        {{/if}}
+			    {{/with}}
+				
 			</div>
 <!-- 		{{/ionContent}}
 	{{/ionView}} -->

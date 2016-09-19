@@ -127,6 +127,7 @@ ClassroomKicker={
 	// and reset the classroom at the same time
 	closeClassroom:function(classroomId){
 		ClassroomKicker.resetClassroom(Schemas.ticketType.talkTicket, classroomId);
+		ClassroomKicker.resetClassroom(Schemas.ticketType.workTicket, classroomId);
 
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
 		Session.set("curClassroomId",undefined);
@@ -292,8 +293,10 @@ ClassroomKicker={
 	},
 	switchRole:function(switch2Type){
 		if (switch2Type === Schemas.userType.student) {
-			ClassroomKicker.closeClassroom(ClassroomKicker.getCurrentTeachingClassroom()._id);
-		} else if (!!ClassroomKicker.getCurrentTeachingClassroom()) {
+			var curClassroom = ClassroomKicker.getCurrentTeachingClassroom();
+			if(!!curClassroom)
+				ClassroomKicker.closeClassroom(curClassroom._id);
+		} else if (!!ClassroomKicker.getCurrentAttendingClassroom()) {
 			ClassroomKicker.leaveClass();
 		}
 		Meteor.call("switchRole", switch2Type);

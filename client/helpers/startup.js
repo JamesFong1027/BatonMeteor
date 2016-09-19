@@ -54,6 +54,10 @@ Meteor.startup(function() {
 			}
 
 		});
+
+		document.addEventListener("deviceready", function() {
+			StatusBar.overlaysWebView(true);
+		}, false);
 	}
 
 	// window.onpopstate = function () {
