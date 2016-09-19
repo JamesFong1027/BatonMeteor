@@ -4,7 +4,7 @@ ClassroomKicker={
 	createClassroom: function(classroomName,description){
 		// the classroom name is unique within the school
 		// and teacher can only have one open classroom at a time
-		if(ClassroomsInfo.find({name:classroomName}).count()===0
+		if(ClassroomsInfo.find({name:classroomName,sid:"1"}).count()===0
 			&&ClassroomKicker.getCurrentTeachingClassroom()===undefined)
 		{
 			// generate shortcode

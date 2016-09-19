@@ -1,3 +1,9 @@
+Template.createClassroom.onRendered(function(){
+  this.$(".errorMsg").hide();
+  $("#createClassroom").prop("disabled", true);
+});
+
+
 Template.createClassroom.events({
   "submit .new_classroom": function (event) {
     console.log("createClassroom");
@@ -27,6 +33,23 @@ Template.createClassroom.events({
       createClassroom(classroomName);
     }
   },
+  "keyup [name=classroomName]":function(event){
+    console.log(event.target.value);
+    if(event.target.value.trim()===""){
+      $("#createClassroom").prop("disabled", true);
+      $(".errorMsg").hide();
+      return;
+    }
+    
+    var classroomName = "^" + event.target.value.trim() + "$";
+    if(ClassroomsInfo.find({name:{$regex: classroomName,$options: "i"},sid:"1"}).count()===0){
+      $("#createClassroom").prop("disabled", false);
+      $(".errorMsg").hide();
+    } else {
+      $("#createClassroom").prop("disabled", true);
+      $(".errorMsg").show();
+    }
+  }
 });
 
 function createClassroom(classroomName){
