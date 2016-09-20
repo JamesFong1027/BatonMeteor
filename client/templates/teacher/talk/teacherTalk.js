@@ -76,7 +76,7 @@ Template.teacherTalk.helpers({
   "tickets": function () {
     console.log(Session.get("curMode"));
     console.log(Session.get("curClassroomId"));
-    return TicketShutter.getClassroomTicketList(Session.get("curMode"),Session.get("curClassroomId"));
+    return TicketShutter.getClassroomTicketList(Session.get("curMode"),Session.get("curClassroomId"), ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")));
   },
   "changeColor":function(){
     this.convertRate = new ReactiveVar(getConvertRate(this.createDate));

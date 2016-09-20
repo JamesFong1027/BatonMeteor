@@ -33,7 +33,7 @@ Template.teacherWork.helpers({
   },
   "tickets": function () {
 
-    return TicketShutter.getClassroomTicketList(Session.get("curMode"),Session.get("curClassroomId"));
+    return TicketShutter.getClassroomTicketList(Session.get("curMode"),Session.get("curClassroomId"), ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")));
   },
   "changeColor":function(ticketValue){
     return getRGB(ticketValue);

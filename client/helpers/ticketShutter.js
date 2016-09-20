@@ -84,17 +84,30 @@ TicketShutter={
 		return studentArray;
 	},
 	// for teacher get their classroom current ticketlist
-	getClassroomTicketList:function(type,classroomId){
+	getClassroomTicketList:function(type,classroomId, sessionObj){
 		// console.log(type);
 		// console.log(classroomId);
-		var ticketArray = TicketsInfo.find({cid:classroomId,ticketType:type,status:Schemas.ticketStatus.waiting}).fetch();
-		return this.getTicketRelativeInfo(ticketArray,classroomId);
+		var startDateFilter;
+		if(!!sessionObj){
+			startDateFilter = sessionObj.sessionStart;
+		} else {
+			startDateFilter = ClassroomKicker.getClassroomInfo(classroomId).createDate;
+		}
+		var ticketArray = TicketsInfo.find({
+			cid: classroomId,
+			ticketType: type,
+			status: Schemas.ticketStatus.waiting,
+			updateDate: {
+				$gte: startDateFilter
+			}
+		}).fetch();
+		return this.getTicketRelativeInfo(ticketArray,classroomId, startDateFilter);
 	},
-	getTicketRelativeInfo:function(ticketArray,classroomId){
+	getTicketRelativeInfo:function(ticketArray,classroomId, startDateFilter){
 		for (var i = ticketArray.length - 1; i >= 0; i--) {
     		//put user profile into ticket info
 			ticketArray[i].user = Meteor.users.findOne({_id:ticketArray[i].uid});
-			ticketArray[i].user.participation = this.getParticipationInfo(ticketArray[i].uid,classroomId);
+			ticketArray[i].user.participation = this.getParticipationInfo(ticketArray[i].uid,classroomId, startDateFilter);
 		}
 		return ticketArray;
 	},
