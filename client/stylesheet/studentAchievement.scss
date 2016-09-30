@@ -87,7 +87,47 @@
 	}
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 320px) {
+	.class-chart{
+		height: 250px;
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	.data_title{
+		li {
+			font-size: 6.2vw;
+		}
+		li span {
+			font-size: 2.6vw;
+		}
+	}
+	.summary_data{
+		li {
+			width: 31%;
+			font-size: 6.2vw;
+		}
+		li span {
+			font-size: 2.6vw;
+		}
+	}
+	.class_achievement_chart .ct-label.ct-label-pie{
+		font-size: 5.3vw;
+	}
+	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
+		font-size: 3.5vw;
+	}
+	.weekly_summary_chart .ct-label.ct-label-pie{
+		font-size: 5.3vw;
+	}
+	.class_achievement_chart{
+		img{
+			padding:18px;
+		}
+	}
+}
+
+@media only screen and (max-width: 420px) and (min-width : 361px) {
 	.data_title{
 		li {
 			font-size: 6.2vw;
