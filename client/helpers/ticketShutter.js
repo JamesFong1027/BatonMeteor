@@ -111,10 +111,20 @@ TicketShutter={
 		}
 		return ticketArray;
 	},
-	getParticipationInfo:function(uid,classroomId,startDateFilter){
+	getAchievementRelativeInfo:function(achievementList, startDateFilter,endDateFilter){
+		for (var i = achievementList.length - 1; i >= 0; i--) {
+    		//put user profile into ticket info
+			achievementList[i].classroomInfo = ClassroomsInfo.findOne({_id:achievementList[i].cid});
+			achievementList[i].participation = this.getParticipationInfo(achievementList[i].uid,achievementList[i].cid, startDateFilter, endDateFilter);
+		}
+		return achievementList;
+	},
+	getParticipationInfo:function(uid,classroomId,startDateFilter, endDateFilter){
 		if(!!!startDateFilter) startDateFilter = ClassroomKicker.getClassroomInfo(classroomId).createDate;
+		if(!!!endDateFilter) endDateFilter = new Date();
+
 		//put student participation info into user
-		var attendTimes = TicketsInfo.find({cid:classroomId,uid:uid,"createDate" : { $gte : startDateFilter}}).count();
+		var attendTimes = TicketsInfo.find({cid:classroomId,uid:uid,"createDate" : { $gte : startDateFilter, $lte: endDateFilter}}).count();
 		var selectedTimes = TicketsInfo.find({cid:classroomId,uid:uid,status:Schemas.ticketStatus.selected,"createDate" : { $gte : startDateFilter}}).count();
 		var participation = new Object();	
 		participation.attendTimes = attendTimes;

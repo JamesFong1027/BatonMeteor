@@ -11,7 +11,9 @@ Meteor.startup(function() {
 
 	Meteor.subscribe('classroomsInfo');
 	Meteor.subscribe('schoolsInfo');
+	Meteor.subscribe('ticketsInfo');
 	Meteor.subscribe('classSession');
+	Meteor.subscribe('achievement');
 	Tracker.autorun(function() {
 		if (Session.get("curClassroomId") && Session.get("curMode")) {
 			console.log("start subscribe ticketsInfoDetail");

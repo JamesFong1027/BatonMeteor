@@ -229,6 +229,9 @@ ClassroomKicker={
 		});
 
 		if(sessionType === Schemas.sessionType.attending){
+			// add default achievment (total sent ticket) for this classroom
+			ClassroomKicker.addClassAchievement(classroomId, 0);
+
 			analytics.track("Attending class", {
 				category: 'Student',
 				label: 'start session',
@@ -241,7 +244,34 @@ ClassroomKicker={
 				value: 1
 			});
 		}
-		
+	},
+	addClassAchievement:function(classroomId, target){
+		if(!!ClassroomKicker.getClassAchievement(classroomId)) return;
+
+		Achievement.insert({
+			uid: Meteor.userId(),
+			cid: classroomId,
+			target: target
+		});
+	},
+	editClassAchievement: function(achievementId, target){
+		Achievement.update({_id:achievementId},{$set:{target:target}});
+	},
+	getClassAchievement: function(classroomId) {
+		return Achievement.findOne({
+			uid: Meteor.userId(),
+			cid: classroomId,
+			achievementType: Schemas.achievementType.totalSentTicket
+		});
+	},
+	getClassAchievementList: function(){
+		return Achievement.find({
+			uid: Meteor.userId(),
+			achievementType: Schemas.achievementType.totalSentTicket
+		});
+	},
+	getAchievementsWithRelativeInfo: function(startDateFilter, endDateFilter){
+		return TicketShutter.getAchievementRelativeInfo(ClassroomKicker.getClassAchievementList().fetch(),startDateFilter,endDateFilter);
 	},
 	getCurrentClassSessionByType:function(sessionType){
 		return ClassSession.findOne({

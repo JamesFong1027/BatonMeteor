@@ -1,0 +1,186 @@
+@import 'colorVariables.scss';
+
+.weekly_summary{
+	height: 15%;
+	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
+}
+.weekly_summary_chart{
+	height:100%	
+}
+
+.class_detail_achievements{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+.class-chart{
+	margin: 2%;
+	width: 46%;
+	min-height: 300px;
+}
+
+.class_achievement_chart{
+	border: none; 
+	height:62%;
+	img{
+		position: relative;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
+}
+
+.class_title{
+	height: 20%;
+	border-bottom: none;
+}
+
+.data_title{
+	height: 18%;
+	padding: 2%;
+	li {
+		color: $calm;
+		width: 31%;
+		text-align: center;
+		display: inline-block;
+		border-right: solid 1px #bdc3c7;
+	}
+	li:last-child {
+		border: none; 
+		color: $positive;
+	}
+	li span {
+		display: block;
+		margin-top: .6em;
+		font-weight:lighter;
+	}
+}
+
+.summary_data{
+	li {
+		color: $calm;
+		width: 32%;
+		text-align: center;
+		display: inline-block;
+		border-right: solid 1px #bdc3c7;
+	}
+	li:last-child {
+		border: none; 
+		color: $positive;
+	}
+	li span {
+		display: block;
+		margin-top: .6em;
+		font-weight:lighter;
+	}
+}
+
+@media only screen and (max-width: 420px) {
+	.data_title{
+		li {
+			font-size: 6.2vw;
+		}
+		li span {
+			font-size: 2.6vw;
+		}
+	}
+	.summary_data{
+		li {
+			font-size: 26px;
+		}
+		li span {
+			font-size: 11px;
+		}
+	}
+	.class_achievement_chart .ct-label.ct-label-pie{
+		font-size: 5.3vw;
+	}
+	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
+		font-size: 3.5vw;
+	}
+	.weekly_summary_chart .ct-label.ct-label-pie{
+		font-size: 5.3vw;
+	}
+	.class_achievement_chart{
+		img{
+			padding:18px;
+		}
+	}
+}
+
+@media only screen and (max-width : 750px) and (min-width : 420px){
+	.data_title{
+		li {
+			font-size: 28px;
+		}
+		li span {
+			font-size: 15px;
+		}
+	}
+	.summary_data{
+		li {
+			font-size: 28px;
+		}
+		li span {
+			font-size: 15px;
+		}
+	}
+	.class_achievement_chart .ct-label.ct-label-pie{
+		font-size: 25px;
+	}
+	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
+		font-size: 15px;
+	}
+	.weekly_summary_chart .ct-label.ct-label-pie{
+		font-size: 28px;
+	}
+	.class_achievement_chart{
+		img{
+			padding:18px;
+		}
+	}
+}
+
+@media only screen and (max-width : 3000px) and (min-width : 760px){
+	.data_title{
+		li {
+			font-size: 30px;
+		}
+		li span {
+			font-size: 15px;
+		}
+	}
+	.summary_data{
+		li {
+			font-size: 30px;
+		}
+		li span {
+			font-size: 15px;
+		}
+	}
+	.class_achievement_chart .ct-label.ct-label-pie{
+		font-size: 30px;
+	}
+	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
+		font-size: 15px;
+	}
+	.weekly_summary_chart .ct-label.ct-label-pie{
+		font-size: 35px;
+	}
+	.class_achievement_chart{
+		img{
+			padding:58px;
+		}
+	}
+}

@@ -1,0 +1,34 @@
+@import 'colorVariables.scss';
+
+$a-color: $calm;
+$b-color: rgba(96, 196, 248, 0.5);
+$c-color: $positive;
+
+.ct-slice-donut{
+	/* customize stroke width of the donut slices in CSS. Note that this property is already set in JavaScript and label positioning also relies on this. In the right situation though it can be very useful to style this property. You need to use !important to override the style attribute */
+	stroke-width: 15% !important;
+}
+
+.class_achievement_chart .ct-slice-donut{
+	/* customize stroke width of the donut slices in CSS. Note that this property is already set in JavaScript and label positioning also relies on this. In the right situation though it can be very useful to style this property. You need to use !important to override the style attribute */
+	stroke-width: 5% !important;
+}
+
+/* Donut charts get built from Pie charts but with a fundamentally difference in the drawing approach. The donut is drawn using arc strokes for maximum freedom in styling */
+.ct-series-a .ct-slice-donut {
+  /* give the donut slice a custom colour */
+  stroke: $a-color;
+}
+
+.ct-series-b .ct-slice-donut {
+  stroke: $b-color;
+}
+
+.ct-series-c .ct-slice-donut {
+  stroke: $c-color;
+}
+
+.class_achievement_chart .ct-slice-donut{
+	/* Make your points appear as squares */
+  	stroke-linecap: round;
+}

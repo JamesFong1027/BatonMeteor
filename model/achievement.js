@@ -1,30 +1,39 @@
 // might be used in the future, for save student attendance records
 Schemas = {};
-Attendance = new Mongo.Collection('attendance');
+Achievement = new Mongo.Collection('achievement');
 
-Schemas.attendanceStatus={
-	pending:   "Pending",
-	attending: "Attending",
-	dismissed: "Dismissed"
+Schemas.achievementStatus={
+	unset:   "Unset",
+	inProgress: "In Progress",
+	Completed: "Completed"
+}
+Schemas.achievementType={
+	totalSentTicket: 	"Total Sent Ticekt",
+	acceptedTicket: 	"Accepted Ticekt"
 }
 
-Schemas.Attendance = new SimpleSchema({
+Schemas.Achievement = new SimpleSchema({
 	uid:{
 		type: String,
-		label: "student id"
+		label: "user id"
 	},
 	cid:{
 		type: String,
 		label: "class id"
 	},
-	status:{
+	target:{
+		type: SimpleSchema.Integer,
+		label: "achievement target number",
+		min: 0
+	},
+	achievementType:{
 		type: String,
-		label: "the ticket status",
+		label: "achievement type",
 		autoValue: function(){
     		// console.log(this.field("lastUpdate").value);
     		if(this.isInsert&&null==this.value)
     		{
-    			return Schemas.attendanceStatus.attending;
+    			return Schemas.achievementType.totalSentTicket;
     		}
     		else if(null!=this.value)
     			return this.value;
@@ -32,9 +41,9 @@ Schemas.Attendance = new SimpleSchema({
     			this.unset();
     	}
 	},
-	sessionStart:{
+	createDate:{
 		type: Date,
-		label: "the create time of this session",
+		label: "the create time of this achievement",
 		autoValue: function(){
     		// console.log(this.field("lastUpdate").value);
     		if(this.isInsert&&null==this.value)
@@ -49,13 +58,15 @@ Schemas.Attendance = new SimpleSchema({
 	},
 	updateDate:{
 		type: Date,
-		label: "the time this ticket updated",
+		label: "the time this achievement updated",
 		autoValue: function(){
     		// console.log(this.field("lastUpdate").value);
     		if(this.isInsert&&null==this.value)
     		{
     			return new Date();
     		}
+    		else if(this.isUpdate&&null==this.value)
+    			return new Date();
     		else if(null!=this.value)
     			return this.value;
     		else
@@ -63,9 +74,9 @@ Schemas.Attendance = new SimpleSchema({
     	}
 	}
 });
-Attendance.attachSchema(Schemas.Attendance);
+Achievement.attachSchema(Schemas.Achievement);
 
-Attendance.allow({
+Achievement.allow({
 	// can only insert ticket on your behavour
 	insert: function(userId, document){return userId===document.uid;},
 	// only the ticket owner or teacher can update the ticket
@@ -79,7 +90,7 @@ Attendance.allow({
 	}
 });
 
-Attendance.deny({  
+Achievement.deny({  
   update: function (userId, docs, fields, modifier) {
     // can't change owners
     return _.contains(fields, 'uid');

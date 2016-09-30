@@ -1,0 +1,135 @@
+<template name="studentAchievements">  
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">My Achievements</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+      <div id="achievementHistory" class="button button-clear">
+        <i class="icon ion-stats-bars"></i>
+      </div>
+    {{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton}}
+	{{/contentFor}}
+
+	{{#ionSubheaderBar class="bar-clear"}}
+		<h1 class="title" style="color:#000000">Weekly Summary</h1>
+	{{/ionSubheaderBar}}
+	
+	{{#ionView}}
+    	{{#ionContent}}
+    		<div class="row weekly_summary">
+    			<div class="weekly_summary_chart col col-50">
+    				
+				</div>
+    			<div class="col col-50">
+    				{{#with summaryInfo}}
+	    				<div class="summary_data vertical-center">
+					 		<ul>
+								<li>
+									{{selectedTimes}}
+									<span>Accepted</span>
+								</li>
+								<li>
+									{{attendTimes}}
+									<span>Total</span>
+								</li>
+								<li>
+									{{target}}
+									<span>Goal</span>
+								</li>
+							</ul>
+					 	</div>
+					{{/with}}
+    			</div>
+	  		</div>
+			<div class="class_detail_achievements">
+				{{#with studentClassAchievements}}
+			        {{#if this.length}}
+			            {{#each this}}
+							<div class="card class-chart">
+								<a class="item item-icon-right class_title" href="#">
+									<i class="icon ion-android-more-vertical more-op" ></i>
+									{{classroomInfo.name}}
+								</a>
+							 	<div class="class_achievement_chart" id={{_id}}>
+							 		{{#if target}}
+							 			{{ afterRenderTrigger}}
+							 		{{else}}
+							 			<img class="full-image add_goal" src="/achievement_placeholder.png">
+							 		{{/if}}
+							 	</div>
+							 	<div class="data_title">
+							 		<ul>
+										<li>
+											{{participation.selectedTimes}}
+											<span>Accepted</span>
+										</li>
+										<li>
+											{{participation.attendTimes}}
+											<span>Total</span>
+										</li>
+										<li>
+											{{target}}
+											<span>Goal</span>
+										</li>
+									</ul>
+							 	</div>
+							</div>
+						{{/each}}
+					{{else}}
+			          <div class="padding text-center">
+			            <h4>You have no data to display yet</h4>
+			          </div>
+			        {{/if}}
+				{{/with}}
+
+				<!-- <div class="card class-chart">
+					<a class="item item-icon-right class_title" href="#">
+						<i class="icon ion-android-more-vertical more-op" data-ion-popover="classAchievementMenu"></i>
+						History 2.1
+					</a>
+				 	<div class="item item-image class_achievement_chart">
+						<img class="full-image" src="/achievement_placeholder.png">	
+					</div>
+				 	<div class="data_title">
+				 		<ul>
+							<li>
+								11
+								<span>Accepted</span>
+							</li>
+							<li>
+								27
+								<span>Total</span>
+							</li>
+							<li>
+								0
+								<span>Goal</span>
+							</li>
+						</ul>
+				 	</div>
+				</div> -->
+			</div> 
+			<!-- {{#with studentClassAchievements}}
+				<div class="list">
+	  				<div class="item item-thumbnail-left">
+						
+					</div>
+				</div>
+		    {{/with}} -->
+		    <!-- <div class="item item-divider">
+	          Achievements Detail
+	        </div> -->
+			<!-- {{#ionList}}
+				{{#each classroomSession}}
+					{{#ionItem id=this._id class="classroomItem item item-icon-right"}}
+						<h2>Session: {{sessionNumber @index}}</h2>
+						<p>Start Date: {{formatDate sessionStart}}</p>
+						<p>End Date: {{formatDate updateDate}}</p>
+					{{/ionItem}}
+				{{/each}}
+			{{/ionList}} -->
+		{{/ionContent}}
+  	{{/ionView}}
+</template>

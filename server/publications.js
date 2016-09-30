@@ -40,6 +40,14 @@ Meteor.publish("classSession",function(){
 	return ClassSession.find({uid:this.userId});
 });
 
+Meteor.publish("achievement",function(){
+	return Achievement.find({uid:this.userId});
+});
+
+Meteor.publish("ticketsInfo",function(){
+	return TicketsInfo.find({uid:this.userId});
+});
+
 // Meteor.publish('schoolsInfo',function(){
 // 	return SchoolsInfo.find();
 // });

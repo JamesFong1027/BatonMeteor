@@ -1,0 +1,20 @@
+<template name="classAchievementMenu">
+  {{#ionPopover}}
+    <div class="content">
+      <div class="list">
+        <li class="item item-icon-left popover-item" id="change_goal" >
+          {{> ionIcon icon="settings"}}
+          Change goal
+        </li>
+        <li class="item item-icon-left popover-item" id="view_history">
+          {{> ionIcon icon="stats-bars"}}
+          History chart
+        </li>
+        <li class="item item-icon-left popover-item positive" id="remove_target">
+          {{> ionIcon icon="trash-b"}}
+          Remove target
+        </li>
+      </div>
+    </div>
+  {{/ionPopover}}
+</template>

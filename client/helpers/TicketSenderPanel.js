@@ -257,6 +257,5 @@ TicketSenderPanel = function(template) {
         fn();
       });  
     }
-    
   }
 }
