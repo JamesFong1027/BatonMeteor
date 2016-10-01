@@ -26,7 +26,16 @@ Template.classAchievementMenu.events({
 
 	},
 	"click #remove_target":function(event){
-
+		var achievementId = Template.instance().data;
+	    IonPopup.confirm({
+	      title: "Delete achievement",
+	      template: 'Are you sure to remove this achievement?',
+	      okText: 'Confirm',
+	      onOk: function() {
+	      	console.log();
+	        ClassroomKicker.removeClassAchievement(achievementId);
+	      }
+	    });
 	},
 	"click .popover-item":function(event){
 		// remove the popover when click on each item

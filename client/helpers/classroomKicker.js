@@ -230,7 +230,7 @@ ClassroomKicker={
 
 		if(sessionType === Schemas.sessionType.attending){
 			// add default achievment (total sent ticket) for this classroom
-			ClassroomKicker.addClassAchievement(classroomId, 0);
+			// ClassroomKicker.addClassAchievement(classroomId, 0);
 
 			analytics.track("Attending class", {
 				category: 'Student',
@@ -245,6 +245,13 @@ ClassroomKicker={
 			});
 		}
 	},
+	getUntrackedClassroomList:function(){
+		var achievementClassList = ClassroomKicker.getClassAchievementList().fetch();
+	    var excludeClassIdList = null;
+	    if (!!achievementClassList && achievementClassList.length !== 0)
+	      excludeClassIdList = _.pluck(achievementClassList, 'cid');
+	    return ClassroomKicker.getAttendedClassroomInfoList(null,excludeClassIdList);
+	},
 	addClassAchievement:function(classroomId, target){
 		if(!!ClassroomKicker.getClassAchievement(classroomId)) return;
 
@@ -253,6 +260,10 @@ ClassroomKicker={
 			cid: classroomId,
 			target: target
 		});
+	},
+	removeClassAchievement: function(achievementId){
+		// Meteor.call("removeAchievement", achievementId);
+		Achievement.remove(achievementId);
 	},
 	editClassAchievement: function(achievementId, target){
 		Achievement.update({_id:achievementId},{$set:{target:target}});
@@ -302,8 +313,11 @@ ClassroomKicker={
 	getAttendingSessionList:function(classroomId){
 		return ClassroomKicker.getClassroomSessionList(classroomId,Schemas.sessionType.attending);
 	},
-	getAttendedClassroomInfoList:function(classroomStatus){
+	getAttendedClassroomInfoList:function(classroomStatus, excludeClassroomIdList){
 		var attendedClassIdList = DBUtil.distinct(ClassSession,"cid",{uid:Meteor.userId(),sessionType:Schemas.sessionType.attending},{sessionStart:-1});
+		if(!!excludeClassroomIdList) {
+			attendedClassIdList = _.difference(attendedClassIdList, excludeClassroomIdList);
+		}
 		if(!!classroomStatus){
 			return ClassroomsInfo.find({_id:{$in:attendedClassIdList},status:classroomStatus});	
 		} else {

@@ -193,6 +193,15 @@
 	}
 }
 
+@media only screen and (max-width : 3000px) and (min-width : 630px){
+	.add_class{
+		height: 250px;
+		width: auto;
+		display: block;
+    	margin: auto;
+	}
+}
+
 @media only screen and (max-width : 3000px) and (min-width : 760px){
 	.data_title{
 		li {

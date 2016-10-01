@@ -14,6 +14,7 @@ Template.studentAchievements.helpers({
     var goalNum = this.target;
     var achieveNum = this.participation.attendTimes;
     var chartCssId = this._id;
+    var chartSelector = "#"+chartCssId;
     if(goalNum===0) return;    
 
     BlazeTemplateHelper.fireWhenReady(function(template){
@@ -23,7 +24,6 @@ Template.studentAchievements.helpers({
         data = [achieveNum, goalNum - achieveNum];
       }
 
-      var chartSelector = "#"+chartCssId;
       template.$(chartSelector).empty();
       
       var classPie = new Chartist.Pie(chartSelector, {
@@ -68,25 +68,32 @@ Template.studentAchievements.helpers({
 
         }
       });
-    },Template.instance(),".class_achievement_chart", 500);
+    },Template.instance(),chartSelector, 500);
   },
   studentClassAchievements: function () {
     return fetchClassAchievements();
   },
   summaryInfo: function(){
     return fetchSummaryAchievement();
+  },
+  hasUntrackedClassroom: function(){
+    return ClassroomKicker.getUntrackedClassroomList().count() !== 0;
+  },
+  moreopId: function(id){
+    return "more-op-"+id;
   }
 });
 
 Template.studentAchievements.events({
   "click .more-op":function(){
-    IonPopover.show("classAchievementMenu", this._id, ".more-op");
+    console.log(this._id);
+    IonPopover.show("classAchievementMenu", this._id, "#more-op-"+this._id);
   },
   "click .add_goal":function(event,template){
     var achievementId = this._id;
     IonPopup.prompt({
       title: 'Setup goal',
-      template: 'Please enter your goal',
+      template: 'Please enter your weekly goal',
       okText: 'Submit',
       inputType: 'number',
       inputPlaceholder: 'Your goal in number',
@@ -94,6 +101,9 @@ Template.studentAchievements.events({
         ClassroomKicker.editClassAchievement(achievementId,value);
       }
     });
+  },
+  "click .add_class": function(event, template){
+    IonModal.open("classroomPickList");
   }
 })
 
@@ -127,10 +137,19 @@ function fetchSummaryAchievement(){
 
 function initSummaryInfo(){
   var summaryInfo = fetchSummaryAchievement();
+  if(!!!summaryInfo) return;
+
+  if(summaryInfo.target === 0 && summaryInfo.attendTimes === 0 && summaryInfo.selectedTimes === 0){
+    summaryInfo.target = 1;
+  } else if(summaryInfo.target === 0 && (summaryInfo.attendTimes !== 0 || summaryInfo.selectedTimes !== 0)){
+    summaryInfo.target = summaryInfo.attendTimes + summaryInfo.selectedTimes;
+  }
+
   var data = [summaryInfo.attendTimes, summaryInfo.target-summaryInfo.attendTimes];
   if(!!summaryInfo && (summaryInfo.target < summaryInfo.attendTimes)){
     data = [summaryInfo.target,0];
-  } 
+  }
+
   console.log(data);
   var donutWidth = $(".weekly_summary_chart").height()*0.3;
   var summaryPie = new Chartist.Pie('.weekly_summary_chart', {

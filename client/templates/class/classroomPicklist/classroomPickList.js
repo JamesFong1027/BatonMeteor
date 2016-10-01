@@ -6,7 +6,7 @@ Template.classroomPickList.onCreated(function(){
 
 Template.classroomPickList.helpers({
   classrooms: function () {
-    return ClassroomKicker.getAttendedClassroomInfoList();
+    return ClassroomKicker.getUntrackedClassroomList();
   },
   getTeacherName:function(tid){
   	var teacherProfile = Meteor.users.findOne({_id:tid});
@@ -20,18 +20,18 @@ Template.classroomPickList.helpers({
 
 Template.classroomPickList.events({
 	"click .classroomItem":function(event){
-    if(this.classStatus === Schemas.classroomStatus.open){
-      IonModal.close();
-      ClassroomKicker.attendClass(this.id);
-      Router.go("home");
-    } else {
-      IonPopup.alert({
-        title: 'Classroom is closed',
-        template: 'Please wait until the classroom is re-opened.',
-        okText: 'Got It.'
-      });
-    }
-    
+    var classroomId = this.id;
+    IonPopup.prompt({
+      title: 'Setup goal',
+      template: 'Please enter your weekly goal',
+      okText: 'Submit',
+      inputType: 'number',
+      inputPlaceholder: 'Your goal in number',
+      onOk: function(event, value){
+        ClassroomKicker.addClassAchievement(classroomId,value);
+        IonModal.close();
+      }
+    });
 	},
   // "input #classSearch":function(event,template){
   //   console.log(event.target.value);

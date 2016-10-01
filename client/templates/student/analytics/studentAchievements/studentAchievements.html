@@ -50,7 +50,7 @@
 			            {{#each this}}
 							<div class="card class-chart">
 								<a class="item item-icon-right class_title" href="#">
-									<i class="icon ion-android-more-vertical more-op" ></i>
+									<i class="icon ion-android-more-vertical more-op" id={{moreopId _id}} ></i>
 									{{classroomInfo.name}}
 								</a>
 							 	<div class="class_achievement_chart" id={{_id}}>
@@ -84,6 +84,13 @@
 			          </div>
 			        {{/if}}
 				{{/with}}
+				{{#if hasUntrackedClassroom}}
+					<div class="card class-chart">
+						<div class="vertical-center">
+							<img class="full-image add_class" src="/addclass_placeholder.png">	
+						</div>
+					</div>
+				{{/if}}
 
 				<!-- <div class="card class-chart">
 					<a class="item item-icon-right class_title" href="#">

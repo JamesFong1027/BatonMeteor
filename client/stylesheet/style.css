@@ -117,6 +117,12 @@ body {
   transform: translateY(-50%);
 }
 
+.horizon-center{
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 /*body.keyboard-open .content.overflow-scroll {
   bottom: 0px !important;
 }*/

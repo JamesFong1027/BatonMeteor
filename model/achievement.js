@@ -86,7 +86,7 @@ Achievement.allow({
 	},
 	// can only remove your own documents
 	remove: function (userId, doc) {
-		return doc.userId === userId;
+		return doc.uid === userId;
 	}
 });
 
