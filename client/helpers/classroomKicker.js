@@ -230,7 +230,7 @@ ClassroomKicker={
 
 		if(sessionType === Schemas.sessionType.attending){
 			// add default achievment (total sent ticket) for this classroom
-			// ClassroomKicker.addClassAchievement(classroomId, 0);
+			// AnalyticSpider.addClassAchievement(classroomId, 0);
 
 			analytics.track("Attending class", {
 				category: 'Student',
@@ -244,45 +244,6 @@ ClassroomKicker={
 				value: 1
 			});
 		}
-	},
-	getUntrackedClassroomList:function(){
-		var achievementClassList = ClassroomKicker.getClassAchievementList().fetch();
-	    var excludeClassIdList = null;
-	    if (!!achievementClassList && achievementClassList.length !== 0)
-	      excludeClassIdList = _.pluck(achievementClassList, 'cid');
-	    return ClassroomKicker.getAttendedClassroomInfoList(null,excludeClassIdList);
-	},
-	addClassAchievement:function(classroomId, target){
-		if(!!ClassroomKicker.getClassAchievement(classroomId)) return;
-
-		Achievement.insert({
-			uid: Meteor.userId(),
-			cid: classroomId,
-			target: target
-		});
-	},
-	removeClassAchievement: function(achievementId){
-		// Meteor.call("removeAchievement", achievementId);
-		Achievement.remove(achievementId);
-	},
-	editClassAchievement: function(achievementId, target){
-		Achievement.update({_id:achievementId},{$set:{target:target}});
-	},
-	getClassAchievement: function(classroomId) {
-		return Achievement.findOne({
-			uid: Meteor.userId(),
-			cid: classroomId,
-			achievementType: Schemas.achievementType.totalSentTicket
-		});
-	},
-	getClassAchievementList: function(){
-		return Achievement.find({
-			uid: Meteor.userId(),
-			achievementType: Schemas.achievementType.totalSentTicket
-		});
-	},
-	getAchievementsWithRelativeInfo: function(startDateFilter, endDateFilter){
-		return TicketShutter.getAchievementRelativeInfo(ClassroomKicker.getClassAchievementList().fetch(),startDateFilter,endDateFilter);
 	},
 	getCurrentClassSessionByType:function(sessionType){
 		return ClassSession.findOne({

@@ -77,7 +77,7 @@ Template.studentAchievements.helpers({
     return fetchSummaryAchievement();
   },
   hasUntrackedClassroom: function(){
-    return ClassroomKicker.getUntrackedClassroomList().count() !== 0;
+    return AnalyticSpider.getUntrackedClassroomList().count() !== 0;
   },
   moreopId: function(id){
     return "more-op-"+id;
@@ -87,7 +87,7 @@ Template.studentAchievements.helpers({
 Template.studentAchievements.events({
   "click .more-op":function(){
     console.log(this._id);
-    IonPopover.show("classAchievementMenu", this._id, "#more-op-"+this._id);
+    IonPopover.show("classAchievementMenu", this, "#more-op-"+this._id);
   },
   "click .add_goal":function(event,template){
     var achievementId = this._id;
@@ -98,13 +98,13 @@ Template.studentAchievements.events({
       inputType: 'number',
       inputPlaceholder: 'Your goal in number',
       onOk: function(event, value){
-        ClassroomKicker.editClassAchievement(achievementId,value);
+        AnalyticSpider.editClassAchievement(achievementId,value);
       }
     });
   },
   "click .add_class": function(event, template){
     IonModal.open("classroomPickList");
-  }
+  },
 })
 
 Template.studentAchievements.onDestroyed(function(){
@@ -115,7 +115,7 @@ Template.studentAchievements.onDestroyed(function(){
 
 function fetchClassAchievements(){
   // right now we only fetch current week data
-  return ClassroomKicker.getAchievementsWithRelativeInfo(moment().startOf('week').toDate(),moment().endOf('week').toDate());
+  return AnalyticSpider.getAchievementsWithRelativeInfo(moment().startOf('week').toDate(),moment().endOf('week').toDate());
 }
 
 function fetchSummaryAchievement(){

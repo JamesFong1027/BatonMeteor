@@ -119,7 +119,7 @@ TicketShutter={
 		}
 		return achievementList;
 	},
-	getParticipationInfo:function(uid,classroomId,startDateFilter, endDateFilter){
+	getParticipationInfo:function(uid, classroomId, startDateFilter, endDateFilter){
 		if(!!!startDateFilter) startDateFilter = ClassroomKicker.getClassroomInfo(classroomId).createDate;
 		if(!!!endDateFilter) endDateFilter = new Date();
 

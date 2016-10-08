@@ -1,0 +1,40 @@
+<template name="classParticipationHistoryChart">  
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">History Chart</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+      <div id="achievementHistory" class="button button-clear">
+        <i class="icon ion-stats-bars"></i>
+      </div>
+    {{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton}}
+	{{/contentFor}}
+
+	{{#ionSubheaderBar class="bar-clear"}}
+		<h1 class="title" style="color:#000000">{{className}}</h1>
+	{{/ionSubheaderBar}}
+	
+	{{#ionView}}
+    	{{#ionContent}}
+    		<div class="list">
+				<div class="item item-divider">
+					Monthly Breakdown
+				</div>
+    		</div>
+    		<div class="class_participation_summary_chart class_chart">
+
+    		</div>
+    		<div class="list">
+				<div class="item item-divider">
+					Overall Trending
+				</div>
+    		</div>
+    		<div class="class_participation_trends_chart class_chart">
+
+    		</div>
+		{{/ionContent}}
+  	{{/ionView}}
+</template>

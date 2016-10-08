@@ -6,7 +6,7 @@ Template.classroomPickList.onCreated(function(){
 
 Template.classroomPickList.helpers({
   classrooms: function () {
-    return ClassroomKicker.getUntrackedClassroomList();
+    return AnalyticSpider.getUntrackedClassroomList();
   },
   getTeacherName:function(tid){
   	var teacherProfile = Meteor.users.findOne({_id:tid});
@@ -28,7 +28,7 @@ Template.classroomPickList.events({
       inputType: 'number',
       inputPlaceholder: 'Your goal in number',
       onOk: function(event, value){
-        ClassroomKicker.addClassAchievement(classroomId,value);
+        AnalyticSpider.addClassAchievement(classroomId,value);
         IonModal.close();
       }
     });
