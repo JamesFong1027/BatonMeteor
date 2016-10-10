@@ -12,6 +12,9 @@ Template.profile.helpers({
   },
   isTeacher: function () {
     return isTeacherAccount(Meteor.userId());
+  },
+  targetNum:function(){
+    return AnalyticSpider.getClassAchievementList().count();
   }
 });
 

@@ -1,12 +1,12 @@
 @import 'colorVariables.scss';
 
-.weekly_summary{
+.general_summary{
 	height: 15%;
 	box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
 	-webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.5);
 }
-.weekly_summary_chart{
+.general_summary_chart{
 	height:100%	
 }
 
@@ -50,7 +50,6 @@
 	height: 18%;
 	padding: 2%;
 	li {
-		color: $calm;
 		width: 31%;
 		text-align: center;
 		display: inline-block;
@@ -58,7 +57,7 @@
 	}
 	li:last-child {
 		border: none; 
-		color: $positive;
+		color: $dark;
 	}
 	li span {
 		display: block;
@@ -70,7 +69,6 @@
 .summary_data{
 	height: 100%;
 	li {
-		color: $calm;
 		width: 32%;
 		text-align: center;
 		display: inline-block;
@@ -78,7 +76,7 @@
 	}
 	li:last-child {
 		border: none; 
-		color: $positive;
+		color: $dark;
 	}
 	li span {
 		display: block;
@@ -131,7 +129,7 @@
 	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
 		font-size: 3.5vw;
 	}
-	.weekly_summary_chart .ct-label.ct-label-pie{
+	.general_summary_chart .ct-label.ct-label-pie{
 		font-size: 5.3vw;
 	}
 	.class_achievement_chart{
@@ -164,7 +162,7 @@
 	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
 		font-size: 3.5vw;
 	}
-	.weekly_summary_chart .ct-label.ct-label-pie{
+	.general_summary_chart .ct-label.ct-label-pie{
 		font-size: 5.3vw;
 	}
 	.class_achievement_chart{
@@ -197,7 +195,7 @@
 	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
 		font-size: 15px;
 	}
-	.weekly_summary_chart .ct-label.ct-label-pie{
+	.general_summary_chart .ct-label.ct-label-pie{
 		font-size: 28px;
 	}
 	.class_achievement_chart{
@@ -239,7 +237,7 @@
 	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
 		font-size: 15px;
 	}
-	.weekly_summary_chart .ct-label.ct-label-pie{
+	.general_summary_chart .ct-label.ct-label-pie{
 		font-size: 35px;
 	}
 	.class_achievement_chart{

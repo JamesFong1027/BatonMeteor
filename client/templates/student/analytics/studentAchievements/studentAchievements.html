@@ -3,35 +3,35 @@
 		<h1 class="title">My Achievements</h1>
 	{{/contentFor}}
 
-	{{#contentFor "headerButtonRight"}}
+	<!-- {{#contentFor "headerButtonRight"}}
       <div id="achievementHistory" class="button button-clear">
         <i class="icon ion-stats-bars"></i>
       </div>
-    {{/contentFor}}
+    {{/contentFor}} -->
 
 	{{#contentFor "headerButtonLeft"}}
 		{{>ionNavBackButton}}
 	{{/contentFor}}
 
 	{{#ionSubheaderBar class="bar-clear"}}
-		<h1 class="title" style="color:#000000">Weekly Summary</h1>
+		<h1 class="title" style="color:#000000">Overall Summary</h1>
 	{{/ionSubheaderBar}}
 	
 	{{#ionView}}
     	{{#ionContent}}
-    		<div class="row weekly_summary">
-    			<div class="weekly_summary_chart col col-50">
+    		<div class="row general_summary">
+    			<div class="general_summary_chart col col-50">
     				
 				</div>
     			<div class="col col-50 summary_data">
     				{{#with summaryInfo}}
 	    				<div class="vertical-center">
 					 		<ul>
-								<li>
+								<li class="accepted_title">
 									{{selectedTimes}}
 									<span>Accepted</span>
 								</li>
-								<li>
+								<li class="total_title">
 									{{attendTimes}}
 									<span>Total</span>
 								</li>
@@ -62,11 +62,11 @@
 							 	</div>
 							 	<div class="data_title">
 							 		<ul>
-										<li>
+										<li class="accepted_title">
 											{{participation.selectedTimes}}
 											<span>Accepted</span>
 										</li>
-										<li>
+										<li class="total_title">
 											{{participation.attendTimes}}
 											<span>Total</span>
 										</li>

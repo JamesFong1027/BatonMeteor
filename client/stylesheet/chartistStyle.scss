@@ -1,8 +1,18 @@
 @import 'colorVariables.scss';
 
 $a-color: $calm;
-$b-color: rgba(96, 196, 248, 0.5);
-$c-color: $positive;
+$b-color: rgba(96, 196, 248, 1);
+$c-color: rgba(238, 238, 238, 0.8);
+
+$ct-series-colors: $a-color, $b-color, $c-color;
+
+.accepted_title{
+	color: $a-color;
+}
+
+.total_title{
+	color: $b-color;
+}
 
 .ct-slice-donut{
 	/* customize stroke width of the donut slices in CSS. Note that this property is already set in JavaScript and label positioning also relies on this. In the right situation though it can be very useful to style this property. You need to use !important to override the style attribute */
@@ -14,14 +24,23 @@ $c-color: $positive;
 	stroke-width: 5% !important;
 }
 
-/* Donut charts get built from Pie charts but with a fundamentally difference in the drawing approach. The donut is drawn using arc strokes for maximum freedom in styling */
-.ct-series-a .ct-slice-donut {
-  /* give the donut slice a custom colour */
-  stroke: $a-color;
+/* give the a series a custom colour */
+.ct-series-a {
+	& .ct-slice-donut, & .ct-bar, & .ct-line{
+		stroke: $a-color;		
+	}
+	& .ct-area{
+		fill: $a-color;
+	}
 }
 
-.ct-series-b .ct-slice-donut {
-  stroke: $b-color;
+.ct-series-b {
+	& .ct-slice-donut, & .ct-bar, & .ct-line{
+  		stroke: $b-color;
+	}
+	& .ct-area{
+		fill: $b-color;
+	}
 }
 
 .ct-series-c .ct-slice-donut {
@@ -31,4 +50,48 @@ $c-color: $positive;
 .class_achievement_chart .ct-slice-donut{
 	/* Make your points appear as squares */
   	stroke-linecap: round;
+}
+
+/* Default css for chartist legend plugin*/
+.ct-legend {
+    position: relative;
+    z-index: 10;
+	list-style: none;
+    text-align: center;
+
+    li {
+        position: relative;
+        padding-left: 23px;
+        margin-bottom: 3px;
+    	margin-right: 10px;
+    	cursor: pointer;
+    	display: inline-block;
+    }
+
+    li:before {
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        left: 0;
+        content: '';
+        border: 3px solid transparent;
+        border-radius: 2px;
+    }
+
+    li.inactive:before {
+        background: transparent;
+    }
+
+    &.ct-legend-inside {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    @for $i from 0 to length($ct-series-colors) {
+        .ct-series-#{$i}:before {
+            background-color: nth($ct-series-colors, $i + 1);
+            border-color: nth($ct-series-colors, $i + 1);
+        }
+    }
 }
