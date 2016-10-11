@@ -2,7 +2,7 @@ App.info({
   id:"com.batonmobile.android.meteor",
   name: 'Baton',
   description: 'Making participation smarter',
-  version: '0.2.2',
+  version: '0.2.6',
   author: 'Victor Chen',
   email: 'info@batonmobile.com',
   website: 'http://batonmobile.com'
