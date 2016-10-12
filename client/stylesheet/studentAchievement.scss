@@ -69,7 +69,7 @@
 .summary_data{
 	height: 100%;
 	li {
-		width: 32%;
+		width: 31%;
 		text-align: center;
 		display: inline-block;
 		border-right: solid 1px #bdc3c7;
@@ -100,12 +100,20 @@
 }
 
 @media only screen and (max-width: 320px) {
+	.general_summary{
+		height: 60px;
+	}
+
 	.class-chart{
 		height: 250px;
 	}
 }
 
 @media only screen and (max-width: 360px) {
+	.general_summary{
+		height: 85px;
+	}
+
 	.data_title{
 		li {
 			font-size: 6.2vw;
@@ -116,7 +124,6 @@
 	}
 	.summary_data{
 		li {
-			width: 31%;
 			font-size: 6.2vw;
 		}
 		li span {
@@ -140,6 +147,10 @@
 }
 
 @media only screen and (max-width: 420px) and (min-width : 361px) {
+	.general_summary{
+		height: 100px;
+	}
+
 	.data_title{
 		li {
 			font-size: 6.2vw;
@@ -150,10 +161,10 @@
 	}
 	.summary_data{
 		li {
-			font-size: 26px;
+			font-size: 6.2vw;
 		}
 		li span {
-			font-size: 11px;
+			font-size: 2.6vw;
 		}
 	}
 	.class_achievement_chart .ct-label.ct-label-pie{
@@ -173,6 +184,10 @@
 }
 
 @media only screen and (max-width : 750px) and (min-width : 420px){
+	.general_summary{
+		height: 130px;
+	}
+
 	.data_title{
 		li {
 			font-size: 28px;
@@ -206,6 +221,10 @@
 }
 
 @media only screen and (max-width : 3000px) and (min-width : 630px){
+	.general_summary{
+		height: 130px;
+	}
+
 	.add_class{
 		height: 250px;
 		width: auto;
@@ -215,6 +234,10 @@
 }
 
 @media only screen and (max-width : 3000px) and (min-width : 760px){
+	.general_summary{
+		height: 140px;
+	}
+
 	.data_title{
 		li {
 			font-size: 30px;

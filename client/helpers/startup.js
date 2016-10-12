@@ -60,6 +60,35 @@ Meteor.startup(function() {
 		document.addEventListener("deviceready", function() {
 			StatusBar.overlaysWebView(true);
 		}, false);
+
+		window.addEventListener('native.keyboardshow', function (event) {
+			console.log("keyboardshow");
+			console.log($('.content.overflow-scroll').data());
+
+			var keyboardHeight = event.keyboardHeight;
+
+			// Move the bottom of the popup area(s) above the top of the keyboard
+			$('.popup-container.popup-showing.active').each(function (index, el) {
+				$(el).data('ionkeyboard.bottom', $(el).css('bottom'));
+				$(el).css({bottom: keyboardHeight});
+			});
+
+		});
+
+		window.addEventListener('native.keyboardhide', function (event) {
+			console.log("keyboardhide");
+			console.log($('.content.overflow-scroll').data());
+
+			// Reset the content area(s)
+			$('.popup-container.popup-showing.active').each(function (index, el) {
+				$(el).css({bottom: $(el).data('ionkeyboard.bottom')});
+			});
+
+			// keyboard workaround for login screen
+			$('.content.login-screen.overflow-scroll').each(function (index, el) {
+				$(el).css({bottom: "0px"});
+			});
+		});
 	}
 
 	// window.onpopstate = function () {

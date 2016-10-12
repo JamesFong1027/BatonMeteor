@@ -132,6 +132,10 @@ body {
   color: grey;
 }
 
+.popup-container.popup-showing.active{
+  transition: 0.5s ease;
+}
+
 /*body.keyboard-open .content.overflow-scroll {
   bottom: 0px !important;
 }*/
