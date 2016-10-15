@@ -57,12 +57,14 @@ AnalyticSpider = {
 		}
 		return monthArray;
 	},
+	// userId means student user id
 	getMonthlyParticipationStat:function(userId,classroomId){
 		var firstTicket = TicketsInfo.findOne({uid:userId, cid:classroomId},{sort:{createDate:1}});
 		var lastTicket = TicketsInfo.findOne({uid:userId, cid:classroomId},{sort:{createDate:-1}});
 		if(!!!firstTicket) return null;
 
 		var statObj = {
+			dateArray: new Array(),
 			monthStrArray : new Array(),
 			attendTimesArray : new Array(),
 			selectedTimesArray : new Array()
@@ -72,6 +74,7 @@ AnalyticSpider = {
 		var monthDiff = lastMoment.diff(startMoment,"month");
 
 		for (var i=0 ; i <= monthDiff; i++) { 
+			statObj.dateArray.push(startMoment.format("Y-M-D"));
 			statObj.monthStrArray.push(startMoment.format("MMM"));
 			var startDateFilter = startMoment.clone().startOf('month').toDate();
 			var endDateFilter = startMoment.clone().endOf('month').toDate();
@@ -80,7 +83,26 @@ AnalyticSpider = {
 			statObj.attendTimesArray.push(monthlyStat.attendTimes);
 			startMoment.add(1,"M");
 		}
+		return statObj;
+	},
+	// userId means student user id
+	getParticipationStatByType:function(userId, classroomId){
+		var workTicketQuery = {ticketType:Schemas.ticketType.workTicket, uid:userId, cid:classroomId};
+		var talkTicketQuery = {ticketType:Schemas.ticketType.talkTicket, uid:userId, cid:classroomId};
 
+		var statObj = {
+			workTicketTotal:0,
+			workTicketArray : new Array(),
+			talkTicketTotal:0,
+			talkTicketArray: new Array()
+		}
+		statObj.workTicketTotal = TicketsInfo.find(workTicketQuery).count();
+		statObj.talkTicketTotal = TicketsInfo.find(talkTicketQuery).count();
+		if(statObj.workTicketTotal === 0 && statObj.talkTicketTotal === 0){
+			return;
+		}
+		statObj.workTicketArray = DBUtil.groupBy(TicketsInfo,"ticketContent",workTicketQuery);
+		statObj.talkTicketArray = DBUtil.groupBy(TicketsInfo,"ticketContent",talkTicketQuery);
 
 		return statObj;
 	}

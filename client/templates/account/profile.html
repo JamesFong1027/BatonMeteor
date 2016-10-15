@@ -26,6 +26,11 @@
               Classroom history list
               <span class="badge badge-assertive">{{historyClassroomCount}}</span>
             {{/ionItem}}
+            {{#ionItem id=this._id class="item item-icon-left item-icon-right" path="studentAchievements"}}
+              <i class="icon ion-clipboard"></i>
+              Participation Records
+              <span class="badge badge-calm">{{trackedClassNumber}}</span>
+            {{/ionItem}}
           {{else}}
             {{#ionItem id=this._id class="item item-icon-left item-icon-right" path="studentAchievements"}}
               <i class="icon ion-ribbon-a"></i>

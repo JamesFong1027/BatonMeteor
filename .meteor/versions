@@ -26,6 +26,7 @@ check@1.2.3
 chriswessels:hammer@4.0.2
 coffeescript@1.1.2_1
 crosswalk@1.6.2
+d3js:d3@3.5.8
 ddp@1.2.5
 ddp-client@1.2.8_1
 ddp-common@1.2.6

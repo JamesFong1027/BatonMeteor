@@ -68,6 +68,14 @@ ClassroomKicker={
 		}
 		return null;
 	},
+	getUserProfile:function(userId){
+		var userObj = Meteor.users.findOne({_id:userId});
+		if(!!userObj){
+			return userObj.profile;
+		} else {
+			return null;
+		}
+	},
 	getClassroomInfo:function (classroomId) {
 		return ClassroomsInfo.findOne({_id:classroomId});
 	},

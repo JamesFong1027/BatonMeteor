@@ -22,5 +22,9 @@ Template.classRecord.helpers({
 Template.classRecord.events({
 	"click .viewToggle":function(event){
 		Template.instance().SessionMode.set(!event.target.checked);
+	},
+	"click .ticketSquare":function(event,template){
+		// IonModal.close();
+		IonModal.open("studentParticipationRecord",{studentId:this._id, classroomId: Session.get("curClassroomId")});
 	}
 })

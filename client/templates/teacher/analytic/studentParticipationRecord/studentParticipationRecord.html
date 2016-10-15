@@ -1,0 +1,24 @@
+<template name="studentParticipationRecord">
+{{#ionModal title="Student Participation Record" closeText="Close"}}
+	<div class="content overflow-scroll">
+		<div class="list">
+			<div class="item item-divider">
+				Trending Chart
+			</div>
+		</div>
+		<div class="trending_chart class_chart">
+			<h4 class="placeholder_text">You have not enough data to show</h4>
+		</div>
+		<div class="list">
+			<div class="item item-divider item-icon-right">
+				Breakdown Chart
+				<i class="icon ion-ios-reload" id="refreshChart"></i>
+			</div>
+		</div>
+		<div class="breakdown_chart class_chart">
+			<h4 class="placeholder_text">You have not enough data to show</h4>
+		</div>
+	</div>
+    
+{{/ionModal}}
+</template>

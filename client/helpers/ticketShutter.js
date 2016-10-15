@@ -91,7 +91,8 @@ TicketShutter={
 		if(!!sessionObj){
 			startDateFilter = sessionObj.sessionStart;
 		} else {
-			startDateFilter = ClassroomKicker.getClassroomInfo(classroomId).createDate;
+			var classInfo = ClassroomKicker.getClassroomInfo(classroomId);
+			startDateFilter = !!classInfo ? classInfo.createDate : new Date();
 		}
 		var ticketArray = TicketsInfo.find({
 			cid: classroomId,

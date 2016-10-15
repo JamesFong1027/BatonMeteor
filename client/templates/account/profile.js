@@ -15,6 +15,9 @@ Template.profile.helpers({
   },
   targetNum:function(){
     return AnalyticSpider.getClassAchievementList().count();
+  },
+  trackedClassNumber:function(){
+    
   }
 });
 
