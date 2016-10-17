@@ -91,14 +91,14 @@ AnalyticSpider = {
 		var talkTicketQuery = {ticketType:Schemas.ticketType.talkTicket, uid:userId, cid:classroomId};
 
 		var statObj = {
-			workTicketTotal:0,
+			workTicketTotal: ["Work"],
 			workTicketArray : new Array(),
-			talkTicketTotal:0,
+			talkTicketTotal: ["Talk"],
 			talkTicketArray: new Array()
 		}
-		statObj.workTicketTotal = TicketsInfo.find(workTicketQuery).count();
-		statObj.talkTicketTotal = TicketsInfo.find(talkTicketQuery).count();
-		if(statObj.workTicketTotal === 0 && statObj.talkTicketTotal === 0){
+		statObj.workTicketTotal.push(TicketsInfo.find(workTicketQuery).count());
+		statObj.talkTicketTotal.push(TicketsInfo.find(talkTicketQuery).count());
+		if(statObj.workTicketTotal[1] === 0 && statObj.talkTicketTotal[1] === 0){
 			return;
 		}
 		statObj.workTicketArray = DBUtil.groupBy(TicketsInfo,"ticketContent",workTicketQuery);
