@@ -31,6 +31,15 @@ Meteor.publishComposite('classroomsInfo',function(){
 						}
 					}
 				]
+			},
+			{
+				// publicate student participation history ticket to the owner of this classroom
+				find:function(classroomsInfo){
+					// if this classroom belongs to the user(teacher), will return all the related participation tickets
+					if(isClassroomBlongTo(this.userId,classroomsInfo._id)){
+						return TicketsInfo.find({cid:classroomsInfo._id});
+					}
+				}
 			}
 		]	
 	}

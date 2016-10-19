@@ -1,0 +1,33 @@
+<template name="dataTitleTrendChart">
+	{{#with classroomInfo}}
+		<div class="card data_title_trend_chart">
+			<a class="item item-icon-right class_title" href="#">
+				<i class="icon ion-android-more-vertical more-op" id={{moreopId _id}} ></i>
+				{{classroomInfo.name}}
+			</a>
+		 	<div class="bang_chart" id={{_id}}>
+		 		
+		 	</div>
+		 	{{#with statData}}
+			 	<div class="data_title">
+			 		<ul>
+						<li class="accepted_title">
+							{{currentNum}}
+							<span>Current</span>
+						</li>
+						<li class="total_title">
+							{{diffNum}}
+							<span>Diff</span>
+						</li>
+						<li class={{trendTypeClass}}>
+							<i>
+								{{percentStr}}
+								<span>{{trendType}}</span>
+							</i>
+						</li>
+					</ul>
+			 	</div>
+			 {{/with}}
+		</div>
+	{{/with}}
+</template>

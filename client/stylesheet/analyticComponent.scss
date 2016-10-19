@@ -98,7 +98,6 @@ $sans-serif: "Varela Round", sans-serif;
 }
 
 .summary-negative i {
-  //color: $peach;
   color: darken($peach, 10);
 }
 
@@ -118,5 +117,212 @@ $sans-serif: "Varela Round", sans-serif;
     stroke: desaturate(lighten($calm, 15), 20) !important;
   }
 }
-/*****************************************************************************************/
 
+
+/*********************** data title trend card **********************************/
+@media only screen and (max-width : 720px){
+  .data_title_trend_chart{
+    width: 98%;
+  }
+}
+
+@media only screen and (max-width: 3000px) and (min-width: 721px){
+  .data_title_trend_chart{
+    width: 46%;
+  }
+}
+
+.data_title_trend_chart{
+    margin: 2%;
+    height: 300px;
+}
+
+.bang_chart{
+  border: none; 
+  height:62%;
+  img{
+    position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+}
+
+.class_title{
+  height: 20%;
+  border-bottom: none;
+}
+
+.summary_data{
+  height: 100%;
+  li {
+    width: 31%;
+    text-align: center;
+    display: inline-block;
+    border-right: solid 1px #bdc3c7;
+  }
+  li:last-child {
+    border: none; 
+    color: $dark;
+  }
+  li span {
+    display: block;
+    margin-top: .6em;
+    font-weight:lighter;
+  }
+}
+
+
+.data_title{
+  height: 18%;
+  padding: 2%;
+  li {
+    width: 31%;
+    text-align: center;
+    display: inline-block;
+    border-right: solid 1px #bdc3c7;
+  }
+  li:last-child {
+    border: none; 
+    color: $dark;
+  }
+  li span {
+    display: block;
+    margin-top: .6em;
+    font-weight:lighter;
+  }
+}
+
+
+@media only screen and (max-width: 360px) {
+  .data_title{
+    li {
+      font-size: 6.2vw;
+    }
+    li span {
+      font-size: 2.6vw;
+    }
+  }
+  .summary_data{
+    li {
+      font-size: 6.2vw;
+    }
+    li span {
+      font-size: 2.6vw;
+    }
+  }
+  .bang_chart .ct-label.ct-label-pie{
+    font-size: 5.3vw;
+  }
+  .bang_chart .ct-label.ct-label-pie.ct-label-subtitle{
+    font-size: 3.5vw;
+  }
+  .general_summary_chart .ct-label.ct-label-pie{
+    font-size: 5.3vw;
+  }
+  .bang_chart{
+    img{
+      padding:18px;
+    }
+  }
+}
+
+@media only screen and (max-width: 420px) and (min-width : 361px) {
+  .data_title{
+    li {
+      font-size: 6.2vw;
+    }
+    li span {
+      font-size: 2.6vw;
+    }
+  }
+  .summary_data{
+    li {
+      font-size: 6.2vw;
+    }
+    li span {
+      font-size: 2.6vw;
+    }
+  }
+  .bang_chart .ct-label.ct-label-pie{
+    font-size: 5.3vw;
+  }
+  .bang_chart .ct-label.ct-label-pie.ct-label-subtitle{
+    font-size: 3.5vw;
+  }
+  .general_summary_chart .ct-label.ct-label-pie{
+    font-size: 5.3vw;
+  }
+  .bang_chart{
+    img{
+      padding:18px;
+    }
+  }
+}
+
+@media only screen and (max-width : 750px) and (min-width : 420px){
+  .data_title{
+    li {
+      font-size: 28px;
+    }
+    li span {
+      font-size: 15px;
+    }
+  }
+  .summary_data{
+    li {
+      font-size: 28px;
+    }
+    li span {
+      font-size: 15px;
+    }
+  }
+  .bang_chart .ct-label.ct-label-pie{
+    font-size: 25px;
+  }
+  .bang_chart .ct-label.ct-label-pie.ct-label-subtitle{
+    font-size: 15px;
+  }
+  .general_summary_chart .ct-label.ct-label-pie{
+    font-size: 28px;
+  }
+  .bang_chart{
+    img{
+      padding:18px;
+    }
+  }
+}
+
+@media only screen and (max-width : 3000px) and (min-width : 760px){
+  .data_title{
+    li {
+      font-size: 30px;
+    }
+    li span {
+      font-size: 15px;
+    }
+  }
+  .summary_data{
+    li {
+      font-size: 30px;
+    }
+    li span {
+      font-size: 15px;
+    }
+  }
+  .bang_chart .ct-label.ct-label-pie{
+    font-size: 30px;
+  }
+  .bang_chart .ct-label.ct-label-pie.ct-label-subtitle{
+    font-size: 15px;
+  }
+  .general_summary_chart .ct-label.ct-label-pie{
+    font-size: 35px;
+  }
+  .bang_chart{
+    img{
+      padding:58px;
+    }
+  }
+}
+
+/*****************************************************************************************/

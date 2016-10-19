@@ -7,17 +7,8 @@ Template.classParticipationRecords.onRendered(function(){
 });
 
 Template.classParticipationRecords.helpers({
-  "afterRenderTrigger": function() {
-
-  },
-  studentClassAchievements: function() {
-
-  },
-  summaryInfo: function() {
-
-  },
-  hasUntrackedClassroom: function() {
-
+  ClassroomInfoList: function() {
+    return ClassroomKicker.getClassroomList();
   },
   moreopId: function(id) {
     return "more-op-" + id;
@@ -27,13 +18,20 @@ Template.classParticipationRecords.helpers({
       chartTitle: "Total Participation",
       statTimeUnitType: AnalyticSpider.statTimeUnitType.Weekly,
     }
+  },
+  classChartArg: function(classroomId){
+    return {
+      chartTitle: "Total Participation",
+      statTimeUnitType: AnalyticSpider.statTimeUnitType.Weekly,
+      classroomId: classroomId
+    }
   }
 });
 
 Template.classParticipationRecords.events({
   "click .more-op":function(){
     console.log(this._id);
-    IonPopover.show("classAchievementMenu", this, "#more-op-"+this._id);
+    IonPopover.show("classParticipationRecordMenu", this, "#more-op-"+this._id);
   },
   "click .add_goal":function(event,template){
     var achievementId = this._id;

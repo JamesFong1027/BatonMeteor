@@ -25,10 +25,18 @@
 				</div>
 	  		</div>
 			<div class="class_detail_achievements">
-				
+				{{#with ClassroomInfoList}}
+			        {{#if this.count}}
+			            {{#each this}}
+							{{> dataTitleTrendChart (classChartArg _id)}}
+						{{/each}}
+					{{else}}
+			          <div class="padding text-center">
+			            <h4>You have no data to display yet</h4>
+			          </div>
+			        {{/if}}
+				{{/with}}
 			</div>
-			
-			
 		{{/ionContent}}
   	{{/ionView}}
 </template>

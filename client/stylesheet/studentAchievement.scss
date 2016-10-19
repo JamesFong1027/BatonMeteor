@@ -31,60 +31,6 @@
 	height: 300px;
 }
 
-.class_achievement_chart{
-	border: none; 
-	height:62%;
-	img{
-		position: relative;
-	    top: 50%;
-	    transform: translateY(-50%);
-	}
-}
-
-.class_title{
-	height: 20%;
-	border-bottom: none;
-}
-
-.data_title{
-	height: 18%;
-	padding: 2%;
-	li {
-		width: 31%;
-		text-align: center;
-		display: inline-block;
-		border-right: solid 1px #bdc3c7;
-	}
-	li:last-child {
-		border: none; 
-		color: $dark;
-	}
-	li span {
-		display: block;
-		margin-top: .6em;
-		font-weight:lighter;
-	}
-}
-
-.summary_data{
-	height: 100%;
-	li {
-		width: 31%;
-		text-align: center;
-		display: inline-block;
-		border-right: solid 1px #bdc3c7;
-	}
-	li:last-child {
-		border: none; 
-		color: $dark;
-	}
-	li span {
-		display: block;
-		margin-top: .6em;
-		font-weight:lighter;
-	}
-}
-
 @media only screen and (max-width: 320px) {
 	.general_summary{
 		height: 60px;
@@ -99,110 +45,17 @@
 	.general_summary{
 		height: 85px;
 	}
-
-	.data_title{
-		li {
-			font-size: 6.2vw;
-		}
-		li span {
-			font-size: 2.6vw;
-		}
-	}
-	.summary_data{
-		li {
-			font-size: 6.2vw;
-		}
-		li span {
-			font-size: 2.6vw;
-		}
-	}
-	.class_achievement_chart .ct-label.ct-label-pie{
-		font-size: 5.3vw;
-	}
-	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
-		font-size: 3.5vw;
-	}
-	.general_summary_chart .ct-label.ct-label-pie{
-		font-size: 5.3vw;
-	}
-	.class_achievement_chart{
-		img{
-			padding:18px;
-		}
-	}
 }
 
 @media only screen and (max-width: 420px) and (min-width : 361px) {
 	.general_summary{
 		height: 100px;
 	}
-
-	.data_title{
-		li {
-			font-size: 6.2vw;
-		}
-		li span {
-			font-size: 2.6vw;
-		}
-	}
-	.summary_data{
-		li {
-			font-size: 6.2vw;
-		}
-		li span {
-			font-size: 2.6vw;
-		}
-	}
-	.class_achievement_chart .ct-label.ct-label-pie{
-		font-size: 5.3vw;
-	}
-	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
-		font-size: 3.5vw;
-	}
-	.general_summary_chart .ct-label.ct-label-pie{
-		font-size: 5.3vw;
-	}
-	.class_achievement_chart{
-		img{
-			padding:18px;
-		}
-	}
 }
 
 @media only screen and (max-width : 750px) and (min-width : 420px){
 	.general_summary{
 		height: 130px;
-	}
-
-	.data_title{
-		li {
-			font-size: 28px;
-		}
-		li span {
-			font-size: 15px;
-		}
-	}
-	.summary_data{
-		li {
-			font-size: 28px;
-		}
-		li span {
-			font-size: 15px;
-		}
-	}
-	.class_achievement_chart .ct-label.ct-label-pie{
-		font-size: 25px;
-	}
-	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
-		font-size: 15px;
-	}
-	.general_summary_chart .ct-label.ct-label-pie{
-		font-size: 28px;
-	}
-	.class_achievement_chart{
-		img{
-			padding:18px;
-		}
 	}
 }
 
@@ -222,36 +75,5 @@
 @media only screen and (max-width : 3000px) and (min-width : 760px){
 	.general_summary{
 		height: 140px;
-	}
-
-	.data_title{
-		li {
-			font-size: 30px;
-		}
-		li span {
-			font-size: 15px;
-		}
-	}
-	.summary_data{
-		li {
-			font-size: 30px;
-		}
-		li span {
-			font-size: 15px;
-		}
-	}
-	.class_achievement_chart .ct-label.ct-label-pie{
-		font-size: 30px;
-	}
-	.class_achievement_chart .ct-label.ct-label-pie.ct-label-subtitle{
-		font-size: 15px;
-	}
-	.general_summary_chart .ct-label.ct-label-pie{
-		font-size: 35px;
-	}
-	.class_achievement_chart{
-		img{
-			padding:58px;
-		}
 	}
 }
