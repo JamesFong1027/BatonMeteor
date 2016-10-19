@@ -1,0 +1,23 @@
+<template name="statsTrendCard">
+	<div class="line_chart_card">
+		<ul class="summary-card">
+		  <li>
+		    <a href="#">    
+		      <h1 class="stats_title">{{statsTitle}}</h1>
+		      
+		      {{#with statData}}
+			      <div class="summary-score">
+			        {{currentNum}}
+			      </div>
+
+			      <div class="summary-past {{trendType}}">
+			        <i>{{percentStr}}</i> {{periodTypeStr}}
+			      </div>
+			   {{/with}}
+		      
+		      <div class="bg-chart ct-chart"></div>
+		    </a>
+		  </li>
+		</ul>
+	</div>
+</template>

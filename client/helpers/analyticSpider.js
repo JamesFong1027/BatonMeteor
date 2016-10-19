@@ -1,4 +1,14 @@
 AnalyticSpider = {
+	statTimeUnitType:{
+		Daily: "days",
+		Weekly: "weeks",
+		Monthly: "months"
+	},
+	accumulateArray:function(oldArray){
+		var newArray = [];
+		oldArray.reduce(function(a,b,i) { return newArray[i] = a+b; },0);
+		return newArray;
+	},
 	getUntrackedClassroomList:function(){
 		var achievementClassList = AnalyticSpider.getClassAchievementList().fetch();
 	    var excludeClassIdList = null;
@@ -59,29 +69,49 @@ AnalyticSpider = {
 	},
 	// userId means student user id
 	getMonthlyParticipationStat:function(userId,classroomId){
-		var firstTicket = TicketsInfo.findOne({uid:userId, cid:classroomId},{sort:{createDate:1}});
-		var lastTicket = TicketsInfo.findOne({uid:userId, cid:classroomId},{sort:{createDate:-1}});
+		return AnalyticSpider.getParticipationStatByTimePeriod(userId,classroomId,AnalyticSpider.statTimeUnitType.Monthly);
+	},
+	getWeeklyParticipationStat:function(userId,classroomId){
+		return AnalyticSpider.getParticipationStatByTimePeriod(userId,classroomId,AnalyticSpider.statTimeUnitType.Weekly);
+	},
+	getDailyParticipationStat:function(userId,classroomId){
+		return AnalyticSpider.getParticipationStatByTimePeriod(userId,classroomId,AnalyticSpider.statTimeUnitType.Daily);
+	},
+	getParticipationStatByTimePeriod:function(userId,classroomId,statTimeUnitType,startDateFilter,endDateFilter){
+		var query = new Object();
+		if(!!classroomId) query.cid = classroomId;
+		if(!!userId) query.uid = userId;
+		if(!!startDateFilter) query.createDate = { $gte : startDateFilter };
+		if(!!endDateFilter) {
+			if(!!query.createDate) query.createDate.$lte = endDateFilter;
+			else query.createDate = {$lte : endDateFilter};
+		}
+
+		var firstTicket = TicketsInfo.findOne(query,{sort:{createDate:1}});
+		var lastTicket = TicketsInfo.findOne(query,{sort:{createDate:-1}});
 		if(!!!firstTicket) return null;
 
 		var statObj = {
 			dateArray: new Array(),
-			monthStrArray : new Array(),
 			attendTimesArray : new Array(),
 			selectedTimesArray : new Array()
 		};
 		var startMoment = moment(firstTicket.createDate);
 		var lastMoment = moment(lastTicket.createDate);
-		var monthDiff = lastMoment.diff(startMoment,"month");
 
-		for (var i=0 ; i <= monthDiff; i++) { 
+
+		var timeUnitDiff = Math.ceil(lastMoment.diff(startMoment, statTimeUnitType,true));
+
+		for (var i=0 ; i <= timeUnitDiff; i++) { 
+			var startDate = startMoment.clone().startOf(statTimeUnitType).toDate();
+			var endDate = startMoment.clone().endOf(statTimeUnitType).toDate();
+			if(startDate.getTime() > lastMoment.toDate().getTime()) break;
+
 			statObj.dateArray.push(startMoment.format("Y-M-D"));
-			statObj.monthStrArray.push(startMoment.format("MMM"));
-			var startDateFilter = startMoment.clone().startOf('month').toDate();
-			var endDateFilter = startMoment.clone().endOf('month').toDate();
-			var monthlyStat = TicketShutter.getParticipationInfo(userId, classroomId, startDateFilter, endDateFilter);
-			statObj.selectedTimesArray.push(monthlyStat.selectedTimes);
-			statObj.attendTimesArray.push(monthlyStat.attendTimes);
-			startMoment.add(1,"M");
+			var stat = TicketShutter.getParticipationInfo(userId, classroomId, startDate, endDate);
+			statObj.selectedTimesArray.push(stat.selectedTimes);
+			statObj.attendTimesArray.push(stat.attendTimes);
+			startMoment.add(1,statTimeUnitType);
 		}
 		return statObj;
 	},

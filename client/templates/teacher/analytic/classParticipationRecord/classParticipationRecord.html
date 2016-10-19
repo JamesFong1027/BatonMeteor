@@ -1,0 +1,34 @@
+<template name="classParticipationRecords">  
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">Participation Records</h1>
+	{{/contentFor}}
+
+	<!-- {{#contentFor "headerButtonRight"}}
+      <div id="achievementHistory" class="button button-clear">
+        <i class="icon ion-stats-bars"></i>
+      </div>
+    {{/contentFor}} -->
+
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton}}
+	{{/contentFor}}
+
+	{{#ionSubheaderBar class="bar-clear"}}
+		<h1 class="title" style="color:#000000">Overall Summary</h1>
+	{{/ionSubheaderBar}}
+	
+	{{#ionView class="class_participation_record_page"}}
+    	{{#ionContent }}
+    		<div class="row class_overall_summary">
+    			<div class="col">
+    				{{> statsTrendCard chartArg}}		
+				</div>
+	  		</div>
+			<div class="class_detail_achievements">
+				
+			</div>
+			
+			
+		{{/ionContent}}
+  	{{/ionView}}
+</template>

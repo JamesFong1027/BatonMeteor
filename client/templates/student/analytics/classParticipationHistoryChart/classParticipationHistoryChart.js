@@ -4,9 +4,12 @@ Template.classParticipationHistoryChart.onCreated(function(){
 
 Template.classParticipationHistoryChart.onRendered(function(){
 	var monthlyStat = AnalyticSpider.getMonthlyParticipationStat(Meteor.userId(),Template.instance().data);
-	if(!!monthlyStat && monthlyStat.monthStrArray.length !== 0) {
+	if(!!monthlyStat && monthlyStat.dateArray.length !== 0) {
 		$(".class_participation_summary_chart").empty();
 		$(".class_participation_trends_chart").empty();
+		monthlyStat.monthStrArray = _.map(monthlyStat.dateArray, function(date){
+			return moment(date).format("MMM");
+		});
 		drawMonthlyBarChart(monthlyStat);
 		drawTrendingLineChart(monthlyStat);
 	}
@@ -15,7 +18,7 @@ Template.classParticipationHistoryChart.onRendered(function(){
 Template.classParticipationHistoryChart.helpers({
   className:function(){
   	return ClassroomKicker.getClassroomInfo(Template.instance().data).name;
-  }
+  } 
 });
 
 Template.classParticipationHistoryChart.events({
@@ -93,8 +96,8 @@ function drawTrendingLineChart(participationStat){
 	labels.unshift("");
 	acceptArray.unshift(0);
 	totalArray.unshift(0);
-	acceptArray = accumulateArray(acceptArray);
-	totalArray = accumulateArray(totalArray);
+	acceptArray = AnalyticSpider.accumulateArray(acceptArray);
+	totalArray = AnalyticSpider.accumulateArray(totalArray);
 
 	data = [{
 		"name": "Accepted",
@@ -134,10 +137,4 @@ function drawTrendingLineChart(participationStat){
 	    });
 	  }
 	});
-}
-
-function accumulateArray(oldArray){
-	var newArray = [];
-	oldArray.reduce(function(a,b,i) { return newArray[i] = a+b; },0);
-	return newArray;
 }
