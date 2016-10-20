@@ -1,0 +1,32 @@
+<template name="studentSquare">
+	<div class="list">
+		<div class="item item-divider">
+			{{chartName}}
+		</div>
+	</div>
+	<div class="wrapper">
+		{{#with userRecords}}
+			{{#if this.length}}
+				{{#each this}}
+					<div class="ticketSquare">
+						<div id={{_id}}  class="avatar stable">
+							<!-- {{#if isTalkTicket ticketInfo}}
+								<a class={{getIntentIconClass ticketInfo.ticketContent}} ></a>
+							{{else}}
+								<a class="icon">{{ticketInfo.ticketContent}}</a>
+							{{/if}} -->
+							<a class="icon ion-person"></a>
+							<div class="bottom_badge">{{participation.attendTimes}}</div>
+							<div class="top_badge">{{participation.selectedTimes}}</div>
+						</div>
+						<p>{{profile.firstName}}, {{profile.lastName}}</p>
+					</div>
+				{{/each}}
+			{{/if}}
+		{{else}}
+			<div class="padding text-center">
+				<h4>You have not enough data to display</h4>
+			</div>
+		{{/with}}
+	</div>
+</template>

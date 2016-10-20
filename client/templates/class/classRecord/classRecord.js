@@ -11,20 +11,17 @@ Template.classRecord.helpers({
 	"modalTitle":function(){
 		return Template.instance().SessionMode ? "Current session" : "Whole class";
 	},
-	"userRecords": function () {
-		return TicketShutter.getCurClassroomStudentList(Session.get("curClassroomId"), Template.instance().SessionMode.get() ? ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")) : null);
+	"args": function () {
+		return {
+			chartName: "Student List",
+			classroomId: Session.get("curClassroomId"),
+			studentList: TicketShutter.getCurClassroomStudentList(Session.get("curClassroomId"), Template.instance().SessionMode.get() ? ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")) : null)
+		};
 	},
-	"isTalkTicket":function(ticketInfo){
-		return !!ticketInfo && ticketInfo.ticketType === Schemas.ticketType.talkTicket;
-	}
 });
 
 Template.classRecord.events({
 	"click .viewToggle":function(event){
 		Template.instance().SessionMode.set(!event.target.checked);
-	},
-	"click .ticketSquare":function(event,template){
-		// IonModal.close();
-		IonModal.open("studentParticipationRecord",{studentId:this._id, classroomId: Session.get("curClassroomId")});
 	}
 })

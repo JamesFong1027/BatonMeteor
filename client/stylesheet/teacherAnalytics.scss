@@ -1,11 +1,19 @@
 @import 'colorVariables.scss';
 
-.breakdown_chart{
-	height: 50%
+.class_record_history_page .breakdown_chart{
+	height: 40%
 }
 
-.trending_chart {
-	height: 50%;	
+.class_record_history_page .trending_chart {
+	height: 40%;	
+}
+
+.student_partci_record_modal .breakdown_chart{
+	height: 50%;
+}
+
+.student_partci_record_modal .trending_chart{
+	height: 50%;
 }
 
 .class_participation_record_page{

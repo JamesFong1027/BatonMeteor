@@ -4,6 +4,7 @@ Template.breakdownChart.onCreated(function() {
 
 Template.breakdownChart.onRendered(function() {
 	console.log(this.data);
+	if(!!!this.data) this.data = new Object();
 
 	var studentId = this.data.studentId;
 	var classroomId = this.data.classroomId;

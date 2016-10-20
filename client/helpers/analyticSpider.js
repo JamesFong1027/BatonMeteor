@@ -115,10 +115,18 @@ AnalyticSpider = {
 		}
 		return statObj;
 	},
-	// userId means student user id
-	getParticipationStatByType:function(userId, classroomId){
-		var workTicketQuery = {ticketType:Schemas.ticketType.workTicket, uid:userId, cid:classroomId};
-		var talkTicketQuery = {ticketType:Schemas.ticketType.talkTicket, uid:userId, cid:classroomId};
+	// for specific student in specific classroom, or in general 
+	getParticipationStatByType:function(studentId, classroomId){
+		var workTicketQuery = {ticketType:Schemas.ticketType.workTicket};
+		var talkTicketQuery = {ticketType:Schemas.ticketType.talkTicket};
+		if(!!studentId){
+			workTicketQuery.uid = studentId;
+			talkTicketQuery.uid = studentId;
+		}
+		if(!!classroomId){
+			workTicketQuery.cid = classroomId;
+			talkTicketQuery.cid = classroomId;	
+		}
 
 		var statObj = {
 			workTicketTotal: ["Work"],

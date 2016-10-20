@@ -4,9 +4,10 @@ Template.trendingAreaChart.onCreated(function() {
 
 Template.trendingAreaChart.onRendered(function() {
 	console.log(this.data);
+	if(!!!this.data) this.data = new Object();
 
-	var studentId = !!this.data ? this.data.studentId : null;
-	var classroomId = !!this.data ? this.data.classroomId : null;
+	var studentId = this.data.studentId;
+	var classroomId = this.data.classroomId;
 	this.data.stat = AnalyticSpider.getMonthlyParticipationStat(studentId,classroomId);
 	this.data.areaChart = initChart(studentId,classroomId,this.data.stat);
 });

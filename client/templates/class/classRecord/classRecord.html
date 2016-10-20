@@ -9,22 +9,6 @@
          </div>
        </label>
     </li>
-	<div class="wrapper">
-		{{#each userRecords}}
-			<div class="ticketSquare">
-				<div id={{_id}}  class="avatar stable">
-					{{#if isTalkTicket ticketInfo}}
-						<a class={{getIntentIconClass ticketInfo.ticketContent}} ></a>
-					{{else}}
-						<a class="icon">{{ticketInfo.ticketContent}}</a>
-					{{/if}}
-					<div class="bottom_badge">{{participation.attendTimes}}</div>
-					<div class="top_badge">{{participation.selectedTimes}}</div>
-				</div>
-				<p>{{profile.firstName}}, {{profile.lastName}}</p>
-			</div>
-			{{ afterRenderTrigger}}
-		{{/each}}
-	</div>
+	{{> studentSquare args}}
  {{/ionModal}}
 </template>

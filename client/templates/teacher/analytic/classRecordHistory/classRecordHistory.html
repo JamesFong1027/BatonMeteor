@@ -1,0 +1,23 @@
+<template name="classRecordHistory">
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">{{className}} History Record</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		{{>ionNavBackButton}}
+	{{/contentFor}}
+
+	{{#ionView}}
+    	{{#ionContent class="class_record_history_page"}}
+			<div class="trending_chart">
+				{{> trendingAreaChart chartArg "Trending Chart"}}
+			</div>
+			<div class="breakdown_chart">
+				{{> breakdownChart chartArg "Breakdown Chart"}}
+			</div>
+			<div class="student_squre">
+				{{> studentSquare squareArg}}
+			</div>
+		{{/ionContent}}
+	{{/ionView}}
+</template>
