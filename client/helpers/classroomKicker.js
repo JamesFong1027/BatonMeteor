@@ -5,7 +5,7 @@ ClassroomKicker={
 		// the classroom name is unique within the school
 		// and teacher can only have one open classroom at a time
 		if(ClassroomsInfo.find({name:classroomName,sid:"1"}).count()===0
-			&&ClassroomKicker.getCurrentTeachingClassroom()===undefined)
+			&&!!!ClassroomKicker.getCurrentTeachingClassroom())
 		{
 			// generate shortcode
 			var shortcode = "";
@@ -55,12 +55,13 @@ ClassroomKicker={
 	},
 	// for teacher to get their current teaching classroom
 	getCurrentTeachingClassroom:function(){
-		return ClassroomsInfo.findOne({
-			tid:Meteor.userId(),
-			sid:"1",
-			status:Schemas.classroomStatus.open
-		});
+		var curSession = ClassroomKicker.getCurrentClassSessionByType(Schemas.sessionType.hosting);
+		if(!!curSession){
+			return ClassroomKicker.getClassroomInfo(curSession.cid);
+		}
+		return null;
 	},
+	// for student to get their current attending classroom
 	getCurrentAttendingClassroom:function(){
 		var curSession = ClassroomKicker.getCurrentClassSessionByType(Schemas.sessionType.attending);
 		if(!!curSession){
@@ -139,8 +140,8 @@ ClassroomKicker={
 
 		ClassroomsInfo.update({_id:classroomId},{$set:{status:Schemas.classroomStatus.close}});
 		Session.set("curClassroomId",undefined);
-		// close the current session
-		ClassroomKicker.endClassSession(classroomId);
+		// close the current session and all the student session of this classroom
+		ClassroomKicker.endAllClassSession(classroomId);
 	},
 	restartClassroom:function(classroomId){
 		analytics.track("Restart Classroom", {
@@ -253,7 +254,22 @@ ClassroomKicker={
 			});
 		}
 	},
+	// get current valid within session, end those session related class, which is closed
 	getCurrentClassSessionByType:function(sessionType){
+		var attendedClassIdList = DBUtil.distinct(ClassSession, "cid", {
+			uid: Meteor.userId(),
+			sessionType: sessionType,
+			status: Schemas.classSessionStatus.within
+		}, {
+			sessionStart: -1
+		});
+		for (var i = attendedClassIdList.length - 1; i >= 0; i--) {
+			var classInfo = ClassroomKicker.getClassroomInfo(attendedClassIdList[i]);
+			if(classInfo.status === Schemas.classroomStatus.close){
+				ClassroomKicker.endClassSession(classInfo._id);
+			}
+		}
+
 		return ClassSession.findOne({
 			uid: Meteor.userId(),
 			sessionType: sessionType,
@@ -267,10 +283,22 @@ ClassroomKicker={
 			status: Schemas.classSessionStatus.within
 		});	
 	},
+	// for teacher to end all the classroom related session
+	endAllClassSession:function(classroomId){
+		var sessionArray = ClassSession.find({cid:classroomId,status:Schemas.classSessionStatus.within}).fetch();
+		for (var i = sessionArray.length - 1; i >= 0; i--) {
+			ClassSession.update({_id:sessionArray[i]._id},{$set:{status:Schemas.classSessionStatus.end}});
+		}
+	},
+	// for student to end their own session
 	endClassSession:function(classroomId){
-		var curSession = ClassroomKicker.getCurrentClassSession(classroomId);
-		if(!!curSession){
-			ClassSession.update({_id:curSession._id},{$set:{status:Schemas.classSessionStatus.end}});
+		var sessionArray = ClassSession.find({
+			uid: Meteor.userId(),
+			cid: classroomId,
+			status: Schemas.classSessionStatus.within
+		}).fetch();
+		for (var i = sessionArray.length - 1; i >= 0; i--) {
+			ClassSession.update({_id:sessionArray[i]._id},{$set:{status:Schemas.classSessionStatus.end}});
 		}
 	},
 	getClassroomSessionList:function(classroomId, sessionType){
@@ -302,7 +330,6 @@ ClassroomKicker={
 		var classroomId = Session.get("curClassroomId");
 		ClassroomKicker.endClassSession(classroomId);
 		Session.set("curClassroomId", undefined);
-		
 	},
 	switchRole:function(switch2Type){
 		if (switch2Type === Schemas.userType.student) {

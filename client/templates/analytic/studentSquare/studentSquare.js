@@ -22,6 +22,7 @@ Template.studentSquare.helpers({
 Template.studentSquare.events({
 	"click .ticketSquare":function(event,template){
 		// IonModal.close();
+		console.log(this._id, template.data.classroomId);
 		IonModal.open("studentParticipationRecord",{studentId:this._id, classroomId: template.data.classroomId});
 	}
 });

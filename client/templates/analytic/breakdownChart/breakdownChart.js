@@ -1,5 +1,5 @@
 Template.breakdownChart.onCreated(function() {
-
+	this.uniqChartId = RandomUtil.randomCharString();
 });
 
 Template.breakdownChart.onRendered(function() {
@@ -9,6 +9,7 @@ Template.breakdownChart.onRendered(function() {
 	var studentId = this.data.studentId;
 	var classroomId = this.data.classroomId;
 	this.data.stat = AnalyticSpider.getParticipationStatByType(studentId, classroomId);
+	console.log(this.data.stat);
 	this.data.pieChart = initChart(studentId,classroomId,this.data.stat);
 });
 
@@ -22,6 +23,9 @@ Template.breakdownChart.events({
 Template.breakdownChart.helpers({
 	"chartName": function() {
 		return Template.instance().data.chartName;
+	},
+	"uniqChartId": function(){
+		return Template.instance().uniqChartId;
 	}
 });
 
@@ -29,7 +33,7 @@ function initChart(studentId,classroomId, stat){
 	if(!!!stat) return;
 
 	return c3.generate({
-		bindto: '.breakdown_pie_chart',
+		bindto: '#'+Template.instance().uniqChartId,
 		data: {
 			columns: [
 				stat.workTicketTotal,

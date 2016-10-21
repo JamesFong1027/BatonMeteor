@@ -41,7 +41,7 @@ Template.classroomDetail.events({
       onOk: function() {
         console.log('Confirmed');
         var curClassroom = ClassroomKicker.getCurrentTeachingClassroom();
-        if (curClassroom !== undefined)
+        if (!!curClassroom)
           ClassroomKicker.closeClassroom(curClassroom._id);
         ClassroomKicker.restartClassroom(classroomId);
         Session.set("curClassroomId", classroomId);

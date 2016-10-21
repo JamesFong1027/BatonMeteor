@@ -1,5 +1,5 @@
 Template.trendingAreaChart.onCreated(function() {
-
+	this.uniqChartId = RandomUtil.randomCharString();
 });
 
 Template.trendingAreaChart.onRendered(function() {
@@ -22,6 +22,9 @@ Template.trendingAreaChart.events({
 Template.trendingAreaChart.helpers({
 	"chartName": function() {
 		return Template.instance().data.chartName;
+	},
+	"uniqChartId": function(){
+		return Template.instance().uniqChartId;
 	}
 });
 
@@ -45,7 +48,7 @@ function initChart(studentId, classroomId, stat){
 	var chartData = prepareChartData(stat);
 
 	return c3.generate({
-		bindto: '.trending_area_chart',
+		bindto: '#'+Template.instance().uniqChartId,
 		data: {
 			x:'x',
 			type: 'area-spline',

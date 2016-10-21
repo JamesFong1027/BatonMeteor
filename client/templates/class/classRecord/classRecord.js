@@ -13,7 +13,7 @@ Template.classRecord.helpers({
 	},
 	"args": function () {
 		return {
-			chartName: "Student List",
+			chartName: "Participated Student List",
 			classroomId: Session.get("curClassroomId"),
 			studentList: TicketShutter.getCurClassroomStudentList(Session.get("curClassroomId"), Template.instance().SessionMode.get() ? ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")) : null)
 		};
