@@ -28,10 +28,9 @@ Template.statsTrendCard.helpers({
 		var diffNum = currentNum - prevNum;
 		var diffPercent = Math.round( ((diffNum/currentNum) * 100) *10)/10;
 		var trendType = diffNum > 0 ? "summary-positive" : "summary-negative";
-		var percentStr = (diffNum > 0 ? "+" : "") + diffPercent + "%"
-		var periodTypeStr = "in previous ";
+		var percentStr = (diffNum > 0 ? "+" : "") + diffPercent + "%";
 		var periodType = Template.instance().data.periodType;
-		periodTypeStr = periodTypeStr + periodType.substring(0,periodType.length-1);
+		var periodTypeStr = periodType.substring(0,periodType.length-1);
 		var statData = {
 			currentNum: currentNum,
 			percentStr: percentStr,

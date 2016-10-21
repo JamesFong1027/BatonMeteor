@@ -7,11 +7,12 @@
 		      
 		      {{#with statData}}
 			      <div class="summary-score">
-			        {{currentNum}}
+			        <i>{{currentNum}}</i>
+			        in this {{periodTypeStr}}
 			      </div>
 
 			      <div class="summary-past {{trendType}}">
-			        <i>{{percentStr}}</i> {{periodTypeStr}}
+			        <i>{{percentStr}}</i> vs previous {{periodTypeStr}}
 			      </div>
 			   {{/with}}
 		      

@@ -16,14 +16,14 @@ Template.studentAchievements.helpers({
     var acceptedTimes = this.participation.selectedTimes;
     var chartCssId = this._id;
     var chartSelector = "#"+chartCssId;
-    if(goalNum===0) return;    
+    if(goalNum===0) return;
+    var chartTotalNum = goalNum;
 
     BlazeTemplateHelper.fireWhenReady(function(template){
       if(totalTimes > goalNum) {
-        data = [100,0];
-      } else {
-        data = [acceptedTimes, totalTimes - acceptedTimes, goalNum - totalTimes];
+        chartTotalNum = totalTimes;
       }
+      data = [acceptedTimes, totalTimes - acceptedTimes, chartTotalNum - totalTimes];
 
       template.$(chartSelector).empty();
       
@@ -31,7 +31,7 @@ Template.studentAchievements.helpers({
         series: data
       }, {
         donut: true,
-        total: goalNum,
+        total: chartTotalNum,
         startAngle: 0,
         showLabel: true,
         labelInterpolationFnc: function(value,index) {
