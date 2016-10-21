@@ -67,11 +67,14 @@ Meteor.startup(function() {
 
 			var keyboardHeight = event.keyboardHeight;
 
-			// Move the bottom of the popup area(s) above the top of the keyboard
-			$('.popup-container.popup-showing.active').each(function (index, el) {
-				$(el).data('ionkeyboard.bottom', $(el).css('bottom'));
-				$(el).css({bottom: keyboardHeight});
-			});
+			// Move the bottom of the popup area(s) above the top of the keyboard (IOS only)
+			if(Blaze._globalHelpers.isIOS()){
+				$('.popup-container.popup-showing.active').each(function (index, el) {
+					$(el).data('ionkeyboard.bottom', $(el).css('bottom'));
+					$(el).css({bottom: keyboardHeight});
+				});	
+			}
+			
 
 		});
 
@@ -79,10 +82,12 @@ Meteor.startup(function() {
 			console.log("keyboardhide");
 			console.log($('.content.overflow-scroll').data());
 
-			// Reset the content area(s)
-			$('.popup-container.popup-showing.active').each(function (index, el) {
-				$(el).css({bottom: $(el).data('ionkeyboard.bottom')});
-			});
+			if(Blaze._globalHelpers.isIOS()){
+				// Reset the content area(s)
+				$('.popup-container.popup-showing.active').each(function (index, el) {
+					$(el).css({bottom: $(el).data('ionkeyboard.bottom')});
+				});
+			}
 
 			// keyboard workaround for login screen
 			$('.content.login-screen.overflow-scroll').each(function (index, el) {

@@ -17,7 +17,7 @@ Template.profile.helpers({
     return AnalyticSpider.getClassAchievementList().count();
   },
   trackedClassNumber:function(){
-    
+    return ClassroomKicker.getClassroomList().count();
   }
 });
 
