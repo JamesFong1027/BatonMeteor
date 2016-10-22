@@ -5,7 +5,59 @@
 			<i class="icon ion-ios-reload" id="refreshChart"></i>
 		</div>
 	</div>
+	<div class="period_switcher">
+		<div class="switch-field">
+			<input type="radio" id="daily" name={{uniqChartId}} value="days" {{isChecked 'days'}}/>
+			<label for="daily" class="switch_btn">Day</label>
+			<input type="radio" id="weekly" name={{uniqChartId}} value="weeks" {{isChecked 'weeks'}}/>
+			<label for="weekly" class="switch_btn">Week</label>
+			<input type="radio" id="monthly" name={{uniqChartId}} value="months" {{isChecked 'months'}}/>
+			<label for="monthly" class="switch_btn" >Month</label>
+	    </div>
+	</div>
 	<div class="trending_area_chart" id={{uniqChartId}}>
 		<h4 class="placeholder_text">You have not enough data to show</h4>
 	</div>
+	<!--
+	<div class="period_switcher">
+		 <ul class="time-lenght horizontal-list">
+	        <li><a class="time_unit_btn" id="daily" >Day</a></li>
+	        <li><a class="time_unit_btn" id="weekly" >Week</a></li>
+	        <li><a class="time_unit_btn" id="monthly" >Month</a></li>
+	    </ul> -->
+
+	    <!-- <div class="list">
+
+        <label class="item item-radio">
+          <input type="radio" name="group" value="go" checked="checked">
+          <div class="radio-content">
+            <div class="item-content">
+              Go
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </div>
+        </label>
+
+        <label class="item item-radio">
+          <input type="radio" name="group" value="python">
+          <div class="radio-content">
+            <div class="item-content">
+              Python
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </div>
+        </label>
+
+      </div> -->
+		<!-- {{#ionRadio name="type" value="monthly"}}
+			Montly
+		{{/ionRadio}}
+		{{#ionRadio name="type" value="weekly"}}
+			Weekly
+		{{/ionRadio}}
+		{{#ionRadio name="type" value="daily"}}
+			Daily
+		{{/ionRadio}} 
+		
+	</div> -->
 </template>

@@ -1,24 +1,104 @@
-.trending_area_chart{
-	height: 80%;
-}
-
-.breakdown_pie_chart{
-	height: 80%
-}
-
-.list.chart_title{
-	height: 20%;
-	margin-bottom:0px;
-}
-
-
-/*********************** stats trend card **********************************/
 @import url(https://fonts.googleapis.com/css?family=Varela+Round:400);
 @import 'colorVariables.scss';
 
 $sans-serif: "Varela Round", sans-serif; 
 
 
+.list.chart_title{
+	margin-bottom:2px;
+}
+
+/*********************** break down pie chart **********************************/
+.breakdown_pie_chart{
+  height: 80%
+}
+
+/*********************** trending area chart **********************************/
+.trending_area_chart{
+  height: 65%;
+}
+
+.period_switcher{
+  padding-top: 1%;
+  height: 15%;
+  width: 100%;
+  text-align: center;
+}
+
+@media only screen and (max-width: 360px) {
+  .switch-field label {
+    font-size: 9px;
+  }
+}
+@media only screen and (max-width : 420px) and (min-width : 361px){
+  .switch-field label {
+    font-size: 10px;
+  }
+}
+@media only screen and (max-width : 720px) and (min-width: 421px){
+  .switch-field label {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 3000px) and (min-width: 721px){
+  .switch-field label {
+    font-size: 14px;
+  }
+}
+
+.switch-field {
+  font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.switch-field input {
+  display: none;
+}
+
+.switch-field label {
+  float: left;
+}
+
+.switch-field label {
+  display: inline-block;
+  background-color: #e4e4e4;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 6px 14px;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition:    all 0.1s ease-in-out;
+  -ms-transition:     all 0.1s ease-in-out;
+  -o-transition:      all 0.1s ease-in-out;
+  transition:         all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+  cursor: pointer;
+}
+
+.switch-field input:checked + label {
+  background-color: $calm;
+  color: $stable;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+  border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+
+
+/*********************** stats trend card **********************************/
 .line_chart_card {
   padding: 2%;
   font: 400 16px/1.6 $sans-serif;
@@ -57,13 +137,22 @@ $sans-serif: "Varela Round", sans-serif;
     background: rgba(255, 255, 255, .9);
     color: #000;
     text-decoration: none;
-    
-    //&:hover,
-    //&:focus {
-    //  background: rgba(255, 255, 255, .9);
-    //} 
   }
 }
+
+@media only screen and (max-width: 360px) {
+
+}
+@media only screen and (max-width : 420px) and (min-width : 361px){
+
+}
+@media only screen and (max-width : 720px) and (min-width: 421px){
+
+}
+@media only screen and (max-width: 3000px) and (min-width: 721px){
+
+}
+
 
 .summary-score {
   box-sizing: border-box;
@@ -127,7 +216,6 @@ $sans-serif: "Varela Round", sans-serif;
     stroke: desaturate(lighten($calm, 15), 20) !important;
   }
 }
-
 
 /*********************** data title trend card **********************************/
 @media only screen and (max-width : 720px){

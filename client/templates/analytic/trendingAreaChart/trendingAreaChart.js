@@ -1,39 +1,56 @@
 Template.trendingAreaChart.onCreated(function() {
-	this.uniqChartId = RandomUtil.randomCharString();
+	// console.log(this.data);
+	if(!!!this.data) this.data = new Object();
+	this.data.uniqChartId = RandomUtil.randomCharString();
+	if(!!!this.data.statTimeUnitType) this.data.statTimeUnitType = AnalyticSpider.statTimeUnitType.Weekly;
+	this.data.stat = AnalyticSpider.getParticipationStatByTimePeriod(this.data.studentId,this.data.classroomId,this.data.statTimeUnitType);
+	this.data.statTimeUnitType = new ReactiveVar(this.data.statTimeUnitType);
 });
 
 Template.trendingAreaChart.onRendered(function() {
-	console.log(this.data);
-	if(!!!this.data) this.data = new Object();
-
-	var studentId = this.data.studentId;
-	var classroomId = this.data.classroomId;
-	this.data.stat = AnalyticSpider.getMonthlyParticipationStat(studentId,classroomId);
-	this.data.areaChart = initChart(studentId,classroomId,this.data.stat);
+	this.data.areaChart = initChart(this.data.stat);
+	console.log(this.data.areaChart);
 });
 
 Template.trendingAreaChart.events({
 	"click #refreshChart": function(event, template) {
-		template.data.stat = AnalyticSpider.getMonthlyParticipationStat(template.data.studentId, template.data.classroomId);
+		template.data.statTimeUnitType.set(AnalyticSpider.statTimeUnitType.Weekly);
+		template.data.stat = AnalyticSpider.getParticipationStatByTimePeriod(template.data.studentId, template.data.classroomId,template.data.statTimeUnitType.get());
 		refreshChart(template.data.areaChart, template.data.stat);
-	}
+	},
+	"click label[for=daily]": function(event, template){
+		template.data.statTimeUnitType.set(AnalyticSpider.statTimeUnitType.Daily);
+	},
+	"click label[for=weekly]": function(event, template){
+		template.data.statTimeUnitType.set(AnalyticSpider.statTimeUnitType.Weekly);
+	},
+	"click label[for=monthly]": function(event, template){
+		template.data.statTimeUnitType.set(AnalyticSpider.statTimeUnitType.Monthly);
+	},
+	"click .switch_btn": function(event,template){
+		template.data.stat = AnalyticSpider.getParticipationStatByTimePeriod(template.data.studentId, template.data.classroomId,template.data.statTimeUnitType.get());
+		refreshChart(template.data.areaChart, template.data.stat);
+	},
 });
 
 Template.trendingAreaChart.helpers({
 	"chartName": function() {
-		return Template.instance().data.chartName;
+		return this.chartName;
 	},
 	"uniqChartId": function(){
-		return Template.instance().uniqChartId;
+		return this.uniqChartId;
+	},
+	"isChecked":function(statTimeUnitType){
+		return this.statTimeUnitType.get() === statTimeUnitType ? "checked" : "";
 	}
 });
 
 function prepareChartData(stat){
 	if(!!!stat) return;
 	var chartData = {
-		xTicks : ['x', '2014-01-01'],
-		acceptedArray : ['Accepted', 0],
-		totalArray : ['Total', 0],
+		xTicks : ['x'],
+		acceptedArray : ['Accepted'],
+		totalArray : ['Total'],
 	};
 	
 
@@ -43,12 +60,12 @@ function prepareChartData(stat){
 	return chartData;
 }
 
-function initChart(studentId, classroomId, stat){
+function initChart(stat){
 	if(!!!stat) return;
 	var chartData = prepareChartData(stat);
 
 	return c3.generate({
-		bindto: '#'+Template.instance().uniqChartId,
+		bindto: '#'+Template.instance().data.uniqChartId,
 		data: {
 			x:'x',
 			type: 'area-spline',
@@ -65,9 +82,8 @@ function initChart(studentId, classroomId, stat){
 	        x: {
 	            type : 'timeseries',
 	            tick: {
-			      format: "%b %Y",
-			      fit:true,
-			      values:stat.dateArray
+			      format: "%d %b %Y",
+			      fit:true
 			    }
 	        },
 	        y: {
