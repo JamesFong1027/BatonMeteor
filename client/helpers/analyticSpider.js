@@ -77,6 +77,37 @@ AnalyticSpider = {
 	getDailyParticipationStat:function(userId,classroomId){
 		return AnalyticSpider.getParticipationStatByTimePeriod(userId,classroomId,AnalyticSpider.statTimeUnitType.Daily);
 	},
+	getPerfectTimePeriod:function(userId,classroomId,startDateFilter,endDateFilter){
+		var query = new Object();
+		if(!!classroomId) query.cid = classroomId;
+		if(!!userId) query.uid = userId;
+		if(!!startDateFilter) query.createDate = { $gte : startDateFilter };
+		if(!!endDateFilter) {
+			if(!!query.createDate) query.createDate.$lte = endDateFilter;
+			else query.createDate = {$lte : endDateFilter};
+		}
+
+		var firstTicket = TicketsInfo.findOne(query,{sort:{createDate:1}});
+		var lastTicket = TicketsInfo.findOne(query,{sort:{createDate:-1}});
+		if(!!!firstTicket) return null;
+
+		var statObj = {
+			dateArray: new Array(),
+			attendTimesArray : new Array(),
+			selectedTimesArray : new Array()
+		};
+		var startMoment = moment(firstTicket.createDate);
+		var lastMoment = moment(lastTicket.createDate);
+
+
+		var monthDiff = Math.ceil(lastMoment.diff(startMoment, AnalyticSpider.statTimeUnitType.Monthly ,true));
+		var weekDiff = Math.ceil(lastMoment.diff(startMoment, AnalyticSpider.statTimeUnitType.Weekly ,true));
+		var dayDiff = Math.ceil(lastMoment.diff(startMoment, AnalyticSpider.statTimeUnitType.Daily ,true));
+		if(monthDiff > 1) return AnalyticSpider.statTimeUnitType.Monthly;
+		if(weekDiff > 1) return AnalyticSpider.statTimeUnitType.Weekly;
+
+		return AnalyticSpider.statTimeUnitType.Daily;
+	},
 	getParticipationStatByTimePeriod:function(userId,classroomId,statTimeUnitType,startDateFilter,endDateFilter){
 		var query = new Object();
 		if(!!classroomId) query.cid = classroomId;

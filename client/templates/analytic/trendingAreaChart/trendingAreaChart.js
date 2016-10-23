@@ -2,7 +2,7 @@ Template.trendingAreaChart.onCreated(function() {
 	// console.log(this.data);
 	if(!!!this.data) this.data = new Object();
 	this.data.uniqChartId = RandomUtil.randomCharString();
-	if(!!!this.data.statTimeUnitType) this.data.statTimeUnitType = AnalyticSpider.statTimeUnitType.Weekly;
+	if(!!!this.data.statTimeUnitType) this.data.statTimeUnitType = AnalyticSpider.getPerfectTimePeriod(this.data.studentId,this.data.classroomId);
 	this.data.stat = AnalyticSpider.getParticipationStatByTimePeriod(this.data.studentId,this.data.classroomId,this.data.statTimeUnitType);
 	this.data.statTimeUnitType = new ReactiveVar(this.data.statTimeUnitType);
 });
@@ -18,16 +18,8 @@ Template.trendingAreaChart.events({
 		template.data.stat = AnalyticSpider.getParticipationStatByTimePeriod(template.data.studentId, template.data.classroomId,template.data.statTimeUnitType.get());
 		refreshChart(template.data.areaChart, template.data.stat);
 	},
-	"click label[for=daily]": function(event, template){
-		template.data.statTimeUnitType.set(AnalyticSpider.statTimeUnitType.Daily);
-	},
-	"click label[for=weekly]": function(event, template){
-		template.data.statTimeUnitType.set(AnalyticSpider.statTimeUnitType.Weekly);
-	},
-	"click label[for=monthly]": function(event, template){
-		template.data.statTimeUnitType.set(AnalyticSpider.statTimeUnitType.Monthly);
-	},
 	"click .switch_btn": function(event,template){
+		template.data.statTimeUnitType.set(event.target.value);
 		template.data.stat = AnalyticSpider.getParticipationStatByTimePeriod(template.data.studentId, template.data.classroomId,template.data.statTimeUnitType.get());
 		refreshChart(template.data.areaChart, template.data.stat);
 	},
@@ -74,6 +66,11 @@ function initChart(stat){
 				chartData.acceptedArray,
 				chartData.totalArray
 			],
+		},
+		grid: {
+			y: {
+				show: true
+			},
 		},
 		tooltip: {
 		  show: true
