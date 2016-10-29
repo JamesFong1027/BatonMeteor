@@ -33,10 +33,6 @@ TicketShutter={
 
 		return currentTicket;
 	},
-	//Simple version by using session var
-	sendTicketAuto:function(purpose){
-		return TicketShutter.sendTicket(Session.get("curMode"),purpose,Session.get("curClassroomId"));
-	},
 	// for student to cancel the ticket
 	cancelTicket:function(ticketId){
 		analytics.track("Cancel Ticket Request", {

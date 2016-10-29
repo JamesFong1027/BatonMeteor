@@ -1,5 +1,5 @@
 Template.classroomCode.onRendered(function(){
-	Meteor.call("getClassroomShortcode", Session.get("curClassroomId"), function(err,res){
+	Meteor.call("getClassroomShortcode", this.data.classroomId, function(err,res){
 		var template = this;
 		if(!err && res){
 			console.log(res);
@@ -11,7 +11,7 @@ Template.classroomCode.onRendered(function(){
 
 Template.classroomCode.helpers({
   classroomsInfo:function(){
-    return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId"));
+    return ClassroomKicker.getClassroomInfo(Template.instance().data.classroomId);
   },
   isShowShortcode:function(isProtected){
   	return isProtected && isTeacherAccount(Meteor.userId());

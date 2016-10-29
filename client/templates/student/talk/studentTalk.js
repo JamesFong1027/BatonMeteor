@@ -2,29 +2,32 @@ Template.studentTalk.onCreated(function() {
 	console.log("in onCreated");
 	var template = this;
 	template.sender = new ReactiveVar(new TicketSenderPanel(template));
+	template.curClassroomInfo = new ReactiveVar(null);
 });
 
 Template.studentTalk.onRendered(function() {
-	console.log("in studentTalk onRendered");
 	Session.set('ionTab.current', "studentTalk");
-	Session.set("curMode", Schemas.ticketType.talkTicket);
+	var template = this;
+	template.curClassroomInfo.set(ClassroomKicker.checkCurrentClassBySessionType(Meteor.userId,Schemas.sessionType.attending));
+	if(!!template.curClassroomInfo.get())
+		Meteor.subscribe('ticketsInfoDetail', template.curClassroomInfo.get()._id);
 });
 
 Template.studentTalk.helpers({
 	"hasCurClassroom": function() {
-		return !!Template.instance().data;
+		return !!Template.instance().curClassroomInfo.get();
 	},
 	classroom: function() {
-		return ClassroomKicker.getClassroomInfo(Template.instance().data);
+		return Template.instance().curClassroomInfo.get();
 	},
 	"ticketList": function() {
 		console.log("in ticketList helper");
-		return TicketShutter.getClassroomBuddyList(Session.get("curMode"), Session.get("curClassroomId"));
+		return TicketShutter.getClassroomBuddyList(Schemas.ticketType.talkTicket, Template.instance().curClassroomInfo.get()._id);
 	},
 	"afterHasClassroomTrigger": function() {
 		var template = Template.instance();
-		var curClassroomId = template.data;
-		if (!!!curClassroomId || !!!ClassroomKicker.getCurrentAttendingClassroom())
+		var curClassroomId = template.curClassroomInfo.get()._id;
+		if (!!!template.curClassroomInfo.get())
 			return;
 
 		// template.sender.get().removeClassroomWatcher();
@@ -40,16 +43,16 @@ Template.studentTalk.onDestroyed(function() {
 
 Template.studentTalk.events({
 	"click #build": function() {
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.buildOn);
+		TicketShutter.sendTicket(Schemas.ticketType.talkTicket,Schemas.talkTicketValue.buildOn,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #new_idea": function() {
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.newIdea);
+		TicketShutter.sendTicket(Schemas.ticketType.talkTicket,Schemas.talkTicketValue.newIdea,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #question": function() {
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.question);
+		TicketShutter.sendTicket(Schemas.ticketType.talkTicket,Schemas.talkTicketValue.question,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #challenge": function() {
-		TicketShutter.sendTicketAuto(Schemas.talkTicketValue.challenge);
+		TicketShutter.sendTicket(Schemas.ticketType.talkTicket,Schemas.talkTicketValue.challenge,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #add-circle": function() {
 		// Template.instance().sender.addCircle();

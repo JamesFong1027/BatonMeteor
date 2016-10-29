@@ -47,4 +47,22 @@ Template.tabsLayout.events({
 		      });
 		}
 	},
+	"click #teacherMenu": function(event, template) {
+		var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
+		if (!!curClassroom) {
+			IonPopover.show("teacherMenu", {
+				classroomId: curClassroom._id,
+				classMode: event.target.attributes["data"].value
+			}, event.target);
+		}
+	},
+	"click #studentMenu": function(event, template) {
+		var curClassroom = ClassroomKicker.getCurrentAttendingClassroom();
+		if (!!curClassroom) {
+			IonPopover.show("studentMenu", {
+				classroomId: curClassroom._id,
+				classMode: event.target.attributes["data"].value
+			}, event.target);
+		}
+	},
 });

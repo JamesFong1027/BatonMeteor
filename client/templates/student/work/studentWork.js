@@ -1,30 +1,32 @@
 Template.studentWork.onCreated(function() {
 	var template = this;
 	template.sender = new ReactiveVar(new TicketSenderPanel(template));
-	console.log("on Create");
+	template.curClassroomInfo = new ReactiveVar(null);
 });
 
 Template.studentWork.onRendered(function() {
-	console.log("in studentWork onRendered");
 	Session.set('ionTab.current', "studentWork");
-	Session.set("curMode", Schemas.ticketType.workTicket);
+	var template = this;
+	template.curClassroomInfo.set(ClassroomKicker.checkCurrentClassBySessionType(Meteor.userId,Schemas.sessionType.attending));
+	if(!!template.curClassroomInfo.get())
+		Meteor.subscribe('ticketsInfoDetail', template.curClassroomInfo.get()._id);
 });
 
 Template.studentWork.helpers({
 	"hasCurClassroom": function() {
-		return !!Template.instance().data;
+		return !!Template.instance().curClassroomInfo.get();
 	},
 	classroom: function() {
-		return ClassroomKicker.getClassroomInfo(Session.get("curClassroomId"));
+		return Template.instance().curClassroomInfo.get();
 	},
 	"ticketList": function() {
 		console.log("in ticketList helper");
-		return TicketShutter.getClassroomBuddyList(Session.get("curMode"), Session.get("curClassroomId"));
+		return TicketShutter.getClassroomBuddyList(Schemas.ticketType.workTicket, Template.instance().curClassroomInfo.get()._id);
 	},
 	"afterHasClassroomTrigger": function() {
 		var template = Template.instance();
-		var curClassroomId = template.data;
-		if (!!!curClassroomId || !!!ClassroomKicker.getCurrentAttendingClassroom())
+		var curClassroomId = template.curClassroomInfo.get()._id;
+		if (!!!template.curClassroomInfo.get())
 			return;
 
 		template.sender.get().addClassroomWatcher(Schemas.ticketType.workTicket, curClassroomId);
@@ -37,34 +39,34 @@ Template.studentWork.onDestroyed(function() {
 
 Template.studentWork.events({
 	"click #numOne": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.one);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.one,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numTwo": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.two);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.two,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numThree": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.three);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.three,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numFour": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.four);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.four,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numFive": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.five);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.five,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numSix": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.six);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.six,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numSeven": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.seven);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.seven,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numEight": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.eight);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.eight,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numNine": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.nine);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.nine,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click #numTen": function() {
-		TicketShutter.sendTicketAuto(Schemas.workTicketValue.ten);
+		TicketShutter.sendTicket(Schemas.ticketType.workTicket,Schemas.workTicketValue.ten,Template.instance().curClassroomInfo.get()._id);
 	},
 	"click .worktab-menu-item": function() {
 		document.getElementById('menu-toggler').checked = !document.getElementById('menu-toggler').checked;

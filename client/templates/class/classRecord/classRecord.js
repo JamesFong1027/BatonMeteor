@@ -14,8 +14,8 @@ Template.classRecord.helpers({
 	"args": function () {
 		return {
 			chartName: "Participated Student List",
-			classroomId: Session.get("curClassroomId"),
-			studentList: TicketShutter.getCurClassroomStudentList(Session.get("curClassroomId"), Template.instance().SessionMode.get() ? ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")) : null)
+			classroomId: Template.instance().data.classroomId,
+			studentList: TicketShutter.getCurClassroomStudentList(Template.instance().data.classroomId, Template.instance().SessionMode.get() ? ClassroomKicker.getCurrentClassSession(Template.instance().data.classroomId) : null)
 		};
 	},
 });

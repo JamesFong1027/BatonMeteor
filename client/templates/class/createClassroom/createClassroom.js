@@ -12,7 +12,7 @@ Template.createClassroom.events({
     // Get value from form element
     var classroomName = event.target.classroomName.value;
 
-    var curClassroom = ClassroomKicker.getCurrentTeachingClassroom();
+    var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
     if(!!curClassroom){
       var warnStr = "Close Current Classroom?";
       var warnCurClass = "There are one classroom opened already, do you want to <strong>close</strong> it?"
@@ -57,8 +57,6 @@ function createClassroom(classroomName){
   var classroomId = ClassroomKicker.createClassroom(classroomName,"");
 
   if(classroomId){
-    Session.set("curMode",Schemas.ticketType.talkTicket);
-    Session.set("curClassroomId",classroomId);
     Router.go("teacherTalk");
   }
 }

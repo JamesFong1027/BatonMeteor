@@ -178,7 +178,7 @@ TicketSenderPanel = function(template) {
       }
     }
  
-    this.runWhenViewReady(function(){
+    BlazeTemplateHelper.fireWhenReady(function(){
       // add a auto run to watch classroom status
       Tracker.autorun(function(c) {
         template.classWatcher = c;
@@ -186,7 +186,7 @@ TicketSenderPanel = function(template) {
         if (!!!curClassroom)
           return;
 
-        if (curClassroom.status !== Schemas.classroomStatus.close && !!Session.get("curClassroomId")) {
+        if (curClassroom.status !== Schemas.classroomStatus.close) {
             console.log("check buddyListWatcher");
             if(!!template.buddyListWatcher) return;
 
@@ -220,12 +220,12 @@ TicketSenderPanel = function(template) {
           c.stop();
           if(curClassroom.status === Schemas.classroomStatus.close){
             // when the class is closed, all the student will flag as leave the class
-            ClassroomKicker.leaveClass();
+            ClassroomKicker.leaveClass(curClassroom._id);
             Router.go("home");
           }
         }
       });
-    });
+    }, template, '.container',500);
   }
 
   this.removeClassroomWatcher = function(){

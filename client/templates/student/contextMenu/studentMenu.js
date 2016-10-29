@@ -9,13 +9,13 @@ Template.studentMenu.helpers({
 
 Template.studentMenu.events({
 	"click #leave_class": function(event){
-		ClassroomKicker.leaveClass();
+		ClassroomKicker.leaveClass(this.classroomId);
  
 		//back to home page
 		Router.go("home");
 	},
 	"click #cancel_request":function(event){
-		var curTicket = TicketShutter.getCurrentTicket(Session.get("curMode"),Session.get("curClassroomId"));
+		var curTicket = TicketShutter.getCurrentTicket(Template.instance().data.classMode,Template.instance().data.classroomId);
 		if(curTicket){
 			var warnTitle = "Cancel your request ?";
 			IonPopup.confirm({
@@ -30,7 +30,7 @@ Template.studentMenu.events({
 		}
 	},
 	"click #class_info":function(){
-		IonModal.open("classroomCode");
+		IonModal.open("classroomCode", this);
 	},
 	"click #class_record":function(){
 

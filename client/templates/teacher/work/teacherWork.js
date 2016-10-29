@@ -1,14 +1,10 @@
 Template.teacherWork.onCreated(function(){
-  Session.set("curMode",Schemas.ticketType.workTicket);
-  
+  this.curClassroomInfo = new ReactiveVar(null);
 });
 
 Template.teacherWork.onRendered(function(){
   Session.set('ionTab.current', "teacherWork");
-  // Tracker.afterFlush(function(){
-  //   this.$(".avatar").css("background-color","red");
-  //   console.log(this.$(".avatar"));  
-  // });
+  this.curClassroomInfo.set(ClassroomKicker.checkCurrentClassBySessionType(Meteor.userId,Schemas.sessionType.hosting));
 });
 
 
@@ -32,8 +28,7 @@ Template.teacherWork.helpers({
   "afterRenderTrigger":function(){
   },
   "tickets": function () {
-
-    return TicketShutter.getClassroomTicketList(Session.get("curMode"),Session.get("curClassroomId"), ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")));
+    return TicketShutter.getClassroomTicketList(Schemas.ticketType.workTicket,Template.instance().curClassroomInfo.get()._id, ClassroomKicker.getCurrentClassSession(Template.instance().curClassroomInfo.get()._id));
   },
   "changeColor":function(ticketValue){
     return getRGB(ticketValue);
@@ -57,10 +52,10 @@ Template.teacherWork.helpers({
       return iconClass;
   },
   "classroomName":function(){
-  	 return ClassroomKicker.getCurrentTeachingClassroom().name;
+  	 return Template.instance().curClassroomInfo.get().name;
   },
   "hasCurClassroom":function(){
-  	return ClassroomKicker.getCurrentTeachingClassroom();
+  	return !!Template.instance().curClassroomInfo.get();
   },
   longHoldGesture:{
     'press .avatar': function (event, templateInstance) {

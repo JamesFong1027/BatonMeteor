@@ -1,18 +1,10 @@
 Template.teacherTalk.onCreated(function(){
-  Session.set("curMode",Schemas.ticketType.talkTicket);
-  var curClassroomId = Session.get("curClassroomId");
-  if(curClassroomId){
-    Router.go("/t/talkPanel/"+curClassroomId);
-  }
-
+  this.curClassroomInfo = new ReactiveVar(null);
 });
 
 Template.teacherTalk.onRendered(function(){
   Session.set('ionTab.current', "teacherTalk");
-  // Tracker.afterFlush(function(){
-  //   this.$(".avatar").css("background-color","red");
-  //   console.log(this.$(".avatar"));  
-  // });
+  this.curClassroomInfo.set(ClassroomKicker.checkCurrentClassBySessionType(Meteor.userId,Schemas.sessionType.hosting));
 });
 
 function getConvertRate(createDate){
@@ -74,9 +66,7 @@ Template.teacherTalk.helpers({
     )(this);
   },
   "tickets": function () {
-    console.log(Session.get("curMode"));
-    console.log(Session.get("curClassroomId"));
-    return TicketShutter.getClassroomTicketList(Session.get("curMode"),Session.get("curClassroomId"), ClassroomKicker.getCurrentClassSession(Session.get("curClassroomId")));
+    return TicketShutter.getClassroomTicketList(Schemas.ticketType.talkTicket,Template.instance().curClassroomInfo.get()._id, ClassroomKicker.getCurrentClassSession(Template.instance().curClassroomInfo.get()._id));
   },
   "changeColor":function(){
     this.convertRate = new ReactiveVar(getConvertRate(this.createDate));
@@ -85,15 +75,14 @@ Template.teacherTalk.helpers({
     return getRGB(this.convertRate.get());
   },
   "classroomName":function(){
-  	 return ClassroomKicker.getCurrentTeachingClassroom().name;
+  	 return Template.instance().curClassroomInfo.get().name;
   },
   "hasCurClassroom":function(){
     // show first time user guide
-    if(ClassroomKicker.getCurrentTeachingClassroom()){
+    if(!!Template.instance().curClassroomInfo.get()){
       ClassroomKicker.showFirstTimeGuide();
     }
-
-  	return ClassroomKicker.getCurrentTeachingClassroom();
+  	return !!Template.instance().curClassroomInfo.get();
   },
   longHoldGesture:{
     'press .avatar': function (event, templateInstance) {

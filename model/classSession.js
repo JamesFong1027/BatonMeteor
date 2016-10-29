@@ -88,7 +88,17 @@ ClassSession.allow({
 
 ClassSession.deny({  
   update: function (userId, docs, fields, modifier) {
-    // can't change owners
-    return _.contains(fields, 'uid');
+    // can't change owner id, classroom id and session type
+    return _.intersection(fields, ['uid','cid','sessionType']).length !== 0;
+  },
+  insert: function(userId, document){
+  	// should not insert a new "within" session when there already have one in the same classroom and same type
+  	// also prevent create session which is "end"
+  	return !!ClassSession.findOne({
+  		uid:userId,
+  		sessionType:document.sessionType,
+  		cid: document.cid,
+  		status: document.status
+  	});
   }
 });

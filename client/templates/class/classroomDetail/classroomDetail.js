@@ -30,7 +30,7 @@ Template.classroomDetail.events({
     
     var warnStr = "Restart a new session of this classrooom?";
     var warnCurClass = "There are one classroom opened already, do you want to <strong>close</strong> it?"
-    var curClassroom = ClassroomKicker.getCurrentTeachingClassroom();
+    var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
     if (!curClassroom) {
       warnCurClass = "Press OK to restart this classroom";
     }
@@ -40,12 +40,10 @@ Template.classroomDetail.events({
       template: warnCurClass,
       onOk: function() {
         console.log('Confirmed');
-        var curClassroom = ClassroomKicker.getCurrentTeachingClassroom();
+        var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
         if (!!curClassroom)
           ClassroomKicker.closeClassroom(curClassroom._id);
         ClassroomKicker.restartClassroom(classroomId);
-        Session.set("curClassroomId", classroomId);
-        Session.set("curMode", Schemas.ticketType.talkTicket);
         Router.go("teacherTalk");
       },
       onCancel: function() {

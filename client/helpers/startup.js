@@ -14,14 +14,7 @@ Meteor.startup(function() {
 	Meteor.subscribe('ticketsInfo');
 	Meteor.subscribe('classSession');
 	Meteor.subscribe('achievement');
-	Tracker.autorun(function() {
-		if (Session.get("curClassroomId") && Session.get("curMode")) {
-			console.log("start subscribe ticketsInfoDetail");
-			Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroomId"));
-			Meteor.subscribe('userProfile');
-		}
-	});
-
+	Meteor.subscribe('userProfile');
 
 	// for waiting for resume, when update available
 	// Tracker.autorun(function(){
@@ -106,7 +99,6 @@ Meteor.startup(function() {
 	//    };
 
 
-	// Meteor.subscribe("ticketsInfoDetail", Session.get("curClassroom"),Session.get("CurMode"));		
 	// Meteor.subscribe('userProfile');
 	//push notification setup
 	// Push.addListener('message', function(notification) {
