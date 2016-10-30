@@ -22,6 +22,7 @@ caching-compiler@1.0.5_1
 caching-html-compiler@1.0.6
 callback-hook@1.0.9
 ccorcos:transitioner@2.0.2
+cfs:http-methods@0.0.32
 check@1.2.3
 chriswessels:hammer@4.0.2
 coffeescript@1.1.2_1
@@ -78,6 +79,7 @@ meteorhacks:meteorx@1.3.1
 meteoric:ionic@0.2.0
 meteoric:ionic-sass@0.1.9
 meteoric:ionicons-sass@0.1.6
+meteorspark:util@0.2.0
 mfpierre:chartist-js@1.6.0
 minifier-css@1.1.12_1
 minifier-js@1.1.12_1
@@ -118,6 +120,7 @@ srp@1.0.9
 standard-minifier-css@1.0.7_1
 standard-minifier-js@1.0.7_1
 steeve:jquery-qrcode@0.2.2
+tap:i18n@1.8.2
 templating@1.1.12_1
 templating-tools@1.0.4
 tracker@1.0.14
