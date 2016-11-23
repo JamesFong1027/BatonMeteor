@@ -17,7 +17,7 @@ Template.studentMenu.events({
 	"click #cancel_request":function(event){
 		var curTicket = TicketShutter.getCurrentTicket(Template.instance().data.classMode,Template.instance().data.classroomId);
 		if(curTicket){
-			var warnTitle = "Cancel your request ?";
+			var warnTitle = TAPi18n.__("cancel_request_popup_title");
 			IonPopup.confirm({
 		      title: warnTitle,
 		      onOk: function() {
@@ -25,7 +25,7 @@ Template.studentMenu.events({
 		      }
 		    });
 		} else {
-			var warnTitle = "No request yet !";
+			var warnTitle = TAPi18n.__("cancel_request_popup_warn");
 			IonPopup.alert({title:warnTitle});
 		}
 	},

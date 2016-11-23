@@ -1,12 +1,14 @@
 <template name="editClassroom">  
-{{#ionModal title="Edit Classroom"}}
+{{#ionModal title="edit_classroom_page_title"}}
 	{{#with classroomInfo}}
 		<form class="edit_classroom">
 			<div class="list">
 			  <label class="item item-input item-stacked-label">
-			    <span class="input-label">Classroom Name</span>
-			    <input type="text" name="classroomName" placeholder="Science course Nov.10" value="{{name}}" />
-			    <span class="errorMsg positive" name="classroomNameErr">Classroom name is already exist!</span>
+			    <span class="input-label">{{_ "edit_classroom_class_name_title"}}</span>
+			    <input type="text" name="classroomName" placeholder={{_ "edit_classroom_class_name_placeholder"}} value="{{name}}" />
+			    <span class="errorMsg positive" name="classroomNameErr">
+			    	{{_ "class_name_already_exist_error_msg"}}
+			    </span>
 			  </label>
 			  <!-- <label class="item item-input item-stacked-label">
 			    <span class="input-label">Shortcode</span>
@@ -23,7 +25,7 @@
 				
 				<div class="button-bar">
 					<button type="submit" class="button button-positive">
-						Save
+						{{_ "edit_classroom_button_text"}}
 					</button>
 				</div>
 			</div>

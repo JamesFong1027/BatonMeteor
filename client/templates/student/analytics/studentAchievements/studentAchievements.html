@@ -1,6 +1,6 @@
 <template name="studentAchievements">  
 	{{#contentFor "headerTitle"}}
-		<h1 class="title">My Achievements</h1>
+		<h1 class="title">{{_ "student_achievement_page_title"}}</h1>
 	{{/contentFor}}
 
 	<!-- {{#contentFor "headerButtonRight"}}
@@ -14,7 +14,9 @@
 	{{/contentFor}}
 
 	{{#ionSubheaderBar class="bar-clear"}}
-		<h1 class="title" style="color:#000000">Overall Summary</h1>
+		<h1 class="title" style="color:#000000">
+			{{_ "student_achievement_overall_summary"}}
+		</h1>
 	{{/ionSubheaderBar}}
 	
 	{{#ionView}}
@@ -29,15 +31,21 @@
 					 		<ul>
 								<li class="accepted_title">
 									{{selectedTimes}}
-									<span>Accepted</span>
+									<span>
+									{{_ "ticket_stat_title" context="accepted"}}
+									</span>
 								</li>
 								<li class="total_title">
 									{{attendTimes}}
-									<span>Total</span>
+									<span>
+										{{_ "ticket_stat_title" context="total"}}
+									</span>
 								</li>
 								<li>
 									{{target}}
-									<span>Goal</span>
+									<span>
+									{{_ "ticket_stat_title" context="goal"}}
+									</span>
 								</li>
 							</ul>
 					 	</div>
@@ -64,15 +72,21 @@
 							 		<ul>
 										<li class="accepted_title">
 											{{participation.selectedTimes}}
-											<span>Accepted</span>
+											<span>
+												{{_ "ticket_stat_title" context="accepted"}}
+											</span>
 										</li>
 										<li class="total_title">
 											{{participation.attendTimes}}
-											<span>Total</span>
+											<span>
+												{{_ "ticket_stat_title" context="total"}}
+											</span>
 										</li>
 										<li>
 											{{target}}
-											<span>Goal</span>
+											<span>
+											{{_ "ticket_stat_title" context="goal"}}
+											</span>
 										</li>
 									</ul>
 							 	</div>

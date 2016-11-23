@@ -33,7 +33,7 @@ Template.tabsLayout.events({
 		      {
 		          "preferFrontCamera" : false, // iOS and Android 
 		          "showFlipCameraButton" : true, // iOS and Android 
-		          "prompt" : "Place a barcode inside the scan area", // supported on Android only 
+		          "prompt" : TAPi18n.__("qr_scanner_prompt"), // supported on Android only 
 		          "formats" : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED 
 		          "orientation" : "portrait" // Android only (portrait|landscape), default unset so it rotates with the device 
 		      }
@@ -41,8 +41,8 @@ Template.tabsLayout.events({
 		} else{
 			console.log("not Cordova, use qrScanner");
 			IonPopup.alert({
-		        title: 'QR Scanner not available',
-		        template: 'Please download mobile app to use this feature.',
+		        title: TAPi18n.__("qr_scanner_popup_title"),
+		        template: TAPi18n.__("qr_scanner_popup_content"),
 		        okText: 'OK'
 		      });
 		}

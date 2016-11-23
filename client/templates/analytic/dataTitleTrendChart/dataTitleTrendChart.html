@@ -13,16 +13,20 @@
 			 		<ul>
 						<li class="accepted_title">
 							{{currentNum}}
-							<span>Current</span>
+							<span>
+							{{_ "current_participation_title"}}
+							</span>
 						</li>
 						<li class="total_title">
 							{{diffNum}}
-							<span>Diff</span>
+							<span>
+								{{_ "diff_participation_title"}}
+							</span>
 						</li>
 						<li class={{trendTypeClass}}>
 							<i>
 								{{percentStr}}
-								<span>{{trendType}}</span>
+								<span>{{i18nTrendType trendType}}</span>
 							</i>
 						</li>
 					</ul>

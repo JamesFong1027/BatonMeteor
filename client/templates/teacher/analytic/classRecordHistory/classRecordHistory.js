@@ -11,7 +11,7 @@ Template.classRecordHistory.helpers({
 
 		var chartArg = {
 			classroomId: classroomId,
-			chartName: chartName
+			chartName: TAPi18n.__(chartName)
 		}
 		return chartArg;
 	},

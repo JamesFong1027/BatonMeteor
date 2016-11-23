@@ -41,8 +41,8 @@ function prepareChartData(stat){
 	if(!!!stat) return;
 	var chartData = {
 		xTicks : ['x'],
-		acceptedArray : ['Accepted'],
-		totalArray : ['Total'],
+		acceptedArray : [TAPi18n.__("ticket_stat_title", {context:"accepted"})],
+		totalArray : [TAPi18n.__("ticket_stat_title", {context:"total"})],
 	};
 	
 

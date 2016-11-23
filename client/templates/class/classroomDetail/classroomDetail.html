@@ -1,6 +1,6 @@
 <template name="classroomDetail">  
 	{{#contentFor "headerTitle"}}
-		<h1 class="title">Classroom Detail</h1>
+		<h1 class="title">{{_ "classroom_detail_page_title"}}</h1>
 	{{/contentFor}}
 
 	{{#contentFor "headerButtonRight"}}
@@ -19,27 +19,29 @@
 	  				<div class="item item-thumbnail-left">
 						<img src={{getImage logo}}>  
 						<h2>{{name}}</h2>
-						<p>Status: {{status}}</p>
-						<p>Teacher: {{getTeacherName tid}}</p>
-						<p>Create Date: {{formatDate createDate}}</p>
+						<p>{{_ "class_status_title"}}: {{i18n_ClassStatus status}}</p>
+						<p>{{_ "user_type_teacher"}}: {{getTeacherName tid}}</p>
+						<p>{{_ "class_create_date_title"}}: {{formatDate createDate}}</p>
 					</div>
 				<!-- <button class="button button-full button-calm">Select</button> -->
 		    {{/with}}
 		    <div class="item item-divider">
-	          Classroom Session History [{{totalNumber}}]
+	          {{_ "classroom_session_history_title"}} [{{totalNumber}}]
 	        </div>
 			{{#ionList}}
 				{{#each classroomSession}}
 					{{#ionItem id=this._id class="classroomItem item item-icon-right"}}
-						<h2>Session: {{sessionNumber @index}}</h2>
-						<p>Start Date: {{formatDate sessionStart}}</p>
-						<p>End Date: {{formatDate updateDate}}</p>
+						<h2>{{_ "classroom_session_title"}} {{sessionNumber @index}}</h2>
+						<p>{{_ "classroom_session_start_date_title"}}: {{formatDate sessionStart}}</p>
+						<p>{{_ "classroom_session_end_date_title"}}: {{formatDate updateDate}}</p>
 					{{/ionItem}}
 				{{/each}}
 			{{/ionList}}
 		{{/ionContent}}
 		<div id="selectClassroom" class="bar bar-footer bar-calm">
-		  <div class="title">Start new Session</div>
+		  <div class="title">
+		  	{{_ "start_new_session_button_title"}}
+		  </div>
 		</div>
   	{{/ionView}}
 </template>

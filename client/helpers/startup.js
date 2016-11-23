@@ -141,6 +141,28 @@ Meteor.startup(function() {
 		Router.go(path);
 	});
 
+	Template.registerHelper('i18n_ClassStatus', function(classStatus) {
+		return TAPi18n.__("classroom_status", {context: classStatus.toLowerCase()});
+	});
+
+	Template.registerHelper('i18n_UserType', function(userType) {
+		return TAPi18n.__("user_type", {context: userType.toLowerCase()});
+	});
+
+	Template.ionModal.helpers({
+		title: function() {
+			// use i18T for title
+			return TAPi18n.__(this.title);
+		}
+	});
+
+	Template.ionTab.helpers({
+		title: function() {
+			// use i18T for title
+			return TAPi18n.__(this.title);
+		}
+	});
+
 	// Converts from degrees to radians.
 	Math.radians = function(degrees) {
 		return degrees * Math.PI / 180;
@@ -150,7 +172,12 @@ Meteor.startup(function() {
 	// language setup
 	getUserLanguage = function () {
 	  // Put here the logic for determining the user language
-	  return "en";
+	  return "zh";
+	};
+
+	getUserLanguageForT9n = function () {
+	  // Put here the logic for determining the user language
+	  return "zh-CN";
 	};
 
 	if (Meteor.isClient) {
@@ -164,5 +191,7 @@ Meteor.startup(function() {
 				// Handle the situation
 				console.log(error_message);
 			});
+
+		T9n.setLanguage(getUserLanguageForT9n());
 	}
 });

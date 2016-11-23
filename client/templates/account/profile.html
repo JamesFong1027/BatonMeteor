@@ -1,7 +1,7 @@
 <template name="profile">
 
   {{#contentFor "headerTitle"}}
-    <h1 class="title">Profile</h1>
+    <h1 class="title">{{_ "profile_page_title"}}</h1>
   {{/contentFor}}
 
   {{#ionView}}
@@ -14,7 +14,7 @@
 
           {{#ionItem class="item item-icon-left"}}
             <i class="icon ion-person"></i>
-            User profile
+            {{_ "user_profile_title"}}
             <span class="item-note">
               {{firstName}}, {{lastName}}
             </span>
@@ -23,27 +23,27 @@
           {{#if isTeacher}}
             {{#ionItem class="item item-icon-left item-icon-right" path="classroomHistoryList"}}
               <i class="icon ion-ios-clock"></i>
-              Classroom history list
+              {{_ "classroom_history_list_title"}}
               <span class="badge badge-calm">{{historyClassroomCount}}</span>
             {{/ionItem}}
             {{#ionItem id=this._id class="item item-icon-left item-icon-right" path="classParticipationRecords"}}
               <i class="icon ion-clipboard"></i>
-              Participation Records
+              {{_ "participation_records_title"}}
               <span class="badge badge-calm">{{trackedClassNumber}}</span>
             {{/ionItem}}
           {{else}}
             {{#ionItem id=this._id class="item item-icon-left item-icon-right" path="studentAchievements"}}
               <i class="icon ion-ribbon-a"></i>
-              My Achievements
+              {{_ "my_achievement_title"}}
               <span class="badge badge-calm">{{targetNum}}</span>
             {{/ionItem}}
           {{/if}}
 
           {{#ionItem class="item item-icon-left" id="switchRole"}}
             <i class="icon ion-arrow-swap"></i>
-            Switch Role
+            {{_ "switch_role_button_text"}}
             <span class="item-note">
-              {{userType}}
+              {{i18n_UserType userType}}
             </span>
           {{/ionItem}}
 
@@ -54,7 +54,7 @@
 
           {{#ionItem class="item item-icon-left assertive" id="logout"}}
             <i class="icon ion-log-out assertive"></i>
-            Logout
+            {{_ "logout_button_text"}}
           {{/ionItem}}
 
         {{/ionList}}

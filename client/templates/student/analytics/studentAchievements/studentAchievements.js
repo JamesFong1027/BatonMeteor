@@ -95,13 +95,14 @@ Template.studentAchievements.events({
   "click .add_goal":function(event,template){
     var achievementId = this._id;
     IonPopup.prompt({
-      title: 'Setup goal',
-      template: 'Please enter your participation goal',
-      okText: 'Submit',
+      title: TAPi18n.__("set_goal_popup_title"),
+      template: TAPi18n.__("set_goal_popup_content"),
+      okText: TAPi18n.__("popup_submit_button"),
+      cancelText:TAPi18n.__("popup_cancel_button"),
       inputType: 'number',
-      inputPlaceholder: 'Your goal in number',
-      onOk: function(event, value){
-        AnalyticSpider.editClassAchievement(achievementId,value);
+      inputPlaceholder: TAPi18n.__("set_goal_popup_placeholder"),
+      onOk: function(event, value) {
+        AnalyticSpider.editClassAchievement(achievementId, value);
       }
     });
   },

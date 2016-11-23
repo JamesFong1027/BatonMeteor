@@ -1,5 +1,5 @@
 Template.studentSquare.onCreated(function(){
-	if(!!!this.data.chartName) this.data.chartName = "Participated Student List";
+	if(!!!this.data.chartName) this.data.chartName = TAPi18n.__("participation_student_list_title");
 });
 
 Template.studentSquare.onRendered(function(){

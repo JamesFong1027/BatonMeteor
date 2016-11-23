@@ -3,7 +3,6 @@ Template.createClassroom.onRendered(function(){
   $("#createClassroom").prop("disabled", true);
 });
 
-
 Template.createClassroom.events({
   "submit .new_classroom": function (event) {
     console.log("createClassroom");
@@ -13,12 +12,14 @@ Template.createClassroom.events({
     var classroomName = event.target.classroomName.value;
 
     var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
+    var warnStr = TAPi18n.__("start_class_popup_header");
+    var warnCurClass = TAPi18n.__("start_class_popup_alert_cur_class", {context: String(!!curClassroom)});
     if(!!curClassroom){
-      var warnStr = "Close Current Classroom?";
-      var warnCurClass = "There are one classroom opened already, do you want to <strong>close</strong> it?"
       IonPopup.confirm({
         title: warnStr,
         template: warnCurClass,
+        okText: TAPi18n.__("popup_confirm_button"),
+        cancelText:TAPi18n.__("popup_cancel_button"),
         onOk: function() {
           IonModal.close();
           ClassroomKicker.closeClassroom(curClassroom._id);

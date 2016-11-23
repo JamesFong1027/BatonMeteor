@@ -40,9 +40,9 @@ Template.classEntry.events({
 	      Router.go("home");
 	    } else {
 	      IonPopup.alert({
-	        title: 'Classroom is closed',
-	        template: 'Please wait until the classroom is re-opened.',
-	        okText: 'Got It'
+	        title: TAPi18n.__("classroom_closed_popup_title"),
+	        template: TAPi18n.__("classroom_closed_popup_content"),
+	        okText: TAPi18n.__("popup_ok_button")
 	      });
 	    }
     

@@ -1,4 +1,181 @@
 {
 	"hello": "你好",
-	"talk_mode_title": "上课模式"
+	// Classroom Status
+	"classroom_status_open": "开启",
+	"classroom_status_close": "关闭",
+
+	// user type
+	"user_type_student": "学生",
+	"user_type_teacher": "老师",
+
+	// Student Talk Page
+	"talk_mode_title": "上课模式",
+	"send_panel_view_title": "选择提问",
+	"participation_buddy_view_title": "参与情况",
+	"student_class_entry_title": "选择一个教室",
+	"join_button": "加入",
+	"short_code_input_placeholder": "输入短码，点击加入...",
+	"recent_attend_class_title": "最近参加的教室",
+	"class_status_title": "状态",
+	"class_teacher_title": "老师",
+	"class_create_date_title": "创建时间",
+	"attended_class_list_empty_text": "暂时没有参加过的教室，使用短码或者点击右上角扫描二维码进入教室",
+
+	// Student Work Page
+	"work_mode_title": "练习模式",
+
+	// Student Menu
+	"class_info_menu": "教室信息",
+	"guide_menu": "帮助",
+	"cancel_request_menu": "取消提问",
+	"leave_class_menu": "离开教室",
+
+	// Student Tab
+	"talk_tab_title": "上课",
+	"work_tab_title": "练习",
+	"profile_tab_title": "账号",
+
+	// Student Talk Page
+	"classroom_history_list_title": "最近开课列表",
+	"history_class_list_empty_text": "暂时没有任何课堂历史，请点击右上角创建教室",
+	"search_class_placeholder": "输入任意字符搜索",
+
+	// Teacher Menu
+	"class_participation_menu": "课堂参与记录",
+	"reset_class_menu": "重置当前提问",
+	"close_class_menu": "关闭教室",
+
+	// Profile page
+	"profile_page_title": "帐号",
+	"user_profile_title": "用户信息",
+	"participation_records_title": "上课参与统计",
+	"my_achievement_title": "我的成就",
+	"switch_role_button_text": "切换角色",
+	"logout_button_text": "登出",
+
+	// Create Classroom Page
+	"create_classroom_page_title": "新建教室",
+	"create_classroom_class_name_title": "教室名称",
+	"create_classroom_class_name_placeholder": "数学 1.2",
+	"class_name_already_exist_error_msg": "教室名称已被使用！",
+	"create_classroom_button_text": "创建教室",
+
+	// Edit Classroom Page
+	"edit_classroom_page_title": "修改教室信息",
+	"edit_classroom_class_name_title": "教室名称",
+	"edit_classroom_class_name_placeholder": "数学 1.2",
+	"edit_classroom_button_text": "保存",
+
+	// Classroom Detail Page
+	"classroom_detail_page_title": "教室详情",
+	"classroom_session_history_title": "课程历史纪录",
+	"classroom_session_title": "课程",
+	"classroom_session_start_date_title": "开始时间",
+	"classroom_session_end_date_title": "结束时间",
+	"start_new_session_button_title": "开始新课程",
+
+	//Classroom History List Page
+	"classroom_history_page_title": "课程历史",
+
+	//Class Participation Record Page
+	"class_participation_record_page_title": "课堂参与统计",
+	"participation_record_overall_summary": "总体趋势",
+	
+	// statsTrendCard Component
+	"total_participation_times": "总参与次数",
+	"participate_in_this_day": "在这一周",
+	"participate_in_this_week": "在这一周",
+	"participate_in_this_month": "在这一周",
+	"participation_vs_previous_day": "相比上一周",
+	"participation_vs_previous_week": "相比上一周",
+	"participation_vs_previous_month": "相比上一周",
+
+	// dataTitleTrendChart Component
+	"current_participation_title": "目前",
+	"diff_participation_title": "差额",
+	"trend_type_drop": "下降",
+	"trend_type_growth": "上涨",
+
+	// Class Participation Record Menu
+	"class_record_menu_view_history": "查看详细数据",
+	"class_record_menu_untrack": "停止纪录",
+
+	// Class History Record Page
+	"class_history_record_page_title": "历史数据",
+	"trending_chart_title": "历史趋势图",
+	"history_breakdown_chart_title": "类别分解图",
+	"participation_student_list_title": "参与学生列表",
+
+	// TrendingAreaChart Component
+	"time_unit_type_str_day": "天",
+	"time_unit_type_str_week": "周",
+	"time_unit_type_str_month": "月",
+	"chart_empty_placeholder_text": "没有足够的数据用来展示",
+
+	// Class Achievement Menu
+	"class_achieve_menu_change_goal": "设置目标",
+	"class_achieve_menu_history_chart": "历史趋势",
+	"class_achieve_menu_remove_target": "删除目标",
+
+	// Student Achievement Page
+	"student_achievement_page_title": "我的成就",
+	"student_achievement_overall_summary": "总体趋势",
+
+	// Data Title Bar Component
+	"ticket_stat_title_accepted": "接受",
+	"ticket_stat_title_total": "总计",
+	"ticket_stat_title_goal": "目标",
+
+	//ClassroomCode Page
+	"classroom_code_page_title": "教室二维码",
+
+	// Current Classroom Participation Record Page
+	"current_participation_record_page_title": "当前教室参与情况",
+	"record_view_toggle_button_text": "切换到显示整个课堂数据",
+
+	// Popup General
+	"popup_cancel_button":"取消",
+	"popup_enter_button":"进入",
+	"popup_confirm_button":"确认",
+	"popup_submit_button":"提交",
+	"popup_ok_button":"好的",
+
+	// Popup Enter ShortCode
+	"enter_shortcode_popup_header":"输入短码",
+	"enter_shortcode_popup_subtitle":"忽略大小写",
+	"enter_shortcode_popup_errmsg_class_closed":"教室已关闭！",
+	"enter_shortcode_popup_errmsg_not_exist":"短码不存在，再试一次！",
+
+	// Popup Enter ShortCode
+	"switch_role_popup_header_student":"切换成学生角色",
+	"switch_role_popup_header_teacher":"切换成老师角色",
+	"switch_role_popup_subtitle_student":"将退出当前所在的教室，确定切换吗？",
+	"switch_role_popup_subtitle_teacher":"将关闭当前正开启的教室，确定切换吗？",
+
+	// Popup Start Classroom
+	"start_class_popup_alert_cur_class_true":"当前你正在主持一间教室，你想要<strong>关闭</strong>它吗？",
+	"start_class_popup_alert_cur_class_false":"选择确认继续",
+	"start_class_popup_header":"开始一个新课程？",
+
+	// Popup Set Goal
+	"set_goal_popup_title":"设置目标",
+	"set_goal_popup_content":"请输入你的课堂参与目标次数",
+	"set_goal_popup_placeholder":"目标数字",
+	
+	// Popup Delete Achievement
+	"delete_achievement_popup_title":"删除目标",
+	"delete_achievement_popup_content":"你确定要删除这个目标吗？",
+
+	// Popup QR Scannner
+	"qr_scanner_popup_title":"二维码扫描不可用",
+	"qr_scanner_popup_content":"请下载app使用这个功能",
+	"qr_scanner_prompt":"请把二维码放在扫描区内",
+
+	// Popup Cancel Request
+	"cancel_request_popup_title":"取消请求",
+	"cancel_request_popup_warn":"目前没有请求",
+
+	// Popup Classroom Closed
+	"classroom_closed_popup_title":"教室是关闭的",
+	"classroom_closed_popup_content":"请等到教室开放时再加入"
 }

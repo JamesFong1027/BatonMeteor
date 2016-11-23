@@ -41,7 +41,13 @@ Template.statsTrendCard.helpers({
 	},
 	"moreopId":function(){
 
-	}
+	},
+	"i18nPeriodTypeCurrent":function(periodType){
+		return TAPi18n.__("participate_in_this", {context: periodType.toLowerCase()});
+	},
+	"i18nPeriodTypeVsPass":function(periodType){
+		return TAPi18n.__("participation_vs_previous", {context: periodType.toLowerCase()});
+	},
 });
 
 function initChart(statArray){

@@ -15,13 +15,13 @@ Template.classParticipationRecords.helpers({
   },
   chartArg:function(){
     return {
-      chartTitle: "Total Participation",
+      chartTitle: TAPi18n.__("total_participation_times"),
       statTimeUnitType: AnalyticSpider.statTimeUnitType.Weekly,
     }
   },
   classChartArg: function(classroomId){
     return {
-      chartTitle: "Total Participation",
+      chartTitle: TAPi18n.__("total_participation_times"),
       statTimeUnitType: AnalyticSpider.statTimeUnitType.Weekly,
       classroomId: classroomId
     }
@@ -33,19 +33,19 @@ Template.classParticipationRecords.events({
     console.log(this._id);
     IonPopover.show("classParticipationRecordMenu", this, "#more-op-"+this._id);
   },
-  "click .add_goal":function(event,template){
-    var achievementId = this._id;
-    IonPopup.prompt({
-      title: 'Setup goal',
-      template: 'Please enter your participation goal',
-      okText: 'Submit',
-      inputType: 'number',
-      inputPlaceholder: 'Your goal in number',
-      onOk: function(event, value){
-        AnalyticSpider.editClassAchievement(achievementId,value);
-      }
-    });
-  },
+  // "click .add_goal":function(event,template){
+  //   var achievementId = this._id;
+  //   IonPopup.prompt({
+  //     title: 'Setup goal',
+  //     template: 'Please enter your participation goal',
+  //     okText: 'Submit',
+  //     inputType: 'number',
+  //     inputPlaceholder: 'Your goal in number',
+  //     onOk: function(event, value){
+  //       AnalyticSpider.editClassAchievement(achievementId,value);
+  //     }
+  //   });
+  // },
   "click .add_class": function(event, template){
     IonModal.open("classroomPickList");
   },

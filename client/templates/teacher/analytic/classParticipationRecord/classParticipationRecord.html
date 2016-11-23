@@ -1,6 +1,8 @@
 <template name="classParticipationRecords">  
 	{{#contentFor "headerTitle"}}
-		<h1 class="title">Participation Records</h1>
+		<h1 class="title">
+			{{_ "class_participation_record_page_title"}}
+		</h1>
 	{{/contentFor}}
 
 	<!-- {{#contentFor "headerButtonRight"}}
@@ -14,7 +16,9 @@
 	{{/contentFor}}
 
 	{{#ionSubheaderBar class="bar-clear"}}
-		<h1 class="title" style="color:#000000">Overall Summary</h1>
+		<h1 class="title" style="color:#000000">
+			{{_ "participation_record_overall_summary"}}
+		</h1>
 	{{/ionSubheaderBar}}
 	
 	{{#ionView class="class_participation_record_page"}}
@@ -32,7 +36,7 @@
 						{{/each}}
 					{{else}}
 			          <div class="padding text-center">
-			            <h4>You have no data to display yet</h4>
+			            <h4>{{_ "chart_empty_placeholder_text"}}</h4>
 			          </div>
 			        {{/if}}
 				{{/with}}

@@ -3,12 +3,7 @@ Template.studentTab.onRendered(function () {
 });
 
 Template.studentTab.helpers({
-	studentTalkPath:function(){
-		return "studentTalk";
-	},
-	studentWorkPath:function(){
-		return "studentWork";
-	}
+
 });
 
 Template.studentTab.events({

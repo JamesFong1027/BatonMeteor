@@ -1,4 +1,181 @@
 {
 	"hello": "Hey there",
-	"talk_mode_title": "Talk Mode"
+	// Classroom Status
+	"classroom_status_open": "Open",
+	"classroom_status_close": "Close",
+
+	// user type
+	"user_type_student": "Student",
+	"user_type_teacher": "Teacher",
+
+	// Student Talk Page
+	"talk_mode_title": "Talk Mode",
+	"send_panel_view_title": "Send your request",
+	"participation_buddy_view_title": "Classroom participation",
+	"student_class_entry_title": "Pick a classroom",
+	"join_button": "Join",
+	"short_code_input_placeholder": "Enter short code to start...",
+	"recent_attend_class_title": "Recently Attended Class",
+	"class_status_title": "Status",
+	"class_teacher_title": "Teacher",
+	"class_create_date_title": "Create Date",
+	"attended_class_list_empty_text": "There are no classroom, using short code or scan QR code to join a classroom",
+
+	// Student Work Page
+	"work_mode_title": "Work Mode",
+
+	// Student Menu
+	"class_info_menu": "Classroom Info",
+	"guide_menu": "Guides",
+	"cancel_request_menu": "Cancel Request",
+	"leave_class_menu": "Leave Classroom",
+
+	// Student Tab
+	"talk_tab_title": "Talk",
+	"work_tab_title": "Work",
+	"profile_tab_title": "Profile",
+
+	// Student Talk Page
+	"classroom_history_list_title": "Classroom History List",
+	"history_class_list_empty_text": "You have no history classroom, please create a classroom to start",
+	"search_class_placeholder": "Type to search...",
+
+	// Teacher Menu
+	"class_participation_menu": "Class Participation",
+	"reset_class_menu": "Reset all/Next topic",
+	"close_class_menu": "Close Classroom",
+
+	// Profile page
+	"profile_page_title": "Profile",
+	"user_profile_title": "User Profile",
+	"participation_records_title": "Participation Records",
+	"my_achievement_title": "My Achievement",
+	"switch_role_button_text": "Switch Role",
+	"logout_button_text": "Logout",
+
+	// Create Classroom Page
+	"create_classroom_page_title": "New Classroom",
+	"create_classroom_class_name_title": "Classroom Name",
+	"create_classroom_class_name_placeholder": "Science 2.1",
+	"class_name_already_exist_error_msg": "Classroom name is already exist!",
+	"create_classroom_button_text": "Create Classroom",
+
+	// Edit Classroom Page
+	"edit_classroom_page_title": "Edit Classroom",
+	"edit_classroom_class_name_title": "Classroom Name",
+	"edit_classroom_class_name_placeholder": "Science 2.1",
+	"edit_classroom_button_text": "Save",
+
+	// Classroom Detail Page
+	"classroom_detail_page_title": "Classroom Detail",
+	"classroom_session_history_title": "Classroom Session History",
+	"classroom_session_title": "Session",
+	"classroom_session_start_date_title": "Start Date",
+	"classroom_session_end_date_title": "End Date",
+	"start_new_session_button_title": "Start new Session",
+
+	//Classroom History List Page
+	"classroom_history_page_title": "Classroom History List",
+
+	//Class Participation Record Page
+	"class_participation_record_page_title": "Participation Records",
+	"participation_record_overall_summary": "Overall Summary",
+	
+	// statsTrendCard Component
+	"total_participation_times": "Total Participation",
+	"participate_in_this_day": "within today",
+	"participate_in_this_week": "in this week",
+	"participate_in_this_month": "in this month",
+	"participation_vs_previous_day": "vs yesterday",
+	"participation_vs_previous_week": "vs previous week",
+	"participation_vs_previous_month": "vs previous month",
+
+	// dataTitleTrendChart Component
+	"current_participation_title": "Current",
+	"diff_participation_title": "Diff",
+	"trend_type_drop": "Drop",
+	"trend_type_growth": "Growth",
+
+	// Class Participation Record Menu
+	"class_record_menu_view_history": "View History",
+	"class_record_menu_untrack": "Untrack",
+
+	// Class History Record Page
+	"class_history_record_page_title": "History Record",
+	"trending_chart_title": "Trending Chart",
+	"history_breakdown_chart_title": "Breakdown Chart",
+	"participation_student_list_title": "Participation Student List",
+
+	// TrendingAreaChart Component
+	"time_unit_type_str_day": "Day",
+	"time_unit_type_str_week": "Week",
+	"time_unit_type_str_month": "month",
+	"chart_empty_placeholder_text": "You have not enough data to display",
+
+	// Class Achievement Menu
+	"class_achieve_menu_change_goal": "Change goal",
+	"class_achieve_menu_history_chart": "History Chart",
+	"class_achieve_menu_remove_target": "Remove target",
+
+	// Student Achievement Page
+	"student_achievement_page_title": "My Achievement",
+	"student_achievement_overall_summary": "Overall Summary",
+
+	// Data Title Bar Component
+	"ticket_stat_title_accepted": "Accepted",
+	"ticket_stat_title_total": "Total",
+	"ticket_stat_title_goal": "Goal",
+
+	//ClassroomCode Page
+	"classroom_code_page_title": "Classroom QR Code",
+
+	// Current Classroom Participation Record Page
+	"current_participation_record_page_title": "Current Participation Record",
+	"record_view_toggle_button_text": "Toggle to see the all sessions records",
+
+	// Popup General
+	"popup_cancel_button":"Cancel",
+	"popup_enter_button":"Enter",
+	"popup_confirm_button":"Confirm",
+	"popup_submit_button":"Submit",
+	"popup_ok_button":"OK",
+
+	// Popup Enter ShortCode
+	"enter_shortcode_popup_header":"Enter ShortCode",
+	"enter_shortcode_popup_subtitle":"Ignore upper or lower case",
+	"enter_shortcode_popup_errmsg_class_closed":"Classroom is closed!",
+	"enter_shortcode_popup_errmsg_not_exist":"Shortcode not exist, try again!",
+
+	// Popup Enter ShortCode
+	"switch_role_popup_header_student":"Switch to student role",
+	"switch_role_popup_header_teacher":"Switch to teacher role",
+	"switch_role_popup_subtitle_student":"Are you sure? Will exit current attending classroom!",
+	"switch_role_popup_subtitle_teacher":"Are you sure? Will close current open classroom!",
+
+	// Popup Start Classroom
+	"start_class_popup_alert_cur_class_true":"There are one classroom opened already, do you want to <strong>close</strong> it?",
+	"start_class_popup_alert_cur_class_false":"Press OK to restart this classroom",
+	"start_class_popup_header":"Restart a new session of this classrooom?",
+
+	// Popup Set Goal
+	"set_goal_popup_title":"Setup goal",
+	"set_goal_popup_content":"Please enter your weekly goal",
+	"set_goal_popup_placeholder":"Your goal in number",
+
+	// Popup Delete Achievement
+	"delete_achievement_popup_title":"Delete achievement",
+	"delete_achievement_popup_content":"Are you sure to remove this achievement?",
+
+	// Popup QR Scannner
+	"qr_scanner_popup_title":"QR Scanner not available",
+	"qr_scanner_popup_content":"Please download mobile app to use this feature",
+	"qr_scanner_prompt":"Place a barcode inside the scan area",
+
+	// Popup Cancel Request
+	"cancel_request_popup_title":"Cancel your request?",
+	"cancel_request_popup_warn":"No request yet!",
+
+	// Popup Classroom Closed
+	"classroom_closed_popup_title":"Classroom is closed",
+	"classroom_closed_popup_content":"Please wait until the classroom is re-opened"
 }

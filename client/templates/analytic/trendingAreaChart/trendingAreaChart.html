@@ -8,15 +8,15 @@
 	<div class="period_switcher">
 		<div class="switch-field">
 			<input type="radio" id="daily{{uniqChartId}}" class="switch_btn" name={{uniqChartId}} value="days" {{isChecked 'days'}}/>
-			<label for="daily{{uniqChartId}}">Day</label>
+			<label for="daily{{uniqChartId}}">{{_ "time_unit_type_str" context="day"}}</label>
 			<input type="radio" id="weekly{{uniqChartId}}" class="switch_btn" name={{uniqChartId}} value="weeks" {{isChecked 'weeks'}}/>
-			<label for="weekly{{uniqChartId}}">Week</label>
+			<label for="weekly{{uniqChartId}}">{{_ "time_unit_type_str" context="week"}}</label>
 			<input type="radio" id="monthly{{uniqChartId}}" class="switch_btn" name={{uniqChartId}} value="months" {{isChecked 'months'}}/>
-			<label for="monthly{{uniqChartId}}">Month</label>
+			<label for="monthly{{uniqChartId}}">{{_ "time_unit_type_str" context="month"}}</label>
 	    </div>
 	</div>
 	<div class="trending_area_chart" id={{uniqChartId}}>
-		<h4 class="placeholder_text">You have not enough data to show</h4>
+		<h4 class="placeholder_text">{{_ "chart_empty_placeholder_text"}}</h4>
 	</div>
 	<!--
 	<div class="period_switcher">

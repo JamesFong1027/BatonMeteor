@@ -163,19 +163,19 @@ ClassroomKicker={
 	},
 	requestClassroomShortcode:function(){
 		IonPopup.show({
-	        title: 'Enter ShortCode',
-	        subTitle: "Ignore upper or lower case",
+	        title: TAPi18n.__("enter_shortcode_popup_header"),
+	        subTitle: TAPi18n.__("enter_shortcode_popup_subtitle"),
 	        template: '<input type="text" placeholder="ShortCode" name="shortcode" maxlength="5" >',
 	        buttons: [
 	        {
-	          text: 'Cancel',
+	          text: TAPi18n.__("popup_cancel_button"),
 	          type: 'button-default',
 	          onTap: function (event, template) {
 	            return true;
 	          }
 	        },
 	        {
-	          text: 'Enter',
+	          text: TAPi18n.__("popup_enter_button"),
 	          type: 'button-positive',
 	          onTap: function (event, template) {
 	            var input = $(template.firstNode).find('[name=shortcode]');
@@ -186,7 +186,7 @@ ClassroomKicker={
 					if (classroom) {
 						// if shortcode match, close both Modal and Popup
 						if (classroom.status !== Schemas.classroomStatus.open) {
-							errMsg = "Classroom is closed";
+							errMsg = TAPi18n.__("enter_shortcode_popup_errmsg_class_closed");
 						} else {
 							// go to classroom
 							IonPopup.close();
@@ -196,8 +196,7 @@ ClassroomKicker={
 						}
 						
 					} else {
-						console.log("don't match");
-						errMsg = "Shortcode not exist, try again";
+						errMsg = TAPi18n.__("enter_shortcode_popup_errmsg_not_exist");
 					}
 
 					// show error message

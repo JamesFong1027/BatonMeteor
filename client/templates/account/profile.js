@@ -27,22 +27,21 @@ Template.profile.events({
 		AccountsTemplates.logout();
 	},
   "click #switchRole":function(event){
-    var teacherMsg = "Are you sure? Will close current open classroom!";
-    var studentMsg = "Are you sure? Will exit current attending classroom!";
+    var subTitleMsg = TAPi18n.__("switch_role_popup_subtitle", {context:Meteor.user().profile.userType.toLowerCase()});
     var oppositUserType = Meteor.user().profile.userType === Schemas.userType.student ? Schemas.userType.teacher : Schemas.userType.student;
     IonPopup.show({
-        title: 'Switch to ' + oppositUserType,
-        subTitle: Meteor.user().profile.userType === Schemas.userType.student ? studentMsg : teacherMsg,
+        title: TAPi18n.__("switch_role_popup_header", {context: oppositUserType.toLowerCase()}),
+        subTitle: subTitleMsg,
         buttons: [
         {
-          text: 'Cancel',
+          text: TAPi18n.__("popup_cancel_button"),
           type: 'button-default',
           onTap: function (event, template) {
             return true;
           }
         },
         {
-          text: 'Confirm',
+          text: TAPi18n.__("popup_confirm_button"),
           type: 'button-positive',
           onTap: function (event, template) {
             ClassroomKicker.switchRole(oppositUserType);

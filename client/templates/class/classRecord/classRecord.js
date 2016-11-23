@@ -13,7 +13,7 @@ Template.classRecord.helpers({
 	},
 	"args": function () {
 		return {
-			chartName: "Participated Student List",
+			chartName: TAPi18n.__("participation_student_list_title"),
 			classroomId: Template.instance().data.classroomId,
 			studentList: TicketShutter.getCurClassroomStudentList(Template.instance().data.classroomId, Template.instance().SessionMode.get() ? ClassroomKicker.getCurrentClassSession(Template.instance().data.classroomId) : null)
 		};

@@ -38,6 +38,9 @@ Template.dataTitleTrendChart.helpers({
 		}
 		return statData;
 	},
+	"i18nTrendType":function(trendType){
+		return TAPi18n.__("trend_type", {context: trendType.toLowerCase()});
+	}
 });
 
 Template.dataTitleTrendChart.onRendered(function() {

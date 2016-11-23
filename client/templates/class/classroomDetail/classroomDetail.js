@@ -28,27 +28,34 @@ Template.classroomDetail.events({
     event.preventDefault();
     var classroomId = Template.instance().data;
     
-    var warnStr = "Restart a new session of this classrooom?";
-    var warnCurClass = "There are one classroom opened already, do you want to <strong>close</strong> it?"
     var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
-    if (!curClassroom) {
-      warnCurClass = "Press OK to restart this classroom";
-    }
+    var warnStr = TAPi18n.__("start_class_popup_header");
+    var warnCurClass = TAPi18n.__("start_class_popup_alert_cur_class", {context: String(!!curClassroom)});
+   
     console.log("click classroomItem");
-    IonPopup.confirm({
+    IonPopup.show({
       title: warnStr,
       template: warnCurClass,
-      onOk: function() {
-        console.log('Confirmed');
-        var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
-        if (!!curClassroom)
-          ClassroomKicker.closeClassroom(curClassroom._id);
-        ClassroomKicker.restartClassroom(classroomId);
-        Router.go("teacherTalk");
+      buttons: [
+      {
+        text: TAPi18n.__("popup_cancel_button"),
+        type: 'button-default',
+        onTap: function (event, template) {
+          return true;
+        }
       },
-      onCancel: function() {
-        console.log('Cancelled');
-      }
+      {
+        text: TAPi18n.__("popup_confirm_button"),
+        type: 'button-positive',
+        onTap: function (event, template) {
+          console.log('Confirmed');
+          var curClassroom = ClassroomKicker.getCurrentHostingClassroom();
+          if (!!curClassroom)
+            ClassroomKicker.closeClassroom(curClassroom._id);
+          ClassroomKicker.restartClassroom(classroomId);
+          Router.go("teacherTalk");
+        }
+      }]
     });
   },
 })

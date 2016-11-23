@@ -86,15 +86,15 @@
 						<div class="item-input-inset">
 					        <label class="item item-input item-input-wrapper" id="shortCodeInputWrapper">
 					        	<i class="icon ion-ios-keypad placeholder-icon"></i>
-								<input type="text" name="shortCode" placeholder="Enter short code to start...">
+								<input type="text" name="shortCode" placeholder='{{_ "short_code_input_placeholder"}}'>
 							</label>
 							<button class="button button-calm" type="submit">
-								&nbsp;Join&nbsp;
+								&nbsp;{{_ "join_button"}}&nbsp;
 							</button>
 						</div>
 				</form>
 				<div class="item item-stable item-toggle">
-		          	Recently Attended Class
+		          	{{_ "recent_attend_class_title"}}
 					<label class="toggle toggle-calm">
 						<input type="checkbox" class="listToggle">
 						<div class="track">
@@ -109,15 +109,15 @@
 								{{#ionItem id=this._id classStatus=this.status class="classroomItem item item-thumbnail-left item-icon-right"}}
 									<img src={{getImage logo}}>  
 									<h2>{{name}}</h2>
-									<p>Status: {{status}}</p>
-									<p>Teacher: {{getTeacherName tid}}</p>
-									<p>Create Date: {{formatDate createDate}}</p>
+									<p>{{_ "class_status_title"}}: {{i18n_ClassStatus status}}</p>
+									<p>{{_ "class_teacher_title"}}: {{getTeacherName tid}}</p>
+									<p>{{_ "class_create_date_title"}}: {{formatDate createDate}}</p>
 								{{/ionItem}}
 							{{/each}}
 						{{/ionList}}
 			        {{else}}
 						<div class="padding text-center">
-							<h4>There are no classroom, using short code or scan QR code to join a classroom</h4>
+							<h4>{{_ "attended_class_list_empty_text"}}</h4>
 			    		</div>
 			        {{/if}}
 			    {{/with}}
