@@ -1,0 +1,16 @@
+<template name="selectLanguage">
+  {{#contentFor "headerTitle"}}
+    <h1 class="title">{{_ "select_language_page_title"}}</h1>
+  {{/contentFor}}
+
+  {{#contentFor "headerButtonLeft"}}
+    {{>ionNavBackButton}}
+  {{/contentFor}}
+
+  {{#ionView}}
+    {{#ionContent}}
+      {{#ionRadio name="language" value="en"}}English{{/ionRadio}}
+      {{#ionRadio name="language" value="zh"}}中文{{/ionRadio}}
+    {{/ionContent}}
+  {{/ionView}}
+</template>

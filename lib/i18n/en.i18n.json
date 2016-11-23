@@ -51,6 +51,7 @@
 	"participation_records_title": "Participation Records",
 	"my_achievement_title": "My Achievement",
 	"switch_role_button_text": "Switch Role",
+	"select_language_button_text": "Select Language",
 	"logout_button_text": "Logout",
 
 	// Create Classroom Page
@@ -177,5 +178,8 @@
 
 	// Popup Classroom Closed
 	"classroom_closed_popup_title":"Classroom is closed",
-	"classroom_closed_popup_content":"Please wait until the classroom is re-opened"
+	"classroom_closed_popup_content":"Please wait until the classroom is re-opened",
+
+	// Select Language page
+	"select_language_page_title": "Select Language"
 }

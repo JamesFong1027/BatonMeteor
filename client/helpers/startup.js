@@ -149,6 +149,10 @@ Meteor.startup(function() {
 		return TAPi18n.__("user_type", {context: userType.toLowerCase()});
 	});
 
+	Template.registerHelper('i18n_CurLanguageName', function(){
+		return TAPi18n.getLanguages()[TAPi18n.getLanguage()].name;
+	});
+
 	Template.ionModal.helpers({
 		title: function() {
 			// use i18T for title

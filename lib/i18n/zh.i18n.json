@@ -51,6 +51,7 @@
 	"participation_records_title": "上课参与统计",
 	"my_achievement_title": "我的成就",
 	"switch_role_button_text": "切换角色",
+	"select_language_button_text": "选择语言",
 	"logout_button_text": "登出",
 
 	// Create Classroom Page
@@ -177,5 +178,8 @@
 
 	// Popup Classroom Closed
 	"classroom_closed_popup_title":"教室是关闭的",
-	"classroom_closed_popup_content":"请等到教室开放时再加入"
+	"classroom_closed_popup_content":"请等到教室开放时再加入",
+
+	// Select Language page
+	"select_language_page_title": "选择语言"
 }
