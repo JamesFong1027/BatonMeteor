@@ -110,6 +110,7 @@ reload@1.1.10
 retry@1.0.8
 reywood:publish-composite@1.4.2
 routepolicy@1.0.11
+rzymek:moment-locale-zh-cn@2.12.0
 service-configuration@1.0.10
 session@1.1.6
 sha@1.0.8

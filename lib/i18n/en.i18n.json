@@ -121,6 +121,7 @@
 	// Student Achievement Page
 	"student_achievement_page_title": "My Achievement",
 	"student_achievement_overall_summary": "Overall Summary",
+	"completed_percentage_text": "Completed",
 
 	// Data Title Bar Component
 	"ticket_stat_title_accepted": "Accepted",

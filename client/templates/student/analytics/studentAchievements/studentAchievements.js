@@ -40,7 +40,7 @@ Template.studentAchievements.helpers({
             if(index===0)
               return Math.round(totalTimes/goalNum*100)+"%";
             else
-              return "Completed";
+              return TAPi18n.__("completed_percentage_text");
         }
       });
 

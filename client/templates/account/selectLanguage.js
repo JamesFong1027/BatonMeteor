@@ -10,6 +10,7 @@ function isChecked(langCode){
 Template.selectLanguage.events({
 	"click .item-radio [name='language']": function(events, template){
 		console.log(events.target.value);
-		TAPi18n.setLanguage(events.target.value);		
+		Meteor.call("updateUserDefaultLangCode", events.target.value);
+		setUserLanguage(events.target.value);
 	}
 });

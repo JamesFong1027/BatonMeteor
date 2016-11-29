@@ -54,37 +54,43 @@ Meteor.startup(function() {
 			StatusBar.overlaysWebView(true);
 		}, false);
 
-		window.addEventListener('native.keyboardshow', function (event) {
+		window.addEventListener('native.keyboardshow', function(event) {
 			console.log("keyboardshow");
 			console.log($('.content.overflow-scroll').data());
 
 			var keyboardHeight = event.keyboardHeight;
 
 			// Move the bottom of the popup area(s) above the top of the keyboard (IOS only)
-			if(Blaze._globalHelpers.isIOS()){
-				$('.popup-container.popup-showing.active').each(function (index, el) {
+			if (Blaze._globalHelpers.isIOS()) {
+				$('.popup-container.popup-showing.active').each(function(index, el) {
 					$(el).data('ionkeyboard.bottom', $(el).css('bottom'));
-					$(el).css({bottom: keyboardHeight});
-				});	
+					$(el).css({
+						bottom: keyboardHeight
+					});
+				});
 			}
-			
+
 
 		});
 
-		window.addEventListener('native.keyboardhide', function (event) {
+		window.addEventListener('native.keyboardhide', function(event) {
 			console.log("keyboardhide");
 			console.log($('.content.overflow-scroll').data());
 
-			if(Blaze._globalHelpers.isIOS()){
+			if (Blaze._globalHelpers.isIOS()) {
 				// Reset the content area(s)
-				$('.popup-container.popup-showing.active').each(function (index, el) {
-					$(el).css({bottom: $(el).data('ionkeyboard.bottom')});
+				$('.popup-container.popup-showing.active').each(function(index, el) {
+					$(el).css({
+						bottom: $(el).data('ionkeyboard.bottom')
+					});
 				});
 			}
 
 			// keyboard workaround for login screen
-			$('.content.login-screen.overflow-scroll').each(function (index, el) {
-				$(el).css({bottom: "0px"});
+			$('.content.login-screen.overflow-scroll').each(function(index, el) {
+				$(el).css({
+					bottom: "0px"
+				});
 			});
 		});
 	}
@@ -142,14 +148,18 @@ Meteor.startup(function() {
 	});
 
 	Template.registerHelper('i18n_ClassStatus', function(classStatus) {
-		return TAPi18n.__("classroom_status", {context: classStatus.toLowerCase()});
+		return TAPi18n.__("classroom_status", {
+			context: classStatus.toLowerCase()
+		});
 	});
 
 	Template.registerHelper('i18n_UserType', function(userType) {
-		return TAPi18n.__("user_type", {context: userType.toLowerCase()});
+		return TAPi18n.__("user_type", {
+			context: userType.toLowerCase()
+		});
 	});
 
-	Template.registerHelper('i18n_CurLanguageName', function(){
+	Template.registerHelper('i18n_CurLanguageName', function() {
 		return TAPi18n.getLanguages()[TAPi18n.getLanguage()].name;
 	});
 
@@ -172,30 +182,29 @@ Meteor.startup(function() {
 		return degrees * Math.PI / 180;
 	}
 
-
 	// language setup
-	getUserLanguage = function () {
-	  // Put here the logic for determining the user language
-	  return "zh";
+	getUserPreferLanguage = function() {
+		// Put here the logic for determining the user language
+		if(!!Meteor.user() && !!Meteor.user().profile.defaultLangCode){
+			return Meteor.user().profile.defaultLangCode;
+		} else {
+			return Meteor.settings.public.defaultLanguage.langCode;	
+		}
 	};
 
-	getUserLanguageForT9n = function () {
-	  // Put here the logic for determining the user language
-	  return "zh-CN";
-	};
+	setUserLanguage = function(langCode) {
+		console.log(langCode);
+		TAPi18n.setLanguage(langCode);
+		if (langCode === 'zh') {
+			T9n.setLanguage('zh-CN');
+			moment.locale('zh-cn');
+		} else {
+			T9n.setLanguage(langCode);
+			moment.locale(langCode);
+		}
+	}
 
 	if (Meteor.isClient) {
-		Session.set("showLoadingIndicator", true);
-
-		TAPi18n.setLanguage(getUserLanguage())
-			.done(function() {
-				Session.set("showLoadingIndicator", false);
-			})
-			.fail(function(error_message) {
-				// Handle the situation
-				console.log(error_message);
-			});
-
-		T9n.setLanguage(getUserLanguageForT9n());
+		setUserLanguage(getUserPreferLanguage());
 	}
 });

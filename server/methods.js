@@ -48,5 +48,10 @@ Meteor.methods({
       return Achievement.remove({_id:achievementId});
     }
     return 0;
+  },
+  updateUserDefaultLangCode:function(langCode){
+    if(!!Meteor.user()){
+      Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.defaultLangCode":langCode}});
+    }
   }
 });
