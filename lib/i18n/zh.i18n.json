@@ -96,6 +96,7 @@
 	"diff_participation_title": "差额",
 	"trend_type_drop": "下降",
 	"trend_type_growth": "上涨",
+	"not_applicable": "不适用",
 
 	// Class Participation Record Menu
 	"class_record_menu_view_history": "查看详细数据",

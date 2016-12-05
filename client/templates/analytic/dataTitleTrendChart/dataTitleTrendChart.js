@@ -12,22 +12,27 @@ Template.dataTitleTrendChart.helpers({
 	moreopId: function(id) {
 		return "more-op-" + id;
 	},
-	"statData": function(){
-		if(!!!Template.instance().data.stat.get()) return;
+	"statData": function() {
+		if (!!!Template.instance().data.stat.get()) return;
 
 		var arr = Template.instance().data.stat.get().attendTimesArray;
-		if(arr.length === 0) return 0;
+		if (arr.length === 0) return 0;
 
-		var currentNum = arr[arr.length-1];
+		var currentNum = arr[arr.length - 1];
 		var prevNum = arr.length < 2 ? 0 : arr[arr.length - 2];
 		var diffNum = currentNum - prevNum;
-		var diffPercent = Math.round( ((diffNum/currentNum) * 100) *10)/10;
+		var percentStr;
+		if(prevNum ===0){
+			percentStr = TAPi18n.__("not_applicable");
+		} else{
+			var diffPercent = Math.round(((diffNum / prevNum) * 100) * 10) / 10;
+			percentStr = (diffNum > 0 ? "+" : "") + diffPercent + "%"
+		}
 		var trendTypeClass = diffNum > 0 ? "summary-positive" : "summary-negative";
 		var trendType = diffNum > 0 ? "Growth" : "Drop";
-		var percentStr = (diffNum > 0 ? "+" : "") + diffPercent + "%"
 		var periodTypeStr = "in previous ";
 		var periodType = Template.instance().data.periodType;
-		periodTypeStr = periodTypeStr + periodType.substring(0,periodType.length-1);
+		periodTypeStr = periodTypeStr + periodType.substring(0, periodType.length - 1);
 		var statData = {
 			currentNum: currentNum,
 			diffNum: diffNum,
@@ -38,18 +43,20 @@ Template.dataTitleTrendChart.helpers({
 		}
 		return statData;
 	},
-	"i18nTrendType":function(trendType){
-		return TAPi18n.__("trend_type", {context: trendType.toLowerCase()});
+	"i18nTrendType": function(trendType) {
+		return TAPi18n.__("trend_type", {
+			context: trendType.toLowerCase()
+		});
 	}
 });
 
 Template.dataTitleTrendChart.onRendered(function() {
-	if(!!!Template.instance().data.stat.get()) return;
-	
+	if (!!!Template.instance().data.stat.get()) return;
+
 	initChart(this.data.stat.get().attendTimesArray, this.data.classroomId);
 });
 
-function initChart(statArray, classroomId){
+function initChart(statArray, classroomId) {
 	var options = {
 		axisX: {
 			offset: 0,
@@ -75,11 +82,11 @@ function initChart(statArray, classroomId){
 	// add 0 as start point
 	statArray.unshift(0);
 	var labelArray = new Array();
-	for(var i =0 ; i <statArray.length; i++){
+	for (var i = 0; i < statArray.length; i++) {
 		labelArray.push(i);
 	}
 	// statArray = AnalyticSpider.accumulateArray(statArray);
-	new Chartist.Line('.bang_chart#'+classroomId, {
+	new Chartist.Line('.bang_chart#' + classroomId, {
 		labels: labelArray,
 		series: [
 			statArray

@@ -96,6 +96,7 @@
 	"diff_participation_title": "Diff",
 	"trend_type_drop": "Drop",
 	"trend_type_growth": "Growth",
+	"not_applicable": "n/a",
 
 	// Class Participation Record Menu
 	"class_record_menu_view_history": "View History",
