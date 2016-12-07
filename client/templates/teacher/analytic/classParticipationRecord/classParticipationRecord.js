@@ -23,16 +23,22 @@ Template.classParticipationRecords.helpers({
     return {
       chartTitle: TAPi18n.__("total_participation_times"),
       statTimeUnitType: AnalyticSpider.statTimeUnitType.Weekly,
-      classroomId: classroomId
+      classroomId: classroomId,
+      opIcon: {
+        iconClass : "ion-stats-bars",
+        iconCallback: function(){
+          Router.go("classRecordHistory", {_id: classroomId});
+        }
+      }
     }
   }
 });
 
 Template.classParticipationRecords.events({
-  "click .more-op":function(){
-    console.log(this._id);
-    IonPopover.show("classParticipationRecordMenu", this, "#more-op-"+this._id);
-  },
+  // "click .more-op":function(e){
+  //   e.preventDefault();
+  //   Router.go("classRecordHistory", {_id: this._id});
+  // },
   // "click .add_goal":function(event,template){
   //   var achievementId = this._id;
   //   IonPopup.prompt({

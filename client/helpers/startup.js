@@ -33,6 +33,18 @@ Meteor.startup(function() {
 	// 	}
 	// });
 
+
+	// add session control loading component
+	Tracker.autorun(function(){
+		if(Session.get("showLoading")){
+			IonLoading.show({
+		      duration: 3000,
+		      backdrop: true
+		    });
+		    Session.set("showLoading", false);
+		}
+	});	
+
 	if (Meteor.isCordova) {
 		document.addEventListener("backbutton", function() {
 			console.log("on backbutton press");

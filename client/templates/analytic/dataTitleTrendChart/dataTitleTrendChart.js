@@ -9,6 +9,9 @@ Template.dataTitleTrendChart.helpers({
 	"classroomInfo": function() {
 		return ClassroomKicker.getClassroomInfo(Template.instance().data.classroomId);
 	},
+	"opIconClass":function(){
+		return "icon more-op " + (!!Template.instance().data.opIcon ? Template.instance().data.opIcon.iconClass : "ion-android-more-vertical");
+	},
 	moreopId: function(id) {
 		return "more-op-" + id;
 	},
@@ -48,6 +51,15 @@ Template.dataTitleTrendChart.helpers({
 			context: trendType.toLowerCase()
 		});
 	}
+});
+
+Template.dataTitleTrendChart.events({
+  "click .more-op":function(event, template){
+  	if(!!template.data.opIcon){
+  		event.preventDefault() ;
+  		template.data.opIcon.iconCallback();
+  	}
+  }
 });
 
 Template.dataTitleTrendChart.onRendered(function() {
