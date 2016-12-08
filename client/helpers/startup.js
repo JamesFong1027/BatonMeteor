@@ -197,10 +197,10 @@ Meteor.startup(function() {
 	// language setup
 	getUserPreferLanguage = function() {
 		// Put here the logic for determining the user language
-		if(!!Meteor.user() && !!Meteor.user().profile.defaultLangCode){
+		if (!!Meteor.user() && !!Meteor.user().profile.defaultLangCode) {
 			return Meteor.user().profile.defaultLangCode;
 		} else {
-			return Meteor.settings.public.defaultLanguage.langCode;	
+			return Meteor.settings.public.defaultLanguage.langCode;
 		}
 	};
 
