@@ -1,32 +1,43 @@
-Template.studentAchievements.onCreated(function(){
+Template.studentAchievements.onCreated(function() {
 
 });
 
-Template.studentAchievements.onRendered(function(){
+Template.studentAchievements.onRendered(function() {
   Tracker.autorun(function(c) {
     initSummaryInfo();
   });
 });
 
 Template.studentAchievements.helpers({
-  "afterRenderTrigger":function(){
+  "afterRenderTrigger": function() {
     var data = [];
     var goalNum = this.target;
     var totalTimes = this.participation.attendTimes;
     var acceptedTimes = this.participation.selectedTimes;
     var chartCssId = this._id;
-    var chartSelector = "#"+chartCssId;
-    if(goalNum===0) return;
+    // Leading digits
+    // If the first character of an identifier is numeric, you’ll need to escape it based on its Unicode code point. 
+    // For example, the code point for the character 1 is U+0031, so you would escape it as \000031 or \31 .
+    // Basically, to escape any numeric character, just prefix it with \3 and append a space character ( ). 
+    // Yay Unicode!
+    var chartSelector;
+    if (_.contains(["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], chartCssId.charAt(0))) {
+      chartSelector = "#\\3" + chartCssId.charAt(0) + " " + chartCssId.substring(1);
+    } else {
+      chartSelector = "#" + chartCssId;
+    }
+    
+    if (goalNum === 0) return;
     var chartTotalNum = goalNum;
 
-    BlazeTemplateHelper.fireWhenReady(function(template){
-      if(totalTimes > goalNum) {
+    BlazeTemplateHelper.fireWhenReady(function(template) {
+      if (totalTimes > goalNum) {
         chartTotalNum = totalTimes;
       }
       data = [acceptedTimes, totalTimes - acceptedTimes, chartTotalNum - totalTimes];
 
       template.$(chartSelector).empty();
-      
+
       var classPie = new Chartist.Pie(chartSelector, {
         series: data
       }, {
@@ -34,71 +45,73 @@ Template.studentAchievements.helpers({
         total: chartTotalNum,
         startAngle: 0,
         showLabel: true,
-        labelInterpolationFnc: function(value,index) {
-            var total = classPie.data.series.reduce(function(pv, cv) { return pv + cv; }, 0);
-            // return value+ " "+ Math.round(classPie.data.series[index]/total*100)+"%"
-            if(index===0)
-              return Math.round(totalTimes/goalNum*100)+"%";
-            else
-              return TAPi18n.__("completed_percentage_text");
+        labelInterpolationFnc: function(value, index) {
+          var total = classPie.data.series.reduce(function(pv, cv) {
+            return pv + cv;
+          }, 0);
+          // return value+ " "+ Math.round(classPie.data.series[index]/total*100)+"%"
+          if (index === 0)
+            return Math.round(totalTimes / goalNum * 100) + "%";
+          else
+            return TAPi18n.__("completed_percentage_text");
         }
       });
 
       classPie.on('draw', function(ctx) {
-        if(ctx.type === 'label') {
-            ctx.element.addClass("ct-label-pie");
-            if(ctx.index === 0){
-              ctx.element.attr({
-                  dx: ctx.element.root().width() / 2,
-                  dy: ctx.element.root().height() / 2,
-                  "id": "ct-label-pie-"+ctx.index
-              });  
-            } else {
-              ctx.element.addClass("ct-label-subtitle");
-              ctx.element.attr({
-                  dx: ctx.element.root().width() / 2,
-                  dy: (ctx.element.root().height()/2) + ctx.element.height()/1.2,
-                  "id": "ct-label-pie-"+ctx.index
-              });  
-            }
-            
-        }else if(ctx.type === 'slice'){
+        if (ctx.type === 'label') {
+          ctx.element.addClass("ct-label-pie");
+          if (ctx.index === 0) {
             ctx.element.attr({
-                'id' : "ct-slice-pie-"+ctx.index
+              dx: ctx.element.root().width() / 2,
+              dy: ctx.element.root().height() / 2,
+              "id": "ct-label-pie-" + ctx.index
             });
+          } else {
+            ctx.element.addClass("ct-label-subtitle");
+            ctx.element.attr({
+              dx: ctx.element.root().width() / 2,
+              dy: (ctx.element.root().height() / 2) + ctx.element.height() / 1.2,
+              "id": "ct-label-pie-" + ctx.index
+            });
+          }
 
-            // if(ctx.index === 2) return;
-            // donutDisplayAnimation(ctx,800);
+        } else if (ctx.type === 'slice') {
+          ctx.element.attr({
+            'id': "ct-slice-pie-" + ctx.index
+          });
+
+          // if(ctx.index === 2) return;
+          // donutDisplayAnimation(ctx,800);
         }
       });
-    },Template.instance(),chartSelector, 500);
+    }, Template.instance(), chartSelector, 500);
   },
-  studentClassAchievements: function () {
+  studentClassAchievements: function() {
     return fetchClassAchievements();
   },
-  summaryInfo: function(){
+  summaryInfo: function() {
     return fetchSummaryAchievement();
   },
-  hasUntrackedClassroom: function(){
+  hasUntrackedClassroom: function() {
     return AnalyticSpider.getUntrackedClassroomList().count() !== 0;
   },
-  moreopId: function(id){
-    return "more-op-"+id;
+  moreopId: function(id) {
+    return "more-op-" + id;
   }
 });
 
 Template.studentAchievements.events({
-  "click .more-op":function(){
+  "click .more-op": function() {
     console.log(this._id);
-    IonPopover.show("classAchievementMenu", this, "#more-op-"+this._id);
+    IonPopover.show("classAchievementMenu", this, "#more-op-" + this._id);
   },
-  "click .add_goal":function(event,template){
+  "click .add_goal": function(event, template) {
     var achievementId = this._id;
     IonPopup.prompt({
       title: TAPi18n.__("set_goal_popup_title"),
       template: TAPi18n.__("set_goal_popup_content"),
       okText: TAPi18n.__("popup_submit_button"),
-      cancelText:TAPi18n.__("popup_cancel_button"),
+      cancelText: TAPi18n.__("popup_cancel_button"),
       inputType: 'number',
       inputPlaceholder: TAPi18n.__("set_goal_popup_placeholder"),
       onOk: function(event, value) {
@@ -106,23 +119,23 @@ Template.studentAchievements.events({
       }
     });
   },
-  "click .add_class": function(event, template){
+  "click .add_class": function(event, template) {
     IonModal.open("classroomPickList");
   },
 })
 
-Template.studentAchievements.onDestroyed(function(){
-	// console.log("onDestroyed");
-	// console.log(Template.instance());
-	// Template.instance().qrScanner.stopCapture();
+Template.studentAchievements.onDestroyed(function() {
+  // console.log("onDestroyed");
+  // console.log(Template.instance());
+  // Template.instance().qrScanner.stopCapture();
 });
 
-function fetchClassAchievements(){
+function fetchClassAchievements() {
   // right now we fetch all the participation info
   return AnalyticSpider.getAchievementsWithRelativeInfo();
 }
 
-function fetchSummaryAchievement(){
+function fetchSummaryAchievement() {
   var achievements = fetchClassAchievements();
   var summaryInfo = new Object();
   var attendTimes = 0;
@@ -139,36 +152,38 @@ function fetchSummaryAchievement(){
   return summaryInfo;
 }
 
-function initSummaryInfo(){
+function initSummaryInfo() {
   var summaryInfo = fetchSummaryAchievement();
-  if(!!!summaryInfo) return;
+  if (!!!summaryInfo) return;
 
-  if(summaryInfo.target === 0 && summaryInfo.attendTimes === 0 && summaryInfo.selectedTimes === 0){
+  if (summaryInfo.target === 0 && summaryInfo.attendTimes === 0 && summaryInfo.selectedTimes === 0) {
     summaryInfo.target = 1;
-  } else if(summaryInfo.target === 0 && (summaryInfo.attendTimes !== 0 || summaryInfo.selectedTimes !== 0)){
+  } else if (summaryInfo.target === 0 && (summaryInfo.attendTimes !== 0 || summaryInfo.selectedTimes !== 0)) {
     summaryInfo.target = summaryInfo.attendTimes + summaryInfo.selectedTimes;
   }
 
-  var data = [summaryInfo.selectedTimes, summaryInfo.attendTimes - summaryInfo.selectedTimes, summaryInfo.target-summaryInfo.attendTimes];
-  if(!!summaryInfo && (summaryInfo.target < summaryInfo.attendTimes)){
-    data = [summaryInfo.target,0];
+  var data = [summaryInfo.selectedTimes, summaryInfo.attendTimes - summaryInfo.selectedTimes, summaryInfo.target - summaryInfo.attendTimes];
+  if (!!summaryInfo && (summaryInfo.target < summaryInfo.attendTimes)) {
+    data = [summaryInfo.target, 0];
   }
 
   console.log(data);
-  var donutWidth = $(".general_summary_chart").height()*0.3;
+  var donutWidth = $(".general_summary_chart").height() * 0.3;
   var summaryPie = new Chartist.Pie('.general_summary_chart', {
     series: data
   }, {
-    height:'200%',
+    height: '200%',
     donutWidth: donutWidth,
     donut: true,
     startAngle: 270,
     total: summaryInfo.target * 2,
     showLabel: true,
-    labelInterpolationFnc: function(value,index) {
-        var total = summaryPie.data.series.reduce(function(pv, cv) { return pv + cv; }, 0);
-        if(index===0)
-          return Math.round(summaryInfo.attendTimes/summaryInfo.target*100)+"%";
+    labelInterpolationFnc: function(value, index) {
+      var total = summaryPie.data.series.reduce(function(pv, cv) {
+        return pv + cv;
+      }, 0);
+      if (index === 0)
+        return Math.round(summaryInfo.attendTimes / summaryInfo.target * 100) + "%";
     }
   });
 
@@ -179,26 +194,26 @@ function initSummaryInfo(){
   // });
 
   summaryPie.on('draw', function(ctx) {
-    if(ctx.type === 'label') {
-        ctx.element.addClass("ct-label-pie");
-        if(ctx.index === 0){
-          ctx.element.attr({
-              dx: ctx.element.root().width() / 2,
-              dy: ctx.element.root().height() / 2,
-              "id": "ct-label-pie-"+ctx.index
-          });  
-        }
-    }else if(ctx.type === 'slice'){
+    if (ctx.type === 'label') {
+      ctx.element.addClass("ct-label-pie");
+      if (ctx.index === 0) {
         ctx.element.attr({
-            'id' : "ct-slice-pie-"+ctx.index
+          dx: ctx.element.root().width() / 2,
+          dy: ctx.element.root().height() / 2,
+          "id": "ct-label-pie-" + ctx.index
         });
-        donutDisplayAnimation(ctx,800);
+      }
+    } else if (ctx.type === 'slice') {
+      ctx.element.attr({
+        'id': "ct-slice-pie-" + ctx.index
+      });
+      donutDisplayAnimation(ctx, 800);
     }
   });
 }
 
-function donutDisplayAnimation(ctx, duration){
-  if(!!!duration) duration = 1000;
+function donutDisplayAnimation(ctx, duration) {
+  if (!!!duration) duration = 1000;
   // Get the total path length in order to use for dash array animation
   var pathLength = ctx.element._node.getTotalLength();
 
@@ -213,7 +228,7 @@ function donutDisplayAnimation(ctx, duration){
       id: 'anim' + ctx.index,
       dur: duration,
       from: -pathLength + 'px',
-      to:  '0px',
+      to: '0px',
       easing: Chartist.Svg.Easing.easeOutQuint,
       // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
       fill: 'freeze'
@@ -221,7 +236,7 @@ function donutDisplayAnimation(ctx, duration){
   };
 
   // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
-  if(ctx.index !== 0) {
+  if (ctx.index !== 0) {
     animationDefinition['stroke-dashoffset'].begin = 'anim' + (ctx.index - 1) + '.end';
   }
 
