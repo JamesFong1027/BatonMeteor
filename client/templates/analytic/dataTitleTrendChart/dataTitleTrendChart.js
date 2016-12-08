@@ -26,7 +26,8 @@ Template.dataTitleTrendChart.helpers({
 		var diffNum = currentNum - prevNum;
 		var percentStr;
 		if(prevNum ===0){
-			percentStr = TAPi18n.__("not_applicable");
+			// percentStr = TAPi18n.__("not_applicable");
+			percentStr = (diffNum > 0 ? "+" : "") + diffNum;
 		} else{
 			var diffPercent = Math.round(((diffNum / prevNum) * 100) * 10) / 10;
 			percentStr = (diffNum > 0 ? "+" : "") + diffPercent + "%"

@@ -26,9 +26,17 @@ Template.statsTrendCard.helpers({
 		var currentNum = arr[arr.length-1];
 		var prevNum = arr.length < 2 ? 0 : arr[arr.length - 2];
 		var diffNum = currentNum - prevNum;
+		var percentStr;
+		if(prevNum === 0){
+			// percentStr = TAPi18n.__("not_applicable");
+			percentStr = (diffNum > 0 ? "+" : "") + diffNum;
+		} else{
+			var diffPercent = Math.round(((diffNum / prevNum) * 100) * 10) / 10;
+			percentStr = (diffNum > 0 ? "+" : "") + diffPercent + "%"
+		}
+
 		var diffPercent = Math.round( ((diffNum/prevNum) * 100) *10)/10;
 		var trendType = diffNum > 0 ? "summary-positive" : "summary-negative";
-		var percentStr = (diffNum > 0 ? "+" : "") + diffPercent + "%";
 		var periodType = Template.instance().data.periodType;
 		var periodTypeStr = periodType.substring(0,periodType.length-1);
 		var statData = {
