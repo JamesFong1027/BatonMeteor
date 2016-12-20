@@ -1,0 +1,80 @@
+@import url(http://fonts.googleapis.com/css?family=Cabin:700);
+@import 'colorVariables.scss';
+
+$flipCircle-size: 35px;
+$outline-size: 40px;
+
+@mixin size ($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+.flipCircle-container {
+	perspective: 1000;	
+	margin: 0 auto;	
+}
+
+.flipCircle-container.active .flipCircle {
+	transform: rotate3d(45, 45, 0, 180deg);
+}
+		
+.flipCircle-container.active .outer-ring {
+	transform: rotate3d(45, 0, 0, 180deg);
+}
+
+.flipCircle, .outer-ring {
+	transition: 0.5s;
+	transform-style: preserve-3d;
+	transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
+}
+		
+.flipCircle {
+	@include size($flipCircle-size * 2);
+}
+		
+.front, .back {
+	border-radius: 50%;
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+	backface-visibility: hidden;
+	top: 0;
+	left: 0;
+}
+		
+.front {
+	background-color: #fff;
+}
+
+.flipCircle-container.active .front{
+	pointer-events: none;
+}
+		
+.back {
+	transform: rotate3d(45,45,0,180deg);
+	background-color: #fff;
+	position: absolute;
+}
+		
+.back .check_icon{
+	display: block;
+	@include size($flipCircle-size * 2);
+	line-height: $flipCircle-size * 2;
+	font-family: cabin, sans-serif;
+	font-size: $flipCircle-size;
+	text-align: center;
+	color: $dark !important;
+}
+
+.back .check_icon.active {
+	color: $calm !important;	
+}
+		
+.outer-ring {
+	position: absolute;
+	top: $flipCircle-size - $outline-size;
+	left: $flipCircle-size - $outline-size;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	@include size($outline-size * 2);
+	background-color: rgba(255,255,255,0);
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+}

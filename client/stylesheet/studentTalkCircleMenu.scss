@@ -66,7 +66,7 @@ $item-transition: .5s;
 @mixin line {
   @include size($toggler-size, $toggler-size/8);
   display: block;
-  z-index: 1;
+  z-index: 2;
   border-radius: $toggler-size/16;
   background: $toggler-color;
   transition: $toggler-transition;
@@ -81,7 +81,7 @@ body {
 .menu-toggler {
   @include absolute-center;
   @include size($toggler-size);
-  z-index: 2;
+  z-index: 3;
   opacity: 0;
   cursor: pointer;
   
@@ -129,7 +129,7 @@ body {
   background: #424242;
 
   @include size($toggler-size*1.7);
-  z-index: 0;
+  z-index: 1;
   cursor: pointer;
 
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
