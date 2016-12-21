@@ -1,0 +1,173 @@
+<template name="ticketPanel">
+    <div id="carousel">
+        <div class="container">
+        </div>
+    </div>
+    <nav>
+        <input checked='checked' class='menu-toggler' id='menu-toggler' type='checkbox'>
+        <label for='menu-toggler'></label>
+        <div class='menu-toggler-circle'></div>
+        {{#if isTalkMode}}}
+        <ul class="talk_panel">
+            <li class='menu_item flipCircle-container' id="build">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon ion-android-contacts' target='_blank'></a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="new_idea">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon ion-ios-lightbulb' target='_blank'></a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="question">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon ion-help' target='_blank'></a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="challenge">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon ion-alert' target='_blank'></a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        {{else}}
+        <ul class="work_panel">
+            <li class='menu_item flipCircle-container' id="numEight">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(255,120,0, 0.7)">8</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numNine" >
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(255,60,0, 0.8)">9</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numTen">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(255,0,0, 0.9)">10</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numOne">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(0,255,0, 0.2)">1</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numTwo">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(60,255,0, 0.3)">2</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numThree">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(120,255,0, 0.4)">3</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numFour">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(180,255,0, 0.5)">4</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numFive">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(240,255,0, 0.6)">5</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numSix">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(255,240,0, 0.6)">6</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+            <li class='menu_item flipCircle-container' id="numSeven">
+                <div class="outer-ring"></div>
+                <div class="flipCircle">
+                    <div class="front">
+                        <a class='icon button-icon' target='_blank' style="background: rgba(255,180,0, 0.6)">7</a>
+                    </div>
+                    <div class="back">
+                        <a class='icon ion-ios-checkmark-outline check_icon'> </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        {{/if}}
+        
+    </nav>
+</template>
