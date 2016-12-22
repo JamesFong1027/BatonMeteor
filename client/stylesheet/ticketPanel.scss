@@ -71,7 +71,7 @@ $item-transition: .5s;
 
 @media only screen and (max-width : 420px) and (min-width : 321px){
   .menu-toggler:checked ~ ul {
-    @include nthTransform(55px);
+    @include nthTransform(70px);
   }
 }
 

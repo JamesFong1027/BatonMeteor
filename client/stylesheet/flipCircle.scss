@@ -61,16 +61,17 @@ $outline-size: 40px;
 	font-family: cabin, sans-serif;
 	font-size: $flipCircle-size;
 	text-align: center;
-	color: $dark !important;
+	color: grey !important;
 }
 
 .back .check_icon.active {
-	color: $calm !important;
-	font-size: $flipCircle-size * 1.3;
+	color: $stable !important;
+	background-color: $calm !important;
+	font-size: $flipCircle-size * 1.8;
 }
 
 .back .check_icon.active:before{
-	content:"\f3ff" !important;	
+	content:"\f3fd" !important;	
 }
 		
 .outer-ring {
