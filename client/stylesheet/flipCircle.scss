@@ -9,21 +9,36 @@ $outline-size: 40px;
   height: $height;
 }
 
+@mixin xRotate3d($x,$y,$z,$deg){
+	-webkit-transform: rotate3d($x, $y, $z, $deg);
+	transform: rotate3d($x, $y, $z, $deg);
+}
+
+@mixin xBackface-visibility($value){
+	-webkit-backface-visibility: $value;
+    -moz-backface-visibility: $value;
+    -ms-backface-visibility: $value;
+    -o-backface-visibility: $value;
+    backface-visibility: $value;
+}
+
 .flipCircle-container {
-	perspective: 1000;	
+	-webkit-perspective: 1000;
+	perspective: 1000;
 	margin: 0 auto;	
 }
 
 .flipCircle-container.active .flipCircle {
-	transform: rotate3d(45, 45, 0, 180deg);
+	@include xRotate3d(45,45,0,180deg);
 }
 		
 .flipCircle-container.active .outer-ring {
-	transform: rotate3d(45, 0, 0, 180deg);
+	@include xRotate3d(45,0,0,180deg);
 }
 
 .flipCircle, .outer-ring {
 	transition: 0.5s;
+	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 	transition-timing-function: cubic-bezier(0.785, 0.135, 0.150, 0.860);
 }
@@ -35,9 +50,10 @@ $outline-size: 40px;
 .front, .back {
 	border-radius: 50%;
 	box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
-	backface-visibility: hidden;
 	top: 0;
 	left: 0;
+	@include xBackface-visibility(hidden);
+	-webkit-transform: translate3d(0,0,0);
 }
 		
 .front {
@@ -47,9 +63,9 @@ $outline-size: 40px;
 .flipCircle-container.active .front{
 	pointer-events: none;
 }
-		
+
 .back {
-	transform: rotate3d(45,45,0,180deg);
+	@include xRotate3d(45,45,0,180deg);
 	background-color: #fff;
 	position: absolute;
 }
