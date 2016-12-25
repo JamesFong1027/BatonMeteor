@@ -1,6 +1,14 @@
 <template name="studentParticipationRecord">
 {{#ionModal title="Student Participation Record" closeText="Close"}}
 	<div class="content overflow-scroll student_partci_record_modal">
+		<div class="list chart_title">
+			<div class="item item-divider ">
+				{{_ "student_achievement_goal"}}
+			</div>
+		</div>
+		<div class="student_goal_chart">
+			{{> dataTitleDonutCard summaryInfo}}
+		</div>
 		<div class="trending_chart">
 			{{> trendingAreaChart chartArg "Trending Chart"}}
 		</div>
@@ -8,6 +16,5 @@
 			{{> breakdownChart chartArg "Breakdown Chart"}}	
 		</div>
 	</div>
-    
 {{/ionModal}}
 </template>

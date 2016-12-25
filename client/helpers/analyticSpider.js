@@ -10,14 +10,14 @@ AnalyticSpider = {
 		return newArray;
 	},
 	getUntrackedClassroomList:function(){
-		var achievementClassList = AnalyticSpider.getClassAchievementList().fetch();
+		var achievementClassList = AnalyticSpider.getClassAchievementList(Meteor.userId()).fetch();
 	    var excludeClassIdList = null;
 	    if (!!achievementClassList && achievementClassList.length !== 0)
 	      excludeClassIdList = _.pluck(achievementClassList, 'cid');
 	    return ClassroomKicker.getAttendedClassroomInfoList(null,excludeClassIdList);
 	},
 	addClassAchievement:function(classroomId, target){
-		if(!!AnalyticSpider.getClassAchievement(classroomId)) return;
+		if(!!AnalyticSpider.getClassAchievement(classroomId,Meteor.userId())) return;
 
 		Achievement.insert({
 			uid: Meteor.userId(),
@@ -31,21 +31,37 @@ AnalyticSpider = {
 	editClassAchievement: function(achievementId, target){
 		Achievement.update({_id:achievementId},{$set:{target:target}});
 	},
-	getClassAchievement: function(classroomId) {
+	getClassAchievement: function(classroomId,studentId) {
 		return Achievement.findOne({
-			uid: Meteor.userId(),
+			uid: studentId,
 			cid: classroomId,
 			achievementType: Schemas.achievementType.totalSentTicket
 		});
 	},
-	getClassAchievementList: function(){
+	getClassAchievementList: function(studentId){
 		return Achievement.find({
-			uid: Meteor.userId(),
+			uid: studentId,
 			achievementType: Schemas.achievementType.totalSentTicket
 		});
 	},
-	getAchievementsWithRelativeInfo: function(startDateFilter, endDateFilter){
-		return TicketShutter.getAchievementRelativeInfo(AnalyticSpider.getClassAchievementList().fetch(),startDateFilter,endDateFilter);
+	getAchievementsWithRelativeInfo: function(studentId, startDateFilter, endDateFilter){
+		return TicketShutter.getAchievementRelativeInfo(AnalyticSpider.getClassAchievementList(studentId).fetch(),startDateFilter,endDateFilter);
+	},
+	fetchSummaryAchievement: function(studentId) {
+		var achievements = AnalyticSpider.getAchievementsWithRelativeInfo(studentId);
+		var summaryInfo = new Object();
+		var attendTimes = 0;
+		var selectedTimes = 0;
+		var totalTarget = 0;
+		for (var i = achievements.length - 1; i >= 0; i--) {
+			attendTimes += achievements[i].participation.attendTimes;
+			selectedTimes += achievements[i].participation.selectedTimes;
+			totalTarget += parseInt(achievements[i].target);
+		}
+		summaryInfo.attendTimes = attendTimes;
+		summaryInfo.selectedTimes = selectedTimes;
+		summaryInfo.target = totalTarget;
+		return summaryInfo;
 	},
 	getTimeFrameByMonth:function(userId,classroomId){
 		var firstTicket = TicketsInfo.findOne({uid:userId, cid:classroomId},{sort:{createDate:1}});

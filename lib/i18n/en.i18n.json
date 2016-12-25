@@ -125,7 +125,7 @@
 	"completed_percentage_text": "Completed",
 
 	// Data Title Bar Component
-	"ticket_stat_title_accepted": "Accepted",
+	"ticket_stat_title_accepted": "Accept",
 	"ticket_stat_title_total": "Total",
 	"ticket_stat_title_goal": "Goal",
 
@@ -135,6 +135,8 @@
 	// Current Classroom Participation Record Page
 	"current_participation_record_page_title": "Current Participation Record",
 	"record_view_toggle_button_text": "Toggle to see the all sessions records",
+	"student_achievement_goal": "Student's Class Goal Progress",
+	"student_in_class_title": "__student__ record in __class__",
 
 	// Popup General
 	"popup_cancel_button":"Cancel",

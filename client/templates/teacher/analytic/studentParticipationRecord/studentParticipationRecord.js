@@ -9,7 +9,10 @@ Template.studentParticipationRecord.onRendered(function() {
 	var studentProfile = ClassroomKicker.getUserProfile(studentId);
 	var classroomInfo = ClassroomKicker.getClassroomInfo(classroomId);
 	// update the title
-	this.$(".title").text(studentProfile.firstName +"'s record"+" in "+classroomInfo.name);
+	this.$(".title").text(
+		TAPi18n.__("student_in_class_title",{student:studentProfile.firstName,"class":classroomInfo.name})
+	);
+
 });
 
 Template.studentParticipationRecord.helpers({
@@ -23,6 +26,10 @@ Template.studentParticipationRecord.helpers({
 			chartName: chartName
 		}
 		return chartArg;
+	},
+	"summaryInfo":function(){
+		// console.log(AnalyticSpider.fetchSummaryAchievement(Template.instance().data.studentId));
+		return AnalyticSpider.fetchSummaryAchievement(Template.instance().data.studentId);
 	}
 });
 

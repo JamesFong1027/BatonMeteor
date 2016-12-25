@@ -14,7 +14,7 @@ Template.profile.helpers({
     return isTeacherAccount(Meteor.userId());
   },
   targetNum:function(){
-    return AnalyticSpider.getClassAchievementList().count();
+    return AnalyticSpider.getClassAchievementList(Meteor.userId()).count();
   },
   trackedClassNumber:function(){
     return ClassroomKicker.getClassroomList().count();

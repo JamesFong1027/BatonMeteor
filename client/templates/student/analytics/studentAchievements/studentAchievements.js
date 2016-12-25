@@ -3,9 +3,9 @@ Template.studentAchievements.onCreated(function() {
 });
 
 Template.studentAchievements.onRendered(function() {
-  Tracker.autorun(function(c) {
-    initSummaryInfo();
-  });
+  // Tracker.autorun(function(c) {
+  //   initSummaryInfo();
+  // });
 });
 
 Template.studentAchievements.helpers({
@@ -86,6 +86,14 @@ Template.studentAchievements.helpers({
       });
     }, Template.instance(), chartSelector, 500);
   },
+  generateDTBArg: function(achievement){
+    console.log(achievement);
+    return {
+      attendTimes : achievement.participation.attendTimes,
+      selectedTimes : achievement.participation.selectedTimes,
+      target : parseInt(achievement.target)
+    };
+  },
   studentClassAchievements: function() {
     return fetchClassAchievements();
   },
@@ -132,24 +140,11 @@ Template.studentAchievements.onDestroyed(function() {
 
 function fetchClassAchievements() {
   // right now we fetch all the participation info
-  return AnalyticSpider.getAchievementsWithRelativeInfo();
+  return AnalyticSpider.getAchievementsWithRelativeInfo(Meteor.userId());
 }
 
 function fetchSummaryAchievement() {
-  var achievements = fetchClassAchievements();
-  var summaryInfo = new Object();
-  var attendTimes = 0;
-  var selectedTimes = 0;
-  var totalTarget = 0;
-  for (var i = achievements.length - 1; i >= 0; i--) {
-    attendTimes += achievements[i].participation.attendTimes;
-    selectedTimes += achievements[i].participation.selectedTimes;
-    totalTarget += parseInt(achievements[i].target);
-  }
-  summaryInfo.attendTimes = attendTimes;
-  summaryInfo.selectedTimes = selectedTimes;
-  summaryInfo.target = totalTarget;
-  return summaryInfo;
+  return AnalyticSpider.fetchSummaryAchievement(Meteor.userId());
 }
 
 function initSummaryInfo() {

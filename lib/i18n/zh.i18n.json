@@ -135,6 +135,8 @@
 	// Current Classroom Participation Record Page
 	"current_participation_record_page_title": "当前教室参与情况",
 	"record_view_toggle_button_text": "切换到显示整个课堂数据",
+	"student_achievement_goal": "学生目标进展",
+	"student_in_class_title": "__student__在__class__中的参与情况",
 
 	// Popup General
 	"popup_cancel_button":"取消",

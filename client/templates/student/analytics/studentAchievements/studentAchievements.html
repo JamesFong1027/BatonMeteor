@@ -21,37 +21,20 @@
 	
 	{{#ionView}}
     	{{#ionContent}}
-    		<div class="row general_summary">
+    		<!-- <div class="row general_summary">
     			<div class="general_summary_chart col col-50">
     				
 				</div>
     			<div class="col col-50 summary_data">
     				{{#with summaryInfo}}
 	    				<div class="vertical-center">
-					 		<ul>
-								<li class="accepted_title">
-									{{selectedTimes}}
-									<span>
-									{{_ "ticket_stat_title" context="accepted"}}
-									</span>
-								</li>
-								<li class="total_title">
-									{{attendTimes}}
-									<span>
-										{{_ "ticket_stat_title" context="total"}}
-									</span>
-								</li>
-								<li>
-									{{target}}
-									<span>
-									{{_ "ticket_stat_title" context="goal"}}
-									</span>
-								</li>
-							</ul>
+					 		{{> dataTitleBar this}}
 					 	</div>
 					{{/with}}
     			</div>
-	  		</div>
+	  		</div> -->
+	  		{{> dataTitleDonutCard summaryInfo}}
+	  		
 			<div class="class_detail_achievements">
 				{{#with studentClassAchievements}}
 			        {{#if this.length}}
@@ -69,26 +52,7 @@
 							 		{{/if}}
 							 	</div>
 							 	<div class="data_title">
-							 		<ul>
-										<li class="accepted_title">
-											{{participation.selectedTimes}}
-											<span>
-												{{_ "ticket_stat_title" context="accepted"}}
-											</span>
-										</li>
-										<li class="total_title">
-											{{participation.attendTimes}}
-											<span>
-												{{_ "ticket_stat_title" context="total"}}
-											</span>
-										</li>
-										<li>
-											{{target}}
-											<span>
-											{{_ "ticket_stat_title" context="goal"}}
-											</span>
-										</li>
-									</ul>
+							 		{{> dataTitleBar generateDTBArg this}}
 							 	</div>
 							</div>
 						{{/each}}
@@ -105,52 +69,7 @@
 						</div>
 					</div>
 				{{/if}}
-
-				<!-- <div class="card class-chart">
-					<a class="item item-icon-right class_title" href="#">
-						<i class="icon ion-android-more-vertical more-op" data-ion-popover="classAchievementMenu"></i>
-						History 2.1
-					</a>
-				 	<div class="item item-image bang_chart">
-						<img class="full-image" src="/achievement_placeholder.png">	
-					</div>
-				 	<div class="data_title">
-				 		<ul>
-							<li>
-								11
-								<span>Accepted</span>
-							</li>
-							<li>
-								27
-								<span>Total</span>
-							</li>
-							<li>
-								0
-								<span>Goal</span>
-							</li>
-						</ul>
-				 	</div>
-				</div> -->
 			</div> 
-			<!-- {{#with studentClassAchievements}}
-				<div class="list">
-	  				<div class="item item-thumbnail-left">
-						
-					</div>
-				</div>
-		    {{/with}} -->
-		    <!-- <div class="item item-divider">
-	          Achievements Detail
-	        </div> -->
-			<!-- {{#ionList}}
-				{{#each classroomSession}}
-					{{#ionItem id=this._id class="classroomItem item item-icon-right"}}
-						<h2>Session: {{sessionNumber @index}}</h2>
-						<p>Start Date: {{formatDate sessionStart}}</p>
-						<p>End Date: {{formatDate updateDate}}</p>
-					{{/ionItem}}
-				{{/each}}
-			{{/ionList}} -->
 		{{/ionContent}}
   	{{/ionView}}
 </template>

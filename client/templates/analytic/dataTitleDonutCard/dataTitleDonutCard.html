@@ -1,0 +1,13 @@
+<template name="dataTitleDonutCard">
+    <div class="row general_summary">
+        <div class="general_summary_chart col col-50">
+        </div>
+        <div class="col col-50 summary_data">
+            {{#with participationInfo}}
+            <div class="vertical-center">
+                {{> dataTitleBar this}}
+            </div>
+            {{/with}}
+        </div>
+    </div>
+</template>

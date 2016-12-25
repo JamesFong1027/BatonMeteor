@@ -1,0 +1,22 @@
+<template name="dataTitleBar">
+	<ul>
+		<li class="accepted_title">
+			{{selectedTimes}}
+			<span>
+				{{_ "ticket_stat_title" context="accepted"}}
+			</span>
+		</li>
+		<li class="total_title">
+			{{attendTimes}}
+			<span>
+				{{_ "ticket_stat_title" context="total"}}
+			</span>
+		</li>
+		<li>
+			{{target}}
+			<span>
+			{{_ "ticket_stat_title" context="goal"}}
+			</span>
+		</li>
+	</ul>
+</template>

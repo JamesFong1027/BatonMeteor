@@ -65,7 +65,7 @@ Template.classParticipationRecords.onDestroyed(function(){
 
 function fetchClassAchievements(){
   // right now we fetch all the participation info
-  return AnalyticSpider.getAchievementsWithRelativeInfo();
+  return AnalyticSpider.getAchievementsWithRelativeInfo(Meteor.userId());
 }
 
 // function fetchSummaryAchievement(){

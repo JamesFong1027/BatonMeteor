@@ -28,7 +28,15 @@ Meteor.publishComposite('classroomsInfo',function(){
 						// given this class belongs to user(teacher), will return all the attending student profile
 						find:function(classSession){
 							return Meteor.users.find({_id:classSession.uid},{fields:{'profile': 1}});
-						}
+						},
+						children: [
+							{
+								// also publicate all the achievement goals related to that student
+								find:function(userProfile){
+									return Achievement.find({uid:userProfile._id});
+								}
+							}
+						]
 					}
 				]
 			},
@@ -40,7 +48,7 @@ Meteor.publishComposite('classroomsInfo',function(){
 						return TicketsInfo.find({cid:classroomsInfo._id});
 					}
 				}
-			}
+			},
 		]	
 	}
 });
@@ -49,7 +57,7 @@ Meteor.publish("classSession",function(){
 	return ClassSession.find({uid:this.userId});
 });
 
-Meteor.publish("achievement",function(){
+Meteor.publish("achievement",function(classroomId){
 	return Achievement.find({uid:this.userId});
 });
 
@@ -71,7 +79,6 @@ Meteor.publish("ticketsInfo",function(){
 // with extra users profile info
 Meteor.publishComposite('ticketsInfoDetail',function(classroomId) { 
 	return {
-
 		find:function(){
 			//TODO need restrict the publish permission
 			// console.log("ticketsInfoDetail:",classroomId);
