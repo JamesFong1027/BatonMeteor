@@ -53,5 +53,28 @@ Meteor.methods({
     if(!!Meteor.user()){
       Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.defaultLangCode":langCode}});
     }
+  },
+  insertMessage: function(message) {
+    message.owner = Meteor.userId();
+    // message.timestamp = new Date();
+    if (message.destination !== message.owner) {
+      if (message.isDirect) {
+        message.to = message.destination;
+      } else {
+        message.channel = message.destination;
+      }
+      delete message.destination;
+      delete message.isDirect;
+      Message.insert(message);
+    }
+  },
+  markMsgAsRead:function(message){
+    // only receiver can view
+    if(message.to === Meteor.userId()){
+      Message.update({_id:message._id},{$set:{isRead:true}});
+      return true;
+    } else {
+      return false;
+    }
   }
 });

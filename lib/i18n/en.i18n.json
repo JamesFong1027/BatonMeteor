@@ -52,6 +52,7 @@
 	"my_achievement_title": "My Achievement",
 	"switch_role_button_text": "Switch Role",
 	"select_language_button_text": "Select Language",
+	"feedback_button_text": "Feedback & Question",
 	"logout_button_text": "Logout",
 
 	// Create Classroom Page
@@ -185,5 +186,9 @@
 	"classroom_closed_popup_content":"Please wait until the classroom is re-opened",
 
 	// Select Language page
-	"select_language_page_title": "Select Language"
+	"select_language_page_title": "Select Language",
+
+	// Feedback page
+	"feedback_page_title": "Feedback & Question",
+	"feedback_empty_alert_text": "Is anything we can do to help you? Leave your message here, we will get back to you ASAP"
 }

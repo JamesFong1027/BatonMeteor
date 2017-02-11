@@ -102,3 +102,18 @@ Meteor.publish("userProfile", function () {
     this.ready();
   }
 });
+
+Meteor.publish( 'channel', function( isDirect, channel ) {
+  check( isDirect, Boolean );
+  check( channel, String );
+
+  if ( isDirect ) {
+    var toUserId = channel;
+    return Message.find({
+      $or: [ { owner: this.userId, to: toUserId }, { owner: toUserId, to: this.userId } ]
+    });;
+  } else {
+    var selectedChannel = Channels.findOne( { name: channel } );
+    return Message.find( { channel: selectedChannel._id } );
+  }
+});

@@ -52,6 +52,7 @@
 	"my_achievement_title": "我的成就",
 	"switch_role_button_text": "切换角色",
 	"select_language_button_text": "选择语言",
+	"feedback_button_text": "反馈与问题",
 	"logout_button_text": "登出",
 
 	// Create Classroom Page
@@ -185,5 +186,9 @@
 	"classroom_closed_popup_content":"请等到教室开放时再加入",
 
 	// Select Language page
-	"select_language_page_title": "选择语言"
+	"select_language_page_title": "选择语言",
+
+	// Feedback page
+	"feedback_page_title": "反馈与问题",
+	"feedback_empty_alert_text": "有什么可以帮助你吗？请在此留言，我们会尽快解答你的疑问"
 }

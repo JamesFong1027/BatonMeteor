@@ -18,6 +18,9 @@ Template.profile.helpers({
   },
   trackedClassNumber:function(){
     return ClassroomKicker.getClassroomList().count();
+  },
+  feedbackUnreadNum: function(){
+    return Message.find({to:Meteor.userId(),isRead:false}).count();
   }
 });
 

@@ -56,6 +56,17 @@
             </span>
           {{/ionItem}}
 
+          {{#ionItem class="item item-icon-left" id="feedback" path="feedbackChat"}}
+            <!-- <i class="icon"><img class="cusicon" src="/translate.png"/></i> -->
+            <i class="icon ion-android-chat"></i>
+            {{_ "feedback_button_text"}}
+            <span class="item-note">
+              {{#with feedbackUnreadNum}}
+                <span class="badge badge-assertive">{{feedbackUnreadNum}}</span>
+              {{/with}}
+            </span>
+          {{/ionItem}}
+
           <!-- {{#ionItem class="item item-icon-left" id="feedback"}}
             <i class="icon ion-email"></i>
             Feedback
