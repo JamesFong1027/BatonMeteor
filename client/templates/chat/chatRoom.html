@@ -1,0 +1,22 @@
+<template name="chatRoom">
+    <div class="conversation">
+        <div class="chat active-chat" id="messages">
+            {{#each messages}} 
+              {{> chatBubble}}
+            {{else}}
+              <div class="padding text-center">
+                  {{empty_content_str}}
+              </div>
+            {{/each}}
+        </div>
+        <div class="write">
+            <!-- <a href="javascript:;" class="write-link attach"></a> -->
+            <!-- <input type="text" name="message" placeholder="Type your message here..."/> -->
+            <textarea class="msgInputBox" rows="1" placeholder="Type your message here..."></textarea>
+            <!-- <a href="javascript:;" class="write-link smiley"></a> -->
+            <!-- <a href="javascript:;" class="write-link send"></a> -->
+            <!-- <i class="write-link send icon ion-paper-airplane"></i> -->
+            <a class="send button button-icon icon ion-paper-airplane"></a>
+        </div>
+    </div>
+</template>
