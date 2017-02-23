@@ -21,7 +21,7 @@ ChatCat = {
 			Meteor.call("markMsgAsRead", message);
 		}
 	},
-	getChatListingPeople: function(curUserId){
+	getChatListingPeople: function(curUserId, withIssueNum){
 		if(!!!curUserId) curUserId = Meteor.userId();
 
 		var listingPeople = new Array();
@@ -33,8 +33,10 @@ ChatCat = {
 			people.latestMsg = Message.findOne({owner:msgOwnerUserId},{sort:{timestamp:-1}});
 			people.unreadNum = Message.find({owner:msgOwnerUserId,isRead:false}).count();
 			// TODO use github or something to track the issue
-			people.issueNum = 0;
-			people.solvedNum = 0;
+			if(withIssueNum){
+				people.issueNum = Issue.find({uid:msgOwnerUserId, state: Schemas.IssueState.open}).count();
+				people.solvedNum = Issue.find({uid:msgOwnerUserId, state: Schemas.IssueState.closed}).count();
+			}
 			listingPeople.push(people);
 		}
 

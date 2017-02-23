@@ -1,23 +1,3 @@
-import GitHubAPI from 'github';
-var GitHubApi = require("github");
-var github = new GitHubApi({
-  version: "3.0.0", // required
-  timeout: 5000 // optional
-});
-
-var githubSettings = Meteor.settings.private.github;
-
-// github.authenticate({
-//   type: "oauth",
-//   key: "aa60e659ab63ad7cae23",
-//   secret: "896cfe17d05f518a5a89e2bd140410d143d66868"
-// });
-
-github.authenticate({
-  type: "token",
-  token: githubSettings.userToken
-});
-
 // Meteor Method at server sides
 Meteor.methods({
   setUserAsTeacher:function(userId){
@@ -101,7 +81,7 @@ Meteor.methods({
   insertIssue: function(issue) {
     if(!isSysAdminAccount(Meteor.userId())) return false;
 
-    var createIssue = Meteor.wrapAsync(github.issues.create);
+    var createIssue = Meteor.wrapAsync(GlobalVar.github.issues.create);
     var res = createIssue({
       owner: githubSettings.ownerName,
       repo: githubSettings.repo,
@@ -132,69 +112,8 @@ Meteor.methods({
 
     return true;
   },
-  createGitHubIssue: function(issue){
-    var createIssue = Meteor.wrapAsync(github.issues.create);
-    return createIssue({
-      owner: githubSettings.ownerName,
-      repo: githubSettings.repo,
-      title: issue.description,
-      labels: ["feedback"]
-    });
-
-    // github.issues.create({
-    //   owner: "VictorChenLi",
-    //   repo: "BatonMeteor",
-    //   title: issue.description,
-    //   labels: ["feedback"]
-    // }, function(err, res) {
-    //   if (err) {
-    //     console.log(err.toJSON());
-    //   } else {
-    //     // _.each(res.data, function(issue){
-    //     //   console.log(issue.body);
-    //     // })
-    //     console.log(res);
-    //   }
-    // });
-  },
-  getAllGitHubIssue: function() {
-    // console.log(github);
-
-    // github.issues.getForRepo({
-    //   owner: "victorchenli",
-    //   repo: "BatonMeteor",
-    //   labels: "feedback"
-    // }, function(err, res) {
-    //   if (err) {
-    //     console.log(err.toJSON());
-    //   } else {
-    //     _.each(res.data, function(issue){
-    //       console.log(issue.body);
-    //     })
-    //   }
-    // });
-    var SyncFun = Meteor.wrapAsync(github.issues.getForRepo);
-    return SyncFun({
-      owner: "victorchenli",
-      repo: "BatonMeteor",
-      labels: "feedback"
-    });
-
-    // github.user.getFollowingFromUser({
-    //     user: "ndhoule"
-    // }, function(err, res) {
-    //     console.log(JSON.stringify(res));
-    // });
-
-    // github.issues.getMilestones({
-    //   owner: "mikedeboer",
-    //   repo: "node-github"
-    // }, function(err, res) {
-    //   if (err) {
-    //     console.log(err.toJSON());
-    //   } else {
-    //     console.log(res);
-    //   }
-    // });
+  syncUpGithubIssue:function(){
+    if(isSysAdminAccount(Meteor.userId()))
+      return ServerJobBoss.syncUpGithubIssue();
   }
 });

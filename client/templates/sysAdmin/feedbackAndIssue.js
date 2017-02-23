@@ -1,4 +1,6 @@
 Template.feedbackAndIssue.onCreated(function() {
+	Meteor.subscribe("issue");
+
 	var template = this;
 	template.channel = new ReactiveVar(null);
 });
@@ -16,7 +18,8 @@ Template.feedbackAndIssue.events({
 Template.feedbackAndIssue.helpers({
 	chatListArg: function() {
 		return {
-			curUserId: GlobalVar.feedbackAdminID
+			curUserId: GlobalVar.feedbackAdminID,
+			withIssue: true
 		};
 	},
 	chatRoomArg:function(){

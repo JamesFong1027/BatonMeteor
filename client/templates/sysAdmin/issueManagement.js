@@ -1,5 +1,4 @@
 Template.issueManagement.onCreated(function() {
-	Meteor.subscribe("issue");
 	this.associateIssueID = new ReactiveVar(null);
 	this.searchStr = new ReactiveVar("");
 });

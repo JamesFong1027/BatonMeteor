@@ -5,7 +5,7 @@ Template.chatListing.onCreated(function() {
 
 Template.chatListing.helpers({
 	people:function(){
-		var people = ChatCat.getChatListingPeople(this.curUserId);
+		var people = ChatCat.getChatListingPeople(this.curUserId, this.withIssue);
 		return _.sortBy(people, function(peopleObj){
 			return -peopleObj.unreadNum;
 		});
