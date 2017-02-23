@@ -1,0 +1,35 @@
+<template name="chatListing">
+    <div class="conversation">
+        <div class="listing">
+            <div class="search">
+                <label class="item item-input">
+                    <i class="icon ion-search placeholder-icon"></i>
+                    <input id="classSearch" type="text" placeholder="Type to search...">
+                </label>
+            </div>
+            <ul class="people">
+                {{#with people}}
+                    {{#if this.length}}
+                        {{#each this}}
+                            <li class="person">
+                                <img src="/userlogo.png" alt="" />
+                                <span class="name">{{userObj.profile.firstName}} {{userObj.profile.lastName}}</span>
+                                <span class="time">{{timeFormat latestMsg.timestamp}}</span>
+                                <span class="preview">{{latestMsg.message}}</span>
+                                <div class="traffic">
+                                    <p class="lights unread">{{unreadNum}}</p>
+                                    <p class="lights issue">{{issueNum}}</p>
+                                    <p class="lights solved">{{solvedNum}}</p>
+                                </div>
+                            </li>
+                        {{/each}}
+                    {{else}}
+                        <div class="padding text-center">
+                            <h4>No message coming</h4>
+                        </div>
+                    {{/if}}
+                {{/with}}
+            </ul>
+        </div>
+    </div>
+</template>

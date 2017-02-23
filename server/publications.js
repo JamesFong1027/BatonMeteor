@@ -104,6 +104,7 @@ Meteor.publish("userProfile", function () {
 });
 
 Meteor.publish( 'channel', function( isDirect, channel ) {
+  if(!!!isDirect || !!!channel) return;
   check( isDirect, Boolean );
   check( channel, String );
 
@@ -111,9 +112,50 @@ Meteor.publish( 'channel', function( isDirect, channel ) {
     var toUserId = channel;
     return Message.find({
       $or: [ { owner: this.userId, to: toUserId }, { owner: toUserId, to: this.userId } ]
-    });;
+    });
   } else {
     var selectedChannel = Channels.findOne( { name: channel } );
     return Message.find( { channel: selectedChannel._id } );
   }
 });
+
+Meteor.publishComposite('msgListing', function() {
+	return {
+		find:function(){
+			return Message.find({ $or: [{ owner: this.userId }, { to: this.userId }] });
+		},
+		children:[
+			{
+				find:function(message){
+					return Meteor.users.find({_id: message.owner}, {fields: {'profile': 1}});
+				}
+			}
+		]
+
+	}
+});
+
+Meteor.publishComposite('feedbackAdminListing', function() {
+	if(isSysAdminAccount(this.userId)){
+		return {
+			find:function(){
+				return Message.find({ $or: [{ owner: GlobalVar.feedbackAdminID }, { to: GlobalVar.feedbackAdminID }] });
+			},
+			children:[
+				{
+					find: function(message){
+						return Meteor.users.find({_id: message.owner}, {fields: {'profile': 1, 'emails':1}});
+					}
+				}
+			]
+		}
+	}
+});
+
+Meteor.publish('issue', function() {
+	if(isSysAdminAccount(this.userId)) {
+		return Issue.find();
+	}
+});
+
+

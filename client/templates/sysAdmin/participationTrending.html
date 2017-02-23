@@ -1,0 +1,17 @@
+<template name="participationTrending">
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">{{_ "participation_trending"}}</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		<button class="button button-clear pull-left" data-ion-menu-toggle="left">
+			{{> ionIcon icon='navicon'}}
+		</button>
+	{{/contentFor}}
+	
+	{{#ionView}}
+		{{#ionContent}}
+			<h1>Participation Trending</h1>
+		{{/ionContent}}
+	{{/ionView}}
+</template>

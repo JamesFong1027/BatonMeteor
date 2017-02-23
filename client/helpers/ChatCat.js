@@ -17,8 +17,27 @@ ChatCat = {
 	},
 	MarkMsgAsRead: function(message){
 		// only when message is not read and it's sent to me
-		if(!!!message.isRead && message.to === Meteor.userId()) {
+		if(!!!message.isRead) {
 			Meteor.call("markMsgAsRead", message);
 		}
+	},
+	getChatListingPeople: function(curUserId){
+		if(!!!curUserId) curUserId = Meteor.userId();
+
+		var listingPeople = new Array();
+		var groupData = DBUtil.groupBy(Message, "owner", { owner: { $ne: curUserId } });
+		for (var i = groupData.length - 1; i >= 0; i--) {
+			var msgOwnerUserId = groupData[i][0];
+			var people = new Object();
+			people.userObj = Meteor.users.findOne({_id:msgOwnerUserId});
+			people.latestMsg = Message.findOne({owner:msgOwnerUserId},{sort:{timestamp:-1}});
+			people.unreadNum = Message.find({owner:msgOwnerUserId,isRead:false}).count();
+			// TODO use github or something to track the issue
+			people.issueNum = 0;
+			people.solvedNum = 0;
+			listingPeople.push(people);
+		}
+
+		return listingPeople;
 	}
 }

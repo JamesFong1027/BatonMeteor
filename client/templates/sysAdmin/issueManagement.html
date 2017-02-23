@@ -1,0 +1,40 @@
+<template name="issueManagement">
+  {{#ionModal title="issue_management_page_title"}}
+    <div class="content overflow-scroll has-footer">
+      {{#ionList}}
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <input class="issueInput" type="text" placeholder="Describe the issue...">
+            </label>
+            <button class="button button-small addIssue disable-button">
+                Add
+            </button>
+        </div>
+        <!--Auto complete search box-->
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input id="issueSearch" type="text" placeholder="Type to search...">
+        </label>
+        {{#with issues}}
+          {{#if this.count}}
+            {{#each issues}}
+              {{#ionItem id=this._id issue=this class="item-icon-right item-text-wrap issueItem"}}
+                <p style="">#{{giid}}  {{description}}</p>
+                <i class="icon {{isOwner this}}"></i>
+              {{/ionItem}}
+            {{/each}}  
+          {{else}}
+            <div class="padding text-center">
+                <h4>{{_ "empty_issue_message"}}</h4>
+            </div>
+          {{/if}}
+        {{/with}}
+      {{/ionList}}
+    </div>
+
+    <div class="bar bar-footer {{canAssociate}} associateIssue">
+      <div class="title">{{_ "issue_associate_button_text"}}</div>
+    </div>
+    
+  {{/ionModal}}
+</template>

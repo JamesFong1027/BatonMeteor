@@ -190,5 +190,17 @@
 
 	// Feedback page
 	"feedback_page_title": "反馈与问题",
-	"feedback_empty_alert_text": "有什么可以帮助你吗？请在此留言，我们会尽快解答你的疑问"
+	"feedback_empty_alert_text": "有什么可以帮助你吗？请在此留言，我们会尽快解答你的疑问",
+
+	// Sys admin menu
+	"sys_admin_menu": "系统管理员菜单",
+	"feedback_and_issue": "反馈与问题",
+	"user_management": "用户管理",
+	"participation_trending": "参与数据趋势",
+
+	// Issue management
+	"issue_management_page_title": "问题管理",
+	"issue_management_page_title_for_user": "__userName__ 的问题管理",
+	"empty_issue_message": "没有任何关于这个用户的问题",
+	"issue_associate_button_text": "关联"
 }

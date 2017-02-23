@@ -1,0 +1,138 @@
+.chatContainer{
+  width: 100%;
+  height: 100%;
+}
+.chatContainer .left{
+  float: left;
+  width: 37.6%;
+  height: 100%;
+}
+.chatContainer .right{
+  /*position: relative;*/
+  float: left;
+  width: 62.4%;
+  height: 100%;
+}
+.conversation .listing {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #e6e6e6;
+  background-color: #fff;
+}
+.conversation .listing .search {
+  position: relative;
+  width: 100%;
+}
+.conversation .listing .search label {
+  background-color: #d8d8d8;
+}
+.conversation .listing input:focus {
+  outline: none;
+}
+.conversation .listing .people {
+  margin-left: -1px;
+  border-right: 1px solid #e6e6e6;
+  border-left: 1px solid #e6e6e6;
+  width: -moz-calc(100% + 2px);
+  width: -webkit-calc(100% + 2px);
+  width: -o-calc(100% + 2px);
+  width: calc(100% + 2px);
+}
+.conversation .listing .people .person {
+  position: relative;
+  width: 100%;
+  padding: 12px 8px 16px;
+  cursor: pointer;
+  background-color: #fff;
+}
+.person{
+  display: inline-block;
+  /*margin-left:-41px;*/
+}
+.conversation .listing .people .person:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: block;
+  width: 80%;
+  height: 1px;
+  content: '';
+  background-color: #e6e6e6;
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+.conversation .listing .people .person img {
+  float: left;
+  width: 40px;
+  height: 40px;
+  margin-right: 12px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.conversation .listing .people .person .name {
+  font-size: 14px;
+  line-height: 22px;
+  color: #1a1a1a;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  display:block;
+}
+.conversation .listing .people .person .time {
+  font-size: 14px;
+  position: absolute;
+  top: 16px;
+  right: 10%;
+  padding: 0 0 5px 5px;
+  color: #999;
+  background-color: #fff;
+}
+.conversation .listing .people .person .preview {
+  font-size: 14px;
+  display: inline-block;
+  overflow: hidden !important;
+  width: 60%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #999;
+}
+.conversation .listing .people .person.active, .conversation .listing .people .person:hover {
+  border: 0;
+  background-color: #00b0ff;
+}
+.conversation .listing .people .person.active span, .conversation .listing .people .person:hover span {
+  color: #fff;
+  background: transparent;
+}
+.conversation .listing .people .person.active:after, .conversation .listing .people .person:hover:after {
+  display: none;
+}
+.traffic{
+  position: absolute;
+  bottom: 16px;
+  right: 8px;
+}
+.traffic .lights {
+  min-width: 8px;
+  height: 20px;
+  line-height: 18px;
+  padding: 0 6px;
+  font-weight: normal;
+  color: white;
+  text-align: center;
+  text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+  border-radius: 11px;
+  display: inline;
+}
+
+.lights.solved {
+  background: #84ECAF;
+}
+.lights.issue {
+  background: #F89406;
+}
+.lights.unread {
+  background: #db5a3c;
+}

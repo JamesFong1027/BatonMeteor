@@ -1,28 +1,37 @@
 Template.chatRoom.onCreated(function() {
-	console.log(this.data);
-	if(!!!this.data) this.data = new Object();
 
-	Template.instance().subscribe('channel', this.data.isDirect, this.data.channel);
 });
 
 Template.chatRoom.onRendered(function(){
-	$('#messages').animate({scrollTop: $("#messages")[0].scrollHeight}, 1000, "swing");
 	var msgBox = Template.instance().$(".msgInputBox");
 	new autoExpandableTextarea(msgBox);
-	// $msgBox.on('change', function(){
-	// 	if(!!event.target.value){
-
-	// 	}
-	// });
+	
+	this.autorun(function(){
+		var dataContext = Template.currentData();
+		if(!!!dataContext) return;
+		// console.log(dataContext);
+		Template.instance().subscribe('channel', dataContext.isDirect, dataContext.channel);
+		setTimeout(function(){
+			$('#messages').animate({scrollTop: $("#messages")[0].scrollHeight}, 1000, "swing");
+		}, 0);
+	});
 });
 
 Template.chatRoom.helpers({
 	messages: function() {
-		var messages = Message.find({}, {
-			sort: {
-				timestamp: 1
-			}
-		});
+		if(!!!this.channel || !!!this.isDirect) return [];
+		
+		var messages = [];
+		if (this.isDirect) {
+			var toUserId = this.channel;
+			messages = Message.find({
+				$or: [{ to: toUserId }, { owner: toUserId }]
+			});
+		} else {
+			var selectedChannel = Channels.findOne({ name: this.channel });
+			messages = Message.find({ channel: selectedChannel._id });
+		}
+
 		var previousMessage;
 		return messages.map(function(message) {
 			if (!!previousMessage) {
@@ -38,12 +47,21 @@ Template.chatRoom.helpers({
 			return message;
 		});
 	},
-	userName:function(userId){
-		if(Meteor.userId() === userId){
-			return "me";
+	toChannel: function(){
+		if(this.isDirect){
+			var toUserId = this.channel;
+			var toUser = Meteor.users.findOne({_id:toUserId});
+			if(!!toUser)  return toUser.profile.firstName + " " + toUser.profile.lastName;
 		} else {
-			return GlobalVar.feedbackAdminID;
+			var selectedChannel = Channels.findOne({ name: this.channel });
+			return selectedChannel.name;
 		}
+	},
+	chatBubbleArg: function(message){
+		return {
+			curUserId: Template.instance().data.curUserId,
+			message: message
+		};
 	}
 });
 
@@ -51,25 +69,24 @@ Template.chatRoom.events({
 	'keydown .msgInputBox': function(event, template) {
 		if(event.keyCode === 13){
 			event.preventDefault();
-			postFeedBack(event.currentTarget);
+			postFeedBack(event.currentTarget, this.channel, this.isDirect);
 		}
 	},
 	'keyup .msgInputBox':function(event,template){
 		$(".send").toggleClass("ready",!!event.currentTarget.value);
-		// console.log(!!event.currentTarget.value);
 	},
 	'click .send':function(event, template){
-		postFeedBack(template.$(".msgInputBox")[0]);
+		postFeedBack(template.$(".msgInputBox")[0], this.channel, this.isDirect);
 		return false;
 	}
 });
 
-function postFeedBack(msgBox){
+function postFeedBack(msgBox, channel, isDirect){
 	if(!!!msgBox) return;
 
 	var feedbackStr = msgBox.value.trim();
 	if(feedbackStr !== ''){
-		ChatCat.InsertMsg(GlobalVar.feedbackAdminID, true, feedbackStr, function() {
+		ChatCat.InsertMsg(channel, isDirect, feedbackStr, function() {
 			$(msgBox).val('').trigger('change');
 			$('#messages').animate({scrollTop: $("#messages")[0].scrollHeight}, 1000, "swing");
 		});

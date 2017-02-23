@@ -1,0 +1,31 @@
+<template name="feedbackAndIssue">
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">{{_ "feedback_and_issue"}}</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		<button class="button button-clear pull-left" data-ion-menu-toggle="left">
+			{{> ionIcon icon='navicon'}}
+		</button>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonRight"}}
+      <div id="issueManage" class="button button-clear disable-button">
+        <i class="icon ion-bug"></i>
+      </div>
+    {{/contentFor}}
+
+	{{#ionView}}
+		{{#ionContent}}
+			<div class="chatContainer">
+				<div class="left">
+					{{> chatListing chatListArg}}	
+				</div>
+				<div class="right">
+					{{> chatRoom chatRoomArg}}
+					<!-- ChatRoom -->
+				</div>
+			</div>
+		{{/ionContent}}
+	{{/ionView}}
+</template>

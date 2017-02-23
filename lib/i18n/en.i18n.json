@@ -190,5 +190,18 @@
 
 	// Feedback page
 	"feedback_page_title": "Feedback & Question",
-	"feedback_empty_alert_text": "Is anything we can do to help you? Leave your message here, we will get back to you ASAP"
+	"feedback_empty_alert_text": "Is anything we can do to help you? Leave your message here, we will get back to you ASAP",
+
+	// Sys admin menu
+	"sys_admin_menu": "Sys Admin Menu",
+	"feedback_and_issue": "Feedback & Issue",
+	"user_management": "User Management",
+	"participation_trending": "Participation Trending",
+
+	// Issue management
+	"issue_management_page_title": "Issue Management",
+	"issue_management_page_title_for_user": "__userName__'s Issue Management",
+	"empty_issue_message": "There are no issue regarding to this user",
+	"issue_associate_button_text": "Associate"
+
 }

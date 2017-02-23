@@ -136,6 +136,13 @@ body {
   transition: 0.5s ease;
 }
 
+.disable-button{
+  pointer-events: none;
+  border-color: #ddd;
+  background: transparent;
+  color: #ddd;
+}
+
 /*body.keyboard-open .content.overflow-scroll {
   bottom: 0px !important;
 }*/

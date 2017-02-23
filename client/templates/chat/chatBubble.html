@@ -1,17 +1,17 @@
 <template name="chatBubble">
-  {{#if showHeader}}
+  {{#if message.showHeader}}
     <div class="conversation-start">
-      <span>{{messageTimestamp timestamp}}</span>
+      <span>{{messageTimestamp message.timestamp}}</span>
     </div>
   {{/if}}
   
-  {{#if isMe owner}}
+  {{#if isMe message.owner}}
     <div class="bubble me">
-        {{message}}
+        {{message.message}}
     </div>
   {{else}}
     <div class="bubble you">
-        {{message}}
+        {{message.message}}
     </div>
   {{/if}}
 </template>

@@ -1,0 +1,17 @@
+<template name="userManagement">
+	{{#contentFor "headerTitle"}}
+		<h1 class="title">{{_ "user_management"}}</h1>
+	{{/contentFor}}
+
+	{{#contentFor "headerButtonLeft"}}
+		<button class="button button-clear pull-left" data-ion-menu-toggle="left">
+			{{> ionIcon icon='navicon'}}
+		</button>
+	{{/contentFor}}
+
+	{{#ionView}}
+		{{#ionContent}}
+			<h1>User Management</h1>
+		{{/ionContent}}
+	{{/ionView}}
+</template>

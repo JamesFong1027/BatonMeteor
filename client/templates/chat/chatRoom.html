@@ -1,13 +1,20 @@
 <template name="chatRoom">
     <div class="conversation">
+        <div class="toPerson">
+            <span>To: <span class="name">{{toChannel}}</span></span>
+        </div>
         <div class="chat active-chat" id="messages">
-            {{#each messages}} 
-              {{> chatBubble}}
-            {{else}}
-              <div class="padding text-center">
-                  {{empty_content_str}}
-              </div>
-            {{/each}}
+            {{#with messages}}
+                {{#if this.length}}
+                    {{#each this}}
+                        {{> chatBubble chatBubbleArg this}}
+                    {{/each}}
+                {{else}}
+                  <div class="padding text-center">
+                      {{empty_content_str}}
+                  </div>
+                {{/if}}
+            {{/with}}
         </div>
         <div class="write">
             <!-- <a href="javascript:;" class="write-link attach"></a> -->

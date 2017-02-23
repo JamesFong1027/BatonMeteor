@@ -10,17 +10,17 @@
   background-color: #fff;
 }
 
-.conversation .top {
+.conversation .toPerson {
   width: 100%;
   height: 47px;
   padding: 15px 29px;
-  background-color: #eceff1;
+  background-color: #d8d8d8;
 }
-.conversation .top span {
+.conversation .toPerson span {
   font-size: 15px;
   color: #999;
 }
-.conversation .top span .name {
+.conversation .toPerson span .name {
   color: #1a1a1a;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
@@ -103,56 +103,6 @@
   -webkit-animation-duration: 0.15s;
   animation-duration: 0.15s;
 }
-/*.conversation .chat.active-chat .bubble:nth-of-type(1) {
-  -moz-animation-duration: 0.15s;
-  -webkit-animation-duration: 0.15s;
-  animation-duration: 0.15s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(2) {
-  -moz-animation-duration: 0.3s;
-  -webkit-animation-duration: 0.3s;
-  animation-duration: 0.3s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(3) {
-  -moz-animation-duration: 0.45s;
-  -webkit-animation-duration: 0.45s;
-  animation-duration: 0.45s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(4) {
-  -moz-animation-duration: 0.6s;
-  -webkit-animation-duration: 0.6s;
-  animation-duration: 0.6s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(5) {
-  -moz-animation-duration: 0.75s;
-  -webkit-animation-duration: 0.75s;
-  animation-duration: 0.75s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(6) {
-  -moz-animation-duration: 0.9s;
-  -webkit-animation-duration: 0.9s;
-  animation-duration: 0.9s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(7) {
-  -moz-animation-duration: 1.05s;
-  -webkit-animation-duration: 1.05s;
-  animation-duration: 1.05s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(8) {
-  -moz-animation-duration: 1.2s;
-  -webkit-animation-duration: 1.2s;
-  animation-duration: 1.2s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(9) {
-  -moz-animation-duration: 1.35s;
-  -webkit-animation-duration: 1.35s;
-  animation-duration: 1.35s;
-}
-.conversation .chat.active-chat .bubble:nth-of-type(10) {
-  -moz-animation-duration: 1.5s;
-  -webkit-animation-duration: 1.5s;
-  animation-duration: 1.5s;
-}*/
 .conversation .write {
   bottom: 0px;
   position: absolute;

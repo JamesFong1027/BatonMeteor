@@ -1,8 +1,9 @@
 Template.feedbackChat.helpers({
-	charRoomArg:function(){
+	chatRoomArg:function(){
 		return {
 			channel: GlobalVar.feedbackAdminID,
-			isDirect: true
+			isDirect: true,
+			curUserId: Meteor.userId()
 		};
 	},
 });

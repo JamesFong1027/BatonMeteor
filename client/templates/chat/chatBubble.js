@@ -7,7 +7,7 @@ Template.chatBubble.helpers({
 		}
 	},
 	isMe: function(userId){
-		return Meteor.userId() === userId;
+		return this.curUserId === userId;
 	},
 	messageTimestamp: function(timestamp) {
 		if (timestamp) {
