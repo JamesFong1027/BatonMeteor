@@ -61,13 +61,7 @@ Template.issueManagement.helpers({
 		var issueIdList = _.pluck(
 				DBUtil.distinctMulti(Issue,"giid", ["_id"], {state: Schemas.IssueState.open}),
 				"_id");
-		var keyword = Template.instance().searchStr.get();
-		// escape the search string
-		keyword = keyword.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
-		// default to match all the string
-		keyword = keyword+".*";
-
-		return Issue.find({_id:{$in:issueIdList}, description:{$regex:keyword, $options: "i"}}, {sort:{createDate:-1}});
+		return DBUtil.search(Issue, "description", Template.instance().searchStr.get(), {_id:{$in:issueIdList}}, {createDate:-1});
 	},
 	isOwner: function(issue){
 		var passData = Template.instance().data;
@@ -96,6 +90,11 @@ function postIssue(issueInput, userId){
 		IssueKiller.InsertIssue(userId, Schemas.IssueState.open, description, function(e,r) {
 			if(!!e){
 				console.log("InsertIssue error");
+				IonPopup.alert({
+					title: TAPi18n.__("error"),
+					template: TAPi18n.__("add_issue_error_msg"),
+					okText: 'OK'
+				});
 			} else{
 				$(issueInput).val('').trigger('input');	
 			}

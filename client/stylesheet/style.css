@@ -132,6 +132,13 @@ body {
   color: grey;
 }
 
+.cover_layer{
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 99;
+}
+
 .popup-container.popup-showing.active{
   transition: 0.5s ease;
 }

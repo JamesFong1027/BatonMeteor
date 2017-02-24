@@ -4,7 +4,7 @@
             <div class="search">
                 <label class="item item-input">
                     <i class="icon ion-search placeholder-icon"></i>
-                    <input id="classSearch" type="text" placeholder="Type to search...">
+                    <input id="peopleSearch" type="text" placeholder="Type to search...">
                 </label>
             </div>
             <ul class="people">
@@ -18,8 +18,10 @@
                                 <span class="preview">{{latestMsg.message}}</span>
                                 <div class="traffic">
                                     <p class="lights unread">{{unreadNum}}</p>
-                                    <p class="lights issue">{{issueNum}}</p>
-                                    <p class="lights solved">{{solvedNum}}</p>
+                                    {{#if withIssueNum}}
+                                        <p class="lights issue">{{issueNum}}</p>
+                                        <p class="lights solved">{{solvedNum}}</p>
+                                    {{/if}}
                                 </div>
                             </li>
                         {{/each}}

@@ -83,15 +83,15 @@ Meteor.methods({
 
     var createIssue = Meteor.wrapAsync(GlobalVar.github.issues.create);
     var res = createIssue({
-      owner: githubSettings.ownerName,
-      repo: githubSettings.repo,
+      owner: GlobalVar.githubSettings.ownerName,
+      repo: GlobalVar.githubSettings.repo,
       title: issue.description,
       labels: ["feedback"]
     });
 
     issue.giid = res.data.number;
-    issue.gitRepoOwnerName = githubSettings.ownerName;
-    issue.gitRepo = githubSettings.repo;
+    issue.gitRepoOwnerName = GlobalVar.githubSettings.ownerName;
+    issue.gitRepo = GlobalVar.githubSettings.repo;
 
     // issue.giid = "0";
     Issue.insert(issue);

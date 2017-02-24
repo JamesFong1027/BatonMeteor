@@ -9,6 +9,7 @@ Template.chatRoom.onRendered(function(){
 	this.autorun(function(){
 		var dataContext = Template.currentData();
 		if(!!!dataContext) return;
+
 		// console.log(dataContext);
 		Template.instance().subscribe('channel', dataContext.isDirect, dataContext.channel);
 		setTimeout(function(){
@@ -18,6 +19,10 @@ Template.chatRoom.onRendered(function(){
 });
 
 Template.chatRoom.helpers({
+	hasData:function(){
+		var dataContext = Template.currentData();
+		return !!dataContext && !!dataContext.channel;
+	},
 	messages: function() {
 		if(!!!this.channel || !!!this.isDirect) return [];
 		

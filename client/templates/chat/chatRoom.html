@@ -1,4 +1,9 @@
 <template name="chatRoom">
+    {{#unless hasData}}
+        <div class=" cover_layer">
+            <h1 class="title placeholder_text">{{_ "empty_chat_room_data_msg"}}</h1>
+        </div>
+    {{/unless}}
     <div class="conversation">
         <div class="toPerson">
             <span>To: <span class="name">{{toChannel}}</span></span>

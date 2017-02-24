@@ -7,7 +7,7 @@ Meteor.startup(function() {
     timeout: 5000 // optional
   });
 
-  var githubSettings = Meteor.settings.private.github;
+  GlobalVar.githubSettings = Meteor.settings.private.github;
 
   // github.authenticate({
   //   type: "oauth",
@@ -17,9 +17,8 @@ Meteor.startup(function() {
 
   GlobalVar.github.authenticate({
     type: "token",
-    token: githubSettings.userToken
+    token: GlobalVar.githubSettings.userToken
   });
-
 
   SyncedCron.add({
     name: 'Sync up the github Issue state',

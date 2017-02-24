@@ -19,7 +19,7 @@ Template.feedbackAndIssue.helpers({
 	chatListArg: function() {
 		return {
 			curUserId: GlobalVar.feedbackAdminID,
-			withIssue: true
+			withIssueNum: true
 		};
 	},
 	chatRoomArg:function(){

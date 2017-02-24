@@ -1,12 +1,16 @@
 Template.chatListing.onCreated(function() {
-	if(!!!this.data) this.data = new Object();
+	if (!!!this.data) this.data = new Object();
+	this.searchStr = new ReactiveVar("");
 });
 
 
 Template.chatListing.helpers({
-	people:function(){
-		var people = ChatCat.getChatListingPeople(this.curUserId, this.withIssue);
-		return _.sortBy(people, function(peopleObj){
+	people: function() {
+		var people = ChatCat.getChatListingPeople(this.curUserId, this.withIssueNum);
+		return _.sortBy(_.filter(people, function(pp) {
+			var searchField = (pp.userObj.profile.firstName + " " + pp.userObj.profile.lastName).toLowerCase();
+			return (searchField.indexOf(Template.instance().searchStr.get().toLowerCase()) !== -1);
+		}), function(peopleObj) {
 			return -peopleObj.unreadNum;
 		});
 	},
@@ -21,4 +25,16 @@ Template.chatListing.helpers({
 			return moment(timestamp).format(format);
 		}
 	},
+	withIssueNum: function(){
+		return Template.instance().data.withIssueNum;
+	}
+});
+
+
+Template.chatListing.events({
+	"input #peopleSearch": function(event, template) {
+		// console.log(event.target.value);
+		var searchStr = event.target.value.trim();
+		template.searchStr.set(searchStr);
+	}
 });

@@ -6,38 +6,29 @@
 					<div class="bar bar-header bar-dark">
 						<h1 class="title">{{_ "sys_admin_menu"}}</h1>
 					</div>
-					<div class="content has-header">
-						<div class="list">
-							<div class="item item-icon-right" data-ion-menu-close>
-								<li>
-									<a href="{{pathFor 'participationTrending'}}">
-										{{_ "participation_trending"}}
-									</a>
-								</li>
-							</div>
-						</div>
+					<div class="content has-header" data-ion-menu-close>
+						{{#ionItem class="item item-icon-left" path='participationTrending'}}
+							<i class="icon ion-ios-people"></i>
+							{{_ "participation_trending"}}
+						{{/ionItem}}
+					</div>
+					<div class="content has-header" data-ion-menu-close>
+						{{#ionItem class="item item-icon-left" path='userManagement'}}
+							<i class="icon ion-ios-people"></i>
+							{{_ "user_management"}}
+						{{/ionItem}}
+					</div>
+					<div class="content has-header" data-ion-menu-close>
+						{{#ionItem class="item item-icon-left" path='feedbackAndIssue'}}
+							<i class="icon ion-bug"></i>
+							{{_ "feedback_and_issue"}}
+						{{/ionItem}}
 					</div>
 					<div class="content has-header">
-						<div class="list">
-							<div class="item item-icon-right" data-ion-menu-close>
-								<li>
-									<a href="{{pathFor 'userManagement'}}">
-										{{_ "user_management"}}
-									</a>
-								</li>
-							</div>
-						</div>
-					</div>
-					<div class="content has-header">
-						<div class="list">
-							<div class="item item-icon-right" data-ion-menu-close>
-								<li>
-									<a href="{{pathFor 'feedbackAndIssue'}}">
-										{{_ "feedback_and_issue"}}
-									</a>
-								</li>
-							</div>
-						</div>
+						{{#ionItem class="item item-icon-left assertive" id="logout"}}
+							<a class="icon ion-log-out assertive"></a>
+							{{_ "logout_button_text"}}
+						{{/ionItem}}
 					</div>
 				{{/ionSideMenu}}
 			{{/ionSideMenus}}

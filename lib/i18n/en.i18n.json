@@ -1,5 +1,6 @@
 {
 	"hello": "Hey there",
+	"error": "Error",
 	// Classroom Status
 	"classroom_status_open": "Open",
 	"classroom_status_close": "Close",
@@ -191,6 +192,7 @@
 	// Feedback page
 	"feedback_page_title": "Feedback & Question",
 	"feedback_empty_alert_text": "Is anything we can do to help you? Leave your message here, we will get back to you ASAP",
+	"empty_chat_room_data_msg" : "No Chat is selected",
 
 	// Sys admin menu
 	"sys_admin_menu": "Sys Admin Menu",
@@ -202,6 +204,8 @@
 	"issue_management_page_title": "Issue Management",
 	"issue_management_page_title_for_user": "__userName__'s Issue Management",
 	"empty_issue_message": "There are no issue regarding to this user",
-	"issue_associate_button_text": "Associate"
+	"issue_associate_button_text": "Associate",
+	"issue_resolve_message": "Hi __userName__, the issue that we discussed regarding: '__issueDesc__' have already been resolved now, please close/reopen the app or update the app to check it out.",
+	"add_issue_error_msg": "Add issue error"
 
 }

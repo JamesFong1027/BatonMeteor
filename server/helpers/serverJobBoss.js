@@ -1,6 +1,6 @@
 ServerJobBoss = {
   syncUpGithubIssue: function() {
-    var issueList = DBUtil.distinctMulti(Issue, "giid", ["giid", "gitRepo", "gitRepoOwnerName"], {
+    var issueList = DBUtil.distinctMulti(Issue, "giid", ["uid", "giid", "gitRepo", "gitRepoOwnerName", "description"], {
       state: Schemas.IssueState.open
     });
 
@@ -13,9 +13,25 @@ ServerJobBoss = {
           repo: issueList[i].gitRepo,
           number: issueList[i].giid
         });
-        console.log(res.data.state);
         if (res.data.state === Schemas.IssueState.closed) {
-          console.log(res.data.number, " need update");
+          var notifiedUidList = DBUtil.distinct(Issue, "uid", {
+            giid: res.data.number + "",
+            state: Schemas.IssueState.open
+          });
+          for (var j = notifiedUidList.length - 1; j >= 0; j--) {
+            // insert the resolve reply message
+            var resolveMsg = {
+              to: notifiedUidList[j],
+              owner: GlobalVar.feedbackAdminID,
+              message: TAPi18n.__("issue_resolve_message", {
+                userName: Meteor.users.findOne({_id: notifiedUidList[j]}).profile.firstName,
+                issueDesc: issueList[i].description
+              }),
+              isRead: false
+            };
+            Message.insert(resolveMsg);
+          }
+
           updateIssueState({
             giid: res.data.number + ""
           }, {

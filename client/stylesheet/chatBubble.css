@@ -104,6 +104,7 @@
   animation-duration: 0.15s;
 }
 .conversation .write {
+  z-index: 1;
   bottom: 0px;
   position: absolute;
   margin-bottom: 8px;
