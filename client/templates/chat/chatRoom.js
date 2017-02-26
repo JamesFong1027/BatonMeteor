@@ -12,9 +12,7 @@ Template.chatRoom.onRendered(function(){
 
 		// console.log(dataContext);
 		Template.instance().subscribe('channel', dataContext.isDirect, dataContext.channel);
-		setTimeout(function(){
-			$('#messages').animate({scrollTop: $("#messages")[0].scrollHeight}, 1000, "swing");
-		}, 0);
+		swingToBottom();
 	});
 });
 
@@ -36,6 +34,13 @@ Template.chatRoom.helpers({
 			var selectedChannel = Channels.findOne({ name: this.channel });
 			messages = Message.find({ channel: selectedChannel._id });
 		}
+
+		messages.observeChanges({
+			added: function(id, message) {
+				console.log(message);
+				swingToBottom();
+			}
+		});
 
 		var previousMessage;
 		return messages.map(function(message) {
@@ -93,7 +98,7 @@ function postFeedBack(msgBox, channel, isDirect){
 	if(feedbackStr !== ''){
 		ChatCat.InsertMsg(channel, isDirect, feedbackStr, function() {
 			$(msgBox).val('').trigger('change');
-			$('#messages').animate({scrollTop: $("#messages")[0].scrollHeight}, 1000, "swing");
+			swingToBottom();
 		});
 	}
 	msgBox.focus();
@@ -158,4 +163,10 @@ function autoExpandableTextarea() {
 	}
 	
 	constructor.apply(this, arguments);
+}
+
+function swingToBottom(){
+	setTimeout(function(){
+		$('#messages').animate({scrollTop: $("#messages")[0].scrollHeight}, 1000, "swing");
+	}, 0);
 }

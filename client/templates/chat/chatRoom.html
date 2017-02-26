@@ -5,9 +5,11 @@
         </div>
     {{/unless}}
     <div class="conversation">
-        <div class="toPerson">
-            <span>To: <span class="name">{{toChannel}}</span></span>
-        </div>
+        {{#with toChannel}}
+            <div class="toPerson">
+                <span>To: <span class="name">{{toChannel}}</span></span>
+            </div>
+        {{/with}}
         <div class="chat active-chat" id="messages">
             {{#with messages}}
                 {{#if this.length}}
