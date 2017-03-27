@@ -205,6 +205,6 @@
 	"issue_management_page_title_for_user": "__userName__ 的问题管理",
 	"empty_issue_message": "没有任何关于这个用户的问题",
 	"issue_associate_button_text": "关联",
-	"issue_resolve_message": "__userName__ 您好，关于我们上次讨论的问题： '__issueDesc__' 已经被修复啦，请重启或者更新程序来看看是否解决了您的问题。",
+	"issue_resolve_message": "__userName__ 您好，关于我们上次讨论的问题： '__issueDesc__' 已经被修复啦，请重启程序来查看是否解决了您的问题，感谢你的帮助让Baton变得更好！",
 	"Add_issue_error_msg": "新增问题出错"
 }

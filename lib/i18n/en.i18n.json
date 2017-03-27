@@ -3,7 +3,7 @@
 	"error": "Error",
 	// Classroom Status
 	"classroom_status_open": "Open",
-	"classroom_status_close": "Close",
+	"classroom_status_close": "Closed",
 
 	// user type
 	"user_type_student": "Student",
@@ -12,15 +12,15 @@
 	// Student Talk Page
 	"talk_mode_title": "Talk Mode",
 	"send_panel_view_title": "Send your request",
-	"participation_buddy_view_title": "Classroom participation",
-	"student_class_entry_title": "Pick a classroom",
+	"participation_buddy_view_title": "Classroom Participation",
+	"student_class_entry_title": "Pick a Classroom",
 	"join_button": "Join",
 	"short_code_input_placeholder": "Enter short code to start...",
-	"recent_attend_class_title": "Recently Attended Class",
+	"recent_attend_class_title": "Recently Attended Classes",
 	"class_status_title": "Status",
 	"class_teacher_title": "Teacher",
 	"class_create_date_title": "Create Date",
-	"attended_class_list_empty_text": "There are no classroom, using short code or scan QR code to join a classroom",
+	"attended_class_list_empty_text": "Use the 'short code' or scan the QR code to join a classroom",
 
 	// Student Work Page
 	"work_mode_title": "Work Mode",
@@ -60,7 +60,7 @@
 	"create_classroom_page_title": "New Classroom",
 	"create_classroom_class_name_title": "Classroom Name",
 	"create_classroom_class_name_placeholder": "Science 2.1",
-	"class_name_already_exist_error_msg": "Classroom name is already exist!",
+	"class_name_already_exist_error_msg": "Classroom name already exists!",
 	"create_classroom_button_text": "Create Classroom",
 
 	// Edit Classroom Page
@@ -75,7 +75,7 @@
 	"classroom_session_title": "Session",
 	"classroom_session_start_date_title": "Start Date",
 	"classroom_session_end_date_title": "End Date",
-	"start_new_session_button_title": "Start new Session",
+	"start_new_session_button_title": "Start new session",
 
 	//Classroom History List Page
 	"classroom_history_page_title": "Classroom History List",
@@ -114,7 +114,7 @@
 	"time_unit_type_str_day": "Day",
 	"time_unit_type_str_week": "Week",
 	"time_unit_type_str_month": "month",
-	"chart_empty_placeholder_text": "You have not enough data to display",
+	"chart_empty_placeholder_text": "You do not have enough data for display",
 
 	// Class Achievement Menu
 	"class_achieve_menu_change_goal": "Change goal",
@@ -136,7 +136,7 @@
 
 	// Current Classroom Participation Record Page
 	"current_participation_record_page_title": "Current Participation Record",
-	"record_view_toggle_button_text": "Toggle to see the all sessions records",
+	"record_view_toggle_button_text": "Toggle to see  all participation records",
 	"student_achievement_goal": "Student's Class Goal Progress",
 	"student_in_class_title": "__student__ record in __class__",
 
@@ -151,7 +151,7 @@
 	"enter_shortcode_popup_header":"Enter ShortCode",
 	"enter_shortcode_popup_subtitle":"Ignore upper or lower case",
 	"enter_shortcode_popup_errmsg_class_closed":"Classroom is closed!",
-	"enter_shortcode_popup_errmsg_not_exist":"Shortcode not exist, try again!",
+	"enter_shortcode_popup_errmsg_not_exist":"ShortCode not exist, try again!",
 
 	// Popup Enter ShortCode
 	"switch_role_popup_header_student":"Switch to student role",
@@ -160,14 +160,14 @@
 	"switch_role_popup_subtitle_teacher":"Are you sure? Will close current open classroom!",
 
 	// Popup Start Classroom
-	"start_class_popup_alert_cur_class_true":"There are one classroom opened already, do you want to <strong>close</strong> it?",
+	"start_class_popup_alert_cur_class_true":"There is one classroom opened already; do you want to <strong>close</strong> it?",
 	"start_class_popup_alert_cur_class_false":"Press OK to restart this classroom",
 	"start_class_popup_header":"Restart a new session of this classrooom?",
 
 	// Popup Set Goal
-	"set_goal_popup_title":"Setup goal",
-	"set_goal_popup_content":"Please enter your weekly goal",
-	"set_goal_popup_placeholder":"Your goal in number",
+	"set_goal_popup_title":"Setup your participation goal!",
+    "set_goal_popup_content":"Please enter your weekly participation goal",
+    "set_goal_popup_placeholder":"Your target participation goal",
 
 	// Popup Delete Achievement
 	"delete_achievement_popup_title":"Delete achievement",
@@ -184,7 +184,7 @@
 
 	// Popup Classroom Closed
 	"classroom_closed_popup_title":"Classroom is closed",
-	"classroom_closed_popup_content":"Please wait until the classroom is re-opened",
+	"classroom_closed_popup_content":"Please wait until the classroom is reopened",
 
 	// Select Language page
 	"select_language_page_title": "Select Language",
@@ -205,7 +205,7 @@
 	"issue_management_page_title_for_user": "__userName__'s Issue Management",
 	"empty_issue_message": "There are no issue regarding to this user",
 	"issue_associate_button_text": "Associate",
-	"issue_resolve_message": "Hi __userName__, the issue that we discussed regarding: '__issueDesc__' have already been resolved now, please close/reopen the app or update the app to check it out.",
+	"issue_resolve_message": "Hi __userName__, the issue that we discussed regarding: '__issueDesc__' has now been resolved! Please restart the app to check it out. Thanks so much for helping to make Baton better :)",
 	"add_issue_error_msg": "Add issue error"
 
 }
